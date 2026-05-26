@@ -1,0 +1,376 @@
+{
+  "graph_run_id": "graph_run_mock_pilot_001",
+  "nodes": [
+    {
+      "node_id": "doc:mock_class_closed_boarding_v1",
+      "node_type": "document",
+      "label": "全日制封闭班说明",
+      "source_doc_id": "mock_class_closed_boarding_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "class_type",
+          "boarding",
+          "management"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_tuition_policy_v1",
+      "node_type": "document",
+      "label": "费用与缴费说明",
+      "source_doc_id": "mock_tuition_policy_v1",
+      "metadata": {
+        "visibility": "protected",
+        "data_level_int": 2,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "tuition",
+          "payment"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_scripts_v1",
+      "node_type": "document",
+      "label": "家长与学生情绪支持话术库",
+      "source_doc_id": "psych_support_scripts_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "psych_support",
+          "scripts"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_concepts_v1",
+      "node_type": "document",
+      "label": "社会心理学与教育心理学概念索引",
+      "source_doc_id": "psych_support_concepts_v1",
+      "metadata": {
+        "visibility": "protected",
+        "data_level_int": 2,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "psych_support",
+          "educational_psychology"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_crisis_handoff_v1",
+      "node_type": "document",
+      "label": "高风险情绪与转人工规则",
+      "source_doc_id": "psych_support_crisis_handoff_v1",
+      "metadata": {
+        "visibility": "internal",
+        "data_level_int": 3,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "psych_support",
+          "crisis",
+          "handoff"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_weekend_day_class_v1",
+      "node_type": "document",
+      "label": "周末走读班课程安排",
+      "source_doc_id": "mock_weekend_day_class_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "class_type",
+          "schedule"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_enrollment_policy_v1",
+      "node_type": "document",
+      "label": "招生政策与入学流程",
+      "source_doc_id": "mock_enrollment_policy_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "enrollment",
+          "policy"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_assessment_guide_v1",
+      "node_type": "document",
+      "label": "学习状态测评指南",
+      "source_doc_id": "mock_assessment_guide_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "assessment",
+          "evaluation"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_campus_facilities_v1",
+      "node_type": "document",
+      "label": "校区设施与住宿环境",
+      "source_doc_id": "mock_campus_facilities_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "campus",
+          "facilities"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_parent_handbook_v1",
+      "node_type": "document",
+      "label": "家长手册与沟通指南",
+      "source_doc_id": "mock_parent_handbook_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "parent",
+          "communication"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_teacher_intro_v1",
+      "node_type": "document",
+      "label": "教师团队介绍",
+      "source_doc_id": "mock_teacher_intro_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "teacher",
+          "team"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_risk_compliance_v1",
+      "node_type": "document",
+      "label": "合规风险与禁止行为说明",
+      "source_doc_id": "mock_risk_compliance_v1",
+      "metadata": {
+        "visibility": "internal",
+        "data_level_int": 3,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "risk",
+          "compliance"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:boarding_management",
+      "node_type": "topic",
+      "label": "住宿与管理",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "boarding",
+          "management"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:tuition",
+      "node_type": "topic",
+      "label": "费用与缴费",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "tuition"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:emotional_support",
+      "node_type": "topic",
+      "label": "情绪支持",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "psych_support"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:parent_anxiety",
+      "node_type": "topic",
+      "label": "家长焦虑",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "parent",
+          "emotion"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:student_low_efficacy",
+      "node_type": "topic",
+      "label": "学生低自我效能",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "student",
+          "self_efficacy"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:class_selection",
+      "node_type": "topic",
+      "label": "班型选择",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "class_type"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:admission_process",
+      "node_type": "topic",
+      "label": "入学流程",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "enrollment"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:crisis_handling",
+      "node_type": "topic",
+      "label": "危机处理",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "crisis"
+        ]
+      }
+    },
+    {
+      "node_id": "role:parent",
+      "node_type": "role",
+      "label": "家长",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "parent"
+      }
+    },
+    {
+      "node_id": "role:student",
+      "node_type": "role",
+      "label": "学生",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "student"
+      }
+    },
+    {
+      "node_id": "role:sales",
+      "node_type": "role",
+      "label": "招生顾问",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "sales"
+      }
+    },
+    {
+      "node_id": "role:admin",
+      "node_type": "role",
+      "label": "管理员",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "admin"
+      }
+    },
+    {
+      "node_id": "campus:zhengzhou",
+      "node_type": "campus",
+      "label": "郑州校区",
+      "source_doc_id": null,
+      "metadata": {
+        "campus": "zhengzhou"
+      }
+    },
+    {
+      "node_id": "campus:kaifeng",
+      "node_type": "campus",
+      "label": "开封校区",
+      "source_doc_id": null,
+      "metadata": {
+        "campus": "kaifeng"
+      }
+    },
+    {
+      "node_id": "risk:no_promise_language",
+      "node_type": "risk",
+      "label": "禁止承诺提分/录取",
+      "source_doc_id": null,
+      "metadata": {
+        "risk_type": "compliance",
+        "severity": "high"
+      }
+    },
+    {
+      "node_id": "risk:crisis_escalation",
+      "node_type": "risk",
+      "label": "危机升级触发",
+      "source_doc_id": null,
+      "metadata": {
+        "risk_type": "safety",
+        "severity": "critical"
+      }
+    }
+  ]
+}

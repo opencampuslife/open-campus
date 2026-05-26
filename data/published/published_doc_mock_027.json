@@ -1,0 +1,29 @@
+{
+  "published_id": "published_doc_mock_027",
+  "doc_id": "mock_doc_027",
+  "title": "教师团队介绍",
+  "visibility": "internal",
+  "allowed_roles": [
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "internal",
+  "data_level_int": 2,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "class_type",
+    "tuition",
+    "schedule"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_027",
+  "published_by": "admin_mock_002",
+  "published_at": "2026-05-24T06:47:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 5,
+  "embedding_version": "mock-embedding-v1"
+}

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "mode": "design_only",
+  "required_evidence": {
+    "staging_shadow_runs": 3,
+    "strict_evidence_passed": true,
+    "unexpected_diffs": 0,
+    "latency_fail_count": 0,
+    "latency_warn_count_requires_note": true,
+    "legacy_gaps": 0,
+    "state_changing_get_gaps": 0,
+    "deprecated_aliases": 5,
+    "legacy_get_usage_events_allowed": 0
+  },
+  "allowed_cutover_routes": [
+    {
+      "method": "POST",
+      "path": "/api/gaokao/chat",
+      "phase": "production_canary_public",
+      "max_initial_percent": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/ingestion/runs/{run_id}/cancel",
+      "phase": "production_canary_admin",
+      "max_initial_percent": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/staging/docs/{doc_id}/validate",
+      "phase": "production_canary_admin",
+      "max_initial_percent": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/staging/docs/{doc_id}/approve",
+      "phase": "production_canary_admin",
+      "max_initial_percent": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/staging/docs/{doc_id}/reject",
+      "phase": "production_canary_admin",
+      "max_initial_percent": 1
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/staging/docs/{doc_id}/publish",
+      "phase": "production_canary_admin",
+      "max_initial_percent": 1
+    }
+  ],
+  "blocked_routes": [
+    {
+      "method": "GET",
+      "path_pattern": "/api/admin/**",
+      "reason": "deprecated compatibility alias or non-canonical admin mutation"
+    },
+    {
+      "method": "*",
+      "path_pattern": "/api/admin/**",
+      "reason": "wildcard admin cutover is forbidden",
+      "allow_if_explicitly_listed": true
+    }
+  ],
+  "rollback_triggers": {
+    "unexpected_diff_count_gt": 0,
+    "latency_fail_count_gt": 0,
+    "upstream_5xx_increase_pct_gt": 1,
+    "auth_csrf_mismatch": true,
+    "missing_admin_audit_event": true,
+    "deprecated_get_routed_to_go": true
+  }
+}

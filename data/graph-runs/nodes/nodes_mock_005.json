@@ -1,0 +1,125 @@
+{
+  "graph_run_id": "graph_run_mock_005",
+  "nodes": [
+    {
+      "node_id": "doc:mock_doc_004",
+      "node_type": "topic",
+      "label": "节点 1",
+      "source_doc_id": "mock_doc_010",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_009",
+      "node_type": "concept",
+      "label": "节点 2",
+      "source_doc_id": "mock_doc_010",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_005",
+      "node_type": "concept",
+      "label": "节点 3",
+      "source_doc_id": "mock_doc_011",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_007",
+      "node_type": "concept",
+      "label": "节点 4",
+      "source_doc_id": "mock_doc_014",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_013",
+      "node_type": "topic",
+      "label": "节点 5",
+      "source_doc_id": "mock_doc_009",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_010",
+      "node_type": "topic",
+      "label": "节点 6",
+      "source_doc_id": "mock_doc_011",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_003",
+      "node_type": "concept",
+      "label": "节点 7",
+      "source_doc_id": "mock_doc_004",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_012",
+      "node_type": "topic",
+      "label": "节点 8",
+      "source_doc_id": "mock_doc_010",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_003",
+      "node_type": "document",
+      "label": "节点 9",
+      "source_doc_id": "mock_doc_010",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_004",
+      "node_type": "document",
+      "label": "节点 10",
+      "source_doc_id": "mock_doc_010",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_005",
+      "node_type": "topic",
+      "label": "节点 11",
+      "source_doc_id": null,
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    },
+    {
+      "node_id": "doc:mock_doc_014",
+      "node_type": "document",
+      "label": "节点 12",
+      "source_doc_id": "mock_doc_009",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1
+      }
+    }
+  ]
+}

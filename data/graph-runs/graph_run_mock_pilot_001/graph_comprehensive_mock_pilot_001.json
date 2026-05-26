@@ -1,0 +1,799 @@
+{
+  "graph_run": {
+    "graph_run_id": "graph_run_mock_pilot_001",
+    "target_type": "knowledge_vault",
+    "target_id": "pilot_mock_knowledge",
+    "status": "success",
+    "tool_version": "mock-ua-1.0.0",
+    "started_at": "2026-05-24T08:10:00+09:00",
+    "finished_at": "2026-05-24T08:13:00+09:00",
+    "error_message": null,
+    "summary": {
+      "nodes": 28,
+      "edges": 42,
+      "documents": 12,
+      "topics": 8,
+      "roles": 4,
+      "campus_nodes": 2,
+      "risk_nodes": 2,
+      "warnings": 1
+    }
+  },
+  "nodes": [
+    {
+      "node_id": "doc:mock_class_closed_boarding_v1",
+      "node_type": "document",
+      "label": "全日制封闭班说明",
+      "source_doc_id": "mock_class_closed_boarding_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "class_type",
+          "boarding",
+          "management"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_tuition_policy_v1",
+      "node_type": "document",
+      "label": "费用与缴费说明",
+      "source_doc_id": "mock_tuition_policy_v1",
+      "metadata": {
+        "visibility": "protected",
+        "data_level_int": 2,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "tuition",
+          "payment"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_scripts_v1",
+      "node_type": "document",
+      "label": "家长与学生情绪支持话术库",
+      "source_doc_id": "psych_support_scripts_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "psych_support",
+          "scripts"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_concepts_v1",
+      "node_type": "document",
+      "label": "社会心理学与教育心理学概念索引",
+      "source_doc_id": "psych_support_concepts_v1",
+      "metadata": {
+        "visibility": "protected",
+        "data_level_int": 2,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "psych_support",
+          "educational_psychology"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:psych_support_crisis_handoff_v1",
+      "node_type": "document",
+      "label": "高风险情绪与转人工规则",
+      "source_doc_id": "psych_support_crisis_handoff_v1",
+      "metadata": {
+        "visibility": "internal",
+        "data_level_int": 3,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "psych_support",
+          "crisis",
+          "handoff"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_weekend_day_class_v1",
+      "node_type": "document",
+      "label": "周末走读班课程安排",
+      "source_doc_id": "mock_weekend_day_class_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "class_type",
+          "schedule"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_enrollment_policy_v1",
+      "node_type": "document",
+      "label": "招生政策与入学流程",
+      "source_doc_id": "mock_enrollment_policy_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "enrollment",
+          "policy"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_assessment_guide_v1",
+      "node_type": "document",
+      "label": "学习状态测评指南",
+      "source_doc_id": "mock_assessment_guide_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "assessment",
+          "evaluation"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_campus_facilities_v1",
+      "node_type": "document",
+      "label": "校区设施与住宿环境",
+      "source_doc_id": "mock_campus_facilities_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "campus",
+          "facilities"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_parent_handbook_v1",
+      "node_type": "document",
+      "label": "家长手册与沟通指南",
+      "source_doc_id": "mock_parent_handbook_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "parent",
+          "communication"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_teacher_intro_v1",
+      "node_type": "document",
+      "label": "教师团队介绍",
+      "source_doc_id": "mock_teacher_intro_v1",
+      "metadata": {
+        "visibility": "public",
+        "data_level_int": 1,
+        "campus_scope": [
+          "zhengzhou"
+        ],
+        "business_tags": [
+          "teacher",
+          "team"
+        ]
+      }
+    },
+    {
+      "node_id": "doc:mock_risk_compliance_v1",
+      "node_type": "document",
+      "label": "合规风险与禁止行为说明",
+      "source_doc_id": "mock_risk_compliance_v1",
+      "metadata": {
+        "visibility": "internal",
+        "data_level_int": 3,
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "risk",
+          "compliance"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:boarding_management",
+      "node_type": "topic",
+      "label": "住宿与管理",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "boarding",
+          "management"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:tuition",
+      "node_type": "topic",
+      "label": "费用与缴费",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "tuition"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:emotional_support",
+      "node_type": "topic",
+      "label": "情绪支持",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "psych_support"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:parent_anxiety",
+      "node_type": "topic",
+      "label": "家长焦虑",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "parent",
+          "emotion"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:student_low_efficacy",
+      "node_type": "topic",
+      "label": "学生低自我效能",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "student",
+          "self_efficacy"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:class_selection",
+      "node_type": "topic",
+      "label": "班型选择",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "class_type"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:admission_process",
+      "node_type": "topic",
+      "label": "入学流程",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "enrollment"
+        ]
+      }
+    },
+    {
+      "node_id": "topic:crisis_handling",
+      "node_type": "topic",
+      "label": "危机处理",
+      "source_doc_id": null,
+      "metadata": {
+        "business_tags": [
+          "crisis"
+        ]
+      }
+    },
+    {
+      "node_id": "role:parent",
+      "node_type": "role",
+      "label": "家长",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "parent"
+      }
+    },
+    {
+      "node_id": "role:student",
+      "node_type": "role",
+      "label": "学生",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "student"
+      }
+    },
+    {
+      "node_id": "role:sales",
+      "node_type": "role",
+      "label": "招生顾问",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "sales"
+      }
+    },
+    {
+      "node_id": "role:admin",
+      "node_type": "role",
+      "label": "管理员",
+      "source_doc_id": null,
+      "metadata": {
+        "role": "admin"
+      }
+    },
+    {
+      "node_id": "campus:zhengzhou",
+      "node_type": "campus",
+      "label": "郑州校区",
+      "source_doc_id": null,
+      "metadata": {
+        "campus": "zhengzhou"
+      }
+    },
+    {
+      "node_id": "campus:kaifeng",
+      "node_type": "campus",
+      "label": "开封校区",
+      "source_doc_id": null,
+      "metadata": {
+        "campus": "kaifeng"
+      }
+    },
+    {
+      "node_id": "risk:no_promise_language",
+      "node_type": "risk",
+      "label": "禁止承诺提分/录取",
+      "source_doc_id": null,
+      "metadata": {
+        "risk_type": "compliance",
+        "severity": "high"
+      }
+    },
+    {
+      "node_id": "risk:crisis_escalation",
+      "node_type": "risk",
+      "label": "危机升级触发",
+      "source_doc_id": null,
+      "metadata": {
+        "risk_type": "safety",
+        "severity": "critical"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "edge_mock_001",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "topic:boarding_management",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.92
+      }
+    },
+    {
+      "edge_id": "edge_mock_002",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "topic:tuition",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.88
+      }
+    },
+    {
+      "edge_id": "edge_mock_003",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.95
+      }
+    },
+    {
+      "edge_id": "edge_mock_004",
+      "source_node_id": "doc:mock_weekend_day_class_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.85
+      }
+    },
+    {
+      "edge_id": "edge_mock_005",
+      "source_node_id": "doc:mock_enrollment_policy_v1",
+      "target_node_id": "topic:admission_process",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "edge_id": "edge_mock_006",
+      "source_node_id": "doc:mock_assessment_guide_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.87
+      }
+    },
+    {
+      "edge_id": "edge_mock_007",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.91
+      }
+    },
+    {
+      "edge_id": "edge_mock_008",
+      "source_node_id": "doc:psych_support_concepts_v1",
+      "target_node_id": "topic:student_low_efficacy",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.89
+      }
+    },
+    {
+      "edge_id": "edge_mock_009",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "topic:crisis_handling",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.94
+      }
+    },
+    {
+      "edge_id": "edge_mock_010",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "risk:no_promise_language",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.74
+      }
+    },
+    {
+      "edge_id": "edge_mock_011",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "risk:no_promise_language",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.96
+      }
+    },
+    {
+      "edge_id": "edge_mock_012",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "risk:crisis_escalation",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.82
+      }
+    },
+    {
+      "edge_id": "edge_mock_013",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "role:parent",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_014",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "role:student",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_015",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "role:sales",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_016",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "role:admin",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_017",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "role:parent",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_018",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "role:student",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_019",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "role:sales",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_020",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "role:admin",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_021",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_022",
+      "source_node_id": "doc:mock_weekend_day_class_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_023",
+      "source_node_id": "doc:mock_campus_facilities_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_024",
+      "source_node_id": "doc:mock_parent_handbook_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_025",
+      "source_node_id": "doc:mock_teacher_intro_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_026",
+      "source_node_id": "topic:parent_anxiety",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.88
+      }
+    },
+    {
+      "edge_id": "edge_mock_027",
+      "source_node_id": "topic:student_low_efficacy",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.85
+      }
+    },
+    {
+      "edge_id": "edge_mock_028",
+      "source_node_id": "topic:boarding_management",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.75
+      }
+    },
+    {
+      "edge_id": "edge_mock_029",
+      "source_node_id": "topic:tuition",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "edge_id": "edge_mock_030",
+      "source_node_id": "topic:crisis_handling",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.78
+      }
+    },
+    {
+      "edge_id": "edge_mock_031",
+      "source_node_id": "topic:parent_anxiety",
+      "target_node_id": "role:parent",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_032",
+      "source_node_id": "topic:student_low_efficacy",
+      "target_node_id": "role:student",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_033",
+      "source_node_id": "topic:class_selection",
+      "target_node_id": "role:parent",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 0.95
+      }
+    },
+    {
+      "edge_id": "edge_mock_034",
+      "source_node_id": "topic:class_selection",
+      "target_node_id": "role:student",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "edge_id": "edge_mock_035",
+      "source_node_id": "role:sales",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "works_at",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_036",
+      "source_node_id": "role:admin",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "works_at",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_037",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:student_low_efficacy",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.76
+      }
+    },
+    {
+      "edge_id": "edge_mock_038",
+      "source_node_id": "doc:psych_support_concepts_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.72
+      }
+    },
+    {
+      "edge_id": "edge_mock_039",
+      "source_node_id": "doc:mock_enrollment_policy_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.83
+      }
+    },
+    {
+      "edge_id": "edge_mock_040",
+      "source_node_id": "doc:mock_assessment_guide_v1",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.68
+      }
+    },
+    {
+      "edge_id": "edge_mock_041",
+      "source_node_id": "doc:mock_parent_handbook_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.79
+      }
+    },
+    {
+      "edge_id": "edge_mock_042",
+      "source_node_id": "doc:mock_teacher_intro_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.65
+      }
+    }
+  ],
+  "findings": {
+    "orphan_nodes": [],
+    "risk_nodes": [
+      "risk:no_promise_language",
+      "risk:crisis_escalation"
+    ],
+    "coverage": {
+      "documents": 12,
+      "topics": 8,
+      "roles": 4,
+      "campus_nodes": 2,
+      "risk_nodes": 2
+    },
+    "edge_type_distribution": {
+      "related_to": 12,
+      "covers": 5,
+      "guards": 3,
+      "visible_to": 8,
+      "belongs_to_campus": 5,
+      "relates_to": 5,
+      "relevant_for": 4,
+      "works_at": 2
+    }
+  }
+}

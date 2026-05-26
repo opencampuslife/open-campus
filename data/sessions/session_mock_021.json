@@ -1,0 +1,124 @@
+{
+  "session_id": "session_mock_021",
+  "channel": "webchat",
+  "entrypoint": "referral",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "GREETING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:12:00+09:00",
+  "updated_at": "2026-05-24T00:19:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖南",
+    "city": "长沙",
+    "subject_type": "地理",
+    "current_score": 476,
+    "target_score": 587,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_completeness": 0.77,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_018",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_021_1",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T00:12:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_2",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T00:12:19+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_3",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T00:14:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_4",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_20"
+      ],
+      "created_at": "2026-05-24T00:14:20+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_5",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T00:15:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:15:26+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_7",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T00:16:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_021_8",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_14",
+        "chunk_ref_5"
+      ],
+      "created_at": "2026-05-24T00:16:30+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

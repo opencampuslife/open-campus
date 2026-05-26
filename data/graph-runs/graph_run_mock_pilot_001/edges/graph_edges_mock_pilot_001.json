@@ -1,0 +1,383 @@
+{
+  "graph_run_id": "graph_run_mock_pilot_001",
+  "edges": [
+    {
+      "edge_id": "edge_mock_001",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "topic:boarding_management",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.92
+      }
+    },
+    {
+      "edge_id": "edge_mock_002",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "topic:tuition",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.88
+      }
+    },
+    {
+      "edge_id": "edge_mock_003",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.95
+      }
+    },
+    {
+      "edge_id": "edge_mock_004",
+      "source_node_id": "doc:mock_weekend_day_class_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.85
+      }
+    },
+    {
+      "edge_id": "edge_mock_005",
+      "source_node_id": "doc:mock_enrollment_policy_v1",
+      "target_node_id": "topic:admission_process",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "edge_id": "edge_mock_006",
+      "source_node_id": "doc:mock_assessment_guide_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.87
+      }
+    },
+    {
+      "edge_id": "edge_mock_007",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.91
+      }
+    },
+    {
+      "edge_id": "edge_mock_008",
+      "source_node_id": "doc:psych_support_concepts_v1",
+      "target_node_id": "topic:student_low_efficacy",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.89
+      }
+    },
+    {
+      "edge_id": "edge_mock_009",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "topic:crisis_handling",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.94
+      }
+    },
+    {
+      "edge_id": "edge_mock_010",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "risk:no_promise_language",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.74
+      }
+    },
+    {
+      "edge_id": "edge_mock_011",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "risk:no_promise_language",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.96
+      }
+    },
+    {
+      "edge_id": "edge_mock_012",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "risk:crisis_escalation",
+      "edge_type": "guards",
+      "metadata": {
+        "weight": 0.82
+      }
+    },
+    {
+      "edge_id": "edge_mock_013",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "role:parent",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_014",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "role:student",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_015",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "role:sales",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_016",
+      "source_node_id": "doc:psych_support_crisis_handoff_v1",
+      "target_node_id": "role:admin",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_017",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "role:parent",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_018",
+      "source_node_id": "doc:mock_tuition_policy_v1",
+      "target_node_id": "role:student",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_019",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "role:sales",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_020",
+      "source_node_id": "doc:mock_risk_compliance_v1",
+      "target_node_id": "role:admin",
+      "edge_type": "visible_to",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_021",
+      "source_node_id": "doc:mock_class_closed_boarding_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_022",
+      "source_node_id": "doc:mock_weekend_day_class_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_023",
+      "source_node_id": "doc:mock_campus_facilities_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_024",
+      "source_node_id": "doc:mock_parent_handbook_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_025",
+      "source_node_id": "doc:mock_teacher_intro_v1",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "belongs_to_campus",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_026",
+      "source_node_id": "topic:parent_anxiety",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.88
+      }
+    },
+    {
+      "edge_id": "edge_mock_027",
+      "source_node_id": "topic:student_low_efficacy",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.85
+      }
+    },
+    {
+      "edge_id": "edge_mock_028",
+      "source_node_id": "topic:boarding_management",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.75
+      }
+    },
+    {
+      "edge_id": "edge_mock_029",
+      "source_node_id": "topic:tuition",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "edge_id": "edge_mock_030",
+      "source_node_id": "topic:crisis_handling",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "relates_to",
+      "metadata": {
+        "weight": 0.78
+      }
+    },
+    {
+      "edge_id": "edge_mock_031",
+      "source_node_id": "topic:parent_anxiety",
+      "target_node_id": "role:parent",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_032",
+      "source_node_id": "topic:student_low_efficacy",
+      "target_node_id": "role:student",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_033",
+      "source_node_id": "topic:class_selection",
+      "target_node_id": "role:parent",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 0.95
+      }
+    },
+    {
+      "edge_id": "edge_mock_034",
+      "source_node_id": "topic:class_selection",
+      "target_node_id": "role:student",
+      "edge_type": "relevant_for",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "edge_id": "edge_mock_035",
+      "source_node_id": "role:sales",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "works_at",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_036",
+      "source_node_id": "role:admin",
+      "target_node_id": "campus:zhengzhou",
+      "edge_type": "works_at",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "edge_id": "edge_mock_037",
+      "source_node_id": "doc:psych_support_scripts_v1",
+      "target_node_id": "topic:student_low_efficacy",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.76
+      }
+    },
+    {
+      "edge_id": "edge_mock_038",
+      "source_node_id": "doc:psych_support_concepts_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.72
+      }
+    },
+    {
+      "edge_id": "edge_mock_039",
+      "source_node_id": "doc:mock_enrollment_policy_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.83
+      }
+    },
+    {
+      "edge_id": "edge_mock_040",
+      "source_node_id": "doc:mock_assessment_guide_v1",
+      "target_node_id": "topic:emotional_support",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.68
+      }
+    },
+    {
+      "edge_id": "edge_mock_041",
+      "source_node_id": "doc:mock_parent_handbook_v1",
+      "target_node_id": "topic:parent_anxiety",
+      "edge_type": "covers",
+      "metadata": {
+        "weight": 0.79
+      }
+    },
+    {
+      "edge_id": "edge_mock_042",
+      "source_node_id": "doc:mock_teacher_intro_v1",
+      "target_node_id": "topic:class_selection",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.65
+      }
+    }
+  ]
+}

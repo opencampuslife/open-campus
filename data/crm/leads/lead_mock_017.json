@@ -1,0 +1,105 @@
+{
+  "lead_id": "lead_mock_017",
+  "session_id": "session_mock_017",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSESSMENT_BOOKED",
+  "intent_level": "high",
+  "score": 76,
+  "assigned_to": "sales_mock_008",
+  "phone_hash": "mock_phone_hash_017",
+  "created_at": "2026-05-24T07:54:00+09:00",
+  "updated_at": "2026-05-24T20:27:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河北",
+    "city": "唐山",
+    "subject_type": "政治",
+    "current_score": 485,
+    "target_score": 601,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "物理",
+      "化学"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "河北 唐山",
+    "score_summary": "当前约485分，目标good_undergraduate",
+    "weak_subjects": "物理、化学",
+    "main_concerns": "住宿还是走读"
+  },
+  "profile_completeness": 0.65,
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_008",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "intent_reason": [
+    "明确询问课程",
+    "提供分数",
+    "家长焦虑明显",
+    "存在到校测评潜力"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_017_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T19:29:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_017_2",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T13:39:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.5907630132348302
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_017_3",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T10:33:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.5056901900085171
+      }
+    }
+  ]
+}

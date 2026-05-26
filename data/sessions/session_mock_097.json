@@ -1,0 +1,98 @@
+{
+  "session_id": "session_mock_097",
+  "channel": "wechat",
+  "entrypoint": "landing_page",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "NEED_ANALYZING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T06:47:00+09:00",
+  "updated_at": "2026-05-24T07:03:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "四川",
+    "city": "德阳",
+    "subject_type": "生物",
+    "current_score": 409,
+    "target_score": 464,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_completeness": 0.61,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "high",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_008",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_097_1",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T06:47:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_097_2",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T06:47:21+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_097_3",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T06:48:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_097_4",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T06:48:15+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

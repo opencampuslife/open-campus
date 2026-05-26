@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus H5 MVP</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        background: linear-gradient(180deg, #f6f8fb 0%, #eef4ff 100%);
+        color: #172033;
+      }
+      main {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+      }
+      .hero {
+        background: #0f172a;
+        color: #fff;
+        border-radius: 20px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #d9e1ec;
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      }
+      h1, h2, p { margin: 0; }
+      .muted { color: #5f6b7a; margin-top: 8px; }
+      ul { margin: 12px 0 0; padding-left: 18px; color: #3e4c59; }
+      code {
+        background: #eef4ff;
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <h1>校园事务督办 H5</h1>
+        <p class="muted">MVP 壳层，面向家长/学生、教师审批和供应商确认三类入口。</p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>家长/学生</h2>
+          <ul>
+            <li>请假提交：<code>POST /api/campus/leaves</code></li>
+            <li>订/退餐：<code>POST /api/campus/meals/orders</code></li>
+            <li>报修提交：<code>POST /api/campus/repairs</code></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>教师/教务/后勤</h2>
+          <ul>
+            <li>企微 OAuth 回调：<code>GET /api/campus/auth/wecom/callback</code></li>
+            <li>请假审批：<code>POST /api/campus/leaves/:id/approve</code></li>
+            <li>报修指派/完结：<code>POST /api/campus/repairs/:id/assign</code></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>供应商</h2>
+          <ul>
+            <li>配送确认：<code>POST /api/campus/meals/delivery/:id/confirm</code></li>
+            <li>仅使用签名 token，不进入后台</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+{
+  "session_id": "session_mock_007",
+  "channel": "webchat",
+  "entrypoint": "referral",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T06:17:00+09:00",
+  "updated_at": "2026-05-24T06:44:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "江苏",
+    "city": "郑州",
+    "subject_type": "物理",
+    "current_score": 506,
+    "target_score": 544,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "数学"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.8,
+  "profile_missing_fields": [
+    "budget_range",
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "low",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_016",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_007_1",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T06:17:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_25",
+        "chunk_ref_22"
+      ],
+      "created_at": "2026-05-24T06:17:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_3",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T06:22:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_4",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_27"
+      ],
+      "created_at": "2026-05-24T06:22:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T06:25:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_6",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_3"
+      ],
+      "created_at": "2026-05-24T06:25:19+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_7",
+      "role": "user",
+      "content": "孩子506分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T06:27:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_8",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_12"
+      ],
+      "created_at": "2026-05-24T06:27:16+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_9",
+      "role": "user",
+      "content": "孩子506分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T06:29:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_10",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_12",
+        "chunk_ref_1"
+      ],
+      "created_at": "2026-05-24T06:29:29+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_007_11",
+      "role": "user",
+      "content": "孩子506分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T06:32:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

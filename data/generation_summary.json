@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-05-24T20:13:02.593341",
+  "config": {
+    "date": "2026-05-24",
+    "campus": "zhengzhou",
+    "counts": {
+      "sessions": 100,
+      "leads": 50,
+      "audit_events": 500,
+      "published_docs": 30,
+      "knowledge_docs": 60,
+      "graph_runs": 5,
+      "staging_docs": 15
+    },
+    "distribution": {
+      "roles": {
+        "parent": 0.5,
+        "student": 0.3,
+        "visitor": 0.2
+      },
+      "modes": {
+        "ADMISSIONS_CONSULTATION": 0.55,
+        "EMOTIONAL_SUPPORT": 0.35,
+        "MIXED": 0.1
+      },
+      "lead_status": {
+        "NEW": 0.4,
+        "ASSIGNED": 0.25,
+        "CONTACTED": 0.2,
+        "ASSESSMENT_BOOKED": 0.1,
+        "LOST": 0.05
+      }
+    }
+  },
+  "statistics": {
+    "sessions": 100,
+    "leads": 50,
+    "audit_events": 563,
+    "published_docs": 30,
+    "knowledge_docs": 60,
+    "graph_runs": 5,
+    "staging_docs": 15
+  },
+  "total_size_bytes": 1619541
+}

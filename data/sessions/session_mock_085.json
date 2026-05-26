@@ -1,0 +1,136 @@
+{
+  "session_id": "session_mock_085",
+  "channel": "openhuman",
+  "entrypoint": "referral",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "GREETING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:18:00+09:00",
+  "updated_at": "2026-05-24T00:36:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "安徽",
+    "city": "郑州",
+    "subject_type": "物理",
+    "current_score": 319,
+    "target_score": 421,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_completeness": 0.71,
+  "profile_missing_fields": [
+    "budget_range",
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "medium",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_019",
+      "chunk_mock_psych_parent_001"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_085_1",
+      "role": "user",
+      "content": "孩子319分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T00:18:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:18:21+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T00:20:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_4",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_13",
+        "chunk_ref_28"
+      ],
+      "created_at": "2026-05-24T00:20:09+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_5",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:25:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_22",
+        "chunk_ref_24"
+      ],
+      "created_at": "2026-05-24T00:25:22+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_7",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:28:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_8",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:28:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_085_9",
+      "role": "user",
+      "content": "孩子319分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T00:29:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

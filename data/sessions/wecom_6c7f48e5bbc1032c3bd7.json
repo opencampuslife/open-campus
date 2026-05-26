@@ -1,0 +1,49 @@
+{
+  "session_id": "wecom_6c7f48e5bbc1032c3bd7",
+  "user_id": "wecom_user_6c7f48e5bbc1032c3bd7",
+  "role": "visitor",
+  "campus": "all",
+  "created_at": "2026-05-24T16:54:19.616748+00:00",
+  "updated_at": "2026-05-24T16:54:28.614366+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你好"
+    },
+    {
+      "role": "assistant",
+      "content": "具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n来源：说明"
+    },
+    {
+      "role": "user",
+      "content": "您好"
+    },
+    {
+      "role": "assistant",
+      "content": "具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n来源：说明"
+    }
+  ],
+  "intent": {
+    "intent": "faq"
+  },
+  "profile": {
+    "_meta": {},
+    "_completeness": 0.0,
+    "consultation_stage": "PROFILE_COLLECTING"
+  },
+  "profile_completeness": 0.0,
+  "consultation_stage": "PROFILE_COLLECTING",
+  "recommendation_result": {},
+  "risk_level": "low",
+  "next_best_action": {
+    "action": "collect_profile",
+    "description": "继续收集学生/家长画像",
+    "priority": "high",
+    "consultation_stage": "PROFILE_COLLECTING"
+  },
+  "risk_tags": [
+    "missing_score",
+    "missing_subject_type",
+    "missing_school_level"
+  ]
+}

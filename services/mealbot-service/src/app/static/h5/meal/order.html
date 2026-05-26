@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>订餐</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;background:#f5f5f5;color:#333;max-width:480px;margin:0 auto;min-height:100vh}
+.header{background:#07c160;color:#fff;padding:16px 20px;font-size:18px;font-weight:600;text-align:center}
+.form{padding:16px}
+.card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.card-title{font-size:14px;color:#999;margin-bottom:8px}
+label{display:block;font-size:15px;margin-bottom:6px;font-weight:500}
+select,input[type=text],input[type=date]{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:15px;margin-bottom:12px;appearance:none;-webkit-appearance:none;background:#fff}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.radio-group{display:flex;gap:8px;margin-bottom:12px}
+.radio-item{flex:1}
+.radio-item input{display:none}
+.radio-item label{display:flex;align-items:center;justify-content:center;padding:10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;cursor:pointer;text-align:center}
+.radio-item input:checked+label{border-color:#07c160;background:#ecfdf5;color:#07c160;font-weight:600}
+.photo-upload{position:relative}
+.photo-upload input[type=file]{display:none}
+.photo-btn{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1.5px dashed #ccc;border-radius:8px;color:#999;cursor:pointer;font-size:14px}
+.photo-btn::before{content:"📷";font-size:18px}
+.photo-preview{margin-top:8px;max-width:100%;border-radius:8px;display:none}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;text-align:center}
+.btn-primary{background:#07c160;color:#fff}
+.btn-primary:active{opacity:.85}
+.btn-primary:disabled{background:#ccc;cursor:not-allowed}
+.result{padding:20px;text-align:center}
+.result .icon{font-size:48px;margin-bottom:12px}
+.result .msg{font-size:16px;color:#333;margin-bottom:8px}
+.result .detail{font-size:14px;color:#999}
+.error-msg{color:#e74c3c;font-size:13px;margin-top:4px;display:none}
+.loading{text-align:center;padding:20px;color:#999}
+.cutoff-warn{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#856404}
+</style>
+</head>
+<body>
+<div class="header">订餐</div>
+<div class="form" id="formRoot">
+  <div class="loading" id="loading">加载中...</div>
+</div>
+
+<script>
+const API_BASE = "{{API_BASE}}";
+const WECOM_USERID = "{{WECOM_USERID}}";
+
+let currentStudent = null;
+
+async function init() {
+  const root = document.getElementById("formRoot");
+  try {
+    const resp = await fetch(`${API_BASE}/api/h5/students?wecom_userid=${encodeURIComponent(WECOM_USERID)}`, {
+      credentials: "include",
+    });
+    const data = await resp.json();
+    if (!data.ok || !data.students || data.students.length === 0) {
+      root.innerHTML = '<div class="result"><div class="icon">🔍</div><div class="msg">未找到绑定学生</div><div class="detail">请联系学校管理员绑定学生信息</div></div>';
+      return;
+    }
+    renderForm(data.students);
+  } catch (e) {
+    root.innerHTML = '<div class="result"><div class="icon">⚠️</div><div class="msg">加载失败</div><div class="detail">请检查网络连接后重试</div></div>';
+  }
+}
+
+function renderForm(students) {
+  const root = document.getElementById("formRoot");
+  const today = new Date().toISOString().split("T")[0];
+
+  const studentOptions = students.map(s =>
+    `<option value="${s.student_id}|${s.class_id}">${s.name} · ${s.class_name || ''}</option>`
+  ).join("");
+
+  root.innerHTML = `
+    <form id="mealForm" onsubmit="return submitOrder(event)">
+      <div class="card">
+        <div class="card-title">选择学生</div>
+        <select name="student_id" id="studentSelect" required>
+          <option value="">请选择学生</option>
+          ${studentOptions}
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-title">订餐日期</div>
+        <input type="date" name="meal_date" id="mealDate" value="${today}" required />
+      </div>
+
+      <div class="card">
+        <div class="card-title">餐别</div>
+        <div class="radio-group" id="mealTypeGroup">
+          <div class="radio-item"><input type="radio" name="meal_type" value="lunch" id="mt_lunch" checked /><label for="mt_lunch">午餐</label></div>
+          <div class="radio-item"><input type="radio" name="meal_type" value="dinner" id="mt_dinner" /><label for="mt_dinner">晚餐</label></div>
+          <div class="radio-item"><input type="radio" name="meal_type" value="extra" id="mt_extra" /><label for="mt_extra">加餐</label></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">操作类型</div>
+        <div class="radio-group" id="actionGroup">
+          <div class="radio-item"><input type="radio" name="action" value="order" id="act_order" checked /><label for="act_order">订餐</label></div>
+          <div class="radio-item"><input type="radio" name="action" value="cancel" id="act_cancel" /><label for="act_cancel">退餐</label></div>
+          <div class="radio-item"><input type="radio" name="action" value="add" id="act_add" /><label for="act_add">加餐</label></div>
+        </div>
+      </div>
+
+      <div class="card" id="reasonCard" style="display:none">
+        <div class="card-title">退餐原因</div>
+        <input type="text" name="reason" placeholder="请说明退餐原因" />
+      </div>
+
+      <div class="card">
+        <div class="card-title">饮食备注（可选）</div>
+        <input type="text" name="dietary_note" placeholder="如：不吃辣、过敏食物等" />
+      </div>
+
+      <div class="card">
+        <div class="card-title">上传凭证照片（可选，≤5MB）</div>
+        <div class="photo-upload">
+          <label class="photo-btn" for="photoInput">选择照片</label>
+          <input type="file" id="photoInput" name="photo" accept="image/jpeg,image/png" onchange="previewPhoto(event)" />
+          <img class="photo-preview" id="photoPreview" />
+        </div>
+      </div>
+
+      <div id="cutoffWarn" class="cutoff-warn" style="display:none"></div>
+      <div class="error-msg" id="submitError"></div>
+      <button type="submit" class="btn btn-primary" id="submitBtn">提交</button>
+    </form>
+  `;
+
+  document.querySelectorAll('input[name="action"]').forEach(radio => {
+    radio.addEventListener("change", toggleReasonCard);
+  });
+  document.getElementById("mealDate").addEventListener("change", checkCutoff);
+  toggleReasonCard();
+  checkCutoff();
+}
+
+function toggleReasonCard() {
+  const action = document.querySelector('input[name="action"]:checked').value;
+  document.getElementById("reasonCard").style.display = action === "cancel" ? "block" : "none";
+}
+
+function checkCutoff() {
+  const mealDate = document.getElementById("mealDate").value;
+  const mealType = document.querySelector('input[name="meal_type"]:checked').value;
+  const today = new Date().toISOString().split("T")[0];
+  const warn = document.getElementById("cutoffWarn");
+  warn.style.display = "none";
+
+  if (mealDate < today) {
+    warn.style.display = "block";
+    warn.textContent = "⚠️ 所选日期已过，提交可能被截止策略拒绝。";
+  }
+}
+
+function previewPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    showError("图片不能超过 5MB");
+    event.target.value = "";
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const preview = document.getElementById("photoPreview");
+    preview.src = e.target.result;
+    preview.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+}
+
+function showError(msg) {
+  const el = document.getElementById("submitError");
+  el.textContent = msg;
+  el.style.display = "block";
+}
+
+async function submitOrder(event) {
+  event.preventDefault();
+  const btn = document.getElementById("submitBtn");
+  const errorEl = document.getElementById("submitError");
+  errorEl.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "提交中...";
+
+  const form = document.getElementById("mealForm");
+  const formData = new FormData(form);
+
+  const studentVal = formData.get("student_id");
+  if (!studentVal) return;
+  const [student_id, class_id] = studentVal.split("|");
+  formData.set("student_id", student_id);
+  formData.set("class_id", class_id);
+  formData.set("submitted_by_wecom_userid", WECOM_USERID);
+
+  try {
+    const resp = await fetch(`${API_BASE}/api/meal-orders`, {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    });
+    const data = await resp.json();
+
+    if (data.ok) {
+      window.location.href = `/h5/meal/success.html?order_id=${data.order.order_id}&status=${data.order.status}`;
+    } else if (data.error) {
+      showError(data.error.message || "提交失败");
+      btn.disabled = false;
+      btn.textContent = "重试";
+    } else {
+      showError("提交失败，请稍后重试");
+      btn.disabled = false;
+      btn.textContent = "重试";
+    }
+  } catch (e) {
+    showError("网络错误，请检查连接后重试");
+    btn.disabled = false;
+    btn.textContent = "重试";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>

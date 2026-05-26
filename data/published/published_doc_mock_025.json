@@ -1,0 +1,28 @@
+{
+  "published_id": "published_doc_mock_025",
+  "doc_id": "mock_doc_025",
+  "title": "学习状态评估标准",
+  "visibility": "internal",
+  "allowed_roles": [
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "internal",
+  "data_level_int": 2,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "psychology_concepts",
+    "student_motivation"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_025",
+  "published_by": "admin_mock_002",
+  "published_at": "2026-05-24T06:44:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 4,
+  "embedding_version": "mock-embedding-v1"
+}

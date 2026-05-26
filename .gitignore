@@ -1,0 +1,20 @@
+.env
+node_modules/
+dist/
+data/indexes/*.json
+data/audit_logs/*.jsonl
+data/llm_logs/*.jsonl
+__pycache__/
+*.pyc
+reports/shadow/*.json
+reports/shadow/*.jsonl
+reports/shadow/*.md
+!reports/shadow/.gitkeep
+reports/shadow/bundles/*
+!reports/shadow/bundles/.gitkeep
+
+# PR-6E: staging percentage canary temp configs (never commit rendered configs)
+reports/staging/tmp/
+reports/staging/*.json
+!reports/staging/.gitkeep
+!reports/staging/tmp/.gitkeep

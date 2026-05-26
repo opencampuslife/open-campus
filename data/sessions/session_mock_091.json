@@ -1,0 +1,94 @@
+{
+  "session_id": "session_mock_091",
+  "channel": "openhuman",
+  "entrypoint": "public_chat",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T05:35:00+09:00",
+  "updated_at": "2026-05-24T05:49:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "山东",
+    "city": "济南",
+    "subject_type": "化学",
+    "current_score": 345,
+    "target_score": 433,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "英语",
+      "语文"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子不想学"
+    ]
+  },
+  "profile_completeness": 0.94,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "high",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_004",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_091_1",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T05:35:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_091_2",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T05:35:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_091_3",
+      "role": "user",
+      "content": "孩子345分化学类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T05:39:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_091_4",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T05:39:11+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

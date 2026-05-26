@@ -1,0 +1,87 @@
+{
+  "lead_id": "lead_mock_034",
+  "session_id": "session_mock_034",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSESSMENT_BOOKED",
+  "intent_level": "low",
+  "score": 80,
+  "assigned_to": "sales_mock_006",
+  "phone_hash": "mock_phone_hash_034",
+  "created_at": "2026-05-24T07:52:00+09:00",
+  "updated_at": "2026-05-24T13:28:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "四川",
+    "city": "德阳",
+    "subject_type": "历史",
+    "current_score": 509,
+    "target_score": 618,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "四川 德阳",
+    "score_summary": "当前约509分，目标key_university",
+    "weak_subjects": "化学、生物",
+    "main_concerns": "成绩上不去怎么办"
+  },
+  "profile_completeness": 0.84,
+  "consultation_stage": "NEED_ANALYZING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_002",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "intent_reason": [
+    "提供分数",
+    "明确询问课程",
+    "存在到校测评潜力",
+    "主动索要联系方式"
+  ],
+  "next_best_action": "安排与家长电话沟通时间",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_034_1",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T13:15:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

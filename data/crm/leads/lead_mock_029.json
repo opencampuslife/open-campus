@@ -1,0 +1,107 @@
+{
+  "lead_id": "lead_mock_029",
+  "session_id": "session_mock_029",
+  "channel": "openhuman",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 93,
+  "assigned_to": "sales_mock_010",
+  "phone_hash": "mock_phone_hash_029",
+  "created_at": "2026-05-24T09:45:00+09:00",
+  "updated_at": "2026-05-24T09:31:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "江苏",
+    "city": "郑州",
+    "subject_type": "化学",
+    "current_score": 506,
+    "target_score": 560,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "江苏 郑州",
+    "score_summary": "当前约506分，目标key_university",
+    "weak_subjects": "化学、生物",
+    "main_concerns": "不知道该选什么学校"
+  },
+  "profile_completeness": 0.82,
+  "consultation_stage": "CLOSING",
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "high",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_016",
+      "chunk_mock_psych_parent_007"
+    ]
+  },
+  "intent_reason": [
+    "主动索要联系方式",
+    "家长焦虑明显",
+    "明确询问课程"
+  ],
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_029_1",
+      "created_by": "sales_mock_009",
+      "content": "已发送校区介绍资料，待家长回复。",
+      "created_at": "2026-05-24T19:02:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_029_2",
+      "created_by": "sales_mock_002",
+      "content": "家长表示需要和家人商量后再决定。",
+      "created_at": "2026-05-24T18:35:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_029_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T17:07:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_029_2",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T13:37:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.855449124344458
+      }
+    }
+  ]
+}

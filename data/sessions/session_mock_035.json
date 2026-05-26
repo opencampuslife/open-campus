@@ -1,0 +1,133 @@
+{
+  "session_id": "session_mock_035",
+  "channel": "webchat",
+  "entrypoint": "referral",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "CLOSING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:21:00+09:00",
+  "updated_at": "2026-05-24T00:37:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "湖南",
+    "city": "株洲",
+    "subject_type": "政治",
+    "current_score": 416,
+    "target_score": 518,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语",
+      "语文"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "家庭条件有限"
+    ]
+  },
+  "profile_completeness": 0.84,
+  "profile_missing_fields": [
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "low",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_007",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_035_1",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T00:21:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_28",
+        "chunk_ref_9"
+      ],
+      "created_at": "2026-05-24T00:21:23+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_3",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T00:23:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_4",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:23:10+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_5",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T00:25:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_23",
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T00:25:18+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_7",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T00:26:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_035_8",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_29",
+        "chunk_ref_15"
+      ],
+      "created_at": "2026-05-24T00:26:17+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

@@ -1,0 +1,106 @@
+{
+  "lead_id": "lead_mock_019",
+  "session_id": "session_mock_019",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "high",
+  "score": 67,
+  "assigned_to": "sales_mock_006",
+  "phone_hash": "mock_phone_hash_019",
+  "created_at": "2026-05-24T08:45:00+09:00",
+  "updated_at": "2026-05-24T15:34:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "江苏",
+    "city": "郑州",
+    "subject_type": "地理",
+    "current_score": 356,
+    "target_score": 431,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "江苏 郑州",
+    "score_summary": "当前约356分，目标key_university",
+    "weak_subjects": "化学、生物",
+    "main_concerns": "住宿还是走读"
+  },
+  "profile_completeness": 0.75,
+  "consultation_stage": "CLOSING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "high",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_019",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "intent_reason": [
+    "主动索要联系方式",
+    "提供分数",
+    "咨询复读",
+    "存在到校测评潜力"
+  ],
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_019_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T18:32:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_019_2",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T17:11:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.786671588667113
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_019_3",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T14:25:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.67928665438449
+      }
+    }
+  ]
+}

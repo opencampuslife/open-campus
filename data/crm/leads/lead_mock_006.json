@@ -1,0 +1,88 @@
+{
+  "lead_id": "lead_mock_006",
+  "session_id": "session_mock_006",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "NEW",
+  "intent_level": "medium",
+  "score": 53,
+  "assigned_to": null,
+  "phone_hash": "mock_phone_hash_006",
+  "created_at": "2026-05-24T05:31:00+09:00",
+  "updated_at": "2026-05-24T12:35:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "江西",
+    "city": "郑州",
+    "subject_type": "政治",
+    "current_score": 468,
+    "target_score": 498,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "江西 郑州",
+    "score_summary": "当前约468分，目标undergraduate",
+    "weak_subjects": "英语",
+    "main_concerns": "孩子状态差、怕复读压力大"
+  },
+  "profile_completeness": 0.52,
+  "consultation_stage": "NEED_ANALYZING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "medium",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_007",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "intent_reason": [
+    "存在到校测评潜力",
+    "家长焦虑明显"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_006_1",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T09:13:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

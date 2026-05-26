@@ -1,0 +1,29 @@
+{
+  "published_id": "published_doc_mock_013",
+  "doc_id": "mock_doc_013",
+  "title": "历年成绩统计",
+  "visibility": "internal",
+  "allowed_roles": [
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "internal",
+  "data_level_int": 2,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "class_type",
+    "boarding",
+    "management"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_013",
+  "published_by": "admin_mock_004",
+  "published_at": "2026-05-24T11:25:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 4,
+  "embedding_version": "mock-embedding-v1"
+}

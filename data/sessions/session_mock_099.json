@@ -1,0 +1,137 @@
+{
+  "session_id": "session_mock_099",
+  "channel": "openhuman",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "CLOSING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T04:51:00+09:00",
+  "updated_at": "2026-05-24T05:10:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖南",
+    "city": "长沙",
+    "subject_type": "历史",
+    "current_score": 493,
+    "target_score": 556,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_completeness": 0.74,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_017",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_099_1",
+      "role": "user",
+      "content": "孩子493分历史类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T04:51:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_2",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_7",
+        "chunk_ref_11"
+      ],
+      "created_at": "2026-05-24T04:51:18+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_3",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T04:52:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_4",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_4"
+      ],
+      "created_at": "2026-05-24T04:52:13+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_5",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T04:57:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_6",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_20"
+      ],
+      "created_at": "2026-05-24T04:57:22+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_7",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T04:59:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_8",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_19"
+      ],
+      "created_at": "2026-05-24T04:59:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_099_9",
+      "role": "user",
+      "content": "孩子493分历史类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T05:00:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

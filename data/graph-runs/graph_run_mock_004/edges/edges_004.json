@@ -1,0 +1,41 @@
+{
+  "graph_run_id": "graph_run_mock_004",
+  "edges": [
+    {
+      "edge_id": "edge_mock_004_1",
+      "source_node_id": "doc:mock_doc_009",
+      "target_node_id": "doc:mock_doc_002",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.96
+      }
+    },
+    {
+      "edge_id": "edge_mock_004_2",
+      "source_node_id": "doc:mock_doc_002",
+      "target_node_id": "doc:mock_doc_005",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.98
+      }
+    },
+    {
+      "edge_id": "edge_mock_004_3",
+      "source_node_id": "doc:mock_doc_005",
+      "target_node_id": "doc:mock_doc_014",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.68
+      }
+    },
+    {
+      "edge_id": "edge_mock_004_4",
+      "source_node_id": "doc:mock_doc_014",
+      "target_node_id": "doc:mock_doc_003",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.6
+      }
+    }
+  ]
+}

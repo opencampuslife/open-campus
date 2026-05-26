@@ -1,0 +1,86 @@
+{
+  "lead_id": "lead_mock_030",
+  "session_id": "session_mock_030",
+  "channel": "openhuman",
+  "campus": "zhengzhou",
+  "status": "NEW",
+  "intent_level": "low",
+  "score": 78,
+  "assigned_to": null,
+  "phone_hash": "mock_phone_hash_030",
+  "created_at": "2026-05-24T07:53:00+09:00",
+  "updated_at": "2026-05-24T12:26:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "河北",
+    "city": "保定",
+    "subject_type": "物理",
+    "current_score": 416,
+    "target_score": 513,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语",
+      "语文"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "想知道适合什么班"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "河北 保定",
+    "score_summary": "当前约416分，目标key_university",
+    "weak_subjects": "英语、语文",
+    "main_concerns": "想知道适合什么班"
+  },
+  "profile_completeness": 0.92,
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "medium",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_013",
+      "chunk_mock_psych_parent_006"
+    ]
+  },
+  "intent_reason": [
+    "明确询问课程",
+    "存在到校测评潜力",
+    "咨询复读"
+  ],
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_030_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T09:22:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "session_id": "session_mock_014",
+  "channel": "openhuman",
+  "entrypoint": "referral",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "NEED_ANALYZING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T07:03:00+09:00",
+  "updated_at": "2026-05-24T07:18:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "四川",
+    "city": "绵阳",
+    "subject_type": "物理",
+    "current_score": 323,
+    "target_score": 361,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.78,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "low",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_006",
+      "chunk_mock_psych_parent_003"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_014_1",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T07:03:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_2",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T07:03:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_3",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T07:05:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_4",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T07:05:19+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_5",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T07:09:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T07:09:30+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_7",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T07:13:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_014_8",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_9"
+      ],
+      "created_at": "2026-05-24T07:13:21+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

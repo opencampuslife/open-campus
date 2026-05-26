@@ -1,0 +1,132 @@
+{
+  "session_id": "session_mock_003",
+  "channel": "webchat",
+  "entrypoint": "landing_page",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T03:15:00+09:00",
+  "updated_at": "2026-05-24T03:41:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河南",
+    "city": "新乡",
+    "subject_type": "物理",
+    "current_score": 287,
+    "target_score": 375,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_completeness": 0.7,
+  "profile_missing_fields": [
+    "parent_education_level"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_015",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_003_1",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T03:15:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_2",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_13"
+      ],
+      "created_at": "2026-05-24T03:15:10+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_3",
+      "role": "user",
+      "content": "孩子287分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T03:17:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_4",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_19",
+        "chunk_ref_26"
+      ],
+      "created_at": "2026-05-24T03:17:18+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_5",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T03:18:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_6",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_22",
+        "chunk_ref_23"
+      ],
+      "created_at": "2026-05-24T03:18:14+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_7",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T03:23:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_003_8",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T03:23:17+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

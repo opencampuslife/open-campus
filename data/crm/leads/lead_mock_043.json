@@ -1,0 +1,114 @@
+{
+  "lead_id": "lead_mock_043",
+  "session_id": "session_mock_043",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSESSMENT_BOOKED",
+  "intent_level": "high",
+  "score": 93,
+  "assigned_to": "sales_mock_002",
+  "phone_hash": "mock_phone_hash_043",
+  "created_at": "2026-05-24T05:43:00+09:00",
+  "updated_at": "2026-05-24T11:25:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "历史",
+    "current_score": 294,
+    "target_score": 397,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "想知道适合什么班"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "湖北 郑州",
+    "score_summary": "当前约294分，目标key_university",
+    "weak_subjects": "英语",
+    "main_concerns": "想知道适合什么班"
+  },
+  "profile_completeness": 0.86,
+  "consultation_stage": "GREETING",
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_002",
+      "chunk_mock_psych_parent_001"
+    ]
+  },
+  "intent_reason": [
+    "提供分数",
+    "存在到校测评潜力",
+    "主动索要联系方式"
+  ],
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_043_1",
+      "created_by": "sales_mock_009",
+      "content": "家长焦虑较重，建议首次电话不要直接推班，先了解孩子近期状态。",
+      "created_at": "2026-05-24T16:11:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_043_2",
+      "created_by": "sales_mock_001",
+      "content": "家长焦虑较重，建议首次电话不要直接推班，先了解孩子近期状态。",
+      "created_at": "2026-05-24T08:56:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_043_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T10:31:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_043_2",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T13:01:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.7611065413013611
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_043_3",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T12:51:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.6152675476572811
+      }
+    }
+  ]
+}

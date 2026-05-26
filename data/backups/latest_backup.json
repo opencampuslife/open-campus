@@ -1,0 +1,7 @@
+{
+  "backup_id": "backup_mock_001",
+  "timestamp": "2026-05-23T22:00:00+09:00",
+  "size_mb": 77.35,
+  "status": "completed",
+  "files_count": 136
+}

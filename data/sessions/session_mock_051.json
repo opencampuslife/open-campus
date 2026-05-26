@@ -1,0 +1,114 @@
+{
+  "session_id": "session_mock_051",
+  "channel": "openhuman",
+  "entrypoint": "referral",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T09:10:00+09:00",
+  "updated_at": "2026-05-24T09:21:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "四川",
+    "city": "德阳",
+    "subject_type": "历史",
+    "current_score": 484,
+    "target_score": 583,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.61,
+  "profile_missing_fields": [
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "low",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_003",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_051_1",
+      "role": "user",
+      "content": "孩子484分历史类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T09:10:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_051_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T09:10:22+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_051_3",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T09:15:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_051_4",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_9",
+        "chunk_ref_15"
+      ],
+      "created_at": "2026-05-24T09:15:15+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_051_5",
+      "role": "user",
+      "content": "孩子484分历史类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T09:19:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_051_6",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_15",
+        "chunk_ref_10"
+      ],
+      "created_at": "2026-05-24T09:19:17+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

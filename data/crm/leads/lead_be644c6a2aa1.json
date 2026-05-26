@@ -1,0 +1,67 @@
+{
+  "lead_id": "lead_be644c6a2aa1",
+  "session_id": "s_taken_08d57f",
+  "status": "ASSIGNED",
+  "channel": "openhuman",
+  "campus_id": "zhengzhou",
+  "identity_type": "sales",
+  "created_at": "2026-05-24T19:00:06.963596+00:00",
+  "updated_at": "2026-05-24T19:00:06.963857+00:00",
+  "followups": [],
+  "events": [
+    {
+      "event_id": "evt_b54da28e04f9",
+      "event_type": "created",
+      "actor_id": "u_sales",
+      "payload": {
+        "session_id": "s_taken_08d57f",
+        "intent": "faq",
+        "score": 30
+      },
+      "created_at": "2026-05-24T19:00:06.963664+00:00"
+    },
+    {
+      "event_id": "evt_b3d22001b58e",
+      "event_type": "assigned",
+      "actor_id": "u_sales",
+      "payload": {
+        "consultant_id": "u_sales"
+      },
+      "created_at": "2026-05-24T19:00:06.963856+00:00"
+    }
+  ],
+  "profile_summary": {
+    "identity_type": "",
+    "province": "",
+    "subject_type": "",
+    "current_score": null,
+    "target_school_level": "",
+    "weak_subjects": [],
+    "budget_range": "",
+    "self_discipline_level": "",
+    "preferred_class_type": "",
+    "completeness": 0.0
+  },
+  "consultation_stage": "PROFILE_COLLECTING",
+  "recommendation_summary": {},
+  "intent_reason": [],
+  "next_best_action": {
+    "action": "collect_profile",
+    "description": "继续收集学生/家长画像",
+    "priority": "high",
+    "consultation_stage": "PROFILE_COLLECTING"
+  },
+  "risk_tags": [
+    "missing_score",
+    "missing_subject_type",
+    "missing_school_level"
+  ],
+  "last_consultation_at": "2026-05-24T19:00:06.963658+00:00",
+  "intent": "faq",
+  "intent_level": "low",
+  "score": 30,
+  "score_reasons": [],
+  "message": "",
+  "assigned_consultant_id": "u_sales",
+  "assigned_at": "2026-05-24T19:00:06.963850+00:00"
+}

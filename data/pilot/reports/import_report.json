@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "school_id": "pilot_cli_smoke",
+  "imported": {
+    "classes": 1,
+    "students": 1,
+    "teachers": 2,
+    "parent_bindings": 1
+  },
+  "errors": []
+}

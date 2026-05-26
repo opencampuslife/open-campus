@@ -1,0 +1,89 @@
+{
+  "lead_id": "lead_mock_025",
+  "session_id": "session_mock_025",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSESSMENT_BOOKED",
+  "intent_level": "low",
+  "score": 60,
+  "assigned_to": "sales_mock_002",
+  "phone_hash": "mock_phone_hash_025",
+  "created_at": "2026-05-24T00:28:00+09:00",
+  "updated_at": "2026-05-24T12:31:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "河北",
+    "city": "石家庄",
+    "subject_type": "生物",
+    "current_score": 444,
+    "target_score": 532,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "河北 石家庄",
+    "score_summary": "当前约444分，目标undergraduate",
+    "weak_subjects": "历史、地理",
+    "main_concerns": "时间紧迫"
+  },
+  "profile_completeness": 0.88,
+  "consultation_stage": "CLOSING",
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "low",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_018",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "intent_reason": [
+    "主动索要联系方式",
+    "咨询复读",
+    "明确询问课程"
+  ],
+  "next_best_action": "安排与家长电话沟通时间",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_025_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T12:52:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

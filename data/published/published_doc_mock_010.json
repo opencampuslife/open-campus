@@ -1,0 +1,32 @@
+{
+  "published_id": "published_doc_mock_010",
+  "doc_id": "mock_doc_010",
+  "title": "学习状态评估标准",
+  "visibility": "public",
+  "allowed_roles": [
+    "visitor",
+    "parent",
+    "student",
+    "sales",
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "public",
+  "data_level_int": 1,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "psych_support_scripts",
+    "parent_anxiety"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_010",
+  "published_by": "admin_mock_004",
+  "published_at": "2026-05-24T11:45:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 4,
+  "embedding_version": "mock-embedding-v1"
+}

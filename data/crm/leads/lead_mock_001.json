@@ -1,0 +1,94 @@
+{
+  "lead_id": "lead_mock_001",
+  "session_id": "session_mock_001",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "medium",
+  "score": 91,
+  "assigned_to": "sales_mock_010",
+  "phone_hash": "mock_phone_hash_001",
+  "created_at": "2026-05-24T06:25:00+09:00",
+  "updated_at": "2026-05-24T12:13:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "山东",
+    "city": "青岛",
+    "subject_type": "化学",
+    "current_score": 457,
+    "target_score": 563,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "数学",
+      "物理"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子不想学"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "山东 青岛",
+    "score_summary": "当前约457分，目标key_university",
+    "weak_subjects": "数学、物理",
+    "main_concerns": "孩子不想学"
+  },
+  "profile_completeness": 0.52,
+  "consultation_stage": "CLOSING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "medium",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_019",
+      "chunk_mock_psych_parent_006"
+    ]
+  },
+  "intent_reason": [
+    "家长焦虑明显",
+    "咨询复读"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_001_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T20:29:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_001_2",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T19:25:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.8334883760366174
+      }
+    }
+  ]
+}

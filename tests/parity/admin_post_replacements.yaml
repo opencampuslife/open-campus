@@ -1,0 +1,381 @@
+{
+  "cases": [
+    {
+      "name": "admin_cancel_post_success",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/admin/ingestion/runs/run-parity-001/cancel",
+      "method": "POST",
+      "path": "/api/admin/ingestion/runs/run-parity-001/cancel",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-001",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["status"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_cancel_post_missing_csrf",
+      "category": "deterministic_policy",
+      "source": "handcrafted",
+      "route": "POST /api/admin/ingestion/runs/run-parity-001/cancel",
+      "method": "POST",
+      "path": "/api/admin/ingestion/runs/run-parity-001/cancel?case=missing-csrf",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-002"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [403]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["error"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_cancel_post_unknown_id",
+      "category": "deterministic_error",
+      "source": "handcrafted",
+      "route": "POST /api/admin/ingestion/runs/run-parity-404/cancel",
+      "method": "POST",
+      "path": "/api/admin/ingestion/runs/run-parity-404/cancel",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-003",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [400]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["error"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_validate_post_success",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/admin/staging/docs/doc-parity-001/validate",
+      "method": "POST",
+      "path": "/api/admin/staging/docs/doc-parity-001/validate",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-004",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["validation_status"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_validate_post_malformed_json",
+      "category": "deterministic_error",
+      "source": "handcrafted",
+      "route": "POST /api/admin/staging/docs/doc-parity-001/validate",
+      "method": "POST",
+      "path": "/api/admin/staging/docs/doc-parity-001/validate",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-005",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body": "{\"payload\":",
+      "expect": {
+        "status": {
+          "allowed": [400]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["error"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_approve_post_success",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/admin/staging/docs/doc-parity-001/approve",
+      "method": "POST",
+      "path": "/api/admin/staging/docs/doc-parity-001/approve",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-006",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["review_status", "reviewer"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_reject_post_success",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/admin/staging/docs/doc-parity-001/reject",
+      "method": "POST",
+      "path": "/api/admin/staging/docs/doc-parity-001/reject",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-007",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {
+        "reason": "test-reject-reason"
+      },
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["review_status"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "admin_publish_post_success",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/admin/staging/docs/doc-parity-001/publish",
+      "method": "POST",
+      "path": "/api/admin/staging/docs/doc-parity-001/publish",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-admin-008",
+        "x-csrf-token": "parity-csrf-test"
+      },
+      "body_json": {},
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["review_status"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    }
+  ]
+}

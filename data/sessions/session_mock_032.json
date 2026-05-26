@@ -1,0 +1,117 @@
+{
+  "session_id": "session_mock_032",
+  "channel": "openhuman",
+  "entrypoint": "landing_page",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "GREETING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T08:55:00+09:00",
+  "updated_at": "2026-05-24T09:09:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "河北",
+    "city": "石家庄",
+    "subject_type": "生物",
+    "current_score": 430,
+    "target_score": 523,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_completeness": 0.82,
+  "profile_missing_fields": [
+    "parent_education_level",
+    "budget_range"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_001",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_032_1",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T08:55:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_032_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_9",
+        "chunk_ref_24"
+      ],
+      "created_at": "2026-05-24T08:55:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_032_3",
+      "role": "user",
+      "content": "孩子430分生物类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T08:58:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_032_4",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_12"
+      ],
+      "created_at": "2026-05-24T08:58:27+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_032_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T09:00:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_032_6",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_28"
+      ],
+      "created_at": "2026-05-24T09:00:28+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

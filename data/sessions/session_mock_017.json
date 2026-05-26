@@ -1,0 +1,100 @@
+{
+  "session_id": "session_mock_017",
+  "channel": "webchat",
+  "entrypoint": "landing_page",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": true,
+  "created_at": "2026-05-24T07:54:00+09:00",
+  "updated_at": "2026-05-24T08:16:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河北",
+    "city": "唐山",
+    "subject_type": "政治",
+    "current_score": 485,
+    "target_score": 601,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "物理",
+      "化学"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.65,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_008",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_017_1",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T07:54:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_017_2",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_6",
+        "chunk_ref_2"
+      ],
+      "created_at": "2026-05-24T07:54:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_017_3",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T07:55:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_017_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_17",
+        "chunk_ref_8"
+      ],
+      "created_at": "2026-05-24T07:55:29+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

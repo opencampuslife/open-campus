@@ -1,0 +1,127 @@
+{
+  "session_id": "s_multiturn_59f8b6",
+  "user_id": "u_multi_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-24T18:15:55.024477+00:00",
+  "updated_at": "2026-05-24T18:15:55.047008+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "孩子430分，物理类，想上本科，数学差英语弱，自律差。"
+    },
+    {
+      "role": "assistant",
+      "content": "从你描述的情况看，可以优先了解全日制、管理较强的复读方案。适合基础较好、目标明确的学生。课程强度大，侧重难题突破和应试技巧。 特点： - 8-10课时/天 - 周测周评 - 弱科一对一补弱 - 适合目标一本及以上的考生\n\n适合有特殊需求的学生，如艺术生文化课、体育生文化课等。 特点： - 小班授课，不超过15人 - 灵活调整课程进度 - 个性化学习计划 - 需单独评估后入学\n\n最终适合的班型还要结合入学测评、薄弱科目和目标分数判断，不能承诺固定提分结果。\n\n来源：全日制冲刺班、班型对比指南、个性化小班"
+    },
+    {
+      "role": "user",
+      "content": "适合什么班型？"
+    },
+    {
+      "role": "assistant",
+      "content": "根据您目前提供的信息，建议优先了解「小班强化班」。\n\n主要原因：\n- 当前分数430分，目标为undergraduate，存在提升空间\n- 检测到3个薄弱科目：数学、英语、物理\n- 自律水平为中等偏低，需要稳定管理与反馈\n\n但如果孩子有以下情况，这个班型未必是最优选择：\n- 学生自律性极强且只需单科补弱\n- 预算明显低于该班型区间\n\n下一步建议先确认：\n- 孩子更倾向走读还是住宿？\n- 预算方面有什么考虑？\n\n温馨提示：\n- 不承诺提分幅度，最终录取以高考实际表现为准\n\n下一步建议：预约学情评估，由顾问结合薄弱科目和目标进一步确认班型。\n说明：不能承诺固定提分或录取结果，最终效果取决于学生基础与学习执行情况。\n\n来源：全日制冲刺班、个性化小班、班型对比指南"
+    }
+  ],
+  "intent": {
+    "intent": "class_recommendation"
+  },
+  "profile": {
+    "current_score": 430,
+    "subject_type": "physics",
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "数学",
+      "英语",
+      "物理"
+    ],
+    "self_discipline_level": "low",
+    "identity_type": "parent",
+    "_meta": {
+      "current_score": {
+        "confidence": 0.95,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024660+00:00"
+      },
+      "subject_type": {
+        "confidence": 0.9,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024662+00:00"
+      },
+      "target_school_level": {
+        "confidence": 0.85,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024663+00:00"
+      },
+      "weak_subjects": {
+        "confidence": 0.8,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024664+00:00"
+      },
+      "self_discipline_level": {
+        "confidence": 0.7,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024665+00:00"
+      },
+      "identity_type": {
+        "confidence": 0.85,
+        "source": "explicit_user",
+        "evidence": "孩子430分，物理类，想上本科，数学差英语弱，自律差。",
+        "confirmed": false,
+        "updated_at": "2026-05-24T18:15:55.024665+00:00"
+      }
+    },
+    "_completeness": 0.65,
+    "consultation_stage": "CLASS_RECOMMENDING"
+  },
+  "profile_completeness": 0.65,
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "recommendation_result": {
+    "recommended_class_type": "小班强化班",
+    "confidence": "medium",
+    "reasons": [
+      "当前分数430分，目标为undergraduate，存在提升空间",
+      "检测到3个薄弱科目：数学、英语、物理",
+      "自律水平为中等偏低，需要稳定管理与反馈"
+    ],
+    "not_suitable_if": [
+      "学生自律性极强且只需单科补弱",
+      "预算明显低于该班型区间"
+    ],
+    "missing_info": [
+      "budget_range",
+      "preferred_campus",
+      "boarding_preference"
+    ],
+    "next_questions": [
+      "孩子更倾向走读还是住宿？",
+      "预算方面有什么考虑？"
+    ],
+    "risk_warnings": [
+      "不承诺提分幅度，最终录取以高考实际表现为准"
+    ],
+    "evidence_ids": [
+      "class_comparison_2026::chunk_004"
+    ]
+  },
+  "risk_level": "low",
+  "next_best_action": {
+    "action": "recommend_class",
+    "description": "已具备基本画像，推荐班型",
+    "priority": "high",
+    "consultation_stage": "CLASS_RECOMMENDING"
+  },
+  "risk_tags": [
+    "low_discipline"
+  ]
+}

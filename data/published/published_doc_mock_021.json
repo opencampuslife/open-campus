@@ -1,0 +1,33 @@
+{
+  "published_id": "published_doc_mock_021",
+  "doc_id": "mock_doc_021",
+  "title": "校区管理制度",
+  "visibility": "public",
+  "allowed_roles": [
+    "visitor",
+    "parent",
+    "student",
+    "sales",
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "public",
+  "data_level_int": 1,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "campus",
+    "enrollment",
+    "assessment"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_021",
+  "published_by": "admin_mock_001",
+  "published_at": "2026-05-24T07:49:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 3,
+  "embedding_version": "mock-embedding-v1"
+}

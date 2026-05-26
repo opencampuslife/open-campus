@@ -1,0 +1,28 @@
+{
+  "published_id": "published_doc_mock_024",
+  "doc_id": "mock_doc_024",
+  "title": "志愿填报指导",
+  "visibility": "internal",
+  "allowed_roles": [
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "internal",
+  "data_level_int": 2,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "crisis_rules_internal",
+    "safety_protocol"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_024",
+  "published_by": "admin_mock_003",
+  "published_at": "2026-05-24T11:13:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 2,
+  "embedding_version": "mock-embedding-v1"
+}

@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #e5e5e5;
+    --card: #141414;
+    --card-foreground: #e5e5e5;
+    --border: #262626;
+    --primary: #d4a574;
+    --primary-foreground: #0a0a0a;
+    --secondary: #1a1a1a;
+    --secondary-foreground: #a3a3a3;
+    --muted: #1a1a1a;
+    --muted-foreground: #737373;
+    --accent: #d4a574;
+    --accent-foreground: #0a0a0a;
+    --destructive: #991b1b;
+    --destructive-foreground: #fafafa;
+    --success: #166534;
+    --success-foreground: #f0fdf0;
+    --warning: #92400e;
+    --warning-foreground: #fefce8;
+    --info: #1e3a5f;
+    --info-foreground: #eff6ff;
+    --radius: 0.5rem;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #a3a3a3;
+    transition: all 150ms ease;
+  }
+
+  .sidebar-link:hover {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+  }
+
+  .sidebar-link.active {
+    background-color: #1a1a1a;
+    color: #d4a574;
+  }
+
+  .sidebar-section-title {
+    padding: 0.5rem 0.75rem 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #525252;
+  }
+
+  .admin-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .admin-input {
+    background-color: #1a1a1a;
+    border: 1px solid #262626;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    color: #e5e5e5;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 150ms ease;
+  }
+
+  .admin-input:focus {
+    border-color: #d4a574;
+  }
+
+  .admin-input::placeholder {
+    color: #525252;
+  }
+
+  .admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 150ms ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .admin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .admin-btn-primary {
+    background-color: #d4a574;
+    color: #0a0a0a;
+  }
+
+  .admin-btn-primary:hover:not(:disabled) {
+    background-color: #c49565;
+  }
+
+  .admin-btn-secondary {
+    background-color: #262626;
+    color: #e5e5e5;
+  }
+
+  .admin-btn-secondary:hover:not(:disabled) {
+    background-color: #333333;
+  }
+
+  .admin-btn-ghost {
+    background-color: transparent;
+    color: #a3a3a3;
+  }
+
+  .admin-btn-ghost:hover:not(:disabled) {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+  }
+
+  .admin-btn-danger {
+    background-color: #991b1b;
+    color: #fafafa;
+  }
+
+  .admin-btn-danger:hover:not(:disabled) {
+    background-color: #b91c1c;
+  }
+
+  .admin-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+  }
+
+  .admin-badge-success {
+    background-color: #166534;
+    color: #f0fdf0;
+  }
+
+  .admin-badge-warning {
+    background-color: #92400e;
+    color: #fefce8;
+  }
+
+  .admin-badge-error {
+    background-color: #991b1b;
+    color: #fef2f2;
+  }
+
+  .admin-badge-info {
+    background-color: #1e3a5f;
+    color: #eff6ff;
+  }
+
+  .admin-badge-default {
+    background-color: #262626;
+    color: #a3a3a3;
+  }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .admin-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #737373;
+    border-bottom: 1px solid #262626;
+  }
+
+  .admin-table td {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #e5e5e5;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .admin-table tr:hover td {
+    background-color: #141414;
+  }
+}

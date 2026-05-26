@@ -1,0 +1,50 @@
+{
+  "graph_run_id": "graph_run_mock_003",
+  "edges": [
+    {
+      "edge_id": "edge_mock_003_1",
+      "source_node_id": "doc:mock_doc_006",
+      "target_node_id": "doc:mock_doc_015",
+      "edge_type": "enhances",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "edge_id": "edge_mock_003_2",
+      "source_node_id": "doc:mock_doc_015",
+      "target_node_id": "doc:mock_doc_009",
+      "edge_type": "enhances",
+      "metadata": {
+        "weight": 0.62
+      }
+    },
+    {
+      "edge_id": "edge_mock_003_3",
+      "source_node_id": "doc:mock_doc_009",
+      "target_node_id": "doc:mock_doc_008",
+      "edge_type": "related_to",
+      "metadata": {
+        "weight": 0.6
+      }
+    },
+    {
+      "edge_id": "edge_mock_003_4",
+      "source_node_id": "doc:mock_doc_008",
+      "target_node_id": "doc:mock_doc_008",
+      "edge_type": "enhances",
+      "metadata": {
+        "weight": 0.35
+      }
+    },
+    {
+      "edge_id": "edge_mock_003_5",
+      "source_node_id": "doc:mock_doc_008",
+      "target_node_id": "doc:mock_doc_004",
+      "edge_type": "enhances",
+      "metadata": {
+        "weight": 0.41
+      }
+    }
+  ]
+}

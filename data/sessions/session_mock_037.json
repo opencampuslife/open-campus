@@ -1,0 +1,145 @@
+{
+  "session_id": "session_mock_037",
+  "channel": "wechat",
+  "entrypoint": "public_chat",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T03:45:00+09:00",
+  "updated_at": "2026-05-24T04:15:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "湖南",
+    "city": "湘潭",
+    "subject_type": "生物",
+    "current_score": 418,
+    "target_score": 532,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "数学"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.88,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "high",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_004",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_037_1",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T03:45:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_2",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T03:45:25+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_3",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T03:50:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_24",
+        "chunk_ref_14"
+      ],
+      "created_at": "2026-05-24T03:50:07+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T03:54:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_6",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_3"
+      ],
+      "created_at": "2026-05-24T03:54:25+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_7",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T03:58:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_8",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T03:58:17+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_9",
+      "role": "user",
+      "content": "孩子418分生物类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T04:01:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_10",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:01:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_037_11",
+      "role": "user",
+      "content": "孩子418分生物类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T04:05:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

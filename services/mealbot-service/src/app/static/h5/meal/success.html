@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>提交成功</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;background:#f5f5f5;color:#333;max-width:480px;margin:0 auto;min-height:100vh}
+.header{background:#07c160;color:#fff;padding:16px 20px;font-size:18px;font-weight:600;text-align:center}
+.result{padding:40px 20px;text-align:center}
+.result .icon{font-size:64px;margin-bottom:16px}
+.result .msg{font-size:18px;font-weight:600;margin-bottom:8px}
+.result .detail{font-size:14px;color:#999;margin-bottom:24px}
+.result .order-info{background:#fff;border-radius:12px;padding:16px;text-align:left;font-size:14px;line-height:1.8;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.result .order-info span{color:#999}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none}
+.btn-primary{background:#07c160;color:#fff}
+.btn-secondary{background:#fff;color:#07c160;border:1.5px solid #07c160;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="header">提交成功</div>
+<div class="result">
+  <div class="icon">✅</div>
+  <div class="msg">提交成功</div>
+  <div class="detail">您的订餐/退餐申请已收到</div>
+
+  <div class="order-info" id="orderInfo">
+    <div>订单号：<span id="orderId">--</span></div>
+    <div>状态：<span id="orderStatus" style="color:#07c160;font-weight:600">已提交</span></div>
+  </div>
+
+  <a href="/h5/home" class="btn btn-primary">返回首页</a>
+  <a href="javascript:window.location.reload()" class="btn btn-secondary">继续提交</a>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("orderId").textContent = params.get("order_id") || "--";
+document.getElementById("orderStatus").textContent = params.get("status") || "已提交";
+</script>
+</body>
+</html>

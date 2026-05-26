@@ -1,0 +1,116 @@
+{
+  "lead_id": "lead_mock_020",
+  "session_id": "session_mock_020",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "high",
+  "score": 82,
+  "assigned_to": "sales_mock_003",
+  "phone_hash": "mock_phone_hash_020",
+  "created_at": "2026-05-24T00:48:00+09:00",
+  "updated_at": "2026-05-24T10:42:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "地理",
+    "current_score": 515,
+    "target_score": 584,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语",
+      "语文"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "湖北 郑州",
+    "score_summary": "当前约515分，目标key_university",
+    "weak_subjects": "英语、语文",
+    "main_concerns": "孩子状态差、怕复读压力大"
+  },
+  "profile_completeness": 0.63,
+  "consultation_stage": "PROFILE_COLLECTING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "low",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_007",
+      "chunk_mock_psych_parent_006"
+    ]
+  },
+  "intent_reason": [
+    "家长焦虑明显",
+    "咨询复读"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_020_1",
+      "created_by": "sales_mock_004",
+      "content": "家长表示需要和家人商量后再决定。",
+      "created_at": "2026-05-24T11:40:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_020_2",
+      "created_by": "sales_mock_005",
+      "content": "已发送校区介绍资料，待家长回复。",
+      "created_at": "2026-05-24T13:04:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_020_1",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T09:44:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_020_2",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T15:31:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.5786164618879039
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_020_3",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T08:18:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.88690274443489
+      }
+    }
+  ]
+}

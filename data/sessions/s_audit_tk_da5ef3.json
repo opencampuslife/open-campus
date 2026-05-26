@@ -1,0 +1,26 @@
+{
+  "session_id": "s_audit_tk_da5ef3",
+  "user_id": "u_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T18:32:22.555492+00:00",
+  "updated_at": "2026-05-23T18:32:22.555495+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "报名流程是什么？"
+    },
+    {
+      "role": "assistant",
+      "content": "\n每年高考成绩公布后即开放报名。具体时间以学校官方通知为准。建议提前联系招生顾问了解报名流程和所需材料。\n具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n来源：2026 报名流程、什么时候可以报名？、说明"
+    }
+  ],
+  "intent": {
+    "intent": "enrollment_flow",
+    "risk_level": "low",
+    "should_create_lead": true
+  },
+  "takeover_status": "taken",
+  "assigned_to": "u_sales",
+  "assigned_at": "2026-05-23T18:32:22.555631+00:00"
+}

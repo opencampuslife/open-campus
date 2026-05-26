@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>销假确认</title>
+<style>body{font-family:"PingFang SC",sans-serif;background:#f5f7f5;margin:0;color:#17251f}main{padding:22px;max-width:520px;margin:auto}form{background:#fff;border-radius:18px;padding:18px;display:grid;gap:14px}input,button{font:inherit;padding:13px;border-radius:10px;border:1px solid #d7e0db}button{background:#146c52;color:white;border:0}</style></head>
+<body><main><h1>返校销假</h1><p>请确认学生已返校，操作将记录在事务审计中。</p><form id="f"><input id="leave" placeholder="请假申请编号" required><button>确认销假</button></form><p id="result"></p></main>
+<script>document.getElementById("f").onsubmit=async(e)=>{e.preventDefault();const id=document.getElementById("leave").value.trim();const r=await fetch("/api/campus/modules/leaves/"+encodeURIComponent(id)+"/return",{method:"POST",credentials:"include",headers:{"Content-Type":"application/json"},body:"{}"});const d=await r.json();document.getElementById("result").textContent=r.ok?"销假成功。":(d.error||"操作失败");};</script></body></html>

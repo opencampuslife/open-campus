@@ -1,0 +1,18 @@
+data_levels:
+  L1:
+    name: "Public"
+    examples: ["school introduction", "public FAQ", "basic enrollment process"]
+    user_visible: true
+  L2:
+    name: "Protected"
+    examples: ["verified-user guidance", "desensitized cases", "assessment preparation"]
+    user_visible: true
+  L3:
+    name: "Internal"
+    examples: ["sales scripts", "pricing policy", "objection handling", "CRM rules"]
+    user_visible: false
+  L4:
+    name: "Sensitive"
+    examples: ["student profile", "phone number", "score record", "lead ownership", "private notes"]
+    user_visible: false
+

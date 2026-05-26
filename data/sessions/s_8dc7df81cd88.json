@@ -1,0 +1,74 @@
+{
+  "session_id": "s_8dc7df81cd88",
+  "user_id": "anonymous",
+  "role": "visitor",
+  "campus": "all",
+  "created_at": "2026-05-24T08:17:55.713958+00:00",
+  "updated_at": "2026-05-24T08:20:59.022833+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "我是小明妈妈"
+    },
+    {
+      "role": "assistant",
+      "content": "您好，小明妈妈！欢迎您来咨询。我是复读学校的招生问答助手，很高兴为您服务。\n\n请问您想了解哪方面的情况？比如学校的课程安排、报名流程、费用说明等，您都可以直接问我，我会根据公开信息为您解答。\n\n来源：说明、复读学校介绍、学籍说明、全日制高考复读班介绍、公开费用说明"
+    },
+    {
+      "role": "user",
+      "content": "我家孩子不想复读"
+    },
+    {
+      "role": "assistant",
+      "content": "这个问题需要按学校正式口径处理，不能承诺固定提分、保证录取，也不能透露未公开的优惠或内部规则。可以先根据学生基础、目标、薄弱科目和意向校区做评估，再由顾问提供合规说明。"
+    },
+    {
+      "role": "user",
+      "content": "你可以说说学校有什么优点"
+    },
+    {
+      "role": "assistant",
+      "content": "作为复读学校，我们有以下几点优势：\n\n1. **教学管理方面**：学校通过入学测评、分层教学、阶段检测和班主任跟进等方式，帮助学生在原有基础上更高效地提升学习效率（提分效果取决于个人基础、学习周期、执行力等因素，无法承诺固定幅度）。\n\n2. **生活保障方面**：食堂提供三餐，荤素搭配、营养均衡，对特殊饮食需求的学生可提供调整方案，食材有统一采购和质量管理制度。\n\n来源：faq_parent_common_2026::chunk_002、faq_student_common_2026::chunk_005"
+    },
+    {
+      "role": "user",
+      "content": "你们学校在哪"
+    },
+    {
+      "role": "assistant",
+      "content": "抱歉，根据现有资料，我暂时无法提供学校的具体地址信息。建议您联系招生顾问获取详细位置和交通指引。\n\n来源：说明、复读学校介绍、学籍说明、提分效果怎么样？、食堂吃得怎么样？"
+    }
+  ],
+  "intent": {
+    "intent": "faq"
+  },
+  "profile": {
+    "_meta": {
+      "identity_type": {
+        "confidence": 0.85,
+        "source": "explicit_user",
+        "evidence": "我家孩子不想复读",
+        "confirmed": false,
+        "updated_at": "2026-05-24T08:18:09.634501+00:00"
+      }
+    },
+    "_completeness": 0.1,
+    "consultation_stage": "PROFILE_COLLECTING",
+    "identity_type": "parent"
+  },
+  "profile_completeness": 0.1,
+  "consultation_stage": "PROFILE_COLLECTING",
+  "recommendation_result": {},
+  "risk_level": "low",
+  "next_best_action": {
+    "action": "collect_profile",
+    "description": "继续收集学生/家长画像",
+    "priority": "high",
+    "consultation_stage": "PROFILE_COLLECTING"
+  },
+  "risk_tags": [
+    "missing_score",
+    "missing_subject_type",
+    "missing_school_level"
+  ]
+}

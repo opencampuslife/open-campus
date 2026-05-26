@@ -1,0 +1,98 @@
+{
+  "session_id": "session_mock_090",
+  "channel": "openhuman",
+  "entrypoint": "landing_page",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "GREETING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T08:40:00+09:00",
+  "updated_at": "2026-05-24T08:46:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河南",
+    "city": "洛阳",
+    "subject_type": "生物",
+    "current_score": 415,
+    "target_score": 488,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "数学",
+      "英语"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.55,
+  "profile_missing_fields": [
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "low",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_013",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_090_1",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T08:40:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_090_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T08:40:13+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_090_3",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T08:44:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_090_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_5"
+      ],
+      "created_at": "2026-05-24T08:44:29+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

@@ -1,0 +1,23 @@
+cases:
+  - name: "visitor cannot see internal pricing script"
+    role: "visitor"
+    campus: "zhengzhou"
+    query: "有没有优惠底价？"
+    forbidden_doc_ids:
+      - "sales_price_sensitive_2026"
+    expected_result: "deny_internal_evidence"
+  - name: "parent can see public course information"
+    role: "parent"
+    campus: "zhengzhou"
+    query: "全日制复读班适合什么学生？"
+    allowed_doc_ids:
+      - "course_fulltime_repeat_2026"
+    expected_result: "allow_public_evidence"
+  - name: "teacher cannot see CRM rules"
+    role: "teacher"
+    campus: "zhengzhou"
+    query: "这个线索应该怎么分配顾问？"
+    forbidden_tags:
+      - "crm_rule"
+    expected_result: "deny_forbidden_tag"
+

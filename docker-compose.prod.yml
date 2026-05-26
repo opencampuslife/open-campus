@@ -1,0 +1,130 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: gaokao-agent-postgres
+    user: "999:999"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+      POSTGRES_DB: ${POSTGRES_DB:-gaokao_agent}
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-gaokao_agent}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+        reservations:
+          memory: 256M
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_USER: gaokao
+    container_name: gaokao-agent-api
+    user: "1000:1000"
+    environment:
+      APP_ENV: production
+      ALLOW_DEV_IDENTITY_OVERRIDE: "0"
+      ENABLE_REMOTE_URL_INGESTION: "0"
+      CSRF_TOKEN_SECRET: ${CSRF_TOKEN_SECRET:?CSRF_TOKEN_SECRET must be set}
+      CSRF_TOKEN_TTL_SECONDS: "${CSRF_TOKEN_TTL_SECONDS:-3600}"
+      CHAT_RATE_LIMIT_PER_MINUTE: "${CHAT_RATE_LIMIT_PER_MINUTE:-30}"
+      ADMIN_RATE_LIMIT_PER_MINUTE: "${ADMIN_RATE_LIMIT_PER_MINUTE:-60}"
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-v4-flash}
+      DEEPSEEK_ENABLE_LLM: "${DEEPSEEK_ENABLE_LLM:-0}"
+      DATABASE_URL_ADMIN: ${DATABASE_URL_ADMIN:?DATABASE_URL_ADMIN must be set}
+      DATABASE_URL_PUBLIC: ${DATABASE_URL_PUBLIC:?DATABASE_URL_PUBLIC must be set}
+      DATABASE_URL_STAFF: ${DATABASE_URL_STAFF:?DATABASE_URL_STAFF must be set}
+      DATABASE_URL_ADMIN_APP: ${DATABASE_URL_ADMIN_APP:?DATABASE_URL_ADMIN_APP must be set}
+      RAG_SOURCE: ${RAG_SOURCE:-postgres}
+    ports:
+      - "${API_PORT:-8787}:8787"
+    volumes:
+      - knowledge_vault:/app/knowledge_vault:rw
+      - crm_data:/app/data/crm:rw
+      - staging_data:/app/data/staging:rw
+      - ingestion_data:/app/data/ingestion:rw
+      - audit_data:/app/data/audit_logs:rw
+      - published_data:/app/data/published:rw
+      - graph_data:/app/data/graph-runs:rw
+      - configs:/app/configs:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8787/api/health\")'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+        reservations:
+          memory: 256M
+    read_only: true
+    tmpfs:
+      - /tmp:size=64M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+volumes:
+  pgdata:
+    name: gaokao-agent-pgdata
+  knowledge_vault:
+    name: gaokao-agent-knowledge-vault
+  crm_data:
+    name: gaokao-agent-crm-data
+  staging_data:
+    name: gaokao-agent-staging
+  ingestion_data:
+    name: gaokao-agent-ingestion
+  audit_data:
+    name: gaokao-agent-audit
+  published_data:
+    name: gaokao-agent-published
+  graph_data:
+    name: gaokao-agent-graph
+  configs:
+    name: gaokao-agent-configs
+    driver_opts:
+      type: none
+      device: ${PWD}/configs
+      o: bind

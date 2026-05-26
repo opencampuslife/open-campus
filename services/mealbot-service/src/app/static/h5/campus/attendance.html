@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>点名提交</title>
+<style>body{font-family:"PingFang SC",sans-serif;background:#f5f7f5;margin:0;color:#17251f}main{padding:22px;max-width:520px;margin:auto}form{background:white;border-radius:18px;padding:18px;display:grid;gap:12px}input,select,textarea,button{font:inherit;padding:12px;border:1px solid #d7e0db;border-radius:10px}button{background:#146c52;color:#fff;border:0}textarea{height:100px}</style></head>
+<body><main><h1>晚自习点名</h1><p>教师提交异常名单；未到且无已批准请假会触发提醒。</p><form id="f">
+<input name="class_id" placeholder="班级编号" required><input name="attendance_date" type="date" required>
+<select name="period"><option value="evening_study">晚自习</option><option value="morning">晨读</option><option value="class">正课</option></select>
+<textarea name="records" placeholder='异常记录 JSON，例如 [{"student_id":"student_demo_001","status":"absent"}]'></textarea><button>提交点名</button></form><p id="result"></p></main>
+<script>document.getElementById("f").onsubmit=async(e)=>{e.preventDefault();const v=Object.fromEntries(new FormData(e.target));let records;try{records=JSON.parse(v.records||"[]")}catch(x){document.getElementById("result").textContent="记录格式错误";return}const first=await fetch("/api/campus/attendance/sessions",{method:"POST",credentials:"include",headers:{"Content-Type":"application/json"},body:JSON.stringify({class_id:v.class_id,attendance_date:v.attendance_date,period:v.period})});const s=await first.json();if(!first.ok){document.getElementById("result").textContent=s.error;return}const r=await fetch("/api/campus/attendance/sessions/"+s.session.session_id+"/records",{method:"POST",credentials:"include",headers:{"Content-Type":"application/json"},body:JSON.stringify({records})});const d=await r.json();document.getElementById("result").textContent=r.ok?"点名已提交，异常 "+d.anomalies.length+" 项。":d.error;};</script></body></html>

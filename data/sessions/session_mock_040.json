@@ -1,0 +1,115 @@
+{
+  "session_id": "session_mock_040",
+  "channel": "webchat",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T02:26:00+09:00",
+  "updated_at": "2026-05-24T02:48:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "陕西",
+    "city": "郑州",
+    "subject_type": "地理",
+    "current_score": 324,
+    "target_score": 433,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "数学",
+      "英语"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_completeness": 0.79,
+  "profile_missing_fields": [
+    "parent_education_level"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_009",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_040_1",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T02:26:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_040_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_17",
+        "chunk_ref_19"
+      ],
+      "created_at": "2026-05-24T02:26:18+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_040_3",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T02:27:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_040_4",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_7"
+      ],
+      "created_at": "2026-05-24T02:27:30+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_040_5",
+      "role": "user",
+      "content": "孩子324分地理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T02:29:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_040_6",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T02:29:25+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

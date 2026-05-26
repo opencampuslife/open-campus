@@ -1,0 +1,42 @@
+roles:
+  visitor:
+    description: "Unauthenticated website or H5 visitor."
+    allowed_visibility: ["public"]
+    allowed_data_levels: ["L1"]
+  customer:
+    description: "WeChat AI Bot user via enterprise WeCom."
+    allowed_visibility: ["public", "protected"]
+    allowed_data_levels: ["L1", "L2"]
+  student:
+    description: "Verified student user."
+    allowed_visibility: ["public", "protected"]
+    allowed_data_levels: ["L1", "L2"]
+  parent:
+    description: "Verified parent user."
+    allowed_visibility: ["public", "protected"]
+    allowed_data_levels: ["L1", "L2"]
+  sales:
+    description: "Admissions consultant."
+    allowed_visibility: ["public", "protected", "internal"]
+    allowed_data_levels: ["L1", "L2", "L3"]
+    campus_scoped: true
+  teacher:
+    description: "Teaching or academic staff."
+    allowed_visibility: ["public", "protected"]
+    allowed_data_levels: ["L1", "L2"]
+    forbidden_tags: ["crm_rule", "deal_info", "internal_pricing"]
+  operator:
+    description: "Operations staff."
+    allowed_visibility: ["public", "protected", "internal"]
+    allowed_data_levels: ["L1", "L2", "L3"]
+    forbidden_tags: ["student_private_case"]
+  campus_admin:
+    description: "Campus administrator."
+    allowed_visibility: ["public", "protected", "internal"]
+    allowed_data_levels: ["L1", "L2", "L3"]
+    campus_scoped: true
+  admin:
+    description: "System administrator."
+    allowed_visibility: ["public", "protected", "internal", "admin"]
+    allowed_data_levels: ["L1", "L2", "L3", "L4"]
+

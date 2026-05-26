@@ -1,0 +1,114 @@
+{
+  "session_id": "session_mock_094",
+  "channel": "openhuman",
+  "entrypoint": "landing_page",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:55:00+09:00",
+  "updated_at": "2026-05-24T01:17:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "山东",
+    "city": "青岛",
+    "subject_type": "地理",
+    "current_score": 396,
+    "target_score": 460,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.76,
+  "profile_missing_fields": [
+    "budget_range"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "high",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_005",
+      "chunk_mock_psych_parent_010"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_094_1",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:55:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_094_2",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:55:13+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_094_3",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:58:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_094_4",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_29",
+        "chunk_ref_14"
+      ],
+      "created_at": "2026-05-24T00:58:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_094_5",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T01:02:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_094_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_18"
+      ],
+      "created_at": "2026-05-24T01:02:30+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

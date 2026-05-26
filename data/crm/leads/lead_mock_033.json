@@ -1,0 +1,101 @@
+{
+  "lead_id": "lead_mock_033",
+  "session_id": "session_mock_033",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 86,
+  "assigned_to": "sales_mock_002",
+  "phone_hash": "mock_phone_hash_033",
+  "created_at": "2026-05-24T06:04:00+09:00",
+  "updated_at": "2026-05-24T20:01:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "江西",
+    "city": "郑州",
+    "subject_type": "生物",
+    "current_score": 480,
+    "target_score": 598,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语",
+      "语文"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "江西 郑州",
+    "score_summary": "当前约480分，目标key_university",
+    "weak_subjects": "英语、语文",
+    "main_concerns": "时间紧迫"
+  },
+  "profile_completeness": 0.76,
+  "consultation_stage": "NEED_ANALYZING",
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "low",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_012",
+      "chunk_mock_psych_parent_007"
+    ]
+  },
+  "intent_reason": [
+    "提供分数",
+    "家长焦虑明显"
+  ],
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_033_1",
+      "created_by": "sales_mock_003",
+      "content": "家长表示需要和家人商量后再决定。",
+      "created_at": "2026-05-24T08:14:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_033_2",
+      "created_by": "sales_mock_004",
+      "content": "已发送校区介绍资料，待家长回复。",
+      "created_at": "2026-05-24T09:18:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_033_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T12:04:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

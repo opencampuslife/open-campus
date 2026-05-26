@@ -1,0 +1,7 @@
+**
+!control-plane/
+!control-plane/**
+control-plane/tests/
+control-plane/**/*_test.go
+!contracts/
+!contracts/routes.yaml

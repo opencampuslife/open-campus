@@ -1,0 +1,109 @@
+{
+  "lead_id": "lead_mock_022",
+  "session_id": "session_mock_022",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 89,
+  "assigned_to": "sales_mock_006",
+  "phone_hash": "mock_phone_hash_022",
+  "created_at": "2026-05-24T09:03:00+09:00",
+  "updated_at": "2026-05-24T12:03:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "山东",
+    "city": "青岛",
+    "subject_type": "历史",
+    "current_score": 435,
+    "target_score": 537,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "想知道适合什么班"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "山东 青岛",
+    "score_summary": "当前约435分，目标key_university",
+    "weak_subjects": "历史、地理",
+    "main_concerns": "想知道适合什么班"
+  },
+  "profile_completeness": 0.86,
+  "consultation_stage": "NEED_ANALYZING",
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_011",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "intent_reason": [
+    "明确询问课程",
+    "咨询复读",
+    "存在到校测评潜力"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_022_1",
+      "created_by": "sales_mock_007",
+      "content": "已发送校区介绍资料，待家长回复。",
+      "created_at": "2026-05-24T17:16:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_022_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T10:57:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_022_2",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T17:37:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.806498935788881
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_022_3",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T19:18:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.7421855927035056
+      }
+    }
+  ]
+}

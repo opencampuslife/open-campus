@@ -1,0 +1,58 @@
+{
+  "lead_id": "lead_086f9d44bfb6",
+  "session_id": "s_taken_fdbb51",
+  "status": "ASSIGNED",
+  "channel": "openhuman",
+  "campus_id": "zhengzhou",
+  "identity_type": "sales",
+  "created_at": "2026-05-23T20:37:29.836127+00:00",
+  "updated_at": "2026-05-23T20:37:29.836309+00:00",
+  "followups": [],
+  "events": [
+    {
+      "event_id": "evt_a585f0a9e582",
+      "event_type": "created",
+      "actor_id": "u_sales",
+      "payload": {
+        "session_id": "s_taken_fdbb51",
+        "intent": "faq",
+        "score": 30
+      },
+      "created_at": "2026-05-23T20:37:29.836164+00:00"
+    },
+    {
+      "event_id": "evt_c672b786994a",
+      "event_type": "assigned",
+      "actor_id": "u_sales",
+      "payload": {
+        "consultant_id": "u_sales"
+      },
+      "created_at": "2026-05-23T20:37:29.836308+00:00"
+    }
+  ],
+  "profile_summary": {
+    "identity_type": "",
+    "province": "",
+    "subject_type": "",
+    "current_score": null,
+    "target_school_level": "",
+    "weak_subjects": [],
+    "budget_range": "",
+    "self_discipline_level": "",
+    "preferred_class_type": "",
+    "completeness": 0.0
+  },
+  "consultation_stage": "",
+  "recommendation_summary": {},
+  "intent_reason": [],
+  "next_best_action": {},
+  "risk_tags": [],
+  "last_consultation_at": "2026-05-23T20:37:29.836130+00:00",
+  "intent": "faq",
+  "intent_level": "low",
+  "score": 30,
+  "score_reasons": [],
+  "message": "",
+  "assigned_consultant_id": "u_sales",
+  "assigned_at": "2026-05-23T20:37:29.836301+00:00"
+}

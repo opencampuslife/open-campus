@@ -1,0 +1,134 @@
+{
+  "session_id": "session_mock_070",
+  "channel": "openhuman",
+  "entrypoint": "referral",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:40:00+09:00",
+  "updated_at": "2026-05-24T00:59:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "物理",
+    "current_score": 410,
+    "target_score": 493,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "家庭条件有限"
+    ]
+  },
+  "profile_completeness": 0.64,
+  "profile_missing_fields": [
+    "parent_education_level"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "low",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_003",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_070_1",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T00:40:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T00:40:13+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T00:44:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_4",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T00:44:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_5",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T00:48:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_6",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_13"
+      ],
+      "created_at": "2026-05-24T00:48:29+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_7",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:50:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_8",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_5",
+        "chunk_ref_24"
+      ],
+      "created_at": "2026-05-24T00:50:22+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_070_9",
+      "role": "user",
+      "content": "孩子410分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T00:53:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

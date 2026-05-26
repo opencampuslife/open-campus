@@ -1,0 +1,104 @@
+{
+  "session_id": "session_mock_046",
+  "channel": "wechat",
+  "entrypoint": "referral",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "GREETING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T09:35:00+09:00",
+  "updated_at": "2026-05-24T10:01:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "历史",
+    "current_score": 508,
+    "target_score": 554,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_completeness": 0.57,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "low",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_007",
+      "chunk_mock_psych_parent_006"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_046_1",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T09:35:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_046_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_14",
+        "chunk_ref_28"
+      ],
+      "created_at": "2026-05-24T09:35:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_046_3",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T09:39:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_046_4",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_20",
+        "chunk_ref_30"
+      ],
+      "created_at": "2026-05-24T09:39:25+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_046_5",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T09:43:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

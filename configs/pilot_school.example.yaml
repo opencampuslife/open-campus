@@ -1,0 +1,21 @@
+school:
+  id: "demo_school"
+  name: "示范中学"
+  timezone: "Asia/Shanghai"
+
+wecom:
+  corp_id: "wwxxxx"
+  agent_id: "1000002"
+  callback_url: "https://api.example.com/wecom/callback/message"
+
+meal:
+  lunch_cutoff: "09:30"
+  dinner_cutoff: "15:30"
+  extra_cutoff: "16:30"
+  lunch_delivery_time: "12:00"
+  dinner_delivery_time: "18:00"
+
+vendor:
+  name: "A供应商"
+  contact: "13800000000"
+  channel: "wecom_group_bot"

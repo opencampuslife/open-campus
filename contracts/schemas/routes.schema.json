@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gaokao-agent.local/contracts/schemas/routes.schema.json",
+  "title": "Gaokao Route Contract",
+  "type": "object",
+  "required": ["version", "frozen_source", "routes"],
+  "additionalProperties": true,
+  "properties": {
+    "version": {"type": "integer"},
+    "frozen_source": {"type": "string"},
+    "description": {"type": "string"},
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "method",
+          "path",
+          "owner",
+          "surface",
+          "auth",
+          "csrf",
+          "rate_limit",
+          "audit",
+          "migration_wave",
+          "legacy_flags",
+          "openapi_ref",
+          "backend"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "method": {"type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]},
+          "path": {"type": "string", "pattern": "^/"},
+          "owner": {"type": "string", "minLength": 1},
+          "surface": {"type": "string", "enum": ["public", "internal"]},
+          "auth": {"type": "string", "enum": ["anonymous", "session", "staff", "signed_token", "trusted_proxy"]},
+          "csrf": {"type": "string", "enum": ["required", "none"]},
+          "rate_limit": {"type": "string", "minLength": 1},
+          "audit": {"type": "boolean"},
+          "migration_wave": {"type": "string", "pattern": "^phase_[0-9]+$"},
+          "legacy_flags": {
+            "type": "array",
+            "items": {"type": "string", "enum": ["legacy_policy_gap", "legacy_contract_alias", "state_changing_get", "deprecated_compatibility_alias"]}
+          },
+          "legacy_exit": {
+            "type": "object",
+            "required": ["target_phase", "allowed_until", "required_fix", "cutover_blocker"],
+            "properties": {
+              "target_phase": {"type": "string", "minLength": 1},
+              "allowed_until": {"type": "string", "minLength": 1},
+              "required_fix": {"type": "string", "minLength": 1},
+              "cutover_blocker": {"type": "boolean"}
+            }
+          },
+          "replacement": {
+            "type": "object",
+            "required": ["method", "path", "target_phase", "status", "csrf", "audit"],
+            "properties": {
+              "method": {"type": "string", "enum": ["POST"]},
+              "path": {"type": "string", "pattern": "^/"},
+              "target_phase": {"type": "string", "minLength": 1},
+              "status": {"type": "string", "enum": ["planned", "implemented"]},
+              "csrf": {"type": "string", "enum": ["required", "none"]},
+              "audit": {"type": "boolean"},
+              "idempotency": {"type": "string", "enum": ["none", "recommended", "required"]},
+              "notes": {"type": "string"}
+            }
+          },
+          "replaces": {
+            "type": "object",
+            "required": ["method", "path"],
+            "properties": {
+              "method": {"type": "string", "enum": ["GET"]},
+              "path": {"type": "string", "pattern": "^/"}
+            }
+          },
+          "deprecation": {
+            "type": "object",
+            "required": ["successor_method", "successor_path", "sunset", "header"],
+            "properties": {
+              "successor_method": {"type": "string", "enum": ["POST"]},
+              "successor_path": {"type": "string", "pattern": "^/"},
+              "sunset": {"type": "string", "minLength": 1},
+              "header": {"type": "string", "enum": ["Deprecation"]}
+            }
+          },
+          "openapi_ref": {"type": "string", "pattern": "^contracts/openapi/.+\\.yaml$"},
+          "backend": {"type": "string", "enum": ["legacy_python", "go_native", "python_capability"]},
+          "request_schema": {"type": "string"},
+          "response_schema": {"type": "string"},
+          "mutation": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

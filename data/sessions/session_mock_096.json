@@ -1,0 +1,105 @@
+{
+  "session_id": "session_mock_096",
+  "channel": "openhuman",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T06:28:00+09:00",
+  "updated_at": "2026-05-24T06:58:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "四川",
+    "city": "德阳",
+    "subject_type": "地理",
+    "current_score": 520,
+    "target_score": 585,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "想知道适合什么班"
+    ]
+  },
+  "profile_completeness": 0.6,
+  "profile_missing_fields": [
+    "parent_education_level",
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_009",
+      "chunk_mock_psych_parent_001"
+    ]
+  },
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_096_1",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T06:28:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_096_2",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_16"
+      ],
+      "created_at": "2026-05-24T06:28:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_096_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T06:29:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_096_4",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_5"
+      ],
+      "created_at": "2026-05-24T06:29:09+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_096_5",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T06:31:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

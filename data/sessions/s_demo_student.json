@@ -1,0 +1,18 @@
+{
+  "session_id": "s_demo_student",
+  "user_id": "u_demo_student",
+  "role": "student",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T17:02:08.184963+00:00",
+  "updated_at": "2026-05-23T17:02:08.184969+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "招生老师内部话术是什么？"
+    },
+    {
+      "role": "assistant",
+      "content": "我暂时没有检索到当前身份可访问的已审核资料。建议补充校区、班型或咨询目标，或转人工顾问确认。"
+    }
+  ]
+}

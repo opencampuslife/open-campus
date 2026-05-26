@@ -1,0 +1,33 @@
+{
+  "published_id": "published_doc_mock_003",
+  "doc_id": "mock_doc_003",
+  "title": "入学测评流程",
+  "visibility": "public",
+  "allowed_roles": [
+    "visitor",
+    "parent",
+    "student",
+    "sales",
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "public",
+  "data_level_int": 1,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "class_type",
+    "tuition",
+    "schedule"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_003",
+  "published_by": "admin_mock_001",
+  "published_at": "2026-05-24T06:57:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 5,
+  "embedding_version": "mock-embedding-v1"
+}

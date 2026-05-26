@@ -1,0 +1,1192 @@
+{
+  "session_id": "s_staff",
+  "user_id": "u_sales",
+  "role": "sales",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T12:03:22.391237+00:00",
+  "updated_at": "2026-05-25T18:42:23.117443+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    }
+  ],
+  "intent": {
+    "intent": "pricing_consulting"
+  },
+  "profile": {
+    "_completeness": 0.0,
+    "consultation_stage": ""
+  },
+  "profile_completeness": 0.0,
+  "consultation_stage": "",
+  "recommendation_result": {},
+  "risk_level": "low",
+  "next_best_action": {
+    "action": "collect_profile",
+    "description": "继续收集学生/家长画像",
+    "priority": "high",
+    "consultation_stage": ""
+  },
+  "risk_tags": [
+    "missing_score",
+    "missing_subject_type",
+    "missing_school_level"
+  ]
+}

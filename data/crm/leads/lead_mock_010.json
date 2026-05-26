@@ -1,0 +1,94 @@
+{
+  "lead_id": "lead_mock_010",
+  "session_id": "session_mock_010",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "CONTACTED",
+  "intent_level": "medium",
+  "score": 88,
+  "assigned_to": "sales_mock_002",
+  "phone_hash": "mock_phone_hash_010",
+  "created_at": "2026-05-24T09:05:00+09:00",
+  "updated_at": "2026-05-24T12:32:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "四川",
+    "city": "德阳",
+    "subject_type": "生物",
+    "current_score": 504,
+    "target_score": 621,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "物理",
+      "化学"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "四川 德阳",
+    "score_summary": "当前约504分，目标key_university",
+    "weak_subjects": "物理、化学",
+    "main_concerns": "住宿还是走读"
+  },
+  "profile_completeness": 0.74,
+  "consultation_stage": "PROFILE_COLLECTING",
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "low",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_014",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "intent_reason": [
+    "咨询复读",
+    "存在到校测评潜力",
+    "明确询问课程"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_010_1",
+      "created_by": "sales_mock_006",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T18:28:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_010_1",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T14:38:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

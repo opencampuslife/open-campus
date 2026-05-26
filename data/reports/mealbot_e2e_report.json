@@ -1,0 +1,22 @@
+{
+  "suite": "mealbot_e2e",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "score": 100.0,
+  "checks": {
+    "initial_order_created": true,
+    "meal_locked": true,
+    "future_submit_blocked": true,
+    "vendor_confirmed": true,
+    "reminders_sent": true,
+    "wecom_attachment_downloaded": true,
+    "attachment_order_linked": true,
+    "logistics_summary_exported": true
+  },
+  "orders_created": 2,
+  "attachments_created": 2,
+  "meal_lock_status": "closed",
+  "vendor_confirmation_status": "confirmed",
+  "reminders_sent": 4
+}

@@ -1,0 +1,100 @@
+{
+  "session_id": "session_mock_081",
+  "channel": "webchat",
+  "entrypoint": "landing_page",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T01:53:00+09:00",
+  "updated_at": "2026-05-24T02:19:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "四川",
+    "city": "成都",
+    "subject_type": "历史",
+    "current_score": 354,
+    "target_score": 399,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "数学"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.74,
+  "profile_missing_fields": [
+    "budget_range"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "low",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_001",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_081_1",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T01:53:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_081_2",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T01:53:14+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_081_3",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T01:55:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_081_4",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T01:55:15+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_081_5",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T01:59:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

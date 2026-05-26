@@ -1,0 +1,101 @@
+{
+  "session_id": "session_mock_084",
+  "channel": "wechat",
+  "entrypoint": "public_chat",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "CLOSING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:52:00+09:00",
+  "updated_at": "2026-05-24T01:10:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "河北",
+    "city": "保定",
+    "subject_type": "政治",
+    "current_score": 331,
+    "target_score": 422,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "家庭条件有限"
+    ]
+  },
+  "profile_completeness": 0.54,
+  "profile_missing_fields": [
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "high",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_017",
+      "chunk_mock_psych_parent_010"
+    ]
+  },
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_084_1",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T00:52:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_084_2",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_4"
+      ],
+      "created_at": "2026-05-24T00:52:09+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_084_3",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T00:57:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_084_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_7"
+      ],
+      "created_at": "2026-05-24T00:57:06+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

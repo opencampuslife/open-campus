@@ -1,0 +1,20 @@
+blocked_claims:
+  - "guaranteed_admission"
+  - "guaranteed_score_increase"
+  - "internal_quota"
+  - "unapproved_discount"
+  - "exclusive_exam_resource"
+
+blocked_phrases:
+  - "保证录取"
+  - "保证提分"
+  - "肯定能上本科"
+  - "一定能冲一本"
+  - "内部名额"
+  - "优惠底价"
+
+rewrite_guidance:
+  promise_risk: "Use non-promissory language. Explain that outcomes depend on baseline, execution, weak subjects, and learning period."
+  pricing_risk: "Provide public pricing range or invite verified consultation. Do not reveal internal discount approval rules."
+  privacy_risk: "Redact names, phone numbers, scores, and identifiable student cases unless the user is authorized."
+

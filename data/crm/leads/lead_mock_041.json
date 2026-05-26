@@ -1,0 +1,106 @@
+{
+  "lead_id": "lead_mock_041",
+  "session_id": "session_mock_041",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "NEW",
+  "intent_level": "high",
+  "score": 86,
+  "assigned_to": null,
+  "phone_hash": "mock_phone_hash_041",
+  "created_at": "2026-05-24T03:57:00+09:00",
+  "updated_at": "2026-05-24T15:56:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "江西",
+    "city": "郑州",
+    "subject_type": "政治",
+    "current_score": 469,
+    "target_score": 550,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "江西 郑州",
+    "score_summary": "当前约469分，目标undergraduate",
+    "weak_subjects": "历史、地理",
+    "main_concerns": "不知道该选什么学校"
+  },
+  "profile_completeness": 0.72,
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "high",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_013",
+      "chunk_mock_psych_parent_010"
+    ]
+  },
+  "intent_reason": [
+    "提供分数",
+    "主动索要联系方式",
+    "存在到校测评潜力",
+    "咨询复读"
+  ],
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_041_1",
+      "created_by": "sales_mock_002",
+      "content": "家长焦虑较重，建议首次电话不要直接推班，先了解孩子近期状态。",
+      "created_at": "2026-05-24T10:25:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_041_1",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T16:40:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_041_2",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T18:24:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.8442265296928648
+      }
+    }
+  ]
+}

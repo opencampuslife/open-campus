@@ -1,0 +1,133 @@
+{
+  "session_id": "session_mock_053",
+  "channel": "wechat",
+  "entrypoint": "public_chat",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "CLOSING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T04:50:00+09:00",
+  "updated_at": "2026-05-24T05:12:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "安徽",
+    "city": "郑州",
+    "subject_type": "历史",
+    "current_score": 480,
+    "target_score": 559,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "数学",
+      "物理"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "想知道适合什么班"
+    ]
+  },
+  "profile_completeness": 0.74,
+  "profile_missing_fields": [
+    "budget_range",
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "high",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_020",
+      "chunk_mock_psych_parent_003"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_053_1",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T04:50:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_2",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:50:26+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_3",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T04:53:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_4",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_3",
+        "chunk_ref_20"
+      ],
+      "created_at": "2026-05-24T04:53:12+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_5",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T04:55:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_8"
+      ],
+      "created_at": "2026-05-24T04:55:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_7",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T04:59:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_053_8",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T04:59:12+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

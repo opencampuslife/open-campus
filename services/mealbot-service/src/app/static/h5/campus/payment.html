@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>缴费确认</title>
+<style>body{font-family:"PingFang SC",sans-serif;background:#f5f7f5;margin:0;color:#17251f}main{padding:22px;max-width:520px;margin:auto}form{background:#fff;border-radius:18px;padding:18px;display:grid;gap:14px}input,button{font:inherit;padding:13px;border-radius:10px;border:1px solid #d7e0db}button{background:#146c52;color:white;border:0}#result{margin-top:14px}</style></head>
+<body><main><h1>缴费凭证提交</h1><p>识别金额仅供财务复核，不会自动确认缴费。</p><form id="f">
+<input name="task_id" placeholder="缴费任务编号" required><input name="student_id" placeholder="学生编号" required>
+<input name="file" type="file" accept="image/jpeg,image/png,application/pdf" required><button>提交凭证</button></form><div id="result"></div></main>
+<script>document.getElementById("f").onsubmit=async(e)=>{e.preventDefault();const r=await fetch("/api/campus/payments/records",{method:"POST",credentials:"include",body:new FormData(e.target)});const d=await r.json();document.getElementById("result").textContent=r.ok?"已收到凭证，等待财务确认。":(d.error||"提交失败");};</script></body></html>

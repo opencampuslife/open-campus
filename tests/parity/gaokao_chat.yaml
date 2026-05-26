@@ -1,0 +1,145 @@
+{
+  "cases": [
+    {
+      "name": "gaokao_chat_minimal_valid",
+      "category": "nondeterministic_success",
+      "source": "handcrafted",
+      "route": "POST /api/gaokao/chat",
+      "method": "POST",
+      "path": "/api/gaokao/chat",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-fixed-001"
+      },
+      "body_json": {
+        "message": "请介绍一下高考志愿填报的基本流程",
+        "user_id": "parity-user-001"
+      },
+      "expect": {
+        "status": {
+          "allowed": [200]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["answer"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "gaokao_chat_malformed_json",
+      "category": "deterministic_error",
+      "source": "handcrafted",
+      "route": "POST /api/gaokao/chat",
+      "method": "POST",
+      "path": "/api/gaokao/chat?case=malformed",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-fixed-002"
+      },
+      "body": "{\"message\":",
+      "expect": {
+        "status": {
+          "allowed": [400]
+        },
+        "compare": {
+          "status": "exact",
+          "body": "json_semantic",
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    },
+    {
+      "name": "gaokao_chat_policy_block",
+      "category": "deterministic_policy",
+      "source": "handcrafted",
+      "route": "POST /api/gaokao/chat",
+      "method": "POST",
+      "path": "/api/gaokao/chat?case=policy",
+      "privacy": {
+        "sanitized": true,
+        "contains_pii": false,
+        "reviewed_by": "engineering"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "x-request-id": "parity-fixed-003"
+      },
+      "body_json": {
+        "message": "请给我学校内部未公开的学生手机号",
+        "user_id": "parity-user-002"
+      },
+      "expect": {
+        "status": {
+          "allowed": [403]
+        },
+        "compare": {
+          "status": "exact",
+          "body": {
+            "mode": "json_required_fields",
+            "required_fields": ["error.code", "error.message"]
+          },
+          "headers": {
+            "content-type": "compatible"
+          },
+          "ignore_headers": [
+            "date",
+            "server",
+            "content-length",
+            "transfer-encoding",
+            "connection",
+            "x-request-id"
+          ]
+        },
+        "latency": {
+          "warn_ratio": 2.0,
+          "fail_ratio": 4.0
+        }
+      }
+    }
+  ]
+}

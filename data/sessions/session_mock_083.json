@@ -1,0 +1,111 @@
+{
+  "session_id": "session_mock_083",
+  "channel": "webchat",
+  "entrypoint": "referral",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "GREETING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T08:34:00+09:00",
+  "updated_at": "2026-05-24T08:53:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "陕西",
+    "city": "郑州",
+    "subject_type": "化学",
+    "current_score": 431,
+    "target_score": 503,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "孩子不想学"
+    ]
+  },
+  "profile_completeness": 0.93,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "medium",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_014",
+      "chunk_mock_psych_parent_010"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_083_1",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T08:34:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_083_2",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_5"
+      ],
+      "created_at": "2026-05-24T08:34:24+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_083_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T08:39:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_083_4",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_14"
+      ],
+      "created_at": "2026-05-24T08:39:14+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_083_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T08:40:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_083_6",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T08:40:20+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

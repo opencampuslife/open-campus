@@ -1,0 +1,8 @@
+{
+  "staging_id": "staging_doc_mock_006",
+  "doc_id": "staging_006",
+  "title": "待审核文档 6",
+  "status": "pending",
+  "created_at": "2026-05-24T12:50:00+09:00",
+  "updated_at": "2026-05-24T12:40:00+09:00"
+}

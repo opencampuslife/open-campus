@@ -1,0 +1,17 @@
+routes:
+  fast_classifier:
+    tasks: ["intent_classification", "entity_extraction", "risk_prefilter"]
+    model_hint: "fast"
+  rag_answer:
+    tasks: ["school_intro", "course_consulting", "enrollment_flow", "faq"]
+    model_hint: "balanced"
+  planning:
+    tasks: ["class_recommendation", "study_plan", "parent_communication"]
+    model_hint: "reasoning"
+  compliance:
+    tasks: ["permission_leak_check", "sensitive_data_check", "promise_risk_check"]
+    model_hint: "strict"
+  summary:
+    tasks: ["conversation_summary", "crm_followup_summary", "profile_update"]
+    model_hint: "fast"
+

@@ -1,0 +1,40 @@
+{
+  "lead_id": "lead_2c9f3278ff40",
+  "session_id": "s_taken_ba4018",
+  "status": "ASSIGNED",
+  "channel": "openhuman",
+  "campus_id": "zhengzhou",
+  "identity_type": "sales",
+  "created_at": "2026-05-23T20:00:37.586687+00:00",
+  "updated_at": "2026-05-23T20:00:37.586833+00:00",
+  "followups": [],
+  "events": [
+    {
+      "event_id": "evt_cf46a6806862",
+      "event_type": "created",
+      "actor_id": "u_sales",
+      "payload": {
+        "session_id": "s_taken_ba4018",
+        "intent": "faq",
+        "score": 30
+      },
+      "created_at": "2026-05-23T20:00:37.586716+00:00"
+    },
+    {
+      "event_id": "evt_92e0a5faa56f",
+      "event_type": "assigned",
+      "actor_id": "u_sales",
+      "payload": {
+        "consultant_id": "u_sales"
+      },
+      "created_at": "2026-05-23T20:00:37.586832+00:00"
+    }
+  ],
+  "intent": "faq",
+  "intent_level": "low",
+  "score": 30,
+  "score_reasons": [],
+  "message": "",
+  "assigned_consultant_id": "u_sales",
+  "assigned_at": "2026-05-23T20:00:37.586826+00:00"
+}

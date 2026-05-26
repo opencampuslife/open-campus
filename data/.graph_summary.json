@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-05-24T21:20:34.484060",
+  "run_id": "graph_run_mock_pilot_001",
+  "campus": "zhengzhou",
+  "statistics": {
+    "nodes_by_type": {
+      "document": 12,
+      "topic": 8,
+      "role": 4,
+      "campus": 2,
+      "risk": 2
+    },
+    "edges_by_type": {
+      "relates_to": 5,
+      "works_at": 2,
+      "covers": 4,
+      "guards": 3,
+      "relevant_for": 4,
+      "related_to": 11,
+      "visible_to": 8,
+      "belongs_to_campus": 5
+    }
+  },
+  "total_size_bytes": 40100
+}

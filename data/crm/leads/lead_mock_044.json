@@ -1,0 +1,96 @@
+{
+  "lead_id": "lead_mock_044",
+  "session_id": "session_mock_044",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 91,
+  "assigned_to": "sales_mock_002",
+  "phone_hash": "mock_phone_hash_044",
+  "created_at": "2026-05-24T02:49:00+09:00",
+  "updated_at": "2026-05-24T11:48:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "陕西",
+    "city": "郑州",
+    "subject_type": "物理",
+    "current_score": 367,
+    "target_score": 481,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "数学"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "陕西 郑州",
+    "score_summary": "当前约367分，目标good_undergraduate",
+    "weak_subjects": "数学",
+    "main_concerns": "不知道该选什么学校"
+  },
+  "profile_completeness": 0.87,
+  "consultation_stage": "GREETING",
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_011",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "intent_reason": [
+    "主动索要联系方式",
+    "提供分数",
+    "家长焦虑明显",
+    "存在到校测评潜力"
+  ],
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_044_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T14:53:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_044_2",
+      "event_type": "STATUS_CHANGED",
+      "created_at": "2026-05-24T14:26:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.89378542374119
+      }
+    }
+  ]
+}

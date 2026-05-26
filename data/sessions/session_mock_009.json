@@ -1,0 +1,113 @@
+{
+  "session_id": "session_mock_009",
+  "channel": "webchat",
+  "entrypoint": "public_chat",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "NEED_ANALYZING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T02:03:00+09:00",
+  "updated_at": "2026-05-24T02:33:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "湖南",
+    "city": "湘潭",
+    "subject_type": "物理",
+    "current_score": 349,
+    "target_score": 419,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_completeness": 0.59,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "low",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_018",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_009_1",
+      "role": "user",
+      "content": "孩子349分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T02:03:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_009_2",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_1",
+        "chunk_ref_18"
+      ],
+      "created_at": "2026-05-24T02:03:30+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_009_3",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T02:05:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_009_4",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_16"
+      ],
+      "created_at": "2026-05-24T02:05:30+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_009_5",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T02:09:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_009_6",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_2"
+      ],
+      "created_at": "2026-05-24T02:09:24+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

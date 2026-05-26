@@ -1,0 +1,136 @@
+{
+  "session_id": "session_mock_050",
+  "channel": "webchat",
+  "entrypoint": "landing_page",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T02:17:00+09:00",
+  "updated_at": "2026-05-24T02:47:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "地理",
+    "current_score": 303,
+    "target_score": 360,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "数学",
+      "物理"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.92,
+  "profile_missing_fields": [
+    "parent_education_level"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "low",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_017",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_050_1",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T02:17:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_2",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_24"
+      ],
+      "created_at": "2026-05-24T02:17:25+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_3",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T02:18:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [],
+      "created_at": "2026-05-24T02:18:07+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T02:19:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_6",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_30",
+        "chunk_ref_1"
+      ],
+      "created_at": "2026-05-24T02:19:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_7",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T02:22:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_8",
+      "role": "assistant",
+      "content": "关于复读，确实需要综合考虑孩子的自律性、基础水平和心理状态。我们这边的全日制封闭班比较适合自律性较弱的学生，有老师全程管理和反馈。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_24",
+        "chunk_ref_6"
+      ],
+      "created_at": "2026-05-24T02:22:20+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_050_9",
+      "role": "user",
+      "content": "孩子303分地理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T02:25:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

@@ -1,0 +1,28 @@
+{
+  "published_id": "published_doc_mock_016",
+  "doc_id": "mock_doc_016",
+  "title": "周末走读班课程安排",
+  "visibility": "internal",
+  "allowed_roles": [
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "internal",
+  "data_level_int": 2,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "crisis_rules_internal",
+    "safety_protocol"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_016",
+  "published_by": "admin_mock_001",
+  "published_at": "2026-05-24T09:00:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 3,
+  "embedding_version": "mock-embedding-v1"
+}

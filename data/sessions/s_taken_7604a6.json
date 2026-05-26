@@ -1,0 +1,26 @@
+{
+  "session_id": "s_taken_7604a6",
+  "user_id": "u_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T18:31:54.297458+00:00",
+  "updated_at": "2026-05-23T18:31:54.297462+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你们学校在哪儿？"
+    },
+    {
+      "role": "assistant",
+      "content": "\n1. 了解学校的教学理念和管理风格是否适合孩子 2. 考察师资水平和教学经验 3. 了解班型设置和学生管理方式 4. 实地查看校园环境、教室和宿舍条件 5. 与在读学生或家长交流了解真实情况\n具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n来源：复读学校介绍、如何选择复读学校、说明"
+    }
+  ],
+  "intent": {
+    "intent": "faq",
+    "risk_level": "low",
+    "should_create_lead": false
+  },
+  "takeover_status": "taken",
+  "assigned_to": "u_sales",
+  "assigned_at": "2026-05-23T18:31:54.297610+00:00"
+}

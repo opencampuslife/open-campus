@@ -1,0 +1,14 @@
+cases:
+  - name: "reject guaranteed score increase"
+    draft: "报名后保证提分 100 分。"
+    expected_violation: "guaranteed_score_increase"
+    expected_action: "safe_rewrite"
+  - name: "reject internal quota"
+    draft: "我们有内部名额，可以保证录取。"
+    expected_violation: "internal_quota"
+    expected_action: "handoff_or_safe_rewrite"
+  - name: "allow non-promissory improvement explanation"
+    draft: "提分效果取决于学生基础、执行力、薄弱科目和学习周期，我们会通过测评和阶段反馈帮助学生提升学习效率。"
+    expected_violation: null
+    expected_action: "allow"
+

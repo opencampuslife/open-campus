@@ -1,0 +1,112 @@
+{
+  "session_id": "session_mock_068",
+  "channel": "wechat",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T08:24:00+09:00",
+  "updated_at": "2026-05-24T08:44:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖南",
+    "city": "株洲",
+    "subject_type": "政治",
+    "current_score": 349,
+    "target_score": 412,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "家庭条件有限"
+    ]
+  },
+  "profile_completeness": 0.88,
+  "profile_missing_fields": [
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "medium",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_006",
+      "chunk_mock_psych_parent_007"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_068_1",
+      "role": "user",
+      "content": "孩子349分政治类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T08:24:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_068_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T08:24:20+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_068_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T08:26:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_068_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T08:26:05+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_068_5",
+      "role": "user",
+      "content": "孩子对封闭管理比较抵触，能走读吗？",
+      "created_at": "2026-05-24T08:29:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_068_6",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_25",
+        "chunk_ref_25"
+      ],
+      "created_at": "2026-05-24T08:29:11+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

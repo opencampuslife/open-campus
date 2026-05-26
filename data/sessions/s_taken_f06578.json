@@ -1,0 +1,24 @@
+{
+  "session_id": "s_taken_f06578",
+  "user_id": "u_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T18:38:54.237083+00:00",
+  "updated_at": "2026-05-23T18:38:54.237086+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你们学校在哪儿？"
+    },
+    {
+      "role": "assistant",
+      "content": "具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n以上案例均已隐去学生个人信息。每个人的基础、努力程度、临场发挥情况不同，往年案例仅供参考，不代表任何承诺。\n\n来源：说明、复读学校介绍"
+    }
+  ],
+  "intent": {
+    "intent": "faq"
+  },
+  "takeover_status": "taken",
+  "assigned_to": "u_sales",
+  "assigned_at": "2026-05-23T18:38:54.237244+00:00"
+}

@@ -1,0 +1,102 @@
+{
+  "session_id": "session_mock_095",
+  "channel": "openhuman",
+  "entrypoint": "landing_page",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "EMOTIONAL_SUPPORT",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T00:39:00+09:00",
+  "updated_at": "2026-05-24T00:52:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "江苏",
+    "city": "郑州",
+    "subject_type": "历史",
+    "current_score": 458,
+    "target_score": 521,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "数学",
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.55,
+  "profile_missing_fields": [
+    "budget_range"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "一对一精品班",
+    "confidence": "high",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_015",
+      "chunk_mock_psych_parent_010"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_095_1",
+      "role": "user",
+      "content": "孩子自律性比较差，家长又没时间管，能提供住宿吗？",
+      "created_at": "2026-05-24T00:39:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_095_2",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T00:39:29+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_095_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T00:42:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_095_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_27"
+      ],
+      "created_at": "2026-05-24T00:42:20+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_095_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T00:45:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

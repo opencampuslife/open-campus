@@ -1,0 +1,102 @@
+{
+  "session_id": "session_mock_011",
+  "channel": "webchat",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "CONSULTING",
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T08:08:00+09:00",
+  "updated_at": "2026-05-24T08:23:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河南",
+    "city": "安阳",
+    "subject_type": "化学",
+    "current_score": 446,
+    "target_score": 483,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_completeness": 0.55,
+  "profile_missing_fields": [
+    "budget_range",
+    "family_income"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_001",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_011_1",
+      "role": "user",
+      "content": "孩子446分化学类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T08:08:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_011_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_29"
+      ],
+      "created_at": "2026-05-24T08:08:23+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_011_3",
+      "role": "user",
+      "content": "孩子446分化学类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T08:12:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_011_4",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_14",
+        "chunk_ref_4"
+      ],
+      "created_at": "2026-05-24T08:12:25+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

@@ -1,0 +1,101 @@
+{
+  "lead_id": "lead_mock_046",
+  "session_id": "session_mock_046",
+  "channel": "wechat",
+  "campus": "zhengzhou",
+  "status": "NEW",
+  "intent_level": "high",
+  "score": 68,
+  "assigned_to": null,
+  "phone_hash": "mock_phone_hash_046",
+  "created_at": "2026-05-24T09:35:00+09:00",
+  "updated_at": "2026-05-24T18:13:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "湖北",
+    "city": "郑州",
+    "subject_type": "历史",
+    "current_score": 508,
+    "target_score": 554,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "湖北 郑州",
+    "score_summary": "当前约508分，目标key_university",
+    "weak_subjects": "英语",
+    "main_concerns": "孩子状态差、怕复读压力大"
+  },
+  "profile_completeness": 0.57,
+  "consultation_stage": "GREETING",
+  "recommendation_summary": {
+    "recommended_class_type": "全日制封闭班",
+    "confidence": "low",
+    "reasons": [
+      "时间紧迫",
+      "需要高强度冲刺训练"
+    ],
+    "not_suitable_if": [
+      "孩子强烈抗拒封闭管理",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_007",
+      "chunk_mock_psych_parent_006"
+    ]
+  },
+  "intent_reason": [
+    "存在到校测评潜力",
+    "提供分数",
+    "主动索要联系方式",
+    "咨询复读"
+  ],
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_046_1",
+      "created_by": "sales_mock_010",
+      "content": "家长表示需要和家人商量后再决定。",
+      "created_at": "2026-05-24T08:39:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_046_2",
+      "created_by": "sales_mock_009",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T14:25:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_046_1",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T18:30:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

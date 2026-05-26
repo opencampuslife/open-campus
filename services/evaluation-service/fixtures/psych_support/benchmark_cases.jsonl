@@ -1,0 +1,10 @@
+{"id":"psych_router_001","message":"孩子现在一说复读就哭，我们也不知道怎么办","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":"ADMISSIONS_CONSULTATION","expected_theme":"parent_anxiety"}
+{"id":"psych_router_002","message":"430分物理类，想问适合什么班","expected_primary_mode":"ADMISSIONS_CONSULTATION","expected_secondary_mode":null,"expected_theme":null}
+{"id":"psych_router_003","message":"我觉得自己复读也没用，怎么都考不好","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":"ADMISSIONS_CONSULTATION","expected_theme":"low_self_efficacy"}
+{"id":"psych_router_004","message":"你们郑州校区住宿多少钱","expected_primary_mode":"ADMISSIONS_CONSULTATION","expected_secondary_mode":null,"expected_theme":null}
+{"id":"psych_router_005","message":"孩子不和我们说话，一提学校就发火","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":null,"expected_theme":"parent_child_conflict"}
+{"id":"psych_router_006","message":"我怕再失败一次，太丢人了","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":"ADMISSIONS_CONSULTATION","expected_theme":"repeat_failure_fear"}
+{"id":"psych_router_007","message":"报名流程是什么，需要先测评吗","expected_primary_mode":"ADMISSIONS_CONSULTATION","expected_secondary_mode":null,"expected_theme":null}
+{"id":"psych_router_008","message":"孩子数学英语弱，但最近状态很差，天天说不想学","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":"ADMISSIONS_CONSULTATION","expected_theme":"student_pressure"}
+{"id":"psych_router_009","message":"他就是摆烂，我们说什么都不听","expected_primary_mode":"EMOTIONAL_SUPPORT","expected_secondary_mode":null,"expected_theme":"parent_child_conflict"}
+{"id":"psych_router_010","message":"我想了解全日制封闭班管理怎么样","expected_primary_mode":"ADMISSIONS_CONSULTATION","expected_secondary_mode":null,"expected_theme":null}

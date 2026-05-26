@@ -1,0 +1,38 @@
+defaults:
+  min_confidence: 0.65
+  require_review_status: "approved"
+  require_effective_document: true
+  max_chunks: 8
+  hybrid_search:
+    vector_weight: 0.7
+    keyword_weight: 0.3
+
+retrieval_source:
+  production_source: postgres
+  dev_fallback_source: json
+  allow_json_in_production: false
+
+pre_filter:
+  required:
+    - "review_status == approved"
+    - "visibility in permission_scope.allowed_visibility"
+    - "data_level in permission_scope.allowed_data_levels"
+    - "campus_scope contains all or permission_scope.campus"
+    - "effective_date <= today"
+    - "expiry_date >= today"
+  forbidden:
+    - "business_tags intersects permission_scope.forbidden_tags"
+
+post_filter:
+  required:
+    - "chunk.review_status == approved"
+    - "chunk.visibility in permission_scope.allowed_visibility"
+    - "chunk.data_level in permission_scope.allowed_data_levels"
+  drop_if:
+    - "chunk contains unredacted phone number"
+    - "chunk contains student identity in non-L4 context"
+    - "chunk is expired"
+
+source_citation:
+  required_for_user_answers: true
+  expose_internal_paths_to_public_users: false

@@ -1,0 +1,106 @@
+{
+  "session_id": "session_mock_058",
+  "channel": "webchat",
+  "entrypoint": "public_chat",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "PROFILE_COLLECTING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T05:18:00+09:00",
+  "updated_at": "2026-05-24T05:39:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "山东",
+    "city": "济南",
+    "subject_type": "政治",
+    "current_score": 433,
+    "target_score": 472,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_completeness": 0.67,
+  "profile_missing_fields": [
+    "parent_education_level"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "medium",
+    "reasons": [
+      "自律水平偏低",
+      "需要较强管理和反馈",
+      "多科薄弱"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_010",
+      "chunk_mock_psych_parent_005"
+    ]
+  },
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_058_1",
+      "role": "user",
+      "content": "孩子433分政治类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T05:18:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_058_2",
+      "role": "assistant",
+      "content": "数学和英语确实是很多复读生的薄弱科目。我们有专门针对这两科的强化班，由资深教师授课。需要先了解孩子的具体情况才能推荐合适的课程。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_21",
+        "chunk_ref_30"
+      ],
+      "created_at": "2026-05-24T05:18:08+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_058_3",
+      "role": "user",
+      "content": "我家是外地的，来你们这边方便吗？",
+      "created_at": "2026-05-24T05:22:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_058_4",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_11"
+      ],
+      "created_at": "2026-05-24T05:22:28+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_058_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T05:27:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

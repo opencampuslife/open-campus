@@ -1,0 +1,98 @@
+mode: staging_only
+enabled: true
+description: "Go shadow gateway staging header-canary config; enabled for header-based testing; weight=0, no percentage traffic"
+default_weight: 0
+
+canary:
+  type: header
+  enabled: true
+  header: X-Gaokao-Gateway-Canary
+  value: go
+
+upstreams:
+  go_gateway:
+    url: "http://go-shadow-gateway:8788"
+    description: "Go shadow gateway (staging, header-canary only)"
+  python_gateway:
+    url: "http://api-gateway:8787"
+    description: "Python legacy gateway (default fallback)"
+
+routes:
+  - method: POST
+    path: /api/gaokao/chat
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Public chat route; header-canary enabled, percentage weight=0"
+
+  - method: POST
+    path: /api/admin/ingestion/runs/{run_id}/cancel
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin ingest; header-canary enabled, percentage weight=0"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/validate
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; header-canary enabled, percentage weight=0"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/approve
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; header-canary enabled, percentage weight=0"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/reject
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; header-canary enabled, percentage weight=0"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/publish
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; header-canary enabled, percentage weight=0"
+
+blocked_patterns:
+  - method: GET
+    path_pattern: /api/admin/**
+    reason: "deprecated compatibility alias or non-canonical admin mutation"
+  - method: "*"
+    path_pattern: /api/admin/**
+    reason: "wildcard admin cutover is forbidden; allow if explicitly listed"
+    allow_if_explicitly_listed: true
+  - method: "*"
+    path_pattern: /api/*
+    reason: "wildcard /api/* is forbidden"
+    allow_if_explicitly_listed: false

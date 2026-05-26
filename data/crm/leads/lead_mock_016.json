@@ -1,0 +1,117 @@
+{
+  "lead_id": "lead_mock_016",
+  "session_id": "session_mock_016",
+  "channel": "openhuman",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 60,
+  "assigned_to": "sales_mock_001",
+  "phone_hash": "mock_phone_hash_016",
+  "created_at": "2026-05-24T07:43:00+09:00",
+  "updated_at": "2026-05-24T18:34:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "湖南",
+    "city": "长沙",
+    "subject_type": "政治",
+    "current_score": 492,
+    "target_score": 554,
+    "target_school_level": "undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "孩子状态差",
+      "怕复读压力大"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "湖南 长沙",
+    "score_summary": "当前约492分，目标undergraduate",
+    "weak_subjects": "化学、生物",
+    "main_concerns": "孩子状态差、怕复读压力大"
+  },
+  "profile_completeness": 0.77,
+  "consultation_stage": "GREETING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "low",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_017",
+      "chunk_mock_psych_parent_003"
+    ]
+  },
+  "intent_reason": [
+    "咨询复读",
+    "主动索要联系方式",
+    "提供分数"
+  ],
+  "next_best_action": "建议顾问先安抚家长焦虑，再邀请到校做学习状态测评",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_016_1",
+      "created_by": "sales_mock_010",
+      "content": "家长焦虑较重，建议首次电话不要直接推班，先了解孩子近期状态。",
+      "created_at": "2026-05-24T10:44:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_016_2",
+      "created_by": "sales_mock_006",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T15:04:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_016_1",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T17:05:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_016_2",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T11:58:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.5789439925246981
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_016_3",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T10:17:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.6263271972846312
+      }
+    }
+  ]
+}

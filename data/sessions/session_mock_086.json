@@ -1,0 +1,143 @@
+{
+  "session_id": "session_mock_086",
+  "channel": "wechat",
+  "entrypoint": "public_chat",
+  "role": "student",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "GREETING",
+  "primary_mode": "EMOTIONAL_SUPPORT",
+  "secondary_mode": null,
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T04:00:00+09:00",
+  "updated_at": "2026-05-24T04:19:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "江苏",
+    "city": "郑州",
+    "subject_type": "化学",
+    "current_score": 503,
+    "target_score": 564,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "数学"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "成绩上不去怎么办"
+    ]
+  },
+  "profile_completeness": 0.82,
+  "profile_missing_fields": [],
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "medium",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_009",
+      "chunk_mock_psych_parent_002"
+    ]
+  },
+  "next_best_action": "安排与家长电话沟通时间",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_086_1",
+      "role": "user",
+      "content": "数学和英语比较弱，有什么针对性的班型推荐吗？",
+      "created_at": "2026-05-24T04:00:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_2",
+      "role": "assistant",
+      "content": "明白家长的担心。建议先带孩子来校区做个免费的学习状态测评，我们可以根据测评结果给出更具体的建议。您看这周末方便吗？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:00:23+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_3",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T04:02:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_4",
+      "role": "assistant",
+      "content": "校区交通比较便利，高铁和自驾都很方便。如果确定要来，建议提前预约，这样可以安排老师先做一次初步沟通。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:02:16+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_5",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T04:06:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_6",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:06:13+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_7",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T04:08:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_8",
+      "role": "assistant",
+      "content": "能理解你的着急。现在先不急着定班型，更重要的是看孩子是在怕再次失败，还是对学习本身已经很抗拒。可以先确认一个问题：他最近主要是抗拒学习，还是抗拒和家长沟通？",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T04:08:10+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_9",
+      "role": "user",
+      "content": "孩子503分化学类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T04:12:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_10",
+      "role": "assistant",
+      "content": "感谢你的信任。根据你提供的情况，孩子目前的状态确实需要先稳定情绪。建议先做一个学习状态测评，这样我们可以更准确地推荐合适的班型。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [],
+      "created_at": "2026-05-24T04:12:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_086_11",
+      "role": "user",
+      "content": "孩子503分化学类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T04:13:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

@@ -1,0 +1,125 @@
+{
+  "session_id": "session_mock_098",
+  "channel": "webchat",
+  "entrypoint": "landing_page",
+  "role": "visitor",
+  "campus": "zhengzhou",
+  "fsm_state": "IDLE",
+  "consultation_stage": "NEED_ANALYZING",
+  "primary_mode": "ADMISSIONS_CONSULTATION",
+  "secondary_mode": "ADMISSIONS_CONSULTATION",
+  "handoff_triggered": false,
+  "created_at": "2026-05-24T02:03:00+09:00",
+  "updated_at": "2026-05-24T02:23:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "河北",
+    "city": "保定",
+    "subject_type": "物理",
+    "current_score": 326,
+    "target_score": 390,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "数学",
+      "英语"
+    ],
+    "self_discipline_level": "medium",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "flexible",
+    "parent_concerns": [
+      "住宿还是走读"
+    ]
+  },
+  "profile_completeness": 0.76,
+  "profile_missing_fields": [
+    "parent_education_level",
+    "budget_range"
+  ],
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "medium",
+    "reasons": [
+      "目标明确但基础较弱",
+      "需要系统复习计划"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_020",
+      "chunk_mock_psych_parent_007"
+    ]
+  },
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "messages": [
+    {
+      "message_id": "msg_session_mock_098_1",
+      "role": "user",
+      "content": "430分能上什么学校啊？复读的话有希望吗？",
+      "created_at": "2026-05-24T02:03:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_2",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "EMOTIONAL_SUPPORT",
+      "citations": [
+        "chunk_ref_21"
+      ],
+      "created_at": "2026-05-24T02:03:11+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_3",
+      "role": "user",
+      "content": "复读一年大概要花多少钱？有没有优惠？",
+      "created_at": "2026-05-24T02:06:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_4",
+      "role": "assistant",
+      "content": "走读也是可以的，不过需要家长每天接送。我们建议如果家庭条件允许，住宿班的效果会更好，因为孩子的作息会更规律。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_30",
+        "chunk_ref_6"
+      ],
+      "created_at": "2026-05-24T02:06:23+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_5",
+      "role": "user",
+      "content": "我家孩子今年高考没考好，想问一下你们这边的复读班怎么样？",
+      "created_at": "2026-05-24T02:10:00+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_6",
+      "role": "assistant",
+      "content": "关于费用，我们有多种班型，从基础巩固班到精品冲刺班价格不同。具体可以到校区咨询，也可以在电话里先了解一下您的预算范围，我们给您推荐合适的选项。",
+      "mode": "ADMISSIONS_CONSULTATION",
+      "citations": [
+        "chunk_ref_19",
+        "chunk_ref_14"
+      ],
+      "created_at": "2026-05-24T02:10:29+09:00"
+    },
+    {
+      "message_id": "msg_session_mock_098_7",
+      "role": "user",
+      "content": "孩子326分物理类，想复读，但最近一说学习就哭，我们也不知道怎么办。",
+      "created_at": "2026-05-24T02:11:00+09:00"
+    }
+  ],
+  "audit_event_ids": []
+}

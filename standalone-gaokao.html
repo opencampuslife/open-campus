@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>高考复读招生咨询</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4efe6;
+        --panel: rgba(255, 252, 247, 0.92);
+        --panel-strong: #fffdf9;
+        --ink: #1f2933;
+        --muted: #667085;
+        --accent: #a64b2a;
+        --accent-soft: #f6d7c7;
+        --line: rgba(132, 94, 55, 0.16);
+        --user: #153c37;
+        --user-soft: #d7ece8;
+        --assistant-soft: #fff0e8;
+        --shadow: 0 24px 60px rgba(48, 35, 23, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(255, 219, 195, 0.9), transparent 34%),
+          radial-gradient(circle at top right, rgba(209, 234, 227, 0.95), transparent 30%),
+          linear-gradient(180deg, #f9f5ef 0%, var(--bg) 100%);
+      }
+
+      .shell {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 28px 20px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+      }
+
+      .sidebar {
+        padding: 24px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      h1 {
+        margin: 14px 0 12px;
+        font-size: 34px;
+        line-height: 1.15;
+      }
+
+      .copy {
+        margin: 0 0 16px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .tips,
+      .meta {
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tips li,
+      .meta li {
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .tips strong,
+      .meta strong {
+        color: var(--ink);
+      }
+
+      .chat {
+        min-height: 78vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .chat-header {
+        padding: 22px 24px 18px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .chat-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .status {
+        font-size: 13px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .messages {
+        padding: 24px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .bubble {
+        max-width: 80%;
+        border-radius: 20px;
+        padding: 16px 18px;
+        line-height: 1.7;
+        box-shadow: 0 8px 24px rgba(27, 31, 35, 0.05);
+      }
+
+      .bubble p {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .bubble.user {
+        align-self: flex-end;
+        background: var(--user-soft);
+        color: var(--user);
+        border-bottom-right-radius: 8px;
+      }
+
+      .bubble.assistant {
+        align-self: flex-start;
+        background: var(--assistant-soft);
+        border-bottom-left-radius: 8px;
+      }
+
+      .bubble.system {
+        align-self: center;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .message-meta {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 10px;
+      }
+
+      .meta-block h3 {
+        margin: 0 0 8px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .meta-block ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .meta-block li {
+        margin: 6px 0;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .action-chip {
+        border: 1px solid rgba(166, 75, 42, 0.22);
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--accent);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .composer {
+        border-top: 1px solid var(--line);
+        padding: 18px;
+        background: var(--panel-strong);
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
+
+      .composer form {
+        display: grid;
+        gap: 12px;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 104px;
+        resize: vertical;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 16px 18px;
+        font: inherit;
+        color: var(--ink);
+      }
+
+      textarea:focus {
+        outline: 2px solid rgba(166, 75, 42, 0.18);
+        border-color: rgba(166, 75, 42, 0.35);
+      }
+
+      .composer-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .hint {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 18px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .chat {
+          min-height: 72vh;
+        }
+
+        .bubble {
+          max-width: 100%;
+        }
+
+        .composer-footer {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <aside class="panel sidebar">
+          <div class="eyebrow">Gaokao Admissions</div>
+          <h1>高考复读招生咨询</h1>
+          <p class="copy">这里直接连接本地招生咨询 API，并以消费者身份进入公开咨询链路。你可以从课程、费用、管理方式、报名流程开始问，页面会持续复用同一个会话。</p>
+          <ul class="tips">
+            <li><strong>适合提问：</strong>班型区别、是否住校、管理强度、报名流程、学情评估。</li>
+            <li><strong>输出内容：</strong>回答、公开引用、下一步建议动作。</li>
+            <li><strong>安全边界：</strong>页面只走本地消费者入口，不暴露受信代理凭证。</li>
+          </ul>
+          <ul class="meta">
+            <li><strong>接口：</strong><code>/api/local/consumer-chat</code></li>
+            <li><strong>模式：</strong>本地消费者会话</li>
+            <li><strong>页面：</strong><code>127.0.0.1:8787</code></li>
+          </ul>
+        </aside>
+
+        <section class="panel chat">
+          <header class="chat-header">
+            <div class="chat-title">咨询对话框</div>
+            <div class="status" id="status">未开始对话</div>
+          </header>
+
+          <div class="messages" id="messages">
+            <div class="bubble assistant">
+              <p>你好，这里是高考复读招生咨询助手。你可以先告诉我分数段、科类、目标或想了解的班型，我会按公开口径给你建议。</p>
+            </div>
+          </div>
+
+          <div class="composer">
+            <form id="chat-form">
+              <textarea id="message-input" placeholder="例如：孩子今年 430 分，物理类，想冲一本，自律一般，适合什么班型？"></textarea>
+              <div class="composer-footer">
+                <div class="hint">支持连续对话，会自动保留当前 session。</div>
+                <button type="submit" id="send-button">发送咨询</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("message-input");
+      const messages = document.getElementById("messages");
+      const statusNode = document.getElementById("status");
+      const sendButton = document.getElementById("send-button");
+      let sessionId = "";
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll("\"", "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function appendMessage(role, content, extras = {}) {
+        const bubble = document.createElement("article");
+        bubble.className = `bubble ${role}`;
+
+        const body = document.createElement("p");
+        body.innerHTML = escapeHtml(content);
+        bubble.appendChild(body);
+
+        const citations = Array.isArray(extras.citations) ? extras.citations : [];
+        const actions = Array.isArray(extras.actions) ? extras.actions : [];
+
+        if (citations.length || actions.length) {
+          const meta = document.createElement("section");
+          meta.className = "message-meta";
+
+          if (citations.length) {
+            const citationBlock = document.createElement("div");
+            citationBlock.className = "meta-block";
+            citationBlock.innerHTML = "<h3>引用</h3>";
+            const list = document.createElement("ul");
+            citations.forEach((citation) => {
+              const item = document.createElement("li");
+              const title = citation && citation.title ? citation.title : "未命名来源";
+              const section = citation && citation.section ? ` · ${citation.section}` : "";
+              const type = citation && citation.source_type ? ` (${citation.source_type})` : "";
+              item.textContent = `${title}${section}${type}`;
+              list.appendChild(item);
+            });
+            citationBlock.appendChild(list);
+            meta.appendChild(citationBlock);
+          }
+
+          if (actions.length) {
+            const actionBlock = document.createElement("div");
+            actionBlock.className = "meta-block";
+            actionBlock.innerHTML = "<h3>建议动作</h3>";
+            const wrap = document.createElement("div");
+            wrap.className = "actions";
+            actions.forEach((action) => {
+              const chip = document.createElement("button");
+              chip.type = "button";
+              chip.className = "action-chip";
+              const actionLabel =
+                typeof action === "string"
+                  ? action
+                  : action.label || action.type || "继续咨询";
+              chip.textContent = actionLabel;
+              chip.addEventListener("click", () => {
+                input.value = chip.textContent;
+                input.focus();
+              });
+              wrap.appendChild(chip);
+            });
+            actionBlock.appendChild(wrap);
+            meta.appendChild(actionBlock);
+          }
+
+          bubble.appendChild(meta);
+        }
+
+        messages.appendChild(bubble);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function setBusy(busy, label) {
+        sendButton.disabled = busy;
+        input.disabled = busy;
+        statusNode.textContent = label;
+      }
+
+      async function sendMessage(message) {
+        appendMessage("user", message);
+        setBusy(true, "咨询中...");
+
+        try {
+          const response = await fetch("/api/local/consumer-chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              session_id: sessionId || undefined,
+              message
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          sessionId = data.session_id || sessionId;
+          const actions = data.recommended_actions || data.actions || [];
+          appendMessage("assistant", data.answer || "已收到，但暂时没有返回回答。", {
+            citations: data.citations || [],
+            actions
+          });
+
+          statusNode.textContent = sessionId ? `会话进行中 · ${sessionId}` : "会话进行中";
+        } catch (error) {
+          appendMessage("system", `请求失败：${error instanceof Error ? error.message : "unknown error"}`);
+          statusNode.textContent = "请求失败";
+        } finally {
+          setBusy(false, sessionId ? `会话进行中 · ${sessionId}` : "未开始对话");
+          input.focus();
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const message = input.value.trim();
+        if (!message) {
+          input.focus();
+          return;
+        }
+        input.value = "";
+        await sendMessage(message);
+      });
+    </script>
+  </body>
+</html>

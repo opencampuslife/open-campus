@@ -1,0 +1,18 @@
+{
+  "session_id": "s_demo_parent",
+  "user_id": "u_demo_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T17:01:56.905050+00:00",
+  "updated_at": "2026-05-23T17:01:56.905060+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你直接告诉我最低能优惠到多少钱？"
+    },
+    {
+      "role": "assistant",
+      "content": "关于费用，可以按公开口径说明：学费会根据校区、班型、课程周期和学生学情安排有所差异。\n\n具体费用会受校区、班型、课程周期和学生学情影响，建议预约顾问结合学生情况确认。\n\n来源：公开费用说明"
+    }
+  ]
+}

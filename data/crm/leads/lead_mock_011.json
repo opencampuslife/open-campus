@@ -1,0 +1,97 @@
+{
+  "lead_id": "lead_mock_011",
+  "session_id": "session_mock_011",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "CONTACTED",
+  "intent_level": "high",
+  "score": 51,
+  "assigned_to": "sales_mock_004",
+  "phone_hash": "mock_phone_hash_011",
+  "created_at": "2026-05-24T08:08:00+09:00",
+  "updated_at": "2026-05-24T12:17:00+09:00",
+  "profile": {
+    "identity_type": "parent",
+    "province": "河南",
+    "city": "安阳",
+    "subject_type": "化学",
+    "current_score": 446,
+    "target_score": 483,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "历史",
+      "地理"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "day_student",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "parent",
+    "region": "河南 安阳",
+    "score_summary": "当前约446分，目标key_university",
+    "weak_subjects": "历史、地理",
+    "main_concerns": "时间紧迫"
+  },
+  "profile_completeness": 0.55,
+  "consultation_stage": "CLASS_RECOMMENDING",
+  "recommendation_summary": {
+    "recommended_class_type": "冲刺强化班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_001",
+      "chunk_mock_psych_parent_004"
+    ]
+  },
+  "intent_reason": [
+    "存在到校测评潜力",
+    "咨询复读",
+    "主动索要联系方式",
+    "家长焦虑明显"
+  ],
+  "next_best_action": "等待用户回复后再进一步确认需求",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_011_1",
+      "created_by": "sales_mock_005",
+      "content": "家长表示需要和家人商量后再决定。",
+      "created_at": "2026-05-24T16:11:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_011_1",
+      "event_type": "FOLLOWUP_ADDED",
+      "created_at": "2026-05-24T09:35:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}

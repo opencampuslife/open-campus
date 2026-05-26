@@ -1,0 +1,31 @@
+{
+  "session_id": "s_followup_f7d494",
+  "user_id": "u_parent",
+  "role": "parent",
+  "campus": "zhengzhou",
+  "created_at": "2026-05-23T18:32:17.871236+00:00",
+  "updated_at": "2026-05-23T18:32:17.871362+00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "学费贵不贵？"
+    },
+    {
+      "role": "assistant",
+      "content": "关于费用，可以按公开口径说明：\n以上案例均已隐去学生个人信息。每个人的基础、努力程度、临场发挥情况不同，往年案例仅供参考，不代表任何承诺。\n具体开班时间、校区名额和入学安排以学校正式通知为准。\n\n具体费用会受校区、班型、课程周期和学生学情影响，建议预约顾问结合学生情况确认。\n\n来源：公开费用说明、说明"
+    }
+  ],
+  "intent": {
+    "intent": "pricing_consulting",
+    "risk_level": "medium",
+    "should_create_lead": true
+  },
+  "followups": [
+    {
+      "consultant_id": "u_sales",
+      "note": "已向家长说明费用构成，家长表示考虑后回复",
+      "action_type": "call",
+      "created_at": "2026-05-23T18:32:17.871360+00:00"
+    }
+  ]
+}

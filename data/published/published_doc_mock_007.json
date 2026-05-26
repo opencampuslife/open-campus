@@ -1,0 +1,32 @@
+{
+  "published_id": "published_doc_mock_007",
+  "doc_id": "mock_doc_007",
+  "title": "紧急情况处理预案",
+  "visibility": "public",
+  "allowed_roles": [
+    "visitor",
+    "parent",
+    "student",
+    "sales",
+    "admin",
+    "campus_admin"
+  ],
+  "data_level": "public",
+  "data_level_int": 1,
+  "campus_scope": [
+    "zhengzhou"
+  ],
+  "business_tags": [
+    "psych_support_scripts",
+    "parent_anxiety"
+  ],
+  "source_type": "mock",
+  "version": "1.0.0",
+  "source_hash": "mock_source_hash_007",
+  "published_by": "admin_mock_004",
+  "published_at": "2026-05-24T12:14:00+09:00",
+  "review_status": "approved",
+  "production_indexed": true,
+  "chunk_count": 2,
+  "embedding_version": "mock-embedding-v1"
+}

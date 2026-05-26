@@ -1,0 +1,117 @@
+{
+  "lead_id": "lead_mock_032",
+  "session_id": "session_mock_032",
+  "channel": "openhuman",
+  "campus": "zhengzhou",
+  "status": "ASSIGNED",
+  "intent_level": "low",
+  "score": 77,
+  "assigned_to": "sales_mock_005",
+  "phone_hash": "mock_phone_hash_032",
+  "created_at": "2026-05-24T08:55:00+09:00",
+  "updated_at": "2026-05-24T08:38:00+09:00",
+  "profile": {
+    "identity_type": "student",
+    "province": "河北",
+    "city": "石家庄",
+    "subject_type": "生物",
+    "current_score": 430,
+    "target_score": 523,
+    "target_school_level": "key_university",
+    "weak_subjects": [
+      "英语"
+    ],
+    "self_discipline_level": "high",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "不知道该选什么学校"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "student",
+    "region": "河北 石家庄",
+    "score_summary": "当前约430分，目标key_university",
+    "weak_subjects": "英语",
+    "main_concerns": "不知道该选什么学校"
+  },
+  "profile_completeness": 0.82,
+  "consultation_stage": "GREETING",
+  "recommendation_summary": {
+    "recommended_class_type": "周末走读班",
+    "confidence": "high",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [
+      "预算范围"
+    ],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_001",
+      "chunk_mock_psych_parent_009"
+    ]
+  },
+  "intent_reason": [
+    "主动索要联系方式",
+    "存在到校测评潜力",
+    "咨询复读",
+    "提供分数"
+  ],
+  "next_best_action": "引导用户完善个人信息以便提供更精准推荐",
+  "risk_tags": [
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_032_1",
+      "created_by": "sales_mock_007",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T15:29:00+09:00"
+    },
+    {
+      "followup_id": "follow_mock_032_2",
+      "created_by": "sales_mock_009",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T18:06:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_032_1",
+      "event_type": "LEAD_CREATED",
+      "created_at": "2026-05-24T09:44:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_032_2",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T20:58:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.5083655779775513
+      }
+    },
+    {
+      "event_id": "lead_evt_mock_032_3",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T10:47:00+09:00",
+      "metadata": {
+        "profile_completeness": 0.6953904661089587
+      }
+    }
+  ]
+}

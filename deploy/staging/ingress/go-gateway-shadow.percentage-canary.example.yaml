@@ -1,0 +1,105 @@
+mode: staging_only
+enabled: true
+description: "Go shadow gateway staging percentage-canary config; disabled by default (weight=0). PR-6D prepares config only — does not enable traffic."
+default_weight: 0
+
+canary:
+  type: percentage
+  enabled: true
+  header: X-Gaokao-Gateway-Canary
+  value: go
+  current_weight: 0
+  stages:
+    - 1
+    - 5
+    - 25
+    - 50
+    - 100
+
+upstreams:
+  go_gateway:
+    url: "http://go-shadow-gateway:8788"
+    description: "Go shadow gateway (staging, percentage-canary config; weight=0 unless enabled)"
+  python_gateway:
+    url: "http://api-gateway:8787"
+    description: "Python legacy gateway (default fallback)"
+
+routes:
+  - method: POST
+    path: /api/gaokao/chat
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Public chat route; percentage-canary config (weight=0, PR-6D)"
+
+  - method: POST
+    path: /api/admin/ingestion/runs/{run_id}/cancel
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin ingest; percentage-canary config (weight=0, PR-6D)"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/validate
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; percentage-canary config (weight=0, PR-6D)"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/approve
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; percentage-canary config (weight=0, PR-6D)"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/reject
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; percentage-canary config (weight=0, PR-6D)"
+
+  - method: POST
+    path: /api/admin/staging/docs/{doc_id}/publish
+    route_to: go_gateway
+    enabled: true
+    weight: 0
+    canary:
+      type: header
+      header: X-Gaokao-Gateway-Canary
+      value: go
+    notes: "Admin staging; percentage-canary config (weight=0, PR-6D)"
+
+blocked_patterns:
+  - method: GET
+    path_pattern: /api/admin/**
+    reason: "deprecated compatibility alias or non-canonical admin mutation"
+  - method: "*"
+    path_pattern: /api/admin/**
+    reason: "wildcard admin cutover is forbidden; allow if explicitly listed"
+    allow_if_explicitly_listed: true
+  - method: "*"
+    path_pattern: /api/*
+    reason: "wildcard /api/* is forbidden"
+    allow_if_explicitly_listed: false

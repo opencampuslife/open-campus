@@ -1,0 +1,88 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Gaokao Campus Gateway Baseline", "version": "0.1.0"},
+  "paths": {
+    "/h5/{path}": {"parameters": [{"$ref": "#/components/parameters/H5Path"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/vendor/confirm": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/wecom/callback/message": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/campus/auth/wecom/start": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/auth/wecom/callback": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/auth/wecom/state": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/pilot/status": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/pilot/control/pause": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/pilot/control/resume": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/h5/students": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/h5/attachments/{attachment_id}": {"parameters": [{"$ref": "#/components/parameters/AttachmentId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/meal-orders": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/meal-orders/{order_id}/cancel": {"parameters": [{"$ref": "#/components/parameters/OrderId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/meal-locks": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/logistics/meal-summary": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/vendor-confirmations": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/vendor-confirmations/confirm": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/scheduler/run-due-reminders": {"post": {"x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/wecom/process-media-downloads": {"post": {"x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/leaves": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/campus/leaves/{leave_id}": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/leaves/{leave_id}/approve": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/leaves/{leave_id}/reject": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/meals/summary": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/meals/orders": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/meals/orders/{order_id}/cancel": {"parameters": [{"$ref": "#/components/parameters/OrderId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/meals/delivery/{delivery_id}/confirm": {"parameters": [{"$ref": "#/components/parameters/DeliveryId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/repairs": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/campus/repairs/{ticket_id}": {"parameters": [{"$ref": "#/components/parameters/TicketId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/repairs/{ticket_id}/assign": {"parameters": [{"$ref": "#/components/parameters/TicketId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/repairs/{ticket_id}/complete": {"parameters": [{"$ref": "#/components/parameters/TicketId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/repairs/{ticket_id}/close": {"parameters": [{"$ref": "#/components/parameters/TicketId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/reports/daily": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/dashboard": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/materials/tasks": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/materials/submissions": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/materials/tasks/{task_id}/missing/remind": {"parameters": [{"$ref": "#/components/parameters/TaskId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/leaves": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/leaves/{leave_id}/approve": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/leaves/{leave_id}/reject": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/leaves/{leave_id}/return": {"parameters": [{"$ref": "#/components/parameters/LeaveId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/leaves/process-overdue": {"post": {"x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/scores/batches": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/scores/batches/{batch_id}/confirm": {"parameters": [{"$ref": "#/components/parameters/BatchId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/scores/batches/{batch_id}/rpa-dry-run": {"parameters": [{"$ref": "#/components/parameters/BatchId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/payments/tasks": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/payments/tasks/{task_id}/missing/remind": {"parameters": [{"$ref": "#/components/parameters/TaskId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/payments/records": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/payments/records/{record_id}/confirm": {"parameters": [{"$ref": "#/components/parameters/RecordId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/attendance/sessions": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/attendance/sessions/{session_id}/records": {"parameters": [{"$ref": "#/components/parameters/SessionId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/jobs/ocr/process": {"post": {"x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/campus/modules/exports": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}}
+  },
+  "components": {
+    "parameters": {
+      "H5Path": {"name": "path", "in": "path", "required": true, "schema": {"type": "string"}},
+      "AttachmentId": {"name": "attachment_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "LeaveId": {"name": "leave_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "OrderId": {"name": "order_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "DeliveryId": {"name": "delivery_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "TicketId": {"name": "ticket_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "TaskId": {"name": "task_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "BatchId": {"name": "batch_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "RecordId": {"name": "record_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "SessionId": {"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}}
+    },
+    "responses": {
+      "LegacyResponse": {"description": "Legacy response body is preserved during migration"}
+    }
+  }
+}

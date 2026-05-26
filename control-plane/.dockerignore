@@ -1,0 +1,3 @@
+tests/
+**/*_test.go
+.DS_Store

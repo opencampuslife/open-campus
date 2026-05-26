@@ -1,0 +1,14 @@
+{
+  "graph_run_id": "graph_run_mock_001",
+  "target_type": "knowledge_vault",
+  "target_id": "mock_pilot_knowledge_1",
+  "status": "failed",
+  "tool_version": "mock-ua-1.0",
+  "started_at": "2026-05-24T08:55:00+09:00+09:00",
+  "finished_at": "2026-05-24T08:55:34+09:00+09:00",
+  "summary": {
+    "nodes": 32,
+    "edges": 32,
+    "warnings": 3
+  }
+}

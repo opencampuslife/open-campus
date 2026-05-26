@@ -1,0 +1,78 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Gaokao Admin Gateway Baseline", "version": "0.1.0", "description": "Admin and operational endpoints; state-changing legacy GET routes are migration debt marked in the route inventory."},
+  "paths": {
+    "/api/health/full": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/health/db": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/health/rag": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/health/llm": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/health/security": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/health/filesystem": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/internal/worker-status": {"get": {"x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/health": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/sources": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/sources/upload": {"post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/ingestion/runs": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/ingestion/runs/{run_id}": {"parameters": [{"$ref": "#/components/parameters/RunId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/ingestion/runs/{run_id}/cancel": {
+      "parameters": [{"$ref": "#/components/parameters/RunId"}],
+      "get": {"deprecated": true, "x-legacy-policy-gap": "state-changing GET", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"x-csrf-required": true, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/staging/docs/{doc_id}": {
+      "parameters": [{"$ref": "#/components/parameters/DocId"}],
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "patch": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs/{doc_id}/validate": {
+      "parameters": [{"$ref": "#/components/parameters/DocId"}],
+      "get": {"deprecated": true, "x-legacy-policy-gap": "state-changing GET", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"x-csrf-required": true, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs/{doc_id}/approve": {
+      "parameters": [{"$ref": "#/components/parameters/DocId"}],
+      "get": {"deprecated": true, "x-legacy-policy-gap": "state-changing GET", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"x-csrf-required": true, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs/{doc_id}/reject": {
+      "parameters": [{"$ref": "#/components/parameters/DocId"}],
+      "get": {"deprecated": true, "x-legacy-policy-gap": "state-changing GET", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"x-csrf-required": true, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs/{doc_id}/publish": {
+      "parameters": [{"$ref": "#/components/parameters/DocId"}],
+      "get": {"deprecated": true, "x-legacy-policy-gap": "state-changing GET", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"x-csrf-required": true, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/staging/docs/{doc_id}/update": {"parameters": [{"$ref": "#/components/parameters/DocId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/graph/runs": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/admin/graph/latest": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/graph/runs/{run_id}": {"parameters": [{"$ref": "#/components/parameters/RunId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit/events": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit/events/by-trace/{trace_id}": {"parameters": [{"$ref": "#/components/parameters/TraceId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit/events/by-session/{session_id}": {"parameters": [{"$ref": "#/components/parameters/SessionId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit/events/by-lead/{lead_id}": {"parameters": [{"$ref": "#/components/parameters/LeadId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/admin/audit/events/{event_id}": {"parameters": [{"$ref": "#/components/parameters/EventId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}}
+  },
+  "components": {
+    "parameters": {
+      "RunId": {"name": "run_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "DocId": {"name": "doc_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "TraceId": {"name": "trace_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "SessionId": {"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "LeadId": {"name": "lead_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "EventId": {"name": "event_id", "in": "path", "required": true, "schema": {"type": "string"}}
+    },
+    "responses": {
+      "LegacyResponse": {"description": "Legacy response body is preserved during migration"}
+    }
+  }
+}

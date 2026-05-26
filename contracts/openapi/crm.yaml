@@ -1,0 +1,33 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Gaokao CRM And Sales Gateway Baseline", "version": "0.1.0"},
+  "paths": {
+    "/api/sessions": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/sales/sessions": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/sales/sessions/{session_id}/detail": {"parameters": [{"$ref": "#/components/parameters/SessionId"}], "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/sales/sessions/{session_id}/takeover": {"parameters": [{"$ref": "#/components/parameters/SessionId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/sales/sessions/{session_id}/followup": {"parameters": [{"$ref": "#/components/parameters/SessionId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/sales/leads": {"get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/crm/leads": {
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/crm/leads/{lead_id}": {
+      "parameters": [{"$ref": "#/components/parameters/LeadId"}],
+      "get": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    },
+    "/api/crm/leads/{lead_id}/followups": {"parameters": [{"$ref": "#/components/parameters/LeadId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/crm/leads/{lead_id}/assign": {"parameters": [{"$ref": "#/components/parameters/LeadId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/crm/leads/{lead_id}/status": {"parameters": [{"$ref": "#/components/parameters/LeadId"}], "post": {"responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}}
+  },
+  "components": {
+    "parameters": {
+      "SessionId": {"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}},
+      "LeadId": {"name": "lead_id", "in": "path", "required": true, "schema": {"type": "string"}}
+    },
+    "responses": {
+      "LegacyResponse": {"description": "Legacy response body is preserved during migration"}
+    }
+  }
+}

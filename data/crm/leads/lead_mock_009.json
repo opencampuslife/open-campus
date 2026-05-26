@@ -1,0 +1,95 @@
+{
+  "lead_id": "lead_mock_009",
+  "session_id": "session_mock_009",
+  "channel": "webchat",
+  "campus": "zhengzhou",
+  "status": "NEW",
+  "intent_level": "medium",
+  "score": 84,
+  "assigned_to": null,
+  "phone_hash": "mock_phone_hash_009",
+  "created_at": "2026-05-24T02:03:00+09:00",
+  "updated_at": "2026-05-24T08:49:00+09:00",
+  "profile": {
+    "identity_type": "visitor",
+    "province": "湖南",
+    "city": "湘潭",
+    "subject_type": "物理",
+    "current_score": 349,
+    "target_score": 419,
+    "target_school_level": "good_undergraduate",
+    "weak_subjects": [
+      "化学",
+      "生物"
+    ],
+    "self_discipline_level": "low",
+    "preferred_campus": "zhengzhou",
+    "boarding_preference": "boarding",
+    "parent_concerns": [
+      "时间紧迫"
+    ]
+  },
+  "profile_summary": {
+    "identity_type": "visitor",
+    "region": "湖南 湘潭",
+    "score_summary": "当前约349分，目标good_undergraduate",
+    "weak_subjects": "化学、生物",
+    "main_concerns": "时间紧迫"
+  },
+  "profile_completeness": 0.59,
+  "consultation_stage": "NEED_ANALYZING",
+  "recommendation_summary": {
+    "recommended_class_type": "基础巩固班",
+    "confidence": "low",
+    "reasons": [
+      "单科存在明显短板",
+      "需要针对性提升"
+    ],
+    "not_suitable_if": [
+      "时间安排无法配合",
+      "家庭更倾向走读陪伴"
+    ],
+    "missing_info": [],
+    "next_questions": [
+      "孩子更能接受住宿还是走读？",
+      "预算范围大约是多少？"
+    ],
+    "risk_warnings": [
+      "不得承诺提分幅度",
+      "不得承诺录取结果"
+    ],
+    "evidence_ids": [
+      "chunk_mock_class_closed_018",
+      "chunk_mock_psych_parent_008"
+    ]
+  },
+  "intent_reason": [
+    "明确询问课程",
+    "家长焦虑明显",
+    "提供分数",
+    "主动索要联系方式"
+  ],
+  "next_best_action": "安排与家长电话沟通时间",
+  "risk_tags": [
+    "emotion_support_needed",
+    "no_promise_language"
+  ],
+  "followups": [
+    {
+      "followup_id": "follow_mock_009_1",
+      "created_by": "sales_mock_001",
+      "content": "预约到店测评，时间待确认。",
+      "created_at": "2026-05-24T13:28:00+09:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "lead_evt_mock_009_1",
+      "event_type": "PROFILE_UPDATED",
+      "created_at": "2026-05-24T16:06:00+09:00",
+      "metadata": {
+        "source": "chat"
+      }
+    }
+  ]
+}
