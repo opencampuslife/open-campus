@@ -106,8 +106,8 @@ jobs:
       - name: test-db-policy-live
         run: |
           DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
-          DATABASE_URL_PUBLIC=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
-          DATABASE_URL_STAFF=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
+          DATABASE_URL_PUBLIC=postgresql://gaokao_api_public:postgres@localhost:54329/gaokao_agent_test \
+          DATABASE_URL_STAFF=postgresql://gaokao_api_staff:postgres@localhost:54329/gaokao_agent_test \
           DATABASE_URL_ADMIN_APP=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
           python3 services/db-policy-service/tests/run_db_policy_tests.py --live
         env:
