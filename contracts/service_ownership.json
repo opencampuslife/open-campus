@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "services": [
+    {
+      "name": "agent-orchestrator",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "api-gateway",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_1"
+    },
+    {
+      "name": "auth-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "compliance-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "crm-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_3"
+    },
+    {
+      "name": "db-policy-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": "TBD",
+      "sensitivity": "high",
+      "migration_wave": "phase_1"
+    },
+    {
+      "name": "evaluation-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "low",
+      "migration_wave": "phase_3"
+    },
+    {
+      "name": "knowledge-graph-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_3"
+    },
+    {
+      "name": "knowledge-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "llm-gateway",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": "TBD",
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_1"
+    },
+    {
+      "name": "mealbot-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_4"
+    },
+    {
+      "name": "permission-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "rag-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "recommendation-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_3"
+    },
+    {
+      "name": "source-ingestion-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": "TBD",
+      "sensitivity": "high",
+      "migration_wave": "phase_3"
+    },
+    {
+      "name": "ua-mcp-server",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_4"
+    },
+    {
+      "name": "wecom-adapter",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_2"
+    },
+    {
+      "name": "wecom-aibot-bridge",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "high",
+      "migration_wave": "phase_4"
+    },
+    {
+      "name": "workflow-service",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "security_reviewer": null,
+      "data_reviewer": null,
+      "sensitivity": "medium",
+      "migration_wave": "phase_4"
+    }
+  ]
+}

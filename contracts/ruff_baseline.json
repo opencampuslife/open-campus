@@ -1,0 +1,1535 @@
+{
+  "schema_version": 1,
+  "tool": "ruff",
+  "generated_at": "2026-05-27T19:03:42.154955+00:00",
+  "root": ".",
+  "issue_count": 218,
+  "issues": [
+    {
+      "key": "services/agent-orchestrator/src/bt/base.py:F401:3",
+      "path": "services/agent-orchestrator/src/bt/base.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/agent-orchestrator/src/nodes/consultation_stage.py:F401:15",
+      "path": "services/agent-orchestrator/src/nodes/consultation_stage.py",
+      "code": "F401",
+      "line": 15,
+      "column": 57
+    },
+    {
+      "key": "services/agent-orchestrator/src/nodes/pipeline_nodes.py:F401:206",
+      "path": "services/agent-orchestrator/src/nodes/pipeline_nodes.py",
+      "code": "F401",
+      "line": 206,
+      "column": 65
+    },
+    {
+      "key": "services/agent-orchestrator/src/nodes/pipeline_nodes.py:F401:6",
+      "path": "services/agent-orchestrator/src/nodes/pipeline_nodes.py",
+      "code": "F401",
+      "line": 6,
+      "column": 20
+    },
+    {
+      "key": "services/agent-orchestrator/src/trees/emotional_support_tree.py:F401:12",
+      "path": "services/agent-orchestrator/src/trees/emotional_support_tree.py",
+      "code": "F401",
+      "line": 12,
+      "column": 18
+    },
+    {
+      "key": "services/agent-orchestrator/tests/emotional_support_test.py:F841:125",
+      "path": "services/agent-orchestrator/tests/emotional_support_test.py",
+      "code": "F841",
+      "line": 125,
+      "column": 9
+    },
+    {
+      "key": "services/agent-orchestrator/tests/emotional_support_test.py:F841:141",
+      "path": "services/agent-orchestrator/tests/emotional_support_test.py",
+      "code": "F841",
+      "line": 141,
+      "column": 9
+    },
+    {
+      "key": "services/agent-orchestrator/tests/emotional_support_test.py:F841:156",
+      "path": "services/agent-orchestrator/tests/emotional_support_test.py",
+      "code": "F841",
+      "line": 156,
+      "column": 9
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:E402:17",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "E402",
+      "line": 17,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:17",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 17,
+      "column": 54
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:17",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 17,
+      "column": 82
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:4",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 4,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:402",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 402,
+      "column": 34
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:6",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 6,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/src/admin_gateway.py:F401:712",
+      "path": "services/api-gateway/src/admin_gateway.py",
+      "code": "F401",
+      "line": 712,
+      "column": 30
+    },
+    {
+      "key": "services/api-gateway/src/admin_policy.py:F401:5",
+      "path": "services/api-gateway/src/admin_policy.py",
+      "code": "F401",
+      "line": 5,
+      "column": 36
+    },
+    {
+      "key": "services/api-gateway/src/audit_store.py:F401:4",
+      "path": "services/api-gateway/src/audit_store.py",
+      "code": "F401",
+      "line": 4,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/src/audit_store.py:F401:9",
+      "path": "services/api-gateway/src/audit_store.py",
+      "code": "F401",
+      "line": 9,
+      "column": 38
+    },
+    {
+      "key": "services/api-gateway/src/bff_gateway.py:F541:338",
+      "path": "services/api-gateway/src/bff_gateway.py",
+      "code": "F541",
+      "line": 338,
+      "column": 26
+    },
+    {
+      "key": "services/api-gateway/src/bff_gateway.py:F541:379",
+      "path": "services/api-gateway/src/bff_gateway.py",
+      "code": "F541",
+      "line": 379,
+      "column": 26
+    },
+    {
+      "key": "services/api-gateway/src/bff_gateway.py:F541:401",
+      "path": "services/api-gateway/src/bff_gateway.py",
+      "code": "F541",
+      "line": 401,
+      "column": 26
+    },
+    {
+      "key": "services/api-gateway/src/bff_gateway.py:F541:449",
+      "path": "services/api-gateway/src/bff_gateway.py",
+      "code": "F541",
+      "line": 449,
+      "column": 26
+    },
+    {
+      "key": "services/api-gateway/src/campus_gateway.py:F401:18",
+      "path": "services/api-gateway/src/campus_gateway.py",
+      "code": "F401",
+      "line": 18,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/src/campus_gateway.py:F401:19",
+      "path": "services/api-gateway/src/campus_gateway.py",
+      "code": "F401",
+      "line": 19,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/src/csrf_protection.py:F401:8",
+      "path": "services/api-gateway/src/csrf_protection.py",
+      "code": "F401",
+      "line": 8,
+      "column": 20
+    },
+    {
+      "key": "services/api-gateway/src/event_schema.py:F401:4",
+      "path": "services/api-gateway/src/event_schema.py",
+      "code": "F401",
+      "line": 4,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/src/multipart_parser.py:F401:3",
+      "path": "services/api-gateway/src/multipart_parser.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/src/rate_limiter.py:F401:5",
+      "path": "services/api-gateway/src/rate_limiter.py",
+      "code": "F401",
+      "line": 5,
+      "column": 25
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:109",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 109,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:130",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 130,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:131",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 131,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:132",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 132,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:144",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 144,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:145",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 145,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:146",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 146,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:27",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 27,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:53",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 53,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:69",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 69,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:90",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 90,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:E402:91",
+      "path": "services/api-gateway/src/server.py",
+      "code": "E402",
+      "line": 91,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/src/server.py:F401:146",
+      "path": "services/api-gateway/src/server.py",
+      "code": "F401",
+      "line": 146,
+      "column": 31
+    },
+    {
+      "key": "services/api-gateway/src/server.py:F821:910",
+      "path": "services/api-gateway/src/server.py",
+      "code": "F821",
+      "line": 910,
+      "column": 67
+    },
+    {
+      "key": "services/api-gateway/src/server.py:F821:911",
+      "path": "services/api-gateway/src/server.py",
+      "code": "F821",
+      "line": 911,
+      "column": 19
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:E402:14",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:E402:22",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "E402",
+      "line": 22,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:E402:31",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "E402",
+      "line": 31,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:15",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 15,
+      "column": 27
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:15",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 15,
+      "column": 39
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:16",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 16,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:16",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 16,
+      "column": 28
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:16",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 16,
+      "column": 43
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:17",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 17,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:19",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 19,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:19",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 19,
+      "column": 21
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:19",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 19,
+      "column": 35
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:20",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 20,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:20",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 20,
+      "column": 34
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:23",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 23,
+      "column": 44
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:24",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 24,
+      "column": 31
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:27",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 27,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:27",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 27,
+      "column": 29
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:28",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 28,
+      "column": 27
+    },
+    {
+      "key": "services/api-gateway/tests/admin_role_granularity_test.py:F401:29",
+      "path": "services/api-gateway/tests/admin_role_granularity_test.py",
+      "code": "F401",
+      "line": 29,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:39",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 39,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:40",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 40,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:41",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 41,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:42",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 42,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:43",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 43,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:44",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 44,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:52",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 52,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:53",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 53,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:E402:54",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "E402",
+      "line": 54,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:F401:39",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "F401",
+      "line": 39,
+      "column": 46
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:F401:4",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "F401",
+      "line": 4,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:F401:5",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "F401",
+      "line": 5,
+      "column": 8
+    },
+    {
+      "key": "services/api-gateway/tests/admin_security_regression_test.py:F401:52",
+      "path": "services/api-gateway/tests/admin_security_regression_test.py",
+      "code": "F401",
+      "line": 52,
+      "column": 25
+    },
+    {
+      "key": "services/api-gateway/tests/gateway_test.py:F401:301",
+      "path": "services/api-gateway/tests/gateway_test.py",
+      "code": "F401",
+      "line": 301,
+      "column": 16
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:E402:13",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "E402",
+      "line": 13,
+      "column": 1
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:F401:15",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "F401",
+      "line": 15,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:F401:16",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "F401",
+      "line": 16,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:F401:17",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "F401",
+      "line": 17,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:F401:18",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "F401",
+      "line": 18,
+      "column": 5
+    },
+    {
+      "key": "services/api-gateway/tests/sales_consultation_test.py:F841:97",
+      "path": "services/api-gateway/tests/sales_consultation_test.py",
+      "code": "F841",
+      "line": 97,
+      "column": 9
+    },
+    {
+      "key": "services/crm-service/src/leads.py:E741:353",
+      "path": "services/crm-service/src/leads.py",
+      "code": "E741",
+      "line": 353,
+      "column": 27
+    },
+    {
+      "key": "services/crm-service/src/profile_merge_policy.py:F402:75",
+      "path": "services/crm-service/src/profile_merge_policy.py",
+      "code": "F402",
+      "line": 75,
+      "column": 9
+    },
+    {
+      "key": "services/crm-service/src/profile_model.py:F402:311",
+      "path": "services/crm-service/src/profile_model.py",
+      "code": "F402",
+      "line": 311,
+      "column": 9
+    },
+    {
+      "key": "services/crm-service/tests/lead_test.py:F401:3",
+      "path": "services/crm-service/tests/lead_test.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/crm-service/tests/profile_test.py:F401:12",
+      "path": "services/crm-service/tests/profile_test.py",
+      "code": "F401",
+      "line": 12,
+      "column": 5
+    },
+    {
+      "key": "services/crm-service/tests/profile_test.py:F401:17",
+      "path": "services/crm-service/tests/profile_test.py",
+      "code": "F401",
+      "line": 17,
+      "column": 5
+    },
+    {
+      "key": "services/db-policy-service/tests/run_db_policy_tests.py:F401:6",
+      "path": "services/db-policy-service/tests/run_db_policy_tests.py",
+      "code": "F401",
+      "line": 6,
+      "column": 8
+    },
+    {
+      "key": "services/evaluation-service/src/benchmark.py:F841:108",
+      "path": "services/evaluation-service/src/benchmark.py",
+      "code": "F841",
+      "line": 108,
+      "column": 5
+    },
+    {
+      "key": "services/evaluation-service/src/benchmark_tone_quality.py:E713:118",
+      "path": "services/evaluation-service/src/benchmark_tone_quality.py",
+      "code": "E713",
+      "line": 118,
+      "column": 13
+    },
+    {
+      "key": "services/evaluation-service/src/benchmark_tone_quality.py:F401:17",
+      "path": "services/evaluation-service/src/benchmark_tone_quality.py",
+      "code": "F401",
+      "line": 17,
+      "column": 25
+    },
+    {
+      "key": "services/evaluation-service/tests/release_gate_check_test.py:E402:10",
+      "path": "services/evaluation-service/tests/release_gate_check_test.py",
+      "code": "E402",
+      "line": 10,
+      "column": 1
+    },
+    {
+      "key": "services/knowledge-graph-service/src/graph_api.py:F401:8",
+      "path": "services/knowledge-graph-service/src/graph_api.py",
+      "code": "F401",
+      "line": 8,
+      "column": 20
+    },
+    {
+      "key": "services/knowledge-graph-service/src/graph_findings.py:F401:4",
+      "path": "services/knowledge-graph-service/src/graph_findings.py",
+      "code": "F401",
+      "line": 4,
+      "column": 20
+    },
+    {
+      "key": "services/knowledge-graph-service/src/graph_findings.py:F841:13",
+      "path": "services/knowledge-graph-service/src/graph_findings.py",
+      "code": "F841",
+      "line": 13,
+      "column": 5
+    },
+    {
+      "key": "services/knowledge-graph-service/tests/test_graph.py:E402:13",
+      "path": "services/knowledge-graph-service/tests/test_graph.py",
+      "code": "E402",
+      "line": 13,
+      "column": 1
+    },
+    {
+      "key": "services/knowledge-graph-service/tests/test_graph.py:E402:14",
+      "path": "services/knowledge-graph-service/tests/test_graph.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/knowledge-service/src/chunker.py:F841:64",
+      "path": "services/knowledge-service/src/chunker.py",
+      "code": "F841",
+      "line": 64,
+      "column": 21
+    },
+    {
+      "key": "services/llm-gateway/src/gateway.py:F401:11",
+      "path": "services/llm-gateway/src/gateway.py",
+      "code": "F401",
+      "line": 11,
+      "column": 21
+    },
+    {
+      "key": "services/llm-gateway/src/gateway.py:F401:5",
+      "path": "services/llm-gateway/src/gateway.py",
+      "code": "F401",
+      "line": 5,
+      "column": 25
+    },
+    {
+      "key": "services/llm-gateway/tests/contract_test.py:F401:8",
+      "path": "services/llm-gateway/tests/contract_test.py",
+      "code": "F401",
+      "line": 8,
+      "column": 22
+    },
+    {
+      "key": "services/llm-gateway/tests/contract_test.py:F401:9",
+      "path": "services/llm-gateway/tests/contract_test.py",
+      "code": "F401",
+      "line": 9,
+      "column": 27
+    },
+    {
+      "key": "services/llm-gateway/tests/live_smoke_test.py:F401:17",
+      "path": "services/llm-gateway/tests/live_smoke_test.py",
+      "code": "F401",
+      "line": 17,
+      "column": 31
+    },
+    {
+      "key": "services/llm-gateway/tests/live_smoke_test.py:F401:18",
+      "path": "services/llm-gateway/tests/live_smoke_test.py",
+      "code": "F401",
+      "line": 18,
+      "column": 21
+    },
+    {
+      "key": "services/llm-gateway/tests/live_smoke_test.py:F401:18",
+      "path": "services/llm-gateway/tests/live_smoke_test.py",
+      "code": "F401",
+      "line": 18,
+      "column": 36
+    },
+    {
+      "key": "services/llm-gateway/tests/live_smoke_test.py:F401:19",
+      "path": "services/llm-gateway/tests/live_smoke_test.py",
+      "code": "F401",
+      "line": 19,
+      "column": 21
+    },
+    {
+      "key": "services/llm-gateway/tests/live_smoke_test.py:F401:7",
+      "path": "services/llm-gateway/tests/live_smoke_test.py",
+      "code": "F401",
+      "line": 7,
+      "column": 22
+    },
+    {
+      "key": "services/mealbot-service/scripts/run_e2e_pilot.py:E402:17",
+      "path": "services/mealbot-service/scripts/run_e2e_pilot.py",
+      "code": "E402",
+      "line": 17,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/scripts/run_e2e_pilot.py:E402:18",
+      "path": "services/mealbot-service/scripts/run_e2e_pilot.py",
+      "code": "E402",
+      "line": 18,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/scripts/run_e2e_pilot.py:E402:19",
+      "path": "services/mealbot-service/scripts/run_e2e_pilot.py",
+      "code": "E402",
+      "line": 19,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/scripts/run_e2e_pilot.py:E402:20",
+      "path": "services/mealbot-service/scripts/run_e2e_pilot.py",
+      "code": "E402",
+      "line": 20,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/scripts/run_e2e_pilot.py:E402:21",
+      "path": "services/mealbot-service/scripts/run_e2e_pilot.py",
+      "code": "E402",
+      "line": 21,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/db/repositories/delivery_confirmations.py:F401:3",
+      "path": "services/mealbot-service/src/app/db/repositories/delivery_confirmations.py",
+      "code": "F401",
+      "line": 3,
+      "column": 28
+    },
+    {
+      "key": "services/mealbot-service/src/app/db/repositories/meal_orders.py:F401:3",
+      "path": "services/mealbot-service/src/app/db/repositories/meal_orders.py",
+      "code": "F401",
+      "line": 3,
+      "column": 28
+    },
+    {
+      "key": "services/mealbot-service/src/app/db/repositories/meal_orders.py:F401:3",
+      "path": "services/mealbot-service/src/app/db/repositories/meal_orders.py",
+      "code": "F401",
+      "line": 3,
+      "column": 38
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:10",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 10,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:11",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 11,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:12",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 12,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:13",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 13,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:14",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:15",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 15,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:E402:16",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/orders.py:F401:11",
+      "path": "services/mealbot-service/src/app/modules/meal/orders.py",
+      "code": "F401",
+      "line": 11,
+      "column": 59
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/meal/vendor_reminders.py:E402:8",
+      "path": "services/mealbot-service/src/app/modules/meal/vendor_reminders.py",
+      "code": "E402",
+      "line": 8,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/src/app/modules/pilot/config_loader.py:F401:4",
+      "path": "services/mealbot-service/src/app/modules/pilot/config_loader.py",
+      "code": "F401",
+      "line": 4,
+      "column": 20
+    },
+    {
+      "key": "services/mealbot-service/src/app/scripts/onboard_school.py:F401:4",
+      "path": "services/mealbot-service/src/app/scripts/onboard_school.py",
+      "code": "F401",
+      "line": 4,
+      "column": 8
+    },
+    {
+      "key": "services/mealbot-service/tests/message_adapters_test.py:E402:11",
+      "path": "services/mealbot-service/tests/message_adapters_test.py",
+      "code": "E402",
+      "line": 11,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_campus_new_modules.py:E402:14",
+      "path": "services/mealbot-service/tests/test_campus_new_modules.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_campus_new_modules.py:E402:15",
+      "path": "services/mealbot-service/tests/test_campus_new_modules.py",
+      "code": "E402",
+      "line": 15,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_campus_new_modules.py:E402:16",
+      "path": "services/mealbot-service/tests/test_campus_new_modules.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_campus_new_modules.py:E402:34",
+      "path": "services/mealbot-service/tests/test_campus_new_modules.py",
+      "code": "E402",
+      "line": 34,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_meal_orders.py:F401:13",
+      "path": "services/mealbot-service/tests/test_meal_orders.py",
+      "code": "F401",
+      "line": 13,
+      "column": 48
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint2a_backend.py:F401:15",
+      "path": "services/mealbot-service/tests/test_sprint2a_backend.py",
+      "code": "F401",
+      "line": 15,
+      "column": 48
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint2a_backend.py:F401:16",
+      "path": "services/mealbot-service/tests/test_sprint2a_backend.py",
+      "code": "F401",
+      "line": 16,
+      "column": 51
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint2a_backend.py:F401:3",
+      "path": "services/mealbot-service/tests/test_sprint2a_backend.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:13",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 13,
+      "column": 48
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:14",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 14,
+      "column": 47
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:17",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 17,
+      "column": 5
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:5",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 5,
+      "column": 28
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:5",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 5,
+      "column": 38
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:5",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 5,
+      "column": 48
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py:F401:7",
+      "path": "services/mealbot-service/tests/test_sprint3_lock_summary_vendor.py",
+      "code": "F401",
+      "line": 7,
+      "column": 18
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint4_reminder_worker.py:F401:14",
+      "path": "services/mealbot-service/tests/test_sprint4_reminder_worker.py",
+      "code": "F401",
+      "line": 14,
+      "column": 48
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint4_reminder_worker.py:F401:16",
+      "path": "services/mealbot-service/tests/test_sprint4_reminder_worker.py",
+      "code": "F401",
+      "line": 16,
+      "column": 35
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint4_reminder_worker.py:F401:16",
+      "path": "services/mealbot-service/tests/test_sprint4_reminder_worker.py",
+      "code": "F401",
+      "line": 16,
+      "column": 65
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint4_reminder_worker.py:F401:20",
+      "path": "services/mealbot-service/tests/test_sprint4_reminder_worker.py",
+      "code": "F401",
+      "line": 20,
+      "column": 43
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint4_reminder_worker.py:F401:5",
+      "path": "services/mealbot-service/tests/test_sprint4_reminder_worker.py",
+      "code": "F401",
+      "line": 5,
+      "column": 28
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:21",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 21,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:22",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 22,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:23",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 23,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:24",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 24,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:25",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 25,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:26",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 26,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:27",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 27,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py:E402:28",
+      "path": "services/mealbot-service/tests/test_sprint5_wecom_inbound.py",
+      "code": "E402",
+      "line": 28,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:16",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:17",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 17,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:18",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 18,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:19",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 19,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:20",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 20,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint6_release_hardening.py:E402:21",
+      "path": "services/mealbot-service/tests/test_sprint6_release_hardening.py",
+      "code": "E402",
+      "line": 21,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:15",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 15,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:16",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:17",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 17,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:18",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 18,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:19",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 19,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:20",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 20,
+      "column": 1
+    },
+    {
+      "key": "services/mealbot-service/tests/test_sprint7_pilot_package.py:E402:21",
+      "path": "services/mealbot-service/tests/test_sprint7_pilot_package.py",
+      "code": "E402",
+      "line": 21,
+      "column": 1
+    },
+    {
+      "key": "services/rag-service/src/query_rewriter.py:F401:3",
+      "path": "services/rag-service/src/query_rewriter.py",
+      "code": "F401",
+      "line": 3,
+      "column": 20
+    },
+    {
+      "key": "services/rag-service/src/search_router.py:E402:13",
+      "path": "services/rag-service/src/search_router.py",
+      "code": "E402",
+      "line": 13,
+      "column": 1
+    },
+    {
+      "key": "services/rag-service/src/search_router.py:E402:14",
+      "path": "services/rag-service/src/search_router.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/recommendation-service/src/class_rules.py:F401:3",
+      "path": "services/recommendation-service/src/class_rules.py",
+      "code": "F401",
+      "line": 3,
+      "column": 20
+    },
+    {
+      "key": "services/recommendation-service/src/class_rules.py:F841:72",
+      "path": "services/recommendation-service/src/class_rules.py",
+      "code": "F841",
+      "line": 72,
+      "column": 5
+    },
+    {
+      "key": "services/recommendation-service/src/class_rules.py:F841:98",
+      "path": "services/recommendation-service/src/class_rules.py",
+      "code": "F841",
+      "line": 98,
+      "column": 5
+    },
+    {
+      "key": "services/recommendation-service/src/class_rules.py:F841:99",
+      "path": "services/recommendation-service/src/class_rules.py",
+      "code": "F841",
+      "line": 99,
+      "column": 5
+    },
+    {
+      "key": "services/recommendation-service/src/recommendation_engine.py:F401:3",
+      "path": "services/recommendation-service/src/recommendation_engine.py",
+      "code": "F401",
+      "line": 3,
+      "column": 20
+    },
+    {
+      "key": "services/recommendation-service/src/recommendation_explainer.py:F541:24",
+      "path": "services/recommendation-service/src/recommendation_explainer.py",
+      "code": "F541",
+      "line": 24,
+      "column": 22
+    },
+    {
+      "key": "services/recommendation-service/src/recommendation_explainer.py:F541:29",
+      "path": "services/recommendation-service/src/recommendation_explainer.py",
+      "code": "F541",
+      "line": 29,
+      "column": 22
+    },
+    {
+      "key": "services/recommendation-service/src/recommendation_explainer.py:F541:43",
+      "path": "services/recommendation-service/src/recommendation_explainer.py",
+      "code": "F541",
+      "line": 43,
+      "column": 22
+    },
+    {
+      "key": "services/recommendation-service/tests/class_recommendation_test.py:E402:11",
+      "path": "services/recommendation-service/tests/class_recommendation_test.py",
+      "code": "E402",
+      "line": 11,
+      "column": 1
+    },
+    {
+      "key": "services/recommendation-service/tests/class_recommendation_test.py:E402:12",
+      "path": "services/recommendation-service/tests/class_recommendation_test.py",
+      "code": "E402",
+      "line": 12,
+      "column": 1
+    },
+    {
+      "key": "services/recommendation-service/tests/class_recommendation_test.py:E402:13",
+      "path": "services/recommendation-service/tests/class_recommendation_test.py",
+      "code": "E402",
+      "line": 13,
+      "column": 1
+    },
+    {
+      "key": "services/recommendation-service/tests/class_recommendation_test.py:F401:11",
+      "path": "services/recommendation-service/tests/class_recommendation_test.py",
+      "code": "F401",
+      "line": 11,
+      "column": 34
+    },
+    {
+      "key": "services/recommendation-service/tests/class_recommendation_test.py:F401:11",
+      "path": "services/recommendation-service/tests/class_recommendation_test.py",
+      "code": "F401",
+      "line": 11,
+      "column": 55
+    },
+    {
+      "key": "services/source-ingestion-service/src/publisher.py:F401:3",
+      "path": "services/source-ingestion-service/src/publisher.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/source-ingestion-service/tests/security_regression_test.py:E402:14",
+      "path": "services/source-ingestion-service/tests/security_regression_test.py",
+      "code": "E402",
+      "line": 14,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/security_regression_test.py:E402:15",
+      "path": "services/source-ingestion-service/tests/security_regression_test.py",
+      "code": "E402",
+      "line": 15,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/security_regression_test.py:E402:16",
+      "path": "services/source-ingestion-service/tests/security_regression_test.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/security_regression_test.py:F401:14",
+      "path": "services/source-ingestion-service/tests/security_regression_test.py",
+      "code": "F401",
+      "line": 14,
+      "column": 46
+    },
+    {
+      "key": "services/source-ingestion-service/tests/security_regression_test.py:F401:3",
+      "path": "services/source-ingestion-service/tests/security_regression_test.py",
+      "code": "F401",
+      "line": 3,
+      "column": 8
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:15",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 15,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:16",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 16,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:17",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 17,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:18",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 18,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:19",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 19,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:26",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 26,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:27",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 27,
+      "column": 1
+    },
+    {
+      "key": "services/source-ingestion-service/tests/test_ingestion.py:E402:28",
+      "path": "services/source-ingestion-service/tests/test_ingestion.py",
+      "code": "E402",
+      "line": 28,
+      "column": 1
+    },
+    {
+      "key": "tools/benchmark_report.py:E401:112",
+      "path": "tools/benchmark_report.py",
+      "code": "E401",
+      "line": 112,
+      "column": 5
+    },
+    {
+      "key": "tools/benchmark_report.py:F401:112",
+      "path": "tools/benchmark_report.py",
+      "code": "F401",
+      "line": 112,
+      "column": 12
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:134",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 134,
+      "column": 9
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:136",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 136,
+      "column": 13
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:138",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 138,
+      "column": 13
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:140",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 140,
+      "column": 9
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:141",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 141,
+      "column": 9
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:268",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 268,
+      "column": 8
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:270",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 270,
+      "column": 25
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:272",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 272,
+      "column": 68
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F821:274",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F821",
+      "line": 274,
+      "column": 70
+    },
+    {
+      "key": "tools/build_shadow_evidence_bundle.py:F841:95",
+      "path": "tools/build_shadow_evidence_bundle.py",
+      "code": "F841",
+      "line": 95,
+      "column": 5
+    },
+    {
+      "key": "tools/ci_policy_check.py:F401:6",
+      "path": "tools/ci_policy_check.py",
+      "code": "F401",
+      "line": 6,
+      "column": 8
+    },
+    {
+      "key": "tools/collect_staging_canary_result.py:F541:160",
+      "path": "tools/collect_staging_canary_result.py",
+      "code": "F541",
+      "line": 160,
+      "column": 15
+    },
+    {
+      "key": "tools/collect_staging_percentage_canary_result.py:F841:112",
+      "path": "tools/collect_staging_percentage_canary_result.py",
+      "code": "F841",
+      "line": 112,
+      "column": 5
+    },
+    {
+      "key": "tools/generate_paper.py:E731:242",
+      "path": "tools/generate_paper.py",
+      "code": "E731",
+      "line": 242,
+      "column": 1
+    },
+    {
+      "key": "tools/generate_paper.py:F401:5",
+      "path": "tools/generate_paper.py",
+      "code": "F401",
+      "line": 5,
+      "column": 33
+    },
+    {
+      "key": "tools/render_staging_percentage_canary_config.py:F401:17",
+      "path": "tools/render_staging_percentage_canary_config.py",
+      "code": "F401",
+      "line": 17,
+      "column": 8
+    }
+  ]
+}

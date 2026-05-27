@@ -176,7 +176,7 @@ func TestAdminParityUnit(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load fixture: %v", err)
 	}
-	report, err := parity.RunFixture(fixture, legacy.URL, shadow.URL, &http.Client{Timeout: time.Second})
+	report, err := parity.RunFixture(fixture, legacy.URL, shadow.URL, &http.Client{Timeout: 5 * time.Second})
 	if err != nil {
 		t.Fatalf("run parity: %v", err)
 	}

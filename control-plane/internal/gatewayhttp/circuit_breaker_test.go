@@ -288,3 +288,51 @@ func TestCircuitBreakerConcurrentTransitions(t *testing.T) {
 		t.Fatal("failure count should not be negative")
 	}
 }
+
+func TestCircuitBreakerStateTransitionRaceRegression(t *testing.T) {
+	cb := NewCircuitBreaker(CircuitBreakerConfig{
+		FailureThreshold: 5,
+		CooldownDuration: 1 * time.Millisecond,
+		HalfOpenMaxReqs:  3,
+	})
+
+	var wg sync.WaitGroup
+	done := make(chan struct{})
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for {
+				select {
+				case <-done:
+					return
+				default:
+				}
+				cb.Allow()
+				cb.RecordFailure()
+				cb.RecordSuccess()
+				cb.State()
+				cb.StateName()
+				cb.Stats()
+			}
+		}()
+	}
+
+	time.Sleep(100 * time.Millisecond)
+	close(done)
+	wg.Wait()
+
+	s := cb.StateName()
+	if s != "closed" && s != "open" && s != "half-open" {
+		t.Fatalf("invalid state after rapid transition race: %s", s)
+	}
+
+	stats := cb.Stats()
+	if stats.LastStateTime.IsZero() {
+		t.Fatal("lastStateChangeTime should not be zero after transitions")
+	}
+	if stats.FailureCount < 0 {
+		t.Fatalf("failure count should not be negative, got %d", stats.FailureCount)
+	}
+}

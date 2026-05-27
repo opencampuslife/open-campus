@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "tool": "mypy",
+  "generated_at": "2026-05-27T19:03:42.407816+00:00",
+  "root": ".",
+  "issue_count": 1,
+  "issues": [
+    {
+      "key": "services/agent-orchestrator/src/fsm/machine.py:73366d89:0",
+      "path": "services/agent-orchestrator/src/fsm/machine.py",
+      "code": "73366d89",
+      "line": 0,
+      "column": null,
+      "message": "Source file found twice under different module names: \"machine\" and \"fsm.machine\""
+    }
+  ]
+}

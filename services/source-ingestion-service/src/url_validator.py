@@ -67,6 +67,11 @@ def validate_url(url: str, timeout: int = 5) -> dict[str, Any]:
             result["warnings"].append("empty URL")
             return result
 
+        if re.search(r"[\x00-\x1f\x7f]", url_stripped):
+            result["warnings"].append("URL contains control characters")
+            result["ssrf_blocked"] = True
+            return result
+
         parsed = urlparse(url_stripped)
 
         if parsed.scheme.lower() in BLOCKED_SCHEMES:
