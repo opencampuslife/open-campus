@@ -168,3 +168,123 @@ func TestCircuitBreakerDefaultConfig(t *testing.T) {
 		t.Fatalf("default threshold: state = %s, want open", cb.StateName())
 	}
 }
+
+func TestTwoCircuitBreakersIndependent(t *testing.T) {
+	cfg := CircuitBreakerConfig{
+		FailureThreshold: 3,
+		CooldownDuration: 100 * time.Millisecond,
+	}
+	cb1 := NewCircuitBreaker(cfg)
+	cb2 := NewCircuitBreaker(cfg)
+
+	for i := 0; i < 3; i++ {
+		cb1.RecordFailure()
+	}
+	if cb1.State() != CircuitOpen {
+		t.Fatal("breaker 1 should be open")
+	}
+
+	if cb2.State() != CircuitClosed {
+		t.Fatal("breaker 2 should still be closed")
+	}
+	if !cb2.Allow() {
+		t.Fatal("breaker 2 should allow requests")
+	}
+
+	cb2.RecordFailure()
+	cb2.RecordFailure()
+	cb2.RecordFailure()
+	if cb2.State() != CircuitOpen {
+		t.Fatal("breaker 2 should open independently")
+	}
+	if cb1.State() != CircuitOpen {
+		t.Fatal("breaker 1 should remain open")
+	}
+}
+
+func TestCircuitBreakerFailRecoverFailCycle(t *testing.T) {
+	cb := NewCircuitBreaker(CircuitBreakerConfig{
+		FailureThreshold: 2,
+		CooldownDuration: 50 * time.Millisecond,
+		HalfOpenMaxReqs:  1,
+	})
+
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if cb.State() != CircuitOpen {
+		t.Fatal("should be open after 2 failures")
+	}
+
+	time.Sleep(60 * time.Millisecond)
+	if !cb.Allow() {
+		t.Fatal("should allow in half-open after cooldown")
+	}
+	if cb.State() != CircuitHalfOpen {
+		t.Fatal("should transition to half-open")
+	}
+
+	cb.RecordSuccess()
+	if cb.State() != CircuitClosed {
+		t.Fatalf("state = %s, want closed after half-open success", cb.StateName())
+	}
+
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if cb.State() != CircuitOpen {
+		t.Fatal("should reopen after 2 more failures on fresh cycle")
+	}
+}
+
+func TestCircuitBreakerRecordSuccessResetsFailureCount(t *testing.T) {
+	cb := NewCircuitBreaker(CircuitBreakerConfig{
+		FailureThreshold: 10,
+		CooldownDuration: 1 * time.Second,
+	})
+	for i := 0; i < 5; i++ {
+		cb.RecordFailure()
+	}
+	if cb.failureCount.Load() != 5 {
+		t.Fatalf("failure count = %d, want 5", cb.failureCount.Load())
+	}
+
+	cb.RecordSuccess()
+	if cb.failureCount.Load() != 0 {
+		t.Fatalf("failure count = %d, want 0 after RecordSuccess", cb.failureCount.Load())
+	}
+	if cb.State() != CircuitClosed {
+		t.Fatalf("state = %s, want closed", cb.StateName())
+	}
+}
+
+func TestCircuitBreakerConcurrentTransitions(t *testing.T) {
+	cb := NewCircuitBreaker(CircuitBreakerConfig{
+		FailureThreshold: 50,
+		CooldownDuration: 500 * time.Millisecond,
+	})
+
+	var wg sync.WaitGroup
+	for i := 0; i < 20; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 10; j++ {
+				cb.Allow()
+				cb.RecordFailure()
+				cb.State()
+				cb.StateName()
+				cb.RecordSuccess()
+			}
+		}()
+	}
+	wg.Wait()
+
+	s := cb.StateName()
+	if s != "closed" && s != "open" && s != "half-open" {
+		t.Fatalf("invalid state after concurrent transitions: %s", s)
+	}
+
+	stats := cb.Stats()
+	if stats.FailureCount < 0 {
+		t.Fatal("failure count should not be negative")
+	}
+}

@@ -26,6 +26,22 @@ type Config struct {
 	RateLimitRouteRPS   float64
 	CircuitThreshold    int
 	CircuitCooldownSec  int
+	ShadowSampleRate    float64
+	ShadowTimeoutMs     int
+	ShadowAllowUnsafe   bool
+	ParityEnabled       bool
+	ParityMaxLatencyMs  int64
+	EvidenceDir         string
+	EvidenceMode        string
+	CanaryHeaderEnabled bool
+	CanaryHeaderName    string
+	CanaryHeaderValue   string
+	CanaryRequireEvidence bool
+	CandidateBaseURL    string
+	CanaryPercentEnabled bool
+	CanaryPercent       int
+	CanaryBucketKeyName string
+	CanaryPercentRequireEvidence bool
 }
 
 func Load(args []string) (Config, error) {
@@ -39,6 +55,9 @@ func Load(args []string) (Config, error) {
 	defaultRouteRateLimit := float64(envInt("RATE_LIMIT_ROUTE_RPS", 10))
 	defaultCircuitThreshold := int(envInt("CIRCUIT_FAILURE_THRESHOLD", 5))
 	defaultCircuitCooldown := int(envInt("CIRCUIT_COOLDOWN_SEC", 15))
+	defaultShadowSampleRate := float64(envInt("SHADOW_SAMPLE_RATE_PCT", 0)) / 100.0
+	defaultShadowTimeoutMs := int(envInt("SHADOW_TIMEOUT_MS", 5000))
+	defaultParityMaxLatencyMs := int64(envInt("PARITY_MAX_LATENCY_MS", 200))
 	flags := flag.NewFlagSet("gaokao-gateway", flag.ContinueOnError)
 	cfg := Config{}
 	flags.StringVar(&cfg.ListenAddr, "listen", envString("LISTEN_ADDR", ":8788"), "gateway listen address")
@@ -58,6 +77,22 @@ func Load(args []string) (Config, error) {
 	fastRouteRate := flags.Float64("rate-limit-route-rps", defaultRouteRateLimit, "per-route rate limit requests per second")
 	flags.IntVar(&cfg.CircuitThreshold, "circuit-failure-threshold", defaultCircuitThreshold, "consecutive failures before circuit opens")
 	flags.IntVar(&cfg.CircuitCooldownSec, "circuit-cooldown-sec", defaultCircuitCooldown, "seconds before circuit half-opens")
+	flags.Float64Var(&cfg.ShadowSampleRate, "shadow-sample-rate", defaultShadowSampleRate, "shadow request sample rate (0-1)")
+	shadowTimeout := flags.Int("shadow-timeout-ms", defaultShadowTimeoutMs, "shadow request timeout in milliseconds")
+	flags.BoolVar(&cfg.ShadowAllowUnsafe, "shadow-allow-unsafe", envBool("SHADOW_ALLOW_UNSAFE", false), "allow shadowing unsafe methods (POST/PUT/DELETE)")
+	flags.BoolVar(&cfg.ParityEnabled, "parity-enabled", envBool("PARITY_ENABLED", false), "enable parity comparison between primary and shadow")
+	flags.Int64Var(&cfg.ParityMaxLatencyMs, "parity-max-latency-ms", defaultParityMaxLatencyMs, "max allowed shadow latency ms for parity pass")
+	flags.StringVar(&cfg.EvidenceDir, "evidence-dir", envString("EVIDENCE_DIR", "../evidence/control-plane"), "directory for parity evidence files")
+	flags.StringVar(&cfg.EvidenceMode, "evidence-mode", envString("EVIDENCE_MODE", "warn"), "evidence gate mode: strict, warn, or off")
+	flags.BoolVar(&cfg.CanaryHeaderEnabled, "canary-header-enabled", envBool("CANARY_HEADER_ENABLED", false), "enable header-based canary routing")
+	flags.StringVar(&cfg.CanaryHeaderName, "canary-header-name", envString("CANARY_HEADER_NAME", "X-Gaokao-Canary"), "canary header name")
+	flags.StringVar(&cfg.CanaryHeaderValue, "canary-header-value", envString("CANARY_HEADER_VALUE", "go-control-plane"), "canary header expected value")
+	flags.BoolVar(&cfg.CanaryRequireEvidence, "canary-require-evidence", envBool("CANARY_REQUIRE_EVIDENCE", true), "require evidence gate passed before allowing canary")
+	flags.StringVar(&cfg.CandidateBaseURL, "canary-upstream", envString("CANDIDATE_UPSTREAM", ""), "candidate upstream base URL for canary traffic")
+	flags.BoolVar(&cfg.CanaryPercentEnabled, "canary-percent-enabled", envBool("CANARY_PERCENT_ENABLED", false), "enable percentage-based canary routing")
+	flags.IntVar(&cfg.CanaryPercent, "canary-percent", envInt("CANARY_PERCENT", 0), "percentage of traffic to route to candidate (0-100)")
+	flags.StringVar(&cfg.CanaryBucketKeyName, "canary-bucket-key", envString("CANARY_BUCKET_KEY", "request_id"), "bucket key name for deterministic hashing")
+	flags.BoolVar(&cfg.CanaryPercentRequireEvidence, "canary-percent-require-evidence", envBool("CANARY_PERCENT_REQUIRE_EVIDENCE", true), "require evidence gate passed before allowing percentage canary")
 	if err := flags.Parse(args); err != nil {
 		return Config{}, err
 	}
@@ -66,6 +101,7 @@ func Load(args []string) (Config, error) {
 	cfg.ShadowProxyRoutes = parseRouteAllowlist(*shadowProxyRoutes)
 	cfg.RateLimitGlobalRPS = *fastRateLimit
 	cfg.RateLimitRouteRPS = *fastRouteRate
+	cfg.ShadowTimeoutMs = *shadowTimeout
 	return cfg, nil
 }
 

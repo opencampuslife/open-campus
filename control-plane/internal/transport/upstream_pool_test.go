@@ -271,3 +271,158 @@ func TestUpstreamPoolLargeBody(t *testing.T) {
 		t.Fatalf("serve: %v", err)
 	}
 }
+
+func TestUpstreamPoolConcurrentCloseAndServe(t *testing.T) {
+	blocker := make(chan struct{})
+	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		<-blocker
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer upstream.Close()
+
+	pool, err := NewUpstreamPool(PoolConfig{
+		BaseURL:        upstream.URL,
+		MaxInFlight:    10,
+		RequestTimeout: 5 * time.Second,
+		Mode:           "shadow",
+	})
+	if err != nil {
+		t.Fatalf("new pool: %v", err)
+	}
+
+	var wg sync.WaitGroup
+	for i := 0; i < 3; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			req := httptest.NewRequest(http.MethodGet, "/api/test", nil)
+			rec := httptest.NewRecorder()
+			err := pool.ServeHTTP(rec, req)
+			if err != nil && err.Error() != "upstream pool closed" {
+				t.Errorf("unexpected error: %v", err)
+			}
+		}()
+	}
+
+	time.Sleep(10 * time.Millisecond)
+	pool.Close()
+	close(blocker)
+	wg.Wait()
+
+	if !pool.isClosed() {
+		t.Fatal("pool should be closed")
+	}
+}
+
+func TestUpstreamPoolDoubleCloseIsSafe(t *testing.T) {
+	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer upstream.Close()
+
+	pool, err := NewUpstreamPool(PoolConfig{
+		BaseURL:        upstream.URL,
+		RequestTimeout: 5 * time.Second,
+		Mode:           "shadow",
+	})
+	if err != nil {
+		t.Fatalf("new pool: %v", err)
+	}
+
+	pool.Close()
+	pool.Close()
+
+	if !pool.isClosed() {
+		t.Fatal("pool should be closed after double Close()")
+	}
+	if pool.Stats().Closed != true {
+		t.Fatal("Stats().Closed should be true")
+	}
+}
+
+func TestUpstreamPoolAcquireReleaseConcurrency(t *testing.T) {
+	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer upstream.Close()
+
+	pool, err := NewUpstreamPool(PoolConfig{
+		BaseURL:        upstream.URL,
+		MaxInFlight:    5,
+		RequestTimeout: 5 * time.Second,
+		Mode:           "shadow",
+	})
+	if err != nil {
+		t.Fatalf("new pool: %v", err)
+	}
+	defer pool.Close()
+
+	ctx := context.Background()
+	var wg sync.WaitGroup
+
+	for i := 0; i < 100; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			if err := pool.Acquire(ctx); err != nil {
+				return
+			}
+			time.Sleep(1 * time.Millisecond)
+			pool.Release()
+		}()
+	}
+
+	wg.Wait()
+
+	stats := pool.Stats()
+	if stats.InFlight != 0 {
+		t.Fatalf("in-flight = %d, want 0 after all releases", stats.InFlight)
+	}
+}
+
+func TestUpstreamPoolStatsUnderConcurrency(t *testing.T) {
+	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(`{}`))
+	}))
+	defer upstream.Close()
+
+	pool, err := NewUpstreamPool(PoolConfig{
+		BaseURL:        upstream.URL,
+		MaxInFlight:    20,
+		RequestTimeout: 5 * time.Second,
+		Mode:           "shadow",
+	})
+	if err != nil {
+		t.Fatalf("new pool: %v", err)
+	}
+	defer pool.Close()
+
+	var wg sync.WaitGroup
+	totalReqs := 50
+
+	for i := 0; i < totalReqs; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			req := httptest.NewRequest(http.MethodGet, "/api/test", nil)
+			rec := httptest.NewRecorder()
+			if err := pool.ServeHTTP(rec, req); err != nil {
+				t.Errorf("unexpected error: %v", err)
+			}
+		}()
+	}
+
+	wg.Wait()
+
+	stats := pool.Stats()
+	if stats.TotalReqs != int64(totalReqs) {
+		t.Fatalf("total requests = %d, want %d", stats.TotalReqs, totalReqs)
+	}
+	if stats.TotalErrs > 0 {
+		t.Fatalf("total errors = %d, want 0", stats.TotalErrs)
+	}
+	if stats.Capacity != 20 {
+		t.Fatalf("capacity = %d, want 20", stats.Capacity)
+	}
+}

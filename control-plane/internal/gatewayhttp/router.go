@@ -11,21 +11,37 @@ import (
 )
 
 type Options struct {
-	ShadowMode         bool
-	RequestTimeout     time.Duration
-	BodyLimitBytes     int64
-	LogLevel           string
-	EnablePanicPath    bool
-	PythonBaseURL      string
-	UpstreamTimeout    time.Duration
-	ShadowProxyEnabled bool
-	ShadowProxyRoutes  []string
-	UpstreamMaxConns   int
+	ShadowMode          bool
+	RequestTimeout      time.Duration
+	BodyLimitBytes      int64
+	LogLevel            string
+	EnablePanicPath     bool
+	PythonBaseURL       string
+	UpstreamTimeout     time.Duration
+	ShadowProxyEnabled  bool
+	ShadowProxyRoutes   []string
+	UpstreamMaxConns    int
 	UpstreamMaxInFlight int
-	RateLimitGlobalRPS float64
-	RateLimitRouteRPS  float64
-	CircuitThreshold   int
-	CircuitCooldownSec int
+	RateLimitGlobalRPS  float64
+	RateLimitRouteRPS   float64
+	CircuitThreshold    int
+	CircuitCooldownSec  int
+	ShadowSampleRate    float64
+	ShadowTimeout       time.Duration
+	ShadowAllowUnsafe   bool
+	ParityEnabled       bool
+	ParityMaxLatencyMs  int64
+	EvidenceDir         string
+	CanaryHeaderEnabled bool
+	CanaryHeaderName    string
+	CanaryHeaderValue   string
+	CanaryRequireEvidence bool
+	CandidateBaseURL    string
+	EvidencePassed      bool
+	CanaryPercentEnabled bool
+	CanaryPercent       int
+	CanaryBucketKeyName string
+	CanaryPercentRequireEvidence bool
 }
 
 func setLogContext(w http.ResponseWriter, ctx observability.LogContext) {
@@ -189,6 +205,74 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 		FailureThreshold: threshold,
 		CooldownDuration: cooldown,
 	})
+
+	var shadowPool *transport.UpstreamPool
+	var shadowDispatcher *ShadowDispatcher
+	var parityConfig ParityBridgeConfig
+	if options.ShadowSampleRate > 0 && options.PythonBaseURL != "" {
+		shadowTimeout := options.ShadowTimeout
+		if shadowTimeout <= 0 {
+			shadowTimeout = 5 * time.Second
+		}
+		p, err := transport.NewUpstreamPool(transport.PoolConfig{
+			BaseURL:         options.PythonBaseURL,
+			MaxConns:        options.UpstreamMaxConns,
+			MaxInFlight:     options.UpstreamMaxInFlight,
+			RequestTimeout:  shadowTimeout,
+			Mode:            "shadow",
+		})
+		if err == nil {
+			shadowPool = p
+			shadowDispatcher = NewShadowDispatcher(pool, shadowPool, ShadowConfig{
+				Enabled:     true,
+				SampleRate:  options.ShadowSampleRate,
+				Timeout:     shadowTimeout,
+				AllowUnsafe: options.ShadowAllowUnsafe,
+			})
+			parityConfig = ParityBridgeConfig{
+				Enabled:        options.ParityEnabled,
+				MaxLatencyMs:   options.ParityMaxLatencyMs,
+			}
+		}
+	}
+
+	evidenceWriter, err := NewEvidenceWriter(options.EvidenceDir)
+	if err != nil {
+		evidenceWriter, _ = NewEvidenceWriter("")
+	}
+
+	var candidatePool *transport.UpstreamPool
+	var candidateBreaker *CircuitBreaker
+	canaryConfig := CanaryConfig{
+		HeaderEnabled:   options.CanaryHeaderEnabled,
+		HeaderName:      options.CanaryHeaderName,
+		HeaderValue:     options.CanaryHeaderValue,
+		RequireEvidence: options.CanaryRequireEvidence,
+	}
+	if (options.CanaryHeaderEnabled || options.CanaryPercentEnabled) && options.CandidateBaseURL != "" {
+		p, err := transport.NewUpstreamPool(transport.PoolConfig{
+			BaseURL:         options.CandidateBaseURL,
+			MaxConns:        options.UpstreamMaxConns,
+			MaxInFlight:     options.UpstreamMaxInFlight,
+			RequestTimeout:  options.UpstreamTimeout,
+			Mode:            "candidate",
+		})
+		if err == nil {
+			candidatePool = p
+			candidateBreaker = NewCircuitBreaker(CircuitBreakerConfig{
+				FailureThreshold: threshold,
+				CooldownDuration: cooldown,
+			})
+		}
+	}
+
+	pctConfig := PercentageCanaryConfig{
+		Enabled:         options.CanaryPercentEnabled,
+		Percent:         clampPercent(options.CanaryPercent),
+		BucketKeyName:   options.CanaryBucketKeyName,
+		RequireEvidence: options.CanaryPercentRequireEvidence,
+	}
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		route, routeExists := loaded.FindMatchingRoute(r.Method, r.URL.Path)
 		if !routeExists {
@@ -221,19 +305,54 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 			WriteError(w, http.StatusBadGateway, CodeUpstreamUnavailable, "Upstream unavailable", requestIDFromContext(r))
 			return
 		}
-		if !breaker.Allow() {
+
+		canaryDecision := DecideCanary(r, canaryConfig, options.EvidencePassed)
+		pctDecision := DecidePercentage(r, pctConfig, options.EvidencePassed)
+		primaryPool := pool
+		primaryBreaker := breaker
+		evidenceStatus := "disabled"
+		canaryType := ""
+		canaryPercent := pctConfig.Percent
+		canaryBucket := pctDecision.Bucket
+
+		if canaryDecision.UseCandidate && candidatePool != nil && candidateBreaker != nil {
+			primaryPool = candidatePool
+			primaryBreaker = candidateBreaker
+			canaryType = "header"
+		} else if pctDecision.UseCandidate && candidatePool != nil && candidateBreaker != nil {
+			primaryPool = candidatePool
+			primaryBreaker = candidateBreaker
+			canaryType = "percentage"
+		}
+		if options.EvidencePassed {
+			evidenceStatus = "passed"
+		}
+
+		canaryCtx := buildCanaryLogContext(route, r.Method, r.URL.Path, options, canaryDecision, pctDecision, evidenceStatus, canaryType, canaryPercent, canaryBucket)
+		setLogContext(w, canaryCtx)
+
+		if !primaryBreaker.Allow() {
 			ctx := buildErrorLogContext(route, r.Method, r.URL.Path, "UPSTREAM_CIRCUIT_OPEN", 0)
 			setLogContext(w, ctx)
 			WriteError(w, http.StatusServiceUnavailable, "UPSTREAM_CIRCUIT_OPEN",
 				"Upstream temporarily unavailable (circuit open)", requestIDFromContext(r))
 			return
 		}
+
+		var shadowClone *http.Request
+		if shadowDispatcher != nil {
+			shadowClone = shadowDispatcher.PrepareShadow(r)
+		}
+
+		stripCanaryHeaders(r.Header, options.CanaryHeaderName)
+		stripCanaryKeyHeaders(r.Header)
 		transport.InjectForwardedHeaders(r, requestIDFromContext(r), "shadow")
+		capture := newCaptureResponseWriter(w, 1<<20)
 		start := time.Now()
-		err := pool.ServeHTTP(w, r)
+		err := primaryPool.ServeHTTP(capture, r)
 		latency := time.Since(start)
 		if err != nil {
-			breaker.RecordFailure()
+			primaryBreaker.RecordFailure()
 			errorCode := "UPSTREAM_UNAVAILABLE"
 			if transport.IsTimeoutError(err) {
 				errorCode = "UPSTREAM_TIMEOUT"
@@ -247,7 +366,22 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 			WriteError(w, http.StatusBadGateway, CodeUpstreamUnavailable, "Upstream unavailable", requestIDFromContext(r))
 			return
 		}
-		breaker.RecordSuccess()
+		primaryBreaker.RecordSuccess()
+
+		if shadowClone != nil && parityConfig.Enabled {
+			reqID := requestIDFromContext(r)
+			method := r.Method
+			go func() {
+				result := shadowDispatcher.DispatchClone(shadowClone, route.Key())
+				diffResult := NewParityCompare(capture, &result, route.Key(), parityConfig)
+				if evidenceWriter.Enabled() {
+					event := NewParityEvent(route.Key(), method, reqID, capture.StatusCode(), result.StatusCode, result.LatencyMs, diffResult)
+					evidenceWriter.WriteParityEvent(event)
+				}
+			}()
+		} else if shadowClone != nil {
+			go shadowDispatcher.DispatchClone(shadowClone, route.Key())
+		}
 	})
 }
 
@@ -273,4 +407,48 @@ func buildErrorLogContext(route contract.Route, method, path, errorCode string, 
 		ErrorCode:          observability.StrPtr(errorCode),
 		UpstreamLatencyMs:  observability.Int64Ptr(int64(latencyMs)),
 	}
+}
+
+func buildCanaryLogContext(route contract.Route, method, path string, options Options, headerDecision CanaryDecision, pctDecision PercentageCanaryDecision, evidenceStatus string, canaryType string, canaryPercent int, canaryBucket int) observability.LogContext {
+	proxyMode := "shadow_proxy"
+	primaryUpstream := "legacy"
+	canaryRequested := headerDecision.HeaderMatched || pctDecision.UseCandidate
+	canaryAllowed := headerDecision.UseCandidate || pctDecision.UseCandidate
+	canaryReason := "legacy"
+	if headerDecision.UseCandidate {
+		proxyMode = "header_canary"
+		primaryUpstream = "candidate"
+		canaryReason = headerDecision.Reason
+	} else if pctDecision.UseCandidate {
+		proxyMode = "percentage_canary"
+		primaryUpstream = "candidate"
+		canaryReason = pctDecision.Reason
+	} else if pctConfigIsEnabled(options) && !headerDecision.UseCandidate {
+		canaryReason = pctDecision.Reason
+	}
+
+	ctx := observability.LogContext{
+		PathTemplate:       route.Path,
+		Surface:            route.Surface,
+		RouteOwner:         route.Owner,
+		ProxyMode:          proxyMode,
+		ShadowProxyEnabled: options.ShadowProxyEnabled,
+		CanaryRequested:    observability.BoolPtr(canaryRequested),
+		CanaryAllowed:      observability.BoolPtr(canaryAllowed),
+		CanaryReason:       observability.StrPtr(canaryReason),
+		PrimaryUpstream:    observability.StrPtr(primaryUpstream),
+		EvidenceStatus:     observability.StrPtr(evidenceStatus),
+	}
+	if canaryType != "" {
+		ctx.CanaryType = observability.StrPtr(canaryType)
+	}
+	if pctConfigIsEnabled(options) {
+		ctx.CanaryPercent = observability.IntPtr(canaryPercent)
+		ctx.CanaryBucket = observability.IntPtr(canaryBucket)
+	}
+	return ctx
+}
+
+func pctConfigIsEnabled(options Options) bool {
+	return options.CanaryPercentEnabled && clampPercent(options.CanaryPercent) > 0
 }

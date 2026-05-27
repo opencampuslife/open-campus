@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"gaokao-agent/control-plane/internal/config"
 	"gaokao-agent/control-plane/internal/contract"
@@ -35,6 +36,22 @@ func main() {
 		RateLimitRouteRPS:   cfg.RateLimitRouteRPS,
 		CircuitThreshold:    cfg.CircuitThreshold,
 		CircuitCooldownSec:  cfg.CircuitCooldownSec,
+		ShadowSampleRate:    cfg.ShadowSampleRate,
+		ShadowTimeout:       time.Duration(cfg.ShadowTimeoutMs) * time.Millisecond,
+		ShadowAllowUnsafe:   cfg.ShadowAllowUnsafe,
+		ParityEnabled:       cfg.ParityEnabled,
+		ParityMaxLatencyMs:  cfg.ParityMaxLatencyMs,
+		EvidenceDir:         cfg.EvidenceDir,
+		CanaryHeaderEnabled: cfg.CanaryHeaderEnabled,
+		CanaryHeaderName:    cfg.CanaryHeaderName,
+		CanaryHeaderValue:   cfg.CanaryHeaderValue,
+		CanaryRequireEvidence: cfg.CanaryRequireEvidence,
+		CandidateBaseURL:    cfg.CandidateBaseURL,
+		EvidencePassed:      cfg.EvidenceMode == "passed",
+		CanaryPercentEnabled:         cfg.CanaryPercentEnabled,
+		CanaryPercent:                cfg.CanaryPercent,
+		CanaryBucketKeyName:          cfg.CanaryBucketKeyName,
+		CanaryPercentRequireEvidence: cfg.CanaryPercentRequireEvidence,
 	})
 	fmt.Printf("gaokao go gateway listening on %s shadow=%v routes=%d\n", cfg.ListenAddr, cfg.ShadowMode, len(loaded.Routes))
 	if err := http.ListenAndServe(cfg.ListenAddr, router); err != nil {

@@ -127,6 +127,25 @@ func (pool *UpstreamPool) ServeHTTP(w http.ResponseWriter, r *http.Request) erro
 	return copyErr
 }
 
+func (pool *UpstreamPool) DoRequest(r *http.Request) (*http.Response, error) {
+	if pool.isClosed() {
+		pool.totalErrs.Add(1)
+		return nil, fmt.Errorf("upstream pool closed")
+	}
+	pool.totalReqs.Add(1)
+	upstreamReq, err := pool.buildRequest(r)
+	if err != nil {
+		pool.totalErrs.Add(1)
+		return nil, err
+	}
+	resp, err := pool.client.Do(upstreamReq)
+	if err != nil {
+		pool.totalErrs.Add(1)
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (pool *UpstreamPool) buildRequest(r *http.Request) (*http.Request, error) {
 	upstreamURL := *pool.baseURL
 	upstreamURL.Path = r.URL.Path

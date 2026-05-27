@@ -194,8 +194,37 @@ test-python-control-plane-freeze:
 test-go-gateway:
 	cd $(ROOT)/control-plane && go test ./...
 
+test-go-race:
+	cd $(ROOT)/control-plane && go test -race ./...
+
+test-go-control-plane: test-go-gateway test-go-race test-go-shadow test-go-parity test-go-parity-unit test-go-evidence test-go-canary test-go-percentage test-go-readiness check-cutover-readiness
+
 test-go-parity-unit:
 	cd $(ROOT)/control-plane && go test ./tests -run TestParityHarnessUnit -count=1
+
+test-go-shadow:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run TestShadow -count=1 -v
+
+test-go-parity:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestParity|TestCapture" -count=1 -v
+
+test-go-evidence:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestEvidence|TestParitySummary" -count=1 -v
+
+control-plane-evidence-check:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestEvidence|TestParitySummary" -count=1 -v
+
+test-go-canary:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestDecideCanary|TestStripCanary|TestBuildCanary|TestRouterCanary|TestCanaryHeader|TestCanaryModel" -count=1 -v
+
+test-go-percentage:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestHashBucket|TestDecidePercentage|TestExtractBucket|TestClamp|TestRouterPercentage|TestRouterHeaderPriority|TestCanaryPercentage" -count=1 -v
+
+test-go-readiness:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestAllRequired|TestMissing|TestFailed|TestParityGate|TestPrivacy|TestP95|TestCandidate|TestMissingRollback|TestMissingOwner|TestPercent|TestHighRisk|TestLowRisk|TestMalformed|TestReadinessReport|TestReadinessConfigWarn|TestParitySummary|TestParityGateWarned|TestRollbackPlan|TestWriteReadiness|TestDefaultConfig|TestPhaseReportEmpty|TestEmptyConfig" -count=1 -v
+
+control-plane-readiness-check:
+	cd $(ROOT)/control-plane && go test ./internal/gatewayhttp -run "TestAllRequired|TestMissing|TestFailed|TestParityGate|TestPrivacy|TestP95|TestCandidate|TestMissingRollback|TestMissingOwner|TestPercent|TestHighRisk|TestLowRisk|TestMalformed|TestReadinessReport|TestReadinessConfigWarn|TestParitySummary|TestParityGateWarned|TestRollbackPlan|TestWriteReadiness|TestDefaultConfig|TestPhaseReportEmpty|TestEmptyConfig" -count=1
 
 test-parity-fixtures:
 	$(PY) tools/check_parity_fixtures.py --root $(ROOT)
@@ -393,7 +422,7 @@ check-staging-header-canary-config:
 		--policy $(ROOT)/configs/cutover_policy.yaml \
 		--allow-header-canary
 
-release-check-control-plane: release-check test-go-gateway
+release-check-control-plane: release-check test-go-gateway test-go-race
 
 benchmark: index
 	GAOKAO_ENV=production \

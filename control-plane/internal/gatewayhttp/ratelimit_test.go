@@ -3,6 +3,7 @@ package gatewayhttp
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -180,5 +181,107 @@ func TestRateLimiterWithLogContextRecorder(t *testing.T) {
 	handler.ServeHTTP(rec, req)
 	if rec.status != http.StatusOK {
 		t.Fatalf("status = %d, want 200", rec.status)
+	}
+}
+
+func TestRateLimiterMiddlewareOrdering(t *testing.T) {
+	rl := NewRateLimiter(RateLimitConfig{
+		GlobalRate: 1,
+		GlobalBurst: 1,
+	})
+
+	innerHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
+	handler := WithBodyLimit(5, innerHandler)
+	handler = WithRateLimiter(rl)(handler)
+
+	rec1 := &logContextRecorder{
+		ResponseWriter: httptest.NewRecorder(),
+		status:         http.StatusOK,
+	}
+	req1 := httptest.NewRequest(http.MethodGet, "/api/test", strings.NewReader("hi"))
+	handler.ServeHTTP(rec1, req1)
+	if rec1.status != http.StatusOK {
+		t.Fatalf("first request: status = %d, want 200", rec1.status)
+	}
+
+	req2 := httptest.NewRequest(http.MethodGet, "/api/test", strings.NewReader("hi"))
+	rec2 := httptest.NewRecorder()
+	handler.ServeHTTP(rec2, req2)
+	if rec2.Code != http.StatusTooManyRequests {
+		t.Fatalf("second request: status = %d, want 429 (rate limited before body limit)", rec2.Code)
+	}
+}
+
+func TestGlobalLimitBlocksAllRoutes(t *testing.T) {
+	rl := NewRateLimiter(RateLimitConfig{
+		GlobalRate:   0.1,
+		GlobalBurst:  1,
+		PerRouteRate: 100,
+		PerRouteBurst: 100,
+	})
+
+	if !rl.Allow("/api/chat") {
+		t.Fatal("first request should pass (global burst)")
+	}
+
+	if rl.Allow("/api/chat") {
+		t.Fatal("same route blocked: global exhausted")
+	}
+	if rl.Allow("/api/handoff") {
+		t.Fatal("different route blocked: global exhausted")
+	}
+	if rl.Allow("/api/campus") {
+		t.Fatal("third route blocked: global exhausted")
+	}
+}
+
+func TestConcurrentBurstNeverExceeded(t *testing.T) {
+	rl := NewRateLimiter(RateLimitConfig{
+		GlobalRate:   0.01,
+		GlobalBurst:  5,
+		PerRouteRate: 100,
+		PerRouteBurst: 100,
+	})
+
+	var wg sync.WaitGroup
+	var mu sync.Mutex
+	var successCount int
+
+	for i := 0; i < 200; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			if rl.Allow("/api/test") {
+				mu.Lock()
+				successCount++
+				mu.Unlock()
+			}
+		}()
+	}
+	wg.Wait()
+
+	if successCount > 6 {
+		t.Fatalf("concurrent successes = %d, want <= 6 (burst=5 + tiny refill)", successCount)
+	}
+	if successCount < 5 {
+		t.Fatalf("concurrent successes = %d, want >= 5 (burst should be fully consumed)", successCount)
+	}
+}
+
+func TestRateLimiterCleanupDoesNotCrash(t *testing.T) {
+	rl := NewRateLimiter(RateLimitConfig{
+		GlobalRate:  100,
+		GlobalBurst: 100,
+		CleanupEvery: 5 * time.Millisecond,
+	})
+
+	rl.Allow("/api/chat")
+	time.Sleep(100 * time.Millisecond)
+
+	if !rl.Allow("/api/chat") {
+		t.Fatal("should allow after cleanup cycle (bucket recreated)")
 	}
 }

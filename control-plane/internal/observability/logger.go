@@ -32,6 +32,14 @@ type LogContext struct {
 	AuditRequired      *bool
 	DeprecatedDenied   *bool
 	SuccessorRoute     *string
+	CanaryRequested    *bool
+	CanaryAllowed      *bool
+	CanaryReason       *string
+	PrimaryUpstream    *string
+	EvidenceStatus     *string
+	CanaryType         *string
+	CanaryPercent      *int
+	CanaryBucket       *int
 }
 
 func BoolPtr(v bool) *bool       { return &v }
@@ -83,6 +91,30 @@ func (logger Logger) RequestWithContext(r *http.Request, status int, duration ti
 	}
 	if ctx.SuccessorRoute != nil {
 		payload["successor_route"] = *ctx.SuccessorRoute
+	}
+	if ctx.CanaryRequested != nil {
+		payload["canary_requested"] = *ctx.CanaryRequested
+	}
+	if ctx.CanaryAllowed != nil {
+		payload["canary_allowed"] = *ctx.CanaryAllowed
+	}
+	if ctx.CanaryReason != nil {
+		payload["canary_reason"] = *ctx.CanaryReason
+	}
+	if ctx.PrimaryUpstream != nil {
+		payload["primary_upstream"] = *ctx.PrimaryUpstream
+	}
+	if ctx.EvidenceStatus != nil {
+		payload["evidence_status"] = *ctx.EvidenceStatus
+	}
+	if ctx.CanaryType != nil {
+		payload["canary_type"] = *ctx.CanaryType
+	}
+	if ctx.CanaryPercent != nil {
+		payload["canary_percent"] = *ctx.CanaryPercent
+	}
+	if ctx.CanaryBucket != nil {
+		payload["canary_bucket"] = *ctx.CanaryBucket
 	}
 	data, err := json.Marshal(payload)
 	if err != nil {
