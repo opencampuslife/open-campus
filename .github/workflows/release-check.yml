@@ -48,7 +48,7 @@ jobs:
           cache: true
           cache-dependency-path: control-plane/go.mod
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "20"
           cache: npm
