@@ -1,5 +1,10 @@
 # Metacampus — AI Agent Platform for Gaokao Admissions & Campus Operations
 
+[![release-check](https://github.com/opencampuslife/metacampus/actions/workflows/release-check.yml/badge.svg)](https://github.com/opencampuslife/metacampus/actions/workflows/release-check.yml)
+[![go-control-plane](https://github.com/opencampuslife/metacampus/actions/workflows/go-control-plane.yml/badge.svg)](https://github.com/opencampuslife/metacampus/actions/workflows/go-control-plane.yml)
+[![CodeQL](https://github.com/opencampuslife/metacampus/actions/workflows/codeql.yml/badge.svg)](https://github.com/opencampuslife/metacampus/actions/workflows/codeql.yml)
+[![Dependency Review](https://github.com/opencampuslife/metacampus/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/opencampuslife/metacampus/actions/workflows/dependency-review.yml)
+
 Metacampus is a multi-service AI agent platform for college admissions consulting, knowledge retrieval, compliance auditing, CRM follow-up, and campus lifecycle management. It serves thousands of students, parents, and staff across a full admissions cycle — from inquiry through enrollment and daily campus operations.
 
 ---

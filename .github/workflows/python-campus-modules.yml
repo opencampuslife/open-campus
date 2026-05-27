@@ -1,0 +1,120 @@
+name: python-campus-modules
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "services/api-gateway/**"
+      - "services/auth-service/**"
+      - "services/wecom-adapter/**"
+      - "services/wecom-aibot-bridge/**"
+      - "services/mealbot-service/**"
+      - "services/db-policy-service/**"
+      - "contracts/**"
+      - "tests/**"
+      - "Makefile"
+  pull_request:
+    branches: [main]
+    paths:
+      - "services/api-gateway/**"
+      - "services/auth-service/**"
+      - "services/wecom-adapter/**"
+      - "services/wecom-aibot-bridge/**"
+      - "services/mealbot-service/**"
+      - "services/db-policy-service/**"
+      - "contracts/**"
+      - "tests/**"
+      - "Makefile"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  campus-flow:
+    name: Campus Flow Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: gaokao_agent_test
+        ports:
+          - 54329:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: install python deps
+        run: pip install ruff mypy psycopg2-binary pyyaml
+
+      - name: migrate db
+        run: DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test python3 services/db-policy-service/scripts/migrate.py --fixtures
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: test campus auth
+        run: python -m unittest discover -s services/auth-service/tests -p '*test.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: test campus flow
+        run: python -m unittest discover -s services/api-gateway/tests -p 'campus_gateway_test.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          DATABASE_URL_ADMIN: postgresql://postgres:postgres@localhost:54329/gaokao_agent_test
+
+      - name: test wecom adapter
+        run: python -m unittest discover -s services/wecom-adapter/tests -p '*test.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: test wecom inbound
+        run: |
+          python -m unittest discover -s services/mealbot-service/tests -p 'test_sprint5_wecom_inbound.py' -v
+          python -m unittest discover -s services/mealbot-service/tests -p 'message_adapters_test.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          DATABASE_URL: postgresql://postgres:postgres@localhost:54329/gaokao_agent_test
+
+      - name: test campus new modules
+        run: python -m unittest discover -s services/mealbot-service/tests -p 'test_campus_new_modules.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          DATABASE_URL: postgresql://postgres:postgres@localhost:54329/gaokao_agent_test
+
+  wecom-aibot:
+    name: WeCom AI Bot Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: services/wecom-aibot-bridge/package-lock.json
+
+      - name: npm ci
+        working-directory: services/wecom-aibot-bridge
+        run: npm ci
+
+      - name: test wecom aibot
+        working-directory: services/wecom-aibot-bridge
+        run: npm test

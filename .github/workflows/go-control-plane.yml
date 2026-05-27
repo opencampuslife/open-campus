@@ -1,0 +1,89 @@
+name: go-control-plane
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "control-plane/**"
+      - "contracts/**"
+      - "Makefile"
+  pull_request:
+    branches: [main]
+    paths:
+      - "control-plane/**"
+      - "contracts/**"
+      - "Makefile"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Go Control Plane Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache: true
+          cache-dependency-path: control-plane/go.mod
+
+      - name: go vet
+        working-directory: control-plane
+        run: go vet ./...
+
+      - name: go test
+        working-directory: control-plane
+        run: go test ./internal/... -count=1 -timeout 120s
+
+      - name: go test -race
+        working-directory: control-plane
+        run: go test -race ./... -count=1 -timeout 120s
+
+      - name: go build
+        working-directory: control-plane
+        run: go build ./cmd/gaokao-gateway
+
+  readiness:
+    name: Control Plane Readiness Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache: true
+          cache-dependency-path: control-plane/go.mod
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: control-plane evidence check
+        working-directory: control-plane
+        run: go test ./internal/gatewayhttp -run "TestEvidence|TestParitySummary" -count=1 -v
+
+      - name: control-plane readiness check
+        working-directory: control-plane
+        run: |
+          go test ./internal/gatewayhttp \
+            -run "TestAllRequired|TestMissing|TestFailed|TestParityGate|TestPrivacy|TestP95|TestCandidate|TestMissingRollback|TestMissingOwner|TestPercent|TestHighRisk|TestLowRisk|TestMalformed|TestReadinessReport|TestReadinessConfigWarn|TestParitySummary|TestParityGateWarned|TestRollbackPlan|TestWriteReadiness|TestDefaultConfig|TestPhaseReportEmpty|TestEmptyConfig" \
+            -count=1
+
+      - name: upload readiness artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: control-plane-readiness
+          path: |
+            control-plane/evidence/
+            reports/shadow/
+          if-no-files-found: ignore

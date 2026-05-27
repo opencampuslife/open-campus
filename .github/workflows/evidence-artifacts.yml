@@ -1,0 +1,56 @@
+name: evidence-artifacts
+
+on:
+  workflow_run:
+    workflows:
+      - go-control-plane
+      - release-check
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  collect:
+    name: Collect Evidence Artifacts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: run control-plane evidence
+        working-directory: control-plane
+        run: |
+          mkdir -p evidence
+          go test ./internal/gatewayhttp -run "TestEvidence|TestParitySummary|TestAllRequired|TestReadinessReport|TestWriteReadiness" -count=1 -v || true
+          ls -la evidence/ || true
+
+      - name: run cutover readiness
+        run: |
+          python3 tools/check_cutover_readiness.py \
+            --policy configs/cutover_policy.yaml \
+            --routes contracts/routes.yaml || true
+
+      - name: upload evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: control-plane-evidence-bundle
+          path: |
+            control-plane/evidence/
+            reports/shadow/
+            reports/staging/
+            data/reports/benchmark_report.json
+          if-no-files-found: warn
