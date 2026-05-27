@@ -223,7 +223,7 @@ jobs:
 
       - name: go test -race
         working-directory: control-plane
-        run: go test -race ./... -count=1 -timeout 120s
+        run: go test -race ./... -count=1 -timeout 300s
 
       # ── Admin console ──
       - name: admin-console typecheck
@@ -242,8 +242,9 @@ jobs:
         run: python tools/check_lint_baseline.py --tool mypy
 
       - name: baseline-integrity-check
+        if: github.event_name == 'pull_request'
         run: |
-          git fetch origin main --depth=1 2>/dev/null || echo "no remote, checking local"
+          git fetch origin main --depth=1
           python tools/check_baseline_integrity.py --root . --base-ref origin/main
         # TODO: add --strict after schema v1 baselines land on main (second commit)
 

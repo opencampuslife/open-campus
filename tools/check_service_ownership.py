@@ -84,6 +84,10 @@ def check(root, allow_tbd=False):
         print(f"[FAIL] README.md says '{readme_count} services' but services/ has {actual_count}")
         exit_code = 1
 
+    print(f"[INFO] discovered {len(actual_services)} services: {','.join(actual_services)}")
+    if NON_SERVICE_DIRS:
+        print(f"[INFO] excluded non-service dirs: {','.join(NON_SERVICE_DIRS)}")
+
     if exit_code == 0:
         print(f"[PASS] service ownership OK: {len(actual_services)} services matched, no gaps")
         if allow_tbd:

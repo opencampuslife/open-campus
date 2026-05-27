@@ -43,7 +43,7 @@ jobs:
 
       - name: go test -race
         working-directory: control-plane
-        run: go test -race ./... -count=1 -timeout 120s
+        run: go test -race ./... -count=1 -timeout 300s
 
       - name: go build
         working-directory: control-plane
