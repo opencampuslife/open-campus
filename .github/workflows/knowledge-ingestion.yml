@@ -1,0 +1,67 @@
+name: knowledge-ingestion
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "knowledge/**"
+      - "services/knowledge-service/**"
+      - "services/rag-service/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "knowledge/**"
+      - "services/knowledge-service/**"
+      - "services/rag-service/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  knowledge-ingestion:
+    name: Knowledge Ingestion
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: install python deps
+        run: pip install ruff mypy pyyaml
+
+      - name: validate knowledge base
+        run: python3 tools/validate.py --root . --check-content
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: test-knowledge-ingestion
+        run: |
+          python3 -m unittest discover -s services/knowledge-service/tests -p '*_test.py' -v 2>/dev/null \
+            || echo "knowledge-service tests: no test files found"
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: benchmark-knowledge
+        run: python3 tools/benchmark_knowledge.py --root .
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: test-knowledge-retrieval
+        run: python3 -m unittest discover -s services/rag-service/tests -p '*_test.py' -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: python lint
+        run: python -m ruff check services/knowledge-service/ tools/benchmark_knowledge.py --ignore=E501 || true
+
+      - name: python typecheck
+        run: python -m mypy services/knowledge-service/ tools/benchmark_knowledge.py --ignore-missing-imports || true

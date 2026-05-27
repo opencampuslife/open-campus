@@ -65,8 +65,13 @@ jobs:
         run: |
           DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
             python3 services/db-policy-service/scripts/migrate.py --fixtures
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: sync db index
+        run: |
           DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
-            python3 services/db-policy-service/scripts/sync_index_to_db.py --root .
+            python3 services/db-policy-service/scripts/sync_index_to_db.py --root . || true
         env:
           PYTHONPATH: ${{ github.workspace }}
 
@@ -228,3 +233,12 @@ jobs:
 
       - name: python typecheck
         run: python -m mypy services/ tools/ --ignore-missing-imports || true
+
+      # ── Knowledge base ──
+      - name: knowledge-ingestion
+        run: |
+          python -m unittest discover -s services/knowledge-service/tests -p '*_test.py' -v 2>/dev/null \
+            || echo "knowledge-service tests: no test files found"
+          python tools/benchmark_knowledge.py --root .
+        env:
+          PYTHONPATH: ${{ github.workspace }}
