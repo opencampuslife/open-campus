@@ -59,7 +59,7 @@ jobs:
 
       - name: install admin-console deps
         working-directory: apps/admin-console
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: migrate db
         run: |
