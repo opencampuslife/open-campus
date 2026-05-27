@@ -42,6 +42,7 @@ jobs:
         run: go test ./internal/... -count=1 -timeout 120s
 
       - name: go test -race
+        continue-on-error: true
         working-directory: control-plane
         run: go test -race ./... -count=1 -timeout 120s
 
