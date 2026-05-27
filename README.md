@@ -190,7 +190,7 @@ deploy/staging/ingress/           Staging ingress configs
 docs/                             Architecture, runbooks, migration plan
 reports/                          Evidence artifacts (gitignored)
 scripts/                          Dry-run, evidence collection, health collection
-services/                         Python capability services (20 services + uploads/)
+services/                         Python capability services (19 services + uploads/)
 tests/                            Cross-service test suites
 tools/                            Contract checkers, evidence checkers, mirror drivers
 ```

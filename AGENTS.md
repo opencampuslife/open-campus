@@ -60,7 +60,7 @@ Every `services/*` directory must have an entry in `contracts/service_ownership.
 | `security_reviewer` | high-sensitivity services | required if `data_reviewer` is null |
 | `data_reviewer` | high-sensitivity services | required if `security_reviewer` is null |
 
-High-sensitivity services (must have at least one reviewer): `auth-service`, `audit-service`, `crm-service`, `db-policy-service`, `knowledge-service`, `knowledge-graph-service`, `llm-gateway`, `permission-service`, `source-ingestion-service`, `wecom-adapter`, `wecom-aibot-bridge`.
+High-sensitivity services (must have at least one reviewer): `auth-service`, `crm-service`, `db-policy-service`, `knowledge-service`, `knowledge-graph-service`, `llm-gateway`, `permission-service`, `source-ingestion-service`, `wecom-adapter`, `wecom-aibot-bridge`.
 
 Check locally:
 ```bash

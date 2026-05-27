@@ -20,15 +20,6 @@
       "migration_wave": "phase_1"
     },
     {
-      "name": "audit-service",
-      "code_owner": "TBD",
-      "runtime_owner": "TBD",
-      "security_reviewer": null,
-      "data_reviewer": null,
-      "sensitivity": "high",
-      "migration_wave": "phase_4"
-    },
-    {
       "name": "auth-service",
       "code_owner": "TBD",
       "runtime_owner": "TBD",

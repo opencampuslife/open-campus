@@ -9,24 +9,23 @@
 |---|---------|-------------|------------|---------------|-------------------|---------------|----------------|
 | 1 | agent-orchestrator | medium | TBD | TBD | — | — | phase_2 |
 | 2 | api-gateway | medium | TBD | TBD | — | — | phase_1 |
-| 3 | audit-service | **high** | TBD | TBD | TBD | TBD | phase_4 |
-| 4 | auth-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
-| 5 | compliance-service | medium | TBD | TBD | — | — | phase_2 |
-| 6 | crm-service | **high** | TBD | TBD | TBD | TBD | phase_3 |
-| 7 | db-policy-service | **high** | TBD | TBD | — | TBD | phase_1 |
-| 8 | evaluation-service | low | TBD | TBD | — | — | phase_3 |
-| 9 | knowledge-graph-service | **high** | TBD | TBD | TBD | TBD | phase_3 |
-| 10 | knowledge-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
-| 11 | llm-gateway | **high** | TBD | TBD | TBD | — | phase_1 |
-| 12 | mealbot-service | medium | TBD | TBD | — | — | phase_4 |
-| 13 | permission-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
-| 14 | rag-service | medium | TBD | TBD | — | — | phase_2 |
-| 15 | recommendation-service | medium | TBD | TBD | — | — | phase_3 |
-| 16 | source-ingestion-service | **high** | TBD | TBD | — | TBD | phase_3 |
-| 17 | ua-mcp-server | medium | TBD | TBD | — | — | phase_4 |
-| 18 | wecom-adapter | **high** | TBD | TBD | TBD | TBD | phase_2 |
-| 19 | wecom-aibot-bridge | **high** | TBD | TBD | TBD | TBD | phase_4 |
-| 20 | workflow-service | medium | TBD | TBD | — | — | phase_4 |
+| 3 | auth-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
+| 4 | compliance-service | medium | TBD | TBD | — | — | phase_2 |
+| 5 | crm-service | **high** | TBD | TBD | TBD | TBD | phase_3 |
+| 6 | db-policy-service | **high** | TBD | TBD | — | TBD | phase_1 |
+| 7 | evaluation-service | low | TBD | TBD | — | — | phase_3 |
+| 8 | knowledge-graph-service | **high** | TBD | TBD | TBD | TBD | phase_3 |
+| 9 | knowledge-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
+| 10 | llm-gateway | **high** | TBD | TBD | TBD | — | phase_1 |
+| 11 | mealbot-service | medium | TBD | TBD | — | — | phase_4 |
+| 12 | permission-service | **high** | TBD | TBD | TBD | TBD | phase_2 |
+| 13 | rag-service | medium | TBD | TBD | — | — | phase_2 |
+| 14 | recommendation-service | medium | TBD | TBD | — | — | phase_3 |
+| 15 | source-ingestion-service | **high** | TBD | TBD | — | TBD | phase_3 |
+| 16 | ua-mcp-server | medium | TBD | TBD | — | — | phase_4 |
+| 17 | wecom-adapter | **high** | TBD | TBD | TBD | TBD | phase_2 |
+| 18 | wecom-aibot-bridge | **high** | TBD | TBD | TBD | TBD | phase_4 |
+| 19 | workflow-service | medium | TBD | TBD | — | — | phase_4 |
 
 > `uploads/` is static file storage — not a service and excluded from the ownership matrix.
 
@@ -40,7 +39,7 @@
 | `data_reviewer` | **high** sensitivity (data-oriented) | RLS, audit log, data permission review |
 
 **High-sensitivity** services (must have at least one of `security_reviewer` or `data_reviewer`):
-`audit-service`, `auth-service`, `crm-service`, `db-policy-service`, `knowledge-graph-service`, `knowledge-service`, `llm-gateway`, `permission-service`, `source-ingestion-service`, `wecom-adapter`, `wecom-aibot-bridge`.
+`auth-service`, `crm-service`, `db-policy-service`, `knowledge-graph-service`, `knowledge-service`, `llm-gateway`, `permission-service`, `source-ingestion-service`, `wecom-adapter`, `wecom-aibot-bridge`.
 
 ## Dependency Map
 
@@ -70,7 +69,6 @@ ua-mcp-server → knowledge-graph-service
 
 wecom-aibot-bridge → api-gateway
 
-audit-service (not yet implemented)
 uploads/ (data only, no runtime dependency)
 ```
 
@@ -80,4 +78,4 @@ uploads/ (data only, no runtime dependency)
 - `llm-gateway` is the **sole** service allowed to call external LLM APIs.
 - `db-policy-service` is the **sole** service that defines database roles and RLS policies.
 - No service currently has a `pyproject.toml` — packaging is tracked as future work.
-- `audit-service` and `workflow-service` have no tests yet.
+- `workflow-service` has no tests yet.
