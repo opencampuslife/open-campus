@@ -28,11 +28,19 @@ def parse_args() -> argparse.Namespace:
 
 def load_json_yaml(path: Path) -> dict[str, Any]:
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8")
     except FileNotFoundError as exc:
         raise ValueError(f"missing file: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise ValueError(f"invalid JSON-compatible YAML {path}: {exc}") from exc
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        try:
+            import yaml
+            payload = yaml.safe_load(text)
+        except ImportError:
+            raise ValueError(f"invalid JSON/YAML {path}: install PyYAML or use JSON format") from None
+        except Exception as exc:
+            raise ValueError(f"invalid YAML {path}: {exc}") from exc
     if not isinstance(payload, dict):
         raise ValueError(f"{path}: root must be an object")
     return payload

@@ -8,6 +8,67 @@ These rules apply to the repository while the Go control-plane migration is in p
 - Keep existing external response bodies compatible during proxy or cutover changes.
 - Run `make test-route-contract` before submitting gateway or Python service boundary changes.
 
+## Health Hardening Checks
+
+Use these checks when changing service boundaries, gateway code, CI policy, or codegraph behavior:
+
+```bash
+python tools/check_package_boundary.py --root .
+python tools/check_gateway_freeze.py --root . --allow-existing
+python tools/check_ci_policy.py --root .
+```
+
+Reference docs:
+
+- `docs/architecture/code-health-review-2026-05-27.md`
+- `docs/testing/service-test-matrix.md`
+
+Additional hard rules:
+
+- Do not add production `sys.path.append`, `sys.path.insert`, or `sys.path.extend` under `services/*/src`.
+- Do not add new Python gateway route branches; route inventory and control-plane migration must start from `contracts/routes.yaml`.
+- Treat protocol labels in `docs/codegraph.html` as audit signals only when evidence is `confirmed`; review `weak` evidence manually.
+
+
+# Check Rules
+
+Use `make health` before committing (`make release-gate` for CI-wide check).
+
+----
+
+## Gateway Freeze
+
+- Do NOT add new route branches (`elif path.startswith(...)`) to `services/api-gateway/src/server.py` — route must go through `contracts/routes.yaml` instead.
+- Do NOT add new HTTP handler classes to `server.py`.
+- Do NOT add cross-service Python imports in `bff_gateway.py` — BFF must call services via API, not direct import.
+- Run `make test-gateway-freeze` before modifying any gateway file.
+
+## Package Boundary
+
+- Production code (`services/*/src`) must NOT use `sys.path.insert`, `sys.path.append`, or `sys.path.extend`.
+- Each Python service must eventually have a `pyproject.toml` and be installable via `pip install -e`.
+- `make test-python-control-plane-freeze` validates the allowlist in `contracts/python_control_plane_allowlist.json`.
+
+## CI Policy
+
+- `make ci-policy-check` runs production JSON checks, database URL safety, provider isolation, and SQL policy.
+- All SQL must be parameterized; policy filters must not be string-concatenated.
+
+## Codegraph Protocol
+
+| Level | Definition |
+|-------|------------|
+| confirmed | AST import / API-level evidence (e.g., `import psycopg`, `requests.get(...)`) |
+| weak | Keyword/regex hit (e.g., `postgres`, `DATABASE_URL`) |
+| false_positive_suspect | HTML `<select>`, Python `.update()`, HTTP `DELETE`, `sys.path.insert` |
+
+Do not treat `weak` or `false_positive_suspect` as real protocol evidence.
+
+## Test Matrix
+
+Each service must pass the test requirements defined in `docs/testing/service-test-matrix.md`.
+New services added without meeting the minimum test matrix → CI fail.
+
 ---
 
 # PR Status

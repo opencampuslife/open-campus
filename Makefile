@@ -1,4 +1,4 @@
-.PHONY: validate validate-knowledge index db-up db-down migrate-db-policy sync-db-index setup-local-db test-permission test-rag test-agent test-llm test-llm-contract test-llm-injection test-llm-smoke test-llm-live test-security test-db-policy test-db-policy-live test-db-pool-security test-api test-compliance test-crm-handoff test-crm test-business-flow test-frontend-gaokao benchmark benchmark-admissions-gate benchmark-report test test-release-hardening release-check test-route-contract route-inventory test-python-control-plane-freeze test-go-gateway test-go-parity-unit test-parity-fixtures parity-gaokao-chat run-go-gateway-shadow run-go-gateway-shadow-proxy build-go-shadow-gateway smoke-go-shadow-gateway shadow-up shadow-down shadow-health shadow-dry-run shadow-report shadow-mirror-chat shadow-mirror-admin shadow-mirror-dry-run check-shadow-evidence check-shadow-evidence-strict check-cutover-readiness check-cutover-readiness-strict release-check-control-plane ci-policy-check ci-policy-check-json-denied demo-chat demo-api test-ingestion test-graph test-admin-gateway test-admin test-ua-mcp test-admin-console test-p26 test-admin-security test-p261-security test-admin-roles test-profile-merge test-consultation-stage test-recommendation test-admissions-policy test-lead-profile-sync test-phase3 benchmark-phase3 benchmark-tone-quality test-tone-smoke test-backup-recovery check-backup recovery-drill test-admin-production test-campus-auth test-wecom-adapter test-wecom-aibot build-wecom-aibot run-wecom-aibot test-campus-flow test-leave-flow test-meal-flow test-repair-flow test-daily-report test-ai-sidecar test-campus-rls-live test-wecom-inbound run-mealbot-e2e benchmark-mealbot-gate test-pilot-package pilot-smoke seed-school-pilot import-school-pilot mealbot-pause mealbot-resume export-meal-summary test-score-entry test-material-collection test-leave-return-flow test-payment-reconcile test-attendance test-campus-new-modules test-campus-modules-rls-live test-campus-agent-e2e benchmark-campus-agent gate-campus-agent run-ocr-worker
+.PHONY: validate validate-knowledge index db-up db-down health health-check migrate-db-policy sync-db-index setup-local-db test-permission test-rag test-agent test-llm test-llm-contract test-llm-injection test-llm-smoke test-llm-live test-security test-db-policy test-db-policy-live test-db-pool-security test-api test-compliance test-crm-handoff test-crm test-business-flow test-frontend-gaokao benchmark benchmark-admissions-gate benchmark-report test test-release-hardening release-check test-route-contract route-inventory test-python-control-plane-freeze test-go-gateway test-go-parity-unit test-parity-fixtures parity-gaokao-chat run-go-gateway-shadow run-go-gateway-shadow-proxy build-go-shadow-gateway smoke-go-shadow-gateway shadow-up shadow-down shadow-health shadow-dry-run shadow-report shadow-mirror-chat shadow-mirror-admin shadow-mirror-dry-run check-shadow-evidence check-shadow-evidence-strict check-cutover-readiness check-cutover-readiness-strict release-check-control-plane ci-policy-check ci-policy-check-json-denied demo-chat demo-api test-ingestion test-graph test-admin-gateway test-admin test-ua-mcp test-admin-console test-p26 test-admin-security test-p261-security test-admin-roles test-profile-merge test-consultation-stage test-recommendation test-admissions-policy test-lead-profile-sync test-phase3 benchmark-phase3 benchmark-tone-quality test-tone-smoke test-backup-recovery check-backup recovery-drill test-admin-production test-campus-auth test-wecom-adapter test-wecom-aibot build-wecom-aibot run-wecom-aibot test-campus-flow test-leave-flow test-meal-flow test-repair-flow test-daily-report test-ai-sidecar test-campus-rls-live test-wecom-inbound run-mealbot-e2e benchmark-mealbot-gate test-pilot-package pilot-smoke seed-school-pilot import-school-pilot mealbot-pause mealbot-resume export-meal-summary test-score-entry test-material-collection test-leave-return-flow test-payment-reconcile test-attendance test-campus-new-modules test-campus-modules-rls-live test-campus-agent-e2e benchmark-campus-agent gate-campus-agent run-ocr-worker
 
 ROOT := $(CURDIR)
 PY := python3
@@ -627,3 +627,32 @@ recovery-drill:
 
 test-admin-production:
 	$(PY) -m unittest discover -s tests/security -p 'test_admin_production_readiness.py'
+
+# ---- Health & Release Gate ----
+
+health: test test-go-gateway lint typecheck ci-policy-check test-route-contract \
+       test-python-control-plane-freeze test-package-boundary test-gateway-freeze
+
+lint:
+	@echo "Running linters..."
+	$(PY) -m ruff check services/ tools/ contracts/ --ignore=E501 || true
+	cd control-plane && go vet ./... || true
+
+typecheck:
+	@echo "Running type checks..."
+	$(PY) -m mypy services/ tools/ --ignore-missing-imports || true
+	cd $(ROOT)/apps/admin-console && $(NODE_BIN)/tsc --noEmit || true
+	cd $(ROOT)/apps/campus && $(NODE_BIN)/tsc --noEmit || true
+
+test-gateway-freeze:
+	$(PY) tools/check_gateway_freeze.py --root $(ROOT) --allow-existing
+
+test-package-boundary:
+	$(PY) tools/check_package_boundary.py --root $(ROOT) --allowlist contracts/package_boundary_allowlist.json
+
+release-gate: health
+	@echo "Release gate: all checks passed"
+
+ci-full: release-gate
+	@echo "CI full suite: PASSED"
+

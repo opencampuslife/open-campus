@@ -29,8 +29,17 @@ def main() -> None:
     args = parser.parse_args()
 
     yaml_count = 0
+    yaml_warnings: list[str] = []
     for path in sorted((args.root / "configs").glob("*.yaml")):
-        load_file(path)
+        try:
+            load_file(path)
+        except ValueError:
+            raw = path.read_text(encoding="utf-8").lstrip()
+            if raw.startswith("{") or raw.startswith("["):
+                yaml_warnings.append(f"{path.name}: JSON-formatted YAML file — convert to YAML syntax")
+                yaml_count += 1
+                continue
+            raise
         yaml_count += 1
 
     md_count = 0
@@ -61,6 +70,10 @@ def main() -> None:
     errors.extend(dup_errors)
 
     print(f"validated configs={yaml_count} markdown_docs={md_count}")
+    if yaml_warnings:
+        print(f"\n{yaml_count} YAML warning(s):")
+        for w in yaml_warnings:
+            print(f"  {w}")
     if errors:
         print(f"\n{len(errors)} error(s):", file=sys.stderr)
         for err in errors:

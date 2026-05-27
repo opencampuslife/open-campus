@@ -38,7 +38,17 @@ SCHEMA_TYPES = {
 
 
 def load_json_yaml(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        try:
+            import yaml
+            return yaml.safe_load(text)
+        except ImportError:
+            raise ValueError(f"invalid JSON/YAML {path}: install PyYAML or use JSON format") from None
+        except Exception as exc:
+            raise ValueError(f"invalid YAML {path}: {exc}") from exc
 
 
 def validate_schema_node(value: Any, schema: dict[str, Any], location: str) -> list[str]:

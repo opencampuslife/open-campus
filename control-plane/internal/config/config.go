@@ -20,6 +20,12 @@ type Config struct {
 	ShadowProxyEnabled  bool
 	ShadowProxyRoutes   []string
 	LogLevel            string
+	UpstreamMaxConns    int
+	UpstreamMaxInFlight int
+	RateLimitGlobalRPS  float64
+	RateLimitRouteRPS   float64
+	CircuitThreshold    int
+	CircuitCooldownSec  int
 }
 
 func Load(args []string) (Config, error) {
@@ -27,6 +33,12 @@ func Load(args []string) (Config, error) {
 	defaultBodyLimit := int64(envInt("BODY_LIMIT_BYTES", 10*1024*1024))
 	defaultProxyBodyLimit := int64(envInt("PROXY_BODY_LIMIT_BYTES", int(defaultBodyLimit)))
 	defaultUpstreamTimeout := int(envInt("UPSTREAM_TIMEOUT_MS", defaultTimeout))
+	defaultMaxConns := int(envInt("UPSTREAM_MAX_CONNS", 512))
+	defaultMaxInFlight := int(envInt("UPSTREAM_MAX_IN_FLIGHT", defaultMaxConns))
+	defaultRateLimit := float64(envInt("RATE_LIMIT_GLOBAL_RPS", 100))
+	defaultRouteRateLimit := float64(envInt("RATE_LIMIT_ROUTE_RPS", 10))
+	defaultCircuitThreshold := int(envInt("CIRCUIT_FAILURE_THRESHOLD", 5))
+	defaultCircuitCooldown := int(envInt("CIRCUIT_COOLDOWN_SEC", 15))
 	flags := flag.NewFlagSet("gaokao-gateway", flag.ContinueOnError)
 	cfg := Config{}
 	flags.StringVar(&cfg.ListenAddr, "listen", envString("LISTEN_ADDR", ":8788"), "gateway listen address")
@@ -40,12 +52,20 @@ func Load(args []string) (Config, error) {
 	flags.BoolVar(&cfg.ShadowProxyEnabled, "shadow-proxy-enabled", envBool("SHADOW_PROXY_ENABLED", false), "enable explicitly allowed shadow proxy routes")
 	shadowProxyRoutes := flags.String("shadow-proxy-routes", envString("SHADOW_PROXY_ROUTES", ""), "comma-separated METHOD /path shadow proxy allowlist")
 	flags.StringVar(&cfg.LogLevel, "log-level", envString("LOG_LEVEL", "info"), "log level")
+	flags.IntVar(&cfg.UpstreamMaxConns, "upstream-max-conns", defaultMaxConns, "max connections to upstream")
+	flags.IntVar(&cfg.UpstreamMaxInFlight, "upstream-max-in-flight", defaultMaxInFlight, "max concurrent in-flight upstream requests")
+	fastRateLimit := flags.Float64("rate-limit-rps", defaultRateLimit, "global rate limit requests per second")
+	fastRouteRate := flags.Float64("rate-limit-route-rps", defaultRouteRateLimit, "per-route rate limit requests per second")
+	flags.IntVar(&cfg.CircuitThreshold, "circuit-failure-threshold", defaultCircuitThreshold, "consecutive failures before circuit opens")
+	flags.IntVar(&cfg.CircuitCooldownSec, "circuit-cooldown-sec", defaultCircuitCooldown, "seconds before circuit half-opens")
 	if err := flags.Parse(args); err != nil {
 		return Config{}, err
 	}
 	cfg.RequestTimeout = time.Duration(*timeoutMS) * time.Millisecond
 	cfg.UpstreamTimeout = time.Duration(*upstreamTimeoutMS) * time.Millisecond
 	cfg.ShadowProxyRoutes = parseRouteAllowlist(*shadowProxyRoutes)
+	cfg.RateLimitGlobalRPS = *fastRateLimit
+	cfg.RateLimitRouteRPS = *fastRouteRate
 	return cfg, nil
 }
 

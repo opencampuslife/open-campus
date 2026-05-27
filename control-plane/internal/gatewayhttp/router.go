@@ -20,6 +20,12 @@ type Options struct {
 	UpstreamTimeout    time.Duration
 	ShadowProxyEnabled bool
 	ShadowProxyRoutes  []string
+	UpstreamMaxConns   int
+	UpstreamMaxInFlight int
+	RateLimitGlobalRPS float64
+	RateLimitRouteRPS  float64
+	CircuitThreshold   int
+	CircuitCooldownSec int
 }
 
 func setLogContext(w http.ResponseWriter, ctx observability.LogContext) {
@@ -89,6 +95,14 @@ func NewRouter(loaded *contract.Contract, options Options) http.Handler {
 	handler = WithStructuredLogging(observability.NewLogger(options.LogLevel), handler)
 	handler = WithTimeout(options.RequestTimeout, handler)
 	handler = WithRequestID(handler)
+	if options.RateLimitGlobalRPS > 0 {
+		rl := NewRateLimiter(RateLimitConfig{
+			GlobalRate:   options.RateLimitGlobalRPS,
+			GlobalBurst:  int(options.RateLimitGlobalRPS * 2),
+			PerRouteRate: options.RateLimitRouteRPS,
+		})
+		handler = WithRateLimiter(rl)(handler)
+	}
 	return handler
 }
 
@@ -150,13 +164,31 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 	for _, routeKey := range options.ShadowProxyRoutes {
 		allowlist[strings.ToUpper(strings.TrimSpace(routeKey))] = struct{}{}
 	}
-	var upstream *transport.PythonProxy
+	var pool *transport.UpstreamPool
 	if options.PythonBaseURL != "" {
-	proxy, err := transport.NewPythonProxy(options.PythonBaseURL, options.UpstreamTimeout, "shadow")
+		p, err := transport.NewUpstreamPool(transport.PoolConfig{
+			BaseURL:         options.PythonBaseURL,
+			MaxConns:        options.UpstreamMaxConns,
+			MaxInFlight:     options.UpstreamMaxInFlight,
+			RequestTimeout:  options.UpstreamTimeout,
+			Mode:            "shadow",
+		})
 		if err == nil {
-			upstream = proxy
+			pool = p
 		}
 	}
+	cooldown := 15 * time.Second
+	if options.CircuitCooldownSec > 0 {
+		cooldown = time.Duration(options.CircuitCooldownSec) * time.Second
+	}
+	threshold := options.CircuitThreshold
+	if threshold <= 0 {
+		threshold = 5
+	}
+	breaker := NewCircuitBreaker(CircuitBreakerConfig{
+		FailureThreshold: threshold,
+		CooldownDuration: cooldown,
+	})
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		route, routeExists := loaded.FindMatchingRoute(r.Method, r.URL.Path)
 		if !routeExists {
@@ -185,15 +217,23 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 			WriteError(w, http.StatusNotFound, CodeProxyRouteDisabled, "Proxy route disabled", requestIDFromContext(r))
 			return
 		}
-		if upstream == nil {
+		if pool == nil {
 			WriteError(w, http.StatusBadGateway, CodeUpstreamUnavailable, "Upstream unavailable", requestIDFromContext(r))
+			return
+		}
+		if !breaker.Allow() {
+			ctx := buildErrorLogContext(route, r.Method, r.URL.Path, "UPSTREAM_CIRCUIT_OPEN", 0)
+			setLogContext(w, ctx)
+			WriteError(w, http.StatusServiceUnavailable, "UPSTREAM_CIRCUIT_OPEN",
+				"Upstream temporarily unavailable (circuit open)", requestIDFromContext(r))
 			return
 		}
 		transport.InjectForwardedHeaders(r, requestIDFromContext(r), "shadow")
 		start := time.Now()
-		err := upstream.ServeHTTP(w, r)
+		err := pool.ServeHTTP(w, r)
 		latency := time.Since(start)
 		if err != nil {
+			breaker.RecordFailure()
 			errorCode := "UPSTREAM_UNAVAILABLE"
 			if transport.IsTimeoutError(err) {
 				errorCode = "UPSTREAM_TIMEOUT"
@@ -207,6 +247,7 @@ func newProxyHandler(loaded *contract.Contract, options Options) http.Handler {
 			WriteError(w, http.StatusBadGateway, CodeUpstreamUnavailable, "Upstream unavailable", requestIDFromContext(r))
 			return
 		}
+		breaker.RecordSuccess()
 	})
 }
 
@@ -216,7 +257,7 @@ func buildDisabledLogContext(route contract.Route, method, path, errorCode strin
 		Surface:            route.Surface,
 		RouteOwner:         route.Owner,
 		ProxyMode:          "shadow",
-		ShadowProxyEnabled:  true,
+		ShadowProxyEnabled: true,
 		ErrorCode:          observability.StrPtr(errorCode),
 		DeprecatedDenied:   observability.BoolPtr(false),
 	}

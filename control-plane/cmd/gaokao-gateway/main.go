@@ -21,14 +21,20 @@ func main() {
 		log.Fatalf("load routes contract: %v", err)
 	}
 	router := gatewayhttp.NewRouter(loaded, gatewayhttp.Options{
-		ShadowMode:         cfg.ShadowMode,
-		RequestTimeout:     cfg.RequestTimeout,
-		BodyLimitBytes:     cfg.ProxyBodyLimitBytes,
-		LogLevel:           cfg.LogLevel,
-		PythonBaseURL:      cfg.PythonBaseURL,
-		UpstreamTimeout:    cfg.UpstreamTimeout,
-		ShadowProxyEnabled: cfg.ShadowProxyEnabled,
-		ShadowProxyRoutes:  cfg.ShadowProxyRoutes,
+		ShadowMode:          cfg.ShadowMode,
+		RequestTimeout:      cfg.RequestTimeout,
+		BodyLimitBytes:      cfg.ProxyBodyLimitBytes,
+		LogLevel:            cfg.LogLevel,
+		PythonBaseURL:       cfg.PythonBaseURL,
+		UpstreamTimeout:     cfg.UpstreamTimeout,
+		ShadowProxyEnabled:  cfg.ShadowProxyEnabled,
+		ShadowProxyRoutes:   cfg.ShadowProxyRoutes,
+		UpstreamMaxConns:    cfg.UpstreamMaxConns,
+		UpstreamMaxInFlight: cfg.UpstreamMaxInFlight,
+		RateLimitGlobalRPS:  cfg.RateLimitGlobalRPS,
+		RateLimitRouteRPS:   cfg.RateLimitRouteRPS,
+		CircuitThreshold:    cfg.CircuitThreshold,
+		CircuitCooldownSec:  cfg.CircuitCooldownSec,
 	})
 	fmt.Printf("gaokao go gateway listening on %s shadow=%v routes=%d\n", cfg.ListenAddr, cfg.ShadowMode, len(loaded.Routes))
 	if err := http.ListenAndServe(cfg.ListenAddr, router); err != nil {

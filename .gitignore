@@ -18,3 +18,5 @@ reports/staging/tmp/
 reports/staging/*.json
 !reports/staging/.gitkeep
 !reports/staging/tmp/.gitkeep
+.DS_Store
+docs/codegraph.html

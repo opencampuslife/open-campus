@@ -1,0 +1,23 @@
+{
+  "description": "Allowlist for legacy gateway code that existed before the freeze date. New entries require migration owner approval.",
+  "entries": [
+    {
+      "file": "services/api-gateway/src/server.py",
+      "pattern": "new_http_handler",
+      "line": 151,
+      "reason": "Legacy GaokaoHandler - freeze date existing code. Migrate to Go control-plane."
+    },
+    {
+      "file": "services/api-gateway/src/server.py",
+      "pattern": "new_route_branch",
+      "line": 0,
+      "reason": "Entire server.py is legacy - no new elif path.startswith() branches allowed."
+    },
+    {
+      "file": "services/api-gateway/src/bff_gateway.py",
+      "pattern": "new_bff_import",
+      "line": 0,
+      "reason": "Entire bff_gateway.py is legacy - refactoring in progress."
+    }
+  ]
+}

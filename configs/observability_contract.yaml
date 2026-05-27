@@ -1,87 +1,98 @@
-{
-  "version": 1,
-  "description": "Observability contract for Go gateway during controlled ingress cutover",
-  "required_request_log_fields": [
-    "request_id",
-    "method",
-    "path",
-    "path_template",
-    "surface",
-    "route_owner",
-    "status",
-    "latency_ms",
-    "upstream_status",
-    "upstream_latency_ms",
-    "proxy_mode",
-    "shadow_proxy_enabled",
-    "error_code"
-  ],
-  "required_admin_fields": [
-    "auth_required",
-    "csrf_required",
-    "audit_required",
-    "deprecated_route_denied",
-    "successor_route"
-  ],
-  "forbidden_fields": [
-    "authorization",
-    "cookie",
-    "set-cookie",
-    "raw_request_body",
-    "raw_response_body",
-    "raw_ip",
-    "raw_user_id",
-    "student_name",
-    "parent_phone",
-    "document_contents"
-  ],
-  "metrics": [
-    {
-      "name": "gaokao_gateway_requests_total",
-      "labels": ["method", "path_template", "surface", "status"]
-    },
-    {
-      "name": "gaokao_gateway_request_duration_ms",
-      "labels": ["method", "path_template", "surface"]
-    },
-    {
-      "name": "gaokao_gateway_upstream_requests_total",
-      "labels": ["upstream", "status"]
-    },
-    {
-      "name": "gaokao_gateway_upstream_duration_ms",
-      "labels": ["upstream"]
-    },
-    {
-      "name": "gaokao_gateway_errors_total",
-      "labels": ["code"]
-    },
-    {
-      "name": "gaokao_gateway_deprecated_route_denied_total",
-      "labels": ["route"]
-    },
-    {
-      "name": "gaokao_gateway_proxy_disabled_total",
-      "labels": ["route"]
-    }
-  ],
-  "forbidden_metric_labels": [
-    "raw_user_id",
-    "raw_ip",
-    "student_name",
-    "parent_phone",
-    "document_id",
-    "request_id"
-  ],
-  "error_codes": [
-    "ROUTE_NOT_FOUND",
-    "METHOD_NOT_ALLOWED",
-    "REQUEST_TOO_LARGE",
-    "INTERNAL_ERROR",
-    "CONTRACT_VIOLATION",
-    "PROXY_ROUTE_DISABLED",
-    "UPSTREAM_UNAVAILABLE",
-    "UPSTREAM_TIMEOUT",
-    "DEPRECATED_ROUTE_NOT_PROXIED"
-  ]
-}
+version: 1
+description: Observability contract for Go gateway during controlled ingress cutover
+required_request_log_fields:
+  - request_id
+  - method
+  - path
+  - path_template
+  - surface
+  - route_owner
+  - status
+  - latency_ms
+  - upstream_status
+  - upstream_latency_ms
+  - proxy_mode
+  - shadow_proxy_enabled
+  - error_code
+
+required_admin_fields:
+  - auth_required
+  - csrf_required
+  - audit_required
+  - deprecated_route_denied
+  - successor_route
+
+forbidden_fields:
+  - authorization
+  - cookie
+  - set-cookie
+  - raw_request_body
+  - raw_response_body
+  - raw_ip
+  - raw_user_id
+  - student_name
+  - parent_phone
+  - document_contents
+
+metrics:
+  - name: gaokao_gateway_requests_total
+    labels:
+      - method
+      - path_template
+      - surface
+      - status
+
+
+  - name: gaokao_gateway_request_duration_ms
+    labels:
+      - method
+      - path_template
+      - surface
+
+
+  - name: gaokao_gateway_upstream_requests_total
+    labels:
+      - upstream
+      - status
+
+
+  - name: gaokao_gateway_upstream_duration_ms
+    labels:
+      - upstream
+
+
+  - name: gaokao_gateway_errors_total
+    labels:
+      - code
+
+
+  - name: gaokao_gateway_deprecated_route_denied_total
+    labels:
+      - route
+
+
+  - name: gaokao_gateway_proxy_disabled_total
+    labels:
+      - route
+
+
+
+forbidden_metric_labels:
+  - raw_user_id
+  - raw_ip
+  - student_name
+  - parent_phone
+  - document_id
+  - request_id
+
+error_codes:
+  - ROUTE_NOT_FOUND
+  - METHOD_NOT_ALLOWED
+  - REQUEST_TOO_LARGE
+  - INTERNAL_ERROR
+  - CONTRACT_VIOLATION
+  - PROXY_ROUTE_DISABLED
+  - UPSTREAM_UNAVAILABLE
+  - UPSTREAM_TIMEOUT
+  - DEPRECATED_ROUTE_NOT_PROXIED
+
