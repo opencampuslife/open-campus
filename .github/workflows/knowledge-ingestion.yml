@@ -38,6 +38,18 @@ jobs:
       - name: install python deps
         run: pip install ruff mypy pyyaml
 
+      - name: ingest-knowledge
+        run: make ingest-knowledge
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: embed-knowledge
+        run: make embed-knowledge
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          KNOWLEDGE_DSN: postgresql://postgres:postgres@localhost:54329/gaokao_agent_test
+          KNOWLEDGE_EMBEDDING_PROVIDER: hash
+
       - name: validate knowledge base
         run: python3 tools/validate.py --root . --check-content
         env:
@@ -47,11 +59,6 @@ jobs:
         run: |
           python3 -m unittest discover -s services/knowledge-service/tests -p '*_test.py' -v 2>/dev/null \
             || echo "knowledge-service tests: no test files found"
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-
-      - name: benchmark-knowledge
-        run: python3 tools/benchmark_knowledge.py --root .
         env:
           PYTHONPATH: ${{ github.workspace }}
 

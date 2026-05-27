@@ -9,7 +9,12 @@
     "/api/csrf-token": {"get": {"summary": "Issue browser CSRF token", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
     "/api/gaokao/chat": {"post": {"summary": "Admissions chat", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
     "/api/gaokao/handoff": {"post": {"summary": "Consultation handoff", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
-    "/api/local/consumer-chat": {"post": {"summary": "Loopback-only local chat", "x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}}
+    "/api/local/consumer-chat": {"post": {"summary": "Loopback-only local chat", "x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/knowledge/session-context": {"get": {"summary": "Get authenticated identity from gateway session", "x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}},
+    "/api/knowledge/{param}": {
+      "get": {"summary": "Knowledge service proxy GET", "x-visibility": "internal", "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}},
+      "post": {"summary": "Knowledge service proxy POST", "x-visibility": "internal", "requestBody": {"content": {"application/json": {"schema": {"type": "object"}}}}, "responses": {"default": {"$ref": "#/components/responses/LegacyResponse"}}}
+    }
   },
   "components": {
     "responses": {

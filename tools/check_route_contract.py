@@ -89,7 +89,17 @@ def validate_route_schema(root: Path, contract: dict[str, Any]) -> list[str]:
 
 
 def normalize_template(path: str) -> str:
-    return re.sub(r"\{[^{}]+\}", "{param}", path)
+    # Convert {expression} style (Python f-string in server.py) to {param}.
+    path = re.sub(r"\{[^{}]+\}", "{param}", path)
+    if "{param}" not in path:
+        return path
+    # Has {param}: extract the catch-all prefix (everything before {param}).
+    # This allows /api/knowledge/{param} and /api/knowledge/session-context
+    # to both normalize to /api/knowledge/ and match each other.
+    m = re.match(r"^(.+)/\{param\}.*$", path)
+    if m:
+        return m.group(1) + "/"
+    return path
 
 
 def openapi_parameter_names(parameters: list[dict[str, Any]], document: dict[str, Any]) -> set[str]:

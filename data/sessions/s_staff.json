@@ -4,8 +4,24 @@
   "role": "sales",
   "campus": "zhengzhou",
   "created_at": "2026-05-23T12:03:22.391237+00:00",
-  "updated_at": "2026-05-25T18:42:23.117443+00:00",
+  "updated_at": "2026-05-27T07:21:46.454796+00:00",
   "messages": [
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
+    {
+      "role": "user",
+      "content": "家长问优惠底价怎么解释？"
+    },
+    {
+      "role": "assistant",
+      "content": "内部参考"
+    },
     {
       "role": "user",
       "content": "家长问优惠底价怎么解释？"

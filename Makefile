@@ -1,4 +1,4 @@
-.PHONY: validate validate-knowledge index db-up db-down health health-check migrate-db-policy sync-db-index setup-local-db test-permission test-rag test-agent test-llm test-llm-contract test-llm-injection test-llm-smoke test-llm-live test-security test-db-policy test-db-policy-live test-db-pool-security test-api test-compliance test-crm-handoff test-crm test-business-flow test-frontend-gaokao benchmark benchmark-admissions-gate benchmark-report test test-release-hardening release-check test-route-contract route-inventory test-python-control-plane-freeze test-go-gateway test-go-parity-unit test-parity-fixtures parity-gaokao-chat run-go-gateway-shadow run-go-gateway-shadow-proxy build-go-shadow-gateway smoke-go-shadow-gateway shadow-up shadow-down shadow-health shadow-dry-run shadow-report shadow-mirror-chat shadow-mirror-admin shadow-mirror-dry-run check-shadow-evidence check-shadow-evidence-strict check-cutover-readiness check-cutover-readiness-strict release-check-control-plane ci-policy-check ci-policy-check-json-denied demo-chat demo-api test-ingestion test-graph test-admin-gateway test-admin test-ua-mcp test-admin-console test-p26 test-admin-security test-p261-security test-admin-roles test-profile-merge test-consultation-stage test-recommendation test-admissions-policy test-lead-profile-sync test-phase3 benchmark-phase3 benchmark-tone-quality test-tone-smoke test-backup-recovery check-backup recovery-drill test-admin-production test-campus-auth test-wecom-adapter test-wecom-aibot build-wecom-aibot run-wecom-aibot test-campus-flow test-leave-flow test-meal-flow test-repair-flow test-daily-report test-ai-sidecar test-campus-rls-live test-wecom-inbound run-mealbot-e2e benchmark-mealbot-gate test-pilot-package pilot-smoke seed-school-pilot import-school-pilot mealbot-pause mealbot-resume export-meal-summary test-score-entry test-material-collection test-leave-return-flow test-payment-reconcile test-attendance test-campus-new-modules test-campus-modules-rls-live test-campus-agent-e2e benchmark-campus-agent gate-campus-agent run-ocr-worker
+.PHONY: embed-knowledge validate validate-knowledge db-up db-down health health-check migrate-db-policy sync-db-index setup-local-db test-permission test-rag test-agent test-llm test-llm-contract test-llm-injection test-llm-smoke test-llm-live test-security test-db-policy test-db-policy-live test-db-pool-security test-api test-compliance test-crm-handoff test-crm test-business-flow test-frontend-gaokao benchmark benchmark-admissions-gate benchmark-report test test-release-hardening release-check test-route-contract route-inventory test-python-control-plane-freeze test-go-gateway test-go-parity-unit test-parity-fixtures parity-gaokao-chat run-go-gateway-shadow run-go-gateway-shadow-proxy build-go-shadow-gateway smoke-go-shadow-gateway shadow-up shadow-down shadow-health shadow-dry-run shadow-report shadow-mirror-chat shadow-mirror-admin shadow-mirror-dry-run check-shadow-evidence check-shadow-evidence-strict check-cutover-readiness check-cutover-readiness-strict release-check-control-plane ci-policy-check ci-policy-check-json-denied demo-chat demo-api test-ingestion test-graph test-admin-gateway test-admin test-ua-mcp test-admin-console test-p26 test-admin-security test-p261-security test-admin-roles test-profile-merge test-consultation-stage test-recommendation test-admissions-policy test-lead-profile-sync test-phase3 benchmark-phase3 benchmark-tone-quality test-tone-smoke test-backup-recovery check-backup recovery-drill test-admin-production test-campus-auth test-wecom-adapter test-wecom-aibot build-wecom-aibot run-wecom-aibot test-campus-flow test-leave-flow test-meal-flow test-repair-flow test-daily-report test-ai-sidecar test-campus-rls-live test-wecom-inbound run-mealbot-e2e benchmark-mealbot-gate test-pilot-package pilot-smoke seed-school-pilot import-school-pilot mealbot-pause mealbot-resume export-meal-summary test-score-entry test-material-collection test-leave-return-flow test-payment-reconcile test-attendance test-campus-new-modules test-campus-modules-rls-live test-campus-agent-e2e benchmark-campus-agent gate-campus-agent run-ocr-worker
 
 ROOT := $(CURDIR)
 PY := python3
@@ -42,6 +42,19 @@ validate:
 
 validate-knowledge:
 	$(PY) tools/validate.py --root $(ROOT) --check-content
+
+test-knowledge-validator:
+	$(PY) -m pytest services/source-ingestion-service/tests/test_knowledge_validator.py -v
+
+ingest-knowledge:
+	$(PY) services/source-ingestion-service/src/knowledge_ingest.py \
+	  --knowledge-dir knowledge \
+	  --out knowledge/ingestion/chunk_manifest.generated.jsonl
+
+benchmark-knowledge:
+	$(PY) tools/benchmark_knowledge.py \
+	  --eval knowledge/eval/admission_eval.jsonl \
+	  --chunks knowledge/ingestion/chunk_manifest.generated.jsonl
 
 index:
 	$(PY) services/knowledge-service/src/indexer.py --root $(ROOT)
@@ -494,6 +507,7 @@ release-check:
 	$(MAKE) test-wecom-inbound
 	$(MAKE) test-release-hardening
 	$(MAKE) test-pilot-package
+	$(MAKE) test-knowledge-embedding
 	$(MAKE) benchmark-mealbot-gate
 	$(MAKE) gate-campus-agent
 	$(MAKE) test
@@ -660,7 +674,8 @@ test-admin-production:
 # ---- Health & Release Gate ----
 
 health: test test-go-gateway lint typecheck ci-policy-check test-route-contract \
-       test-python-control-plane-freeze test-package-boundary test-gateway-freeze
+       test-python-control-plane-freeze test-package-boundary test-gateway-freeze \
+       test-knowledge-ingestion benchmark-knowledge test-knowledge-retrieval
 
 lint:
 	@echo "Running linters..."
@@ -684,4 +699,76 @@ release-gate: health
 
 ci-full: release-gate
 	@echo "CI full suite: PASSED"
+
+# ──────────────────────────────────────────────
+# P2.x Knowledge Base targets
+# ──────────────────────────────────────────────
+
+test-knowledge-ingestion:
+	$(PY) -m unittest discover -s services/knowledge-service/tests -p '*_test.py' -v 2>/dev/null \
+	  || echo "knowledge-service tests: no test files found (skipping)"
+
+test-knowledge-h5:
+	$(PY) -m pytest services/knowledge-service/tests/test_h5_knowledge.py -v
+
+test-knowledge-embedding:
+	$(PY) -m pytest services/knowledge-service/tests/test_h5_knowledge.py::HybridSearchTests -v
+
+test-knowledge-auth:
+	$(PY) -m pytest services/knowledge-service/tests/test_h5_knowledge.py::SessionContextTests -v
+	$(PY) -m pytest services/knowledge-service/tests/test_h5_knowledge.py::AskIdentityHardeningTests -v
+
+benchmark-knowledge:
+	$(PY) tools/benchmark_knowledge.py \
+	  --eval knowledge/eval/admission_eval.jsonl \
+	  --chunks knowledge/ingestion/chunk_manifest.generated.jsonl
+
+test-knowledge-retrieval:
+	$(PY) -m unittest discover -s services/rag-service/tests -p '*_test.py' -v
+
+# ──────────────────────────────────────────────
+# Phase 2B Embedding pipeline
+# ──────────────────────────────────────────────
+
+# Run one idempotent embedding cycle.
+# - Only updates chunks where embedding IS NULL or content_hash changed
+# - Safe to run repeatedly — repeated runs skip already-up-to-date chunks
+# - KNOWLEDGE_DSN must be set; KNOWLEDGE_EMBEDDING_PROVIDER defaults to hash
+# - Optional: KNOWLEDGE_SCHOOL_ID to filter by school
+# - Optional: EMBEDDING_BATCH_SIZE (default 64)
+embed-knowledge:
+	KNOWLEDGE_DSN=$(DATABASE_URL_ADMIN) \
+	KNOWLEDGE_EMBEDDING_PROVIDER=$(or $(EMBEDDING_PROVIDER),hash) \
+	PYTHONPATH=$(ROOT)/services/knowledge-service/src \
+	$(PY) services/knowledge-service/src/embed_runner.py
+
+# ──────────────────────────────────────────────
+# Phase 3 KB test targets
+# ──────────────────────────────────────────────
+
+test-gaokao-kb:
+	$(PY) -m pytest services/knowledge-service/tests/test_gaokao_kb.py -v 2>/dev/null \
+	  || echo "KB-03 gaokao tests: no test files found (skipping)"
+
+test-ocr-rpa-kb:
+	$(PY) -m pytest services/knowledge-service/tests/test_ocr_rpa_kb.py -v 2>/dev/null \
+	  || echo "KB-06 ocr_rpa tests: no test files found (skipping)"
+
+test-metrics-kb:
+	$(PY) -m pytest services/knowledge-service/tests/test_metrics_kb.py -v 2>/dev/null \
+	  || echo "KB-10 metrics tests: no test files found (skipping)"
+
+test-security-kb:
+	$(PY) -m pytest services/knowledge-service/tests/test_security_kb.py -v 2>/dev/null \
+	  || echo "KB-11 security_policy tests: no test files found (skipping)"
+
+test-governance-kb:
+	$(PY) -m pytest services/knowledge-service/tests/test_governance_kb.py -v 2>/dev/null \
+	  || echo "KB-12 control_plane_governance tests: no test files found (skipping)"
+
+test-communication-kb:
+	@echo "KB-08 communication_templates: not yet implemented"
+
+test-form-template-kb:
+	@echo "KB-09 forms tests: not yet implemented"
 

@@ -2,13 +2,16 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import os
 from http.cookies import SimpleCookie
+from http.client import HTTPMessage
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlparse
+from typing import Any
 
 
 def _load_env(project_root: Path) -> None:
@@ -365,6 +368,8 @@ class GaokaoHandler(BaseHTTPRequestHandler):
             elif path.startswith("/api/admin/audit/events/"):
                 event_id = path.removeprefix("/api/admin/audit/events/")
                 result = admin_get_audit_event(event_id, identity, self.project_root)
+            elif path.startswith("/api/knowledge/"):
+                result = self._forward_to_knowledge_service("GET", path, parsed.query, identity, self.project_root)
             else:
                 self._write_json({"error": "not_found"}, HTTPStatus.NOT_FOUND)
                 return
@@ -568,6 +573,9 @@ class GaokaoHandler(BaseHTTPRequestHandler):
 
             elif path == "/api/admin/graph/runs":
                 result = admin_create_graph_run(payload, identity, self.project_root)
+
+            elif path.startswith("/api/knowledge/"):
+                result = self._forward_to_knowledge_service("POST", path, None, identity, self.project_root, payload)
 
             else:
                 self._write_json({"error": "not_found"}, HTTPStatus.NOT_FOUND)
@@ -855,6 +863,64 @@ class GaokaoHandler(BaseHTTPRequestHandler):
             "auth_level": "local_consumer",
         }
 
+    def _forward_to_knowledge_service(
+        self,
+        method: str,
+        path: str,
+        query: dict[str, list[str]] | None,
+        identity: dict[str, object],
+        project_root: Path,
+        body: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Proxy /api/knowledge/* to the knowledge-service with X-Identity-* headers.
+
+        The campus_session cookie is NOT forwarded — only derived identity fields
+        (school_id, role, user_id, auth_level) are injected as X-Identity-* headers.
+        """
+        host = os.environ.get("KNOWLEDGE_SERVICE_HOST", "localhost")
+        port = int(os.environ.get("KNOWLEDGE_SERVICE_PORT", "8789"))
+        # Strip /api/knowledge prefix to get the service path
+        service_path = path.removeprefix("/api/knowledge")
+        # Rebuild query string from parsed query dict
+        qstr = ""
+        if query:
+            parts = []
+            for k, vals in query.items():
+                for v in vals:
+                    parts.append(f"{quote(k, safe='')}={quote(v, safe='')}")
+            qstr = "?" + "&".join(parts) if parts else ""
+
+        target_path = service_path + qstr
+        body_bytes: bytes | None = None
+        if body is not None:
+            body_bytes = json.dumps(body, ensure_ascii=False).encode("utf-8")
+
+        conn = http.client.HTTPConnection(host, port, timeout=10)
+        try:
+            # ── Security: deny-list client-supplied identity headers ──
+            # Gateway is the ONLY injection point for X-Identity-*. Any client-supplied
+            # X-Identity-* or Cookie headers are stripped before forwarding.
+            forwarded_headers: dict[str, str] = {
+                "X-Forwarded-Path": path,
+                "Content-Type": "application/json; charset=utf-8",
+            }
+            # Strip any client-supplied X-Identity-* or Cookie before injecting ours
+            _strip_client_identity_headers(self.headers, forwarded_headers)
+            forwarded_headers.update(_identity_headers_for_knowledge(identity))
+
+            conn.request(method, target_path, body=body_bytes, headers=forwarded_headers)
+            resp = conn.getresponse()
+            resp_body = resp.read()
+            if resp.status >= 400:
+                return {"error": f"knowledge_service_error", "status": resp.status, "body": resp_body.decode("utf-8", errors="replace")}
+            return json.loads(resp_body.decode("utf-8"))
+        except OSError as exc:
+            return {"error": f"knowledge_service_unavailable: {exc}"}
+        except json.JSONDecodeError as exc:
+            return {"error": f"knowledge_service_invalid_response: {exc}"}
+        finally:
+            conn.close()
+
 
 def _identity_from_headers(headers: dict[str, str]) -> dict[str, str]:
     """Parse identity from trusted headers. Used for admin role attribution.
@@ -905,6 +971,64 @@ def _identity_from_query(query: dict[str, list[str]]) -> dict[str, str]:
         "class_id": query.get("class_id", [""])[0],
         "wecom_userid": query.get("wecom_userid", [""])[0],
     }
+
+
+# Identity fields forwarded to knowledge service via X-Identity-* headers.
+# "source" is always set to "gateway" to mark the injection point.
+_IDENTITY_FORWARD_KEYS = (
+    "school_id",
+    "role",
+    "user_id",
+    "auth_level",
+    "display_name",
+    "wecom_userid",
+)
+
+
+# Prefixes of headers that clients must never be able to influence.
+_CLIENT_IDENTITY_DENY_PREFIXES = (
+    "x-identity-",
+    "cookie",
+)
+
+
+def _strip_client_identity_headers(
+    request_headers: HTTPMessage,
+    out: dict[str, str],
+) -> None:
+    """Strip client-supplied identity headers from the forwarded request.
+
+    Iterates the raw request headers and copies everything EXCEPT headers
+    matching the _CLIENT_IDENTITY_DENY_PREFIXES deny-list. This ensures the
+    gateway is the sole injection point for X-Identity-* headers and prevents
+    clients from spoofing identity by passing X-Identity-School-Id etc.
+
+    Callers pass a mutable `out` dict so headers can be accumulated during iteration.
+    """
+    for name in request_headers:
+        value = request_headers[name]
+        name_lower = name.lower()
+        for prefix in _CLIENT_IDENTITY_DENY_PREFIXES:
+            if name_lower.startswith(prefix):
+                break  # skip denied header
+        else:
+            out[name] = value
+
+
+def _identity_headers_for_knowledge(identity: dict[str, object]) -> dict[str, str]:
+    """Build X-Identity-* headers for knowledge-service forwarding.
+
+    Explicitly denies client-supplied X-Identity-* and Cookie headers to prevent
+    identity spoofing. Only server-side derived identity fields are passed.
+    """
+    headers: dict[str, str] = {
+        "X-Identity-Source": "gateway",
+    }
+    for key in _IDENTITY_FORWARD_KEYS:
+        val = identity.get(key, "")
+        if val:
+            headers[f"X-Identity-{key.replace('_', '-').title()}"] = str(val)
+    return headers
 
 
 def _audit_query_params(query: dict[str, list[str]]) -> dict[str, Any]:
