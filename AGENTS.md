@@ -49,6 +49,66 @@ Use `make health` before committing (`make release-gate` for CI-wide check).
 - Each Python service must eventually have a `pyproject.toml` and be installable via `pip install -e`.
 - `make test-python-control-plane-freeze` validates the allowlist in `contracts/python_control_plane_allowlist.json`.
 
+## Service Ownership
+
+Every `services/*` directory must have an entry in `contracts/service_ownership.json`.
+
+| Field | Required for | Rule |
+|-------|-------------|------|
+| `code_owner` | all services | must not be `TBD` |
+| `runtime_owner` | all services | must not be `TBD` |
+| `security_reviewer` | high-sensitivity services | required if `data_reviewer` is null |
+| `data_reviewer` | high-sensitivity services | required if `security_reviewer` is null |
+
+High-sensitivity services (must have at least one reviewer): `auth-service`, `audit-service`, `crm-service`, `db-policy-service`, `knowledge-service`, `knowledge-graph-service`, `llm-gateway`, `permission-service`, `source-ingestion-service`, `wecom-adapter`, `wecom-aibot-bridge`.
+
+Check locally:
+```bash
+python tools/check_service_ownership.py --root .
+python tools/check_service_ownership.py --root . --allow-tbd  # transitional mode
+```
+
+CI currently runs with `--allow-tbd` (transitional). Remove this flag once all owners are assigned.
+When adding a new service, update both `contracts/service_ownership.json` and `docs/architecture/service-ownership-matrix.md`.
+
+## Lint Baseline
+
+ruff and mypy use a baseline-gated approach: existing issues are grandfathered; only NEW issues block CI.
+
+```bash
+python tools/check_lint_baseline.py              # check against baseline (CI mode)
+python tools/check_lint_baseline.py --mode check  # explicit check mode
+python tools/check_lint_baseline.py --tool ruff   # ruff only
+python tools/check_lint_baseline.py --tool mypy   # mypy only
+python tools/check_lint_baseline.py --mode update # regenerate baselines after fixing issues
+```
+
+### Baseline Integrity Gate
+
+The `tools/check_baseline_integrity.py` checker runs in CI and enforces:
+
+| Rule | Enforcement |
+|------|-------------|
+| Baseline `issue_count` must not increase | BLOCKED |
+| No new issue `key` entries beyond baseline | BLOCKED |
+| `schema_version` must not change | BLOCKED |
+| `tool` name must not change | BLOCKED |
+| Baseline file must exist | BLOCKED |
+| Issues resolved (baseline shrinks) | ALLOWED |
+| `generated_at` timestamp change | ALLOWED |
+
+**Hard rule**: Never expand baseline files in a PR to bypass lint/typecheck failures.
+Fix the code instead. Only `--mode update` to shrink baseline after resolving issues.
+
+If you fix a lint/type issue and need to update the baseline:
+```bash
+python tools/check_lint_baseline.py --mode update --tool ruff
+python tools/check_lint_baseline.py --mode update --tool mypy
+```
+Then commit the shrunk baseline with a clear message like "fix: resolve 3 ruff F401 issues".
+
+Baselines are stored in `contracts/ruff_baseline.json` and `contracts/mypy_baseline.json` (schema v1).
+
 ## CI Policy
 
 - `make ci-policy-check` runs production JSON checks, database URL safety, provider isolation, and SQL policy.
@@ -138,3 +198,30 @@ Each stage requires previous stage `status: passed`:
 - No fake `passed` evidence
 - `--allow-weight` and `--allow-percentage-canary` are independent
 - Do not skip stages (1% → 5% → 25% → 50% → 100%)
+
+---
+
+# MetaCampus 2D Game 项目约定
+
+## Agent 命名限制
+- Mavis agent 名称最大 20 字符，超长会报错（40002）
+- agent 名必须使用 daemon 已注册名称，不能随意创造
+- 如遇未注册名称，使用现有通用 agent 替代
+- 已验证可用名称：godot-developer、narrative-designer、qa-demo-lead、pixel-artist、api-bridge-developer、general、coder、verifier
+- 避免使用未注册短名：dq-eng、mt-eng（均已失败）
+
+## 指标命名约定（4个核心指标）
+| 指标 ID | 说明 | 初始值 |
+|---------|------|--------|
+| school_efficiency | 学校效率 | 40 |
+| parent_trust | 家长信任 | 50 |
+| compliance_safety | 合规安全 | 70 |
+| system_stability | 系统稳定性 | 60 |
+
+## T2 高风险分支数据（game/metacampus-godot/data/dialogues.json）
+- 错误分支：action=promise_admission, compliance_safety=-20, parent_trust=+2
+- 正确分支：compliance_safety=+10, parent_trust=+6
+
+## Phase G2 smoke flow（必须跑通才能验收）
+1. 玩家靠近家长 NPC → E 对话 → 选择知识库回答 → 指标增加 → quest 完成 toast
+2. 家长问"保证录取" → 选错误分支 → compliance_safety -20

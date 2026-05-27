@@ -15,7 +15,7 @@ func TestLoadRouteContract(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load contract: %v", err)
 	}
-	if got, want := len(loaded.Routes), 115; got != want {
+	if got, want := len(loaded.Routes), 118; got != want {
 		t.Fatalf("route count = %d, want %d", got, want)
 	}
 	if got, want := contract.LegacyGapCount(loaded), 0; got != want {

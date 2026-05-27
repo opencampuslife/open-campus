@@ -7,6 +7,10 @@
 
 Metacampus is a multi-service AI agent platform for college admissions consulting, knowledge retrieval, compliance auditing, CRM follow-up, and campus lifecycle management. It serves thousands of students, parents, and staff across a full admissions cycle — from inquiry through enrollment and daily campus operations.
 
+> **License Notice**: This repository is **source-available, proprietary software**.
+> Public visibility does not grant any right to use, modify, or redistribute the code.
+> See [License](#license) for details.
+
 ---
 
 ## Technical Architecture
@@ -186,7 +190,7 @@ deploy/staging/ingress/           Staging ingress configs
 docs/                             Architecture, runbooks, migration plan
 reports/                          Evidence artifacts (gitignored)
 scripts/                          Dry-run, evidence collection, health collection
-services/                         Python capability services (14 services)
+services/                         Python capability services (20 services + uploads/)
 tests/                            Cross-service test suites
 tools/                            Contract checkers, evidence checkers, mirror drivers
 ```
@@ -294,4 +298,6 @@ Until all gates pass, the Go gateway operates as a shadow/canary control-plane c
 
 ## License
 
-Proprietary. All rights reserved.
+This project is **proprietary**. All rights reserved.
+
+Public visibility of this repository does **not** grant any license to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the software. Unauthorized use, reproduction, or distribution is prohibited.

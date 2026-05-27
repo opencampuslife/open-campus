@@ -38,7 +38,7 @@ func TestHealthResponse(t *testing.T) {
 	if body.Status != "ok" || body.Service != "gaokao-gateway" || body.Mode != "shadow" {
 		t.Fatalf("unexpected health response: %+v", body)
 	}
-	if !body.RoutesContractLoaded || body.RouteCount != 115 || body.LegacyGapCount != 0 || body.DeprecatedCompatibilityAliases != 5 {
+	if !body.RoutesContractLoaded || body.RouteCount != 118 || body.LegacyGapCount != 0 || body.DeprecatedCompatibilityAliases != 5 {
 		t.Fatalf("unexpected contract counters: %+v", body)
 	}
 }

@@ -36,6 +36,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:
@@ -88,6 +90,11 @@ jobs:
       - name: test-package-boundary
         run: python3 tools/check_package_boundary.py --root . --allowlist contracts/package_boundary_allowlist.json
 
+      # ── Service ownership ──
+      - name: service-ownership-check
+        run: python3 tools/check_service_ownership.py --root . --allow-tbd
+        # TODO: remove --allow-tbd once code_owner and security_reviewer fields are assigned
+
       # ── CI policy ──
       - name: ci-policy-check
         run: GAOKAO_ENV=production RAG_SOURCE=postgres python3 tools/ci_policy_check.py --root .
@@ -97,7 +104,6 @@ jobs:
 
       # ── DB policy live ──
       - name: test-db-policy-live
-        continue-on-error: true
         run: |
           DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
           DATABASE_URL_PUBLIC=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test \
@@ -196,7 +202,6 @@ jobs:
 
       # ── Security ──
       - name: test-security
-        continue-on-error: true
         run: |
           python -m unittest discover -s tests/security -p 'test_prompt_injection_extended.py' -v
           python -m unittest discover -s services/api-gateway/tests -p 'admin_security_regression_test.py' -v
@@ -217,7 +222,6 @@ jobs:
         run: go test ./... -count=1 -timeout 120s
 
       - name: go test -race
-        continue-on-error: true
         working-directory: control-plane
         run: go test -race ./... -count=1 -timeout 120s
 
@@ -230,12 +234,18 @@ jobs:
         working-directory: apps/admin-console
         run: npm run build
 
-      # ── Lint ──
-      - name: python lint
-        run: python -m ruff check services/ tools/ contracts/ --ignore=E501 || true
+      # ── Lint (baseline-gated) ──
+      - name: python lint (ruff baseline)
+        run: python tools/check_lint_baseline.py --tool ruff
 
-      - name: python typecheck
-        run: python -m mypy services/ tools/ --ignore-missing-imports || true
+      - name: python typecheck (mypy baseline)
+        run: python tools/check_lint_baseline.py --tool mypy
+
+      - name: baseline-integrity-check
+        run: |
+          git fetch origin main --depth=1 2>/dev/null || echo "no remote, checking local"
+          python tools/check_baseline_integrity.py --root . --base-ref origin/main
+        # TODO: add --strict after schema v1 baselines land on main (second commit)
 
       # ── Knowledge base ──
       - name: knowledge-ingestion

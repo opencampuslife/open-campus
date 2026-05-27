@@ -26,8 +26,8 @@ type CircuitBreaker struct {
 	cooldownDuration    time.Duration
 	halfOpenMaxReqs     int
 	lastFailureTime     atomic.Value
+	lastStateChangeTime atomic.Value
 	mu                  sync.Mutex
-	lastStateChangeTime time.Time
 }
 
 func NewCircuitBreaker(cfg CircuitBreakerConfig) *CircuitBreaker {
@@ -41,13 +41,13 @@ func NewCircuitBreaker(cfg CircuitBreakerConfig) *CircuitBreaker {
 		cfg.HalfOpenMaxReqs = 3
 	}
 	cb := &CircuitBreaker{
-		failureThreshold:    cfg.FailureThreshold,
-		cooldownDuration:    cfg.CooldownDuration,
-		halfOpenMaxReqs:     cfg.HalfOpenMaxReqs,
-		lastStateChangeTime: time.Now(),
+		failureThreshold: cfg.FailureThreshold,
+		cooldownDuration: cfg.CooldownDuration,
+		halfOpenMaxReqs:  cfg.HalfOpenMaxReqs,
 	}
 	cb.state.Store(CircuitClosed)
 	cb.lastFailureTime.Store(time.Time{})
+	cb.lastStateChangeTime.Store(time.Now())
 	return cb
 }
 
@@ -57,7 +57,7 @@ func (cb *CircuitBreaker) Allow() bool {
 	case CircuitClosed:
 		return true
 	case CircuitOpen:
-		if time.Since(cb.lastStateChangeTime) >= cb.cooldownDuration {
+		if time.Since(cb.lastStateChangeTime.Load().(time.Time)) >= cb.cooldownDuration {
 			cb.transitionTo(CircuitHalfOpen)
 			return cb.tryHalfOpen()
 		}
@@ -92,7 +92,7 @@ func (cb *CircuitBreaker) transitionTo(newState int32) {
 	defer cb.mu.Unlock()
 	oldState := cb.state.Swap(newState)
 	if oldState != newState {
-		cb.lastStateChangeTime = time.Now()
+		cb.lastStateChangeTime.Store(time.Now())
 	}
 	if newState == CircuitClosed {
 		cb.failureCount.Store(0)
@@ -135,7 +135,7 @@ func (cb *CircuitBreaker) Stats() CircuitBreakerStats {
 	return CircuitBreakerStats{
 		State:         cb.StateName(),
 		FailureCount:  cb.failureCount.Load(),
-		LastStateTime: cb.lastStateChangeTime,
+		LastStateTime: cb.lastStateChangeTime.Load().(time.Time),
 	}
 }
 
