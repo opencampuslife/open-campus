@@ -31,7 +31,7 @@ jobs:
 
       - name: npm ci
         working-directory: apps/admin-console
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: typecheck
         working-directory: apps/admin-console
