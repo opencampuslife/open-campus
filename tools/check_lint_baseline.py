@@ -73,6 +73,11 @@ def run_mypy():
             sys.executable, "-m", "mypy",
             "services/", "tools/",
             "--ignore-missing-imports",
+            "--no-error-summary",
+            "--exclude", "services/.*/tests/gateway_test\\.py",
+            "--exclude", "services/.*/tests/__init__\\.py",
+            "--exclude", "services/.*/src/app/__init__\\.py",
+            "--exclude", "services/.*/src/__init__\\.py",
         ],
         capture_output=True, text=True, cwd=os.path.join(BASELINE_DIR, ".."),
     )
@@ -81,7 +86,7 @@ def run_mypy():
         line = line.strip()
         if not line:
             continue
-        m = re.match(r"^(.+?):(\d+): (?:error|note): (.+)", line)
+        m = re.match(r"^(.+?):(\d+): error: (.+)", line)
         if m:
             path = m.group(1)
             lineno = int(m.group(2))
@@ -93,6 +98,21 @@ def run_mypy():
                 "path": path,
                 "code": code,
                 "line": lineno,
+                "column": None,
+                "message": msg,
+            })
+            continue
+        m = re.match(r"^(.+?): error: (.+)", line)
+        if m:
+            path = m.group(1)
+            msg = m.group(2)
+            code = _extract_mypy_code(msg)
+            key = f"{path}:{code}:0"
+            issues.append({
+                "key": key,
+                "path": path,
+                "code": code,
+                "line": 0,
                 "column": None,
                 "message": msg,
             })

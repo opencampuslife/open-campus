@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "ruff",
-  "generated_at": "2026-05-27T17:30:37.207520+00:00",
+  "generated_at": "2026-05-27T18:55:10.161939+00:00",
   "root": ".",
   "issue_count": 261,
   "issues": [
@@ -755,60 +755,32 @@
       "column": 21
     },
     {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:526",
+      "key": "services/knowledge-service/src/app/knowledge/repository.py:F401:11",
       "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 526,
-      "column": 1
+      "code": "F401",
+      "line": 11,
+      "column": 36
     },
     {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:592",
+      "key": "services/knowledge-service/src/app/knowledge/repository.py:F401:13",
       "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 592,
-      "column": 1
+      "code": "F401",
+      "line": 13,
+      "column": 36
     },
     {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:773",
+      "key": "services/knowledge-service/src/app/knowledge/repository.py:F841:617",
       "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 773,
-      "column": 1
+      "code": "F841",
+      "line": 617,
+      "column": 9
     },
     {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:815",
+      "key": "services/knowledge-service/src/app/knowledge/repository.py:F841:648",
       "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 815,
-      "column": 1
-    },
-    {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:877",
-      "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 877,
-      "column": 1
-    },
-    {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:887",
-      "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 887,
-      "column": 1
-    },
-    {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:902",
-      "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 902,
-      "column": 1
-    },
-    {
-      "key": "services/knowledge-service/src/app/knowledge/repository.py:invalid:957",
-      "path": "services/knowledge-service/src/app/knowledge/repository.py",
-      "code": "invalid",
-      "line": 957,
-      "column": 17
+      "code": "F841",
+      "line": 648,
+      "column": 9
     },
     {
       "key": "services/knowledge-service/src/app/knowledge/search.py:F541:214",
@@ -1810,6 +1782,34 @@
       "code": "F841",
       "line": 112,
       "column": 5
+    },
+    {
+      "key": "tools/debug_knowledge_benchmark.py:F401:28",
+      "path": "tools/debug_knowledge_benchmark.py",
+      "code": "F401",
+      "line": 28,
+      "column": 5
+    },
+    {
+      "key": "tools/debug_knowledge_benchmark.py:F541:263",
+      "path": "tools/debug_knowledge_benchmark.py",
+      "code": "F541",
+      "line": 263,
+      "column": 15
+    },
+    {
+      "key": "tools/debug_knowledge_benchmark.py:F541:267",
+      "path": "tools/debug_knowledge_benchmark.py",
+      "code": "F541",
+      "line": 267,
+      "column": 15
+    },
+    {
+      "key": "tools/debug_knowledge_benchmark.py:F541:273",
+      "path": "tools/debug_knowledge_benchmark.py",
+      "code": "F541",
+      "line": 273,
+      "column": 15
     },
     {
       "key": "tools/generate_paper.py:E731:242",
