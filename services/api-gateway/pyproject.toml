@@ -1,0 +1,12 @@
+[project]
+name = "metacampus-api-gateway"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = [
+  "psycopg[binary]",
+  "psycopg2-binary",
+]
+description = "MetaCampus legacy API gateway — routing, auth, CSRF (being phased out)"
+
+[tool.uv]
+package = false

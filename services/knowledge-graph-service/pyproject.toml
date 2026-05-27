@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-knowledge-graph-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus knowledge graph service"
+
+[tool.uv]
+package = false

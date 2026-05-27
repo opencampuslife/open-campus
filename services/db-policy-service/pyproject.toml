@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-db-policy-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus database policy service — RLS, tenant isolation, audit log"
+
+[tool.uv]
+package = false

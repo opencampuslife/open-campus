@@ -230,6 +230,99 @@ Do not cut production without strict evidence
 
 ---
 
+## Local Development / Python Dependencies
+
+This repository contains multiple Python capability services under `services/`
+plus cross-service tooling under `tools/`.
+
+The root `pyproject.toml` is currently a workspace and tooling entry point. It is
+not yet a complete declaration of all runtime dependencies for every service.
+
+Current dependency policy:
+
+- Python version: 3.11
+- CI installs shared tooling explicitly, including `ruff`, `mypy`, `psycopg[binary]`,
+  `pyyaml`, and `certifi`.
+- Service-specific runtime dependencies should be declared by each service as the
+  service packaging model is normalized.
+- Do not generate or commit `uv.lock` until service-level dependency declarations
+  are complete enough to produce a meaningful lockfile.
+
+Recommended local setup during the transition:
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install ruff mypy "psycopg[binary]" pyyaml certifi
+```
+
+Run contract and baseline checks before opening a PR:
+
+```bash
+make test-route-contract
+make test-python-control-plane-freeze
+python tools/check_lint_baseline.py --tool ruff
+python tools/check_lint_baseline.py --tool mypy
+```
+
+When adding or normalizing a Python service, prefer adding a service-level
+`pyproject.toml` and include only the dependencies required by that service.
+
+### Packaging Status
+
+Run the inventory script to inspect packaging readiness across all services:
+
+```bash
+python tools/inventory_python_services.py --root . --output reports/python_service_inventory.json
+```
+
+The report catalogs each service under `services/` with:
+presence of `src/` and `tests/`, packaging files (`pyproject.toml`,
+`requirements.txt`, `setup.py`), test file count, CI/Makefile coverage,
+sensitivity classification, and a rough top-level-import scan.
+
+As of P0.2-B: **17 of 17 Python services have a minimal `pyproject.toml`**
+(name, version, requires-python, metadata). Runtime dependency declarations
+and `uv.lock` will be added in follow-up iterations once per-service imports
+are validated against actual runtime requirements.
+
+### Dependency Status
+
+Run the dependency inventory script to survey third-party imports across services:
+
+```bash
+python tools/inventory_python_dependencies.py --root . --output reports/python_dependency_inventory.json
+```
+
+The report classifies every import as stdlib, local (repo-internal), or
+third-party, and maps third-party imports to pip package names. P0.3-A
+establishes this as a read-only baseline — it does not modify service
+`pyproject.toml` or generate `uv.lock`.
+
+As of P0.3-A: of the 8 unique suggested third-party dependencies across
+16 scanned services, 3 are already in the CI tooling baseline
+(`certifi`, `psycopg[binary]`, `pyyaml`), and 5 are new
+(`docling`, `fastapi`, `psycopg2-binary`, `pycryptodome`, `pydantic`).
+No service has unmapped or unclassified imports.
+
+As of P0.3-B: 6 services have their `pyproject.toml` updated with confirmed
+`dependencies` from the import scan:
+
+| Service | Dependencies |
+|---|---|
+| api-gateway | psycopg[binary], psycopg2-binary |
+| knowledge-service | fastapi, psycopg[binary], pydantic, pyyaml |
+| llm-gateway | certifi |
+| mealbot-service | certifi, psycopg[binary], pycryptodome |
+| source-ingestion-service | docling |
+| wecom-adapter | certifi |
+
+The remaining 11 services declare no runtime dependencies beyond Python stdlib
+and repo-local imports. `uv.lock` and CI integration will be added in P0.3-C.
+
+---
+
 ## Quick Start
 
 ```bash

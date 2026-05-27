@@ -1,0 +1,45 @@
+[project]
+name = "metacampus"
+version = "0.0.0"
+description = "Source-available multi-service AI agent platform for admissions and campus operations."
+requires-python = ">=3.11"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+  "services/*",
+  "tools",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = [
+  "E",
+  "F",
+  "I",
+  "UP",
+  "B",
+]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_configs = true
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".",
+]
+testpaths = [
+  "services",
+  "tests",
+]

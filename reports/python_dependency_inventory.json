@@ -1,0 +1,574 @@
+{
+  "schema_version": 1,
+  "root": "/Users/kevinzzz/Documents/database/gaokao-agent",
+  "stdlib_module_count": 305,
+  "local_module_count": 201,
+  "summary": {
+    "python_services_scanned": 16,
+    "total_suggested_dependencies": 8,
+    "ci_baseline_deps": [
+      "certifi",
+      "mypy",
+      "psycopg[binary]",
+      "pyyaml",
+      "ruff"
+    ],
+    "new_deps_beyond_ci_baseline": [
+      "docling",
+      "fastapi",
+      "psycopg2-binary",
+      "pycryptodome",
+      "pydantic"
+    ],
+    "confidence_distribution": {
+      "high": 10,
+      "medium": 6
+    },
+    "services_with_unknown_imports": [],
+    "services_with_unmapped_third_party": []
+  },
+  "services": [
+    {
+      "name": "agent-orchestrator",
+      "file_count": 18,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "abc",
+        "argparse",
+        "dataclasses",
+        "datetime",
+        "enum",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "imports_local": [
+        "answer_generator",
+        "audit_logger",
+        "base",
+        "chat_message_tree",
+        "checker",
+        "compliance_gate",
+        "consultation",
+        "consultation_answer",
+        "consultation_stage",
+        "emotional_support_nodes",
+        "emotional_support_tree",
+        "gateway",
+        "intent_classifier",
+        "machine",
+        "mode_router",
+        "pipeline_nodes",
+        "policies",
+        "profile_merge_policy",
+        "profile_model",
+        "prompt_guard",
+        "query_rewriter",
+        "recommendation_engine",
+        "recommendation_routing",
+        "schemas",
+        "scope_builder",
+        "search_router"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "api-gateway",
+      "file_count": 14,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "base64",
+        "collections",
+        "dataclasses",
+        "datetime",
+        "decimal",
+        "hashlib",
+        "hmac",
+        "http",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "re",
+        "secrets",
+        "shutil",
+        "sys",
+        "threading",
+        "time",
+        "typing",
+        "urllib",
+        "uuid"
+      ],
+      "imports_local": [
+        "admin_gateway",
+        "admin_policy",
+        "app",
+        "audit_logger",
+        "audit_store",
+        "bff_gateway",
+        "campus_auth",
+        "campus_domain",
+        "campus_gateway",
+        "campus_modules_gateway",
+        "csrf_protection",
+        "event_schema",
+        "fsm",
+        "handoff",
+        "health_checks",
+        "leads",
+        "mealbot_gateway",
+        "multipart_parser",
+        "next_best_action",
+        "pipeline",
+        "profile_model",
+        "rate_limiter",
+        "structured_logger",
+        "wecom_adapter"
+      ],
+      "imports_third_party": {
+        "psycopg": "psycopg[binary]",
+        "psycopg2": "psycopg2-binary"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "psycopg2-binary",
+        "psycopg[binary]"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "auth-service",
+      "file_count": 1,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "collections",
+        "datetime",
+        "json",
+        "pathlib",
+        "re",
+        "secrets",
+        "typing"
+      ],
+      "imports_local": [
+        "campus_domain"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "compliance-service",
+      "file_count": 1,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "pathlib",
+        "re",
+        "sys",
+        "typing"
+      ],
+      "imports_local": [
+        "simple_yaml"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "crm-service",
+      "file_count": 5,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "enum",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "typing",
+        "uuid"
+      ],
+      "imports_local": [
+        "profile_model"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "evaluation-service",
+      "file_count": 3,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "typing"
+      ],
+      "imports_local": [
+        "bff_gateway",
+        "consultation",
+        "indexer",
+        "pipeline",
+        "policies",
+        "profile_merge_policy",
+        "profile_model",
+        "recommendation_engine",
+        "recommendation_explainer",
+        "simple_yaml"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "knowledge-graph-service",
+      "file_count": 3,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "collections",
+        "datetime",
+        "json",
+        "pathlib",
+        "re",
+        "typing",
+        "uuid"
+      ],
+      "imports_local": [
+        "graph_store"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "knowledge-service",
+      "file_count": 16,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "ast",
+        "collections",
+        "contextlib",
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "json",
+        "logging",
+        "math",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "typing",
+        "uuid"
+      ],
+      "imports_local": [
+        "app",
+        "chunker",
+        "frontmatter_parser",
+        "loader",
+        "simple_yaml",
+        "validator"
+      ],
+      "imports_third_party": {
+        "fastapi": "fastapi",
+        "psycopg": "psycopg[binary]",
+        "pydantic": "pydantic",
+        "yaml": "pyyaml"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "fastapi",
+        "psycopg[binary]",
+        "pydantic",
+        "pyyaml"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "llm-gateway",
+      "file_count": 7,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "ssl",
+        "typing",
+        "urllib"
+      ],
+      "imports_local": [
+        "llm_logger",
+        "model_router",
+        "prompt_guard",
+        "provider_deepseek",
+        "redactor",
+        "schemas"
+      ],
+      "imports_third_party": {
+        "certifi": "certifi"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "certifi"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "mealbot-service",
+      "file_count": 47,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "base64",
+        "contextlib",
+        "csv",
+        "dataclasses",
+        "datetime",
+        "decimal",
+        "hashlib",
+        "hmac",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "re",
+        "secrets",
+        "shutil",
+        "signal",
+        "ssl",
+        "struct",
+        "subprocess",
+        "sys",
+        "time",
+        "typing",
+        "urllib",
+        "uuid",
+        "xml"
+      ],
+      "imports_local": [
+        "app",
+        "wecom_adapter"
+      ],
+      "imports_third_party": {
+        "Crypto": "pycryptodome",
+        "certifi": "certifi",
+        "psycopg": "psycopg[binary]"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "certifi",
+        "psycopg[binary]",
+        "pycryptodome"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "permission-service",
+      "file_count": 3,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "datetime",
+        "json",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "imports_local": [
+        "policy_loader",
+        "simple_yaml"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "rag-service",
+      "file_count": 8,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "collections",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "re",
+        "subprocess",
+        "sys",
+        "typing",
+        "urllib"
+      ],
+      "imports_local": [
+        "access_checker",
+        "citation_builder",
+        "db_retriever",
+        "metadata_filter",
+        "query_rewriter",
+        "reranker",
+        "retriever",
+        "scope_builder",
+        "simple_yaml",
+        "source_policy"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "recommendation-service",
+      "file_count": 4,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "dataclasses",
+        "typing"
+      ],
+      "imports_local": [
+        "class_rules",
+        "recommendation_model"
+      ],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    },
+    {
+      "name": "source-ingestion-service",
+      "file_count": 10,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "argparse",
+        "csv",
+        "datetime",
+        "hashlib",
+        "ipaddress",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "socket",
+        "subprocess",
+        "sys",
+        "textwrap",
+        "typing",
+        "urllib",
+        "uuid"
+      ],
+      "imports_local": [
+        "chunker",
+        "compliance_precheck",
+        "docling_adapter",
+        "frontmatter_validator",
+        "markdown_normalizer",
+        "staging_store"
+      ],
+      "imports_third_party": {
+        "docling": "docling"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "docling"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "wecom-adapter",
+      "file_count": 1,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "ssl",
+        "typing",
+        "urllib"
+      ],
+      "imports_local": [],
+      "imports_third_party": {
+        "certifi": "certifi"
+      },
+      "imports_unknown": [],
+      "suggested_dependencies": [
+        "certifi"
+      ],
+      "unmapped_third_party": [],
+      "confidence": "medium"
+    },
+    {
+      "name": "workflow-service",
+      "file_count": 1,
+      "skipped_files": 0,
+      "imports_stdlib": [
+        "__future__",
+        "collections",
+        "datetime",
+        "hashlib",
+        "json",
+        "pathlib",
+        "secrets",
+        "typing",
+        "uuid"
+      ],
+      "imports_local": [],
+      "imports_third_party": {},
+      "imports_unknown": [],
+      "suggested_dependencies": [],
+      "unmapped_third_party": [],
+      "confidence": "high"
+    }
+  ]
+}

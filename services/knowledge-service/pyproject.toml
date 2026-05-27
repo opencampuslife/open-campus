@@ -1,0 +1,14 @@
+[project]
+name = "metacampus-knowledge-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "psycopg[binary]",
+  "pydantic",
+  "pyyaml",
+]
+description = "MetaCampus knowledge service — source ingestion, knowledge indexing"
+
+[tool.uv]
+package = false

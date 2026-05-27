@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-recommendation-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus recommendation service — admissions matching, scoring"
+
+[tool.uv]
+package = false

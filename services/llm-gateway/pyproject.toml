@@ -1,0 +1,11 @@
+[project]
+name = "metacampus-llm-gateway"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = [
+  "certifi",
+]
+description = "MetaCampus LLM gateway — model routing, prompt guard, tone policy"
+
+[tool.uv]
+package = false

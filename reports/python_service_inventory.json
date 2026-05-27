@@ -1,0 +1,1198 @@
+{
+  "schema_version": 1,
+  "root": "/Users/kevinzzz/Documents/database/gaokao-agent",
+  "summary": {
+    "total_services": 19,
+    "python_services": 17,
+    "node_services": 2,
+    "python_services_with_packaging": 17,
+    "python_services_without_packaging": 0,
+    "python_services_without_packaging_list": [],
+    "high_sensitivity_without_packaging": [],
+    "python_services_without_tests": [
+      "workflow-service"
+    ],
+    "high_sensitivity_without_tests": [],
+    "services_in_ci": 15,
+    "services_not_in_ci": [
+      "compliance-service",
+      "permission-service",
+      "ua-mcp-server",
+      "workflow-service"
+    ]
+  },
+  "services": [
+    {
+      "name": "agent-orchestrator",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 6,
+      "py_file_count": 26,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "pathlib",
+          12
+        ],
+        [
+          "sys",
+          10
+        ],
+        [
+          "typing",
+          10
+        ],
+        [
+          "base",
+          8
+        ],
+        [
+          "enum",
+          4
+        ],
+        [
+          "json",
+          3
+        ],
+        [
+          "dataclasses",
+          2
+        ],
+        [
+          "machine",
+          2
+        ],
+        [
+          "abc",
+          1
+        ],
+        [
+          "argparse",
+          1
+        ],
+        [
+          "chat_message_tree",
+          1
+        ],
+        [
+          "checker",
+          1
+        ],
+        [
+          "consultation_answer",
+          1
+        ],
+        [
+          "consultation_stage",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "api-gateway",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 8,
+      "py_file_count": 22,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_1",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          13
+        ],
+        [
+          "os",
+          10
+        ],
+        [
+          "pathlib",
+          9
+        ],
+        [
+          "datetime",
+          7
+        ],
+        [
+          "sys",
+          6
+        ],
+        [
+          "uuid",
+          6
+        ],
+        [
+          "json",
+          5
+        ],
+        [
+          "time",
+          5
+        ],
+        [
+          "event_schema",
+          3
+        ],
+        [
+          "admin_policy",
+          2
+        ],
+        [
+          "audit_logger",
+          2
+        ],
+        [
+          "audit_store",
+          2
+        ],
+        [
+          "base64",
+          2
+        ],
+        [
+          "campus_auth",
+          2
+        ],
+        [
+          "dataclasses",
+          2
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "auth-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 2,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "campus_domain",
+          1
+        ],
+        [
+          "collections",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ],
+        [
+          "json",
+          1
+        ],
+        [
+          "pathlib",
+          1
+        ],
+        [
+          "re",
+          1
+        ],
+        [
+          "secrets",
+          1
+        ],
+        [
+          "typing",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "compliance-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 2,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": false,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "pathlib",
+          1
+        ],
+        [
+          "re",
+          1
+        ],
+        [
+          "simple_yaml",
+          1
+        ],
+        [
+          "sys",
+          1
+        ],
+        [
+          "typing",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "crm-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 6,
+      "py_file_count": 11,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_3",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          5
+        ],
+        [
+          "datetime",
+          4
+        ],
+        [
+          "re",
+          3
+        ],
+        [
+          "dataclasses",
+          2
+        ],
+        [
+          "json",
+          2
+        ],
+        [
+          "pathlib",
+          2
+        ],
+        [
+          "enum",
+          1
+        ],
+        [
+          "hashlib",
+          1
+        ],
+        [
+          "uuid",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "db-policy-service",
+      "runtime": "python",
+      "has_src": false,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 2,
+      "py_file_count": 4,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_1",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "evaluation-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 2,
+      "py_file_count": 5,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "low",
+      "high_sensitivity": false,
+      "migration_wave": "phase_3",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "json",
+          3
+        ],
+        [
+          "pathlib",
+          3
+        ],
+        [
+          "sys",
+          3
+        ],
+        [
+          "pipeline",
+          2
+        ],
+        [
+          "typing",
+          2
+        ],
+        [
+          "argparse",
+          1
+        ],
+        [
+          "bff_gateway",
+          1
+        ],
+        [
+          "indexer",
+          1
+        ],
+        [
+          "os",
+          1
+        ],
+        [
+          "re",
+          1
+        ],
+        [
+          "simple_yaml",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "knowledge-graph-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 6,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_3",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          3
+        ],
+        [
+          "datetime",
+          2
+        ],
+        [
+          "graph_store",
+          2
+        ],
+        [
+          "json",
+          2
+        ],
+        [
+          "pathlib",
+          2
+        ],
+        [
+          "uuid",
+          2
+        ],
+        [
+          "collections",
+          1
+        ],
+        [
+          "re",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "knowledge-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 3,
+      "py_file_count": 21,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          13
+        ],
+        [
+          "pathlib",
+          9
+        ],
+        [
+          "dataclasses",
+          7
+        ],
+        [
+          "datetime",
+          6
+        ],
+        [
+          "re",
+          5
+        ],
+        [
+          "hashlib",
+          4
+        ],
+        [
+          "os",
+          4
+        ],
+        [
+          "json",
+          2
+        ],
+        [
+          "sys",
+          2
+        ],
+        [
+          "uuid",
+          2
+        ],
+        [
+          "yaml",
+          2
+        ],
+        [
+          "argparse",
+          1
+        ],
+        [
+          "ast",
+          1
+        ],
+        [
+          "chunker",
+          1
+        ],
+        [
+          "collections",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "llm-gateway",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 4,
+      "py_file_count": 11,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_1",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          7
+        ],
+        [
+          "os",
+          3
+        ],
+        [
+          "json",
+          2
+        ],
+        [
+          "pathlib",
+          2
+        ],
+        [
+          "re",
+          2
+        ],
+        [
+          "dataclasses",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ],
+        [
+          "llm_logger",
+          1
+        ],
+        [
+          "model_router",
+          1
+        ],
+        [
+          "prompt_guard",
+          1
+        ],
+        [
+          "provider_deepseek",
+          1
+        ],
+        [
+          "redactor",
+          1
+        ],
+        [
+          "schemas",
+          1
+        ],
+        [
+          "ssl",
+          1
+        ],
+        [
+          "urllib",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "mealbot-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 9,
+      "py_file_count": 63,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_4",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "app",
+          36
+        ],
+        [
+          "typing",
+          34
+        ],
+        [
+          "datetime",
+          17
+        ],
+        [
+          "pathlib",
+          12
+        ],
+        [
+          "json",
+          10
+        ],
+        [
+          "uuid",
+          7
+        ],
+        [
+          "hashlib",
+          6
+        ],
+        [
+          "os",
+          6
+        ],
+        [
+          "psycopg",
+          5
+        ],
+        [
+          "sys",
+          4
+        ],
+        [
+          "argparse",
+          3
+        ],
+        [
+          "csv",
+          3
+        ],
+        [
+          "signal",
+          3
+        ],
+        [
+          "time",
+          3
+        ],
+        [
+          "decimal",
+          2
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "permission-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 4,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": false,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          3
+        ],
+        [
+          "pathlib",
+          2
+        ],
+        [
+          "argparse",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ],
+        [
+          "json",
+          1
+        ],
+        [
+          "policy_loader",
+          1
+        ],
+        [
+          "simple_yaml",
+          1
+        ],
+        [
+          "sys",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "rag-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 2,
+      "py_file_count": 10,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          7
+        ],
+        [
+          "pathlib",
+          5
+        ],
+        [
+          "sys",
+          4
+        ],
+        [
+          "os",
+          3
+        ],
+        [
+          "citation_builder",
+          2
+        ],
+        [
+          "json",
+          2
+        ],
+        [
+          "query_rewriter",
+          2
+        ],
+        [
+          "simple_yaml",
+          2
+        ],
+        [
+          "source_policy",
+          2
+        ],
+        [
+          "access_checker",
+          1
+        ],
+        [
+          "argparse",
+          1
+        ],
+        [
+          "collections",
+          1
+        ],
+        [
+          "db_retriever",
+          1
+        ],
+        [
+          "math",
+          1
+        ],
+        [
+          "metadata_filter",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "recommendation-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 6,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_3",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "recommendation_model",
+          3
+        ],
+        [
+          "typing",
+          3
+        ],
+        [
+          "class_rules",
+          1
+        ],
+        [
+          "dataclasses",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "source-ingestion-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 3,
+      "py_file_count": 15,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_3",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "typing",
+          9
+        ],
+        [
+          "pathlib",
+          7
+        ],
+        [
+          "re",
+          6
+        ],
+        [
+          "datetime",
+          5
+        ],
+        [
+          "json",
+          5
+        ],
+        [
+          "hashlib",
+          4
+        ],
+        [
+          "sys",
+          3
+        ],
+        [
+          "markdown_normalizer",
+          2
+        ],
+        [
+          "os",
+          2
+        ],
+        [
+          "staging_store",
+          2
+        ],
+        [
+          "compliance_precheck",
+          1
+        ],
+        [
+          "docling_adapter",
+          1
+        ],
+        [
+          "ipaddress",
+          1
+        ],
+        [
+          "socket",
+          1
+        ],
+        [
+          "subprocess",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "ua-mcp-server",
+      "runtime": "node",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": false,
+      "test_file_count": 0,
+      "py_file_count": 0,
+      "has_pyproject_toml": false,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": false,
+      "in_makefile": false,
+      "in_ci": false,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_4",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [],
+      "packaging_gap": true,
+      "test_gap": true
+    },
+    {
+      "name": "wecom-adapter",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": true,
+      "test_file_count": 1,
+      "py_file_count": 2,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": true,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_2",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "certifi",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ],
+        [
+          "json",
+          1
+        ],
+        [
+          "os",
+          1
+        ],
+        [
+          "pathlib",
+          1
+        ],
+        [
+          "re",
+          1
+        ],
+        [
+          "ssl",
+          1
+        ],
+        [
+          "typing",
+          1
+        ],
+        [
+          "urllib",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": false
+    },
+    {
+      "name": "wecom-aibot-bridge",
+      "runtime": "node",
+      "has_src": true,
+      "has_tests": true,
+      "has_any_test": false,
+      "test_file_count": 0,
+      "py_file_count": 0,
+      "has_pyproject_toml": false,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": false,
+      "in_makefile": false,
+      "in_ci": true,
+      "sensitivity": "high",
+      "high_sensitivity": true,
+      "migration_wave": "phase_4",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [],
+      "packaging_gap": true,
+      "test_gap": true
+    },
+    {
+      "name": "workflow-service",
+      "runtime": "python",
+      "has_src": true,
+      "has_tests": false,
+      "has_any_test": false,
+      "test_file_count": 0,
+      "py_file_count": 1,
+      "has_pyproject_toml": true,
+      "has_requirements_txt": false,
+      "has_setup_py": false,
+      "has_setup_cfg": false,
+      "has_any_packaging": true,
+      "in_makefile": false,
+      "in_ci": false,
+      "sensitivity": "medium",
+      "high_sensitivity": false,
+      "migration_wave": "phase_4",
+      "code_owner": "TBD",
+      "runtime_owner": "TBD",
+      "top_imports": [
+        [
+          "collections",
+          1
+        ],
+        [
+          "datetime",
+          1
+        ],
+        [
+          "hashlib",
+          1
+        ],
+        [
+          "json",
+          1
+        ],
+        [
+          "pathlib",
+          1
+        ],
+        [
+          "secrets",
+          1
+        ],
+        [
+          "typing",
+          1
+        ],
+        [
+          "uuid",
+          1
+        ]
+      ],
+      "packaging_gap": false,
+      "test_gap": true
+    }
+  ]
+}

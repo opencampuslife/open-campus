@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-rag-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus RAG service — hybrid retrieval, knowledge indexing"
+
+[tool.uv]
+package = false

@@ -1,0 +1,13 @@
+[project]
+name = "metacampus-mealbot-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = [
+  "certifi",
+  "psycopg[binary]",
+  "pycryptodome",
+]
+description = "MetaCampus mealbot service — campus meal management, OCR"
+
+[tool.uv]
+package = false

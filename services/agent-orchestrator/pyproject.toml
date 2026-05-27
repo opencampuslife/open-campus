@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-agent-orchestrator"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus agent orchestrator — behavior tree FSM, multi-turn dialogue"
+
+[tool.uv]
+package = false

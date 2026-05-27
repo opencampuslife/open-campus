@@ -1,0 +1,8 @@
+[project]
+name = "metacampus-crm-service"
+version = "0.0.0"
+requires-python = ">=3.11"
+description = "MetaCampus CRM service — lead lifecycle, profile merge, follow-up"
+
+[tool.uv]
+package = false

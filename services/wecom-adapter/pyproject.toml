@@ -1,0 +1,11 @@
+[project]
+name = "metacampus-wecom-adapter"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = [
+  "certifi",
+]
+description = "MetaCampus WeCom adapter — enterprise messaging integration"
+
+[tool.uv]
+package = false
