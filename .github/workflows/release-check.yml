@@ -55,7 +55,7 @@ jobs:
           cache-dependency-path: apps/admin-console/package-lock.json
 
       - name: install python deps
-        run: pip install ruff mypy psycopg2-binary pyyaml
+        run: pip install ruff mypy "psycopg[binary]" pyyaml certifi
 
       - name: install admin-console deps
         working-directory: apps/admin-console

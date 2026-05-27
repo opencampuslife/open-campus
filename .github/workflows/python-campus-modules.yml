@@ -60,7 +60,7 @@ jobs:
           cache: pip
 
       - name: install python deps
-        run: pip install ruff mypy psycopg2-binary pyyaml
+        run: pip install ruff mypy "psycopg[binary]" pyyaml certifi
 
       - name: migrate db
         run: DATABASE_URL_ADMIN=postgresql://postgres:postgres@localhost:54329/gaokao_agent_test python3 services/db-policy-service/scripts/migrate.py --fixtures
