@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "generated_at": "2026-05-27T18:55:58.027839+00:00",
+  "generated_at": "2026-05-27T19:03:42.407816+00:00",
   "root": ".",
   "issue_count": 1,
   "issues": [
