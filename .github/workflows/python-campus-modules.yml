@@ -117,6 +117,28 @@ jobs:
           print("ok: no heavy deps installed")
           PY
 
+  llm-gateway-uv-sync:
+    name: LLM Gateway uv sync (pilot)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v4
+      - name: Sync llm-gateway only
+        run: uv sync --package metacampus-llm-gateway
+      - name: Verify no heavy deps installed
+        run: |
+          uv run python - <<'PY'
+          import importlib.util
+          blocked = ["docling", "torch", "transformers", "pandas", "numpy", "PIL"]
+          bad = [name for name in blocked if importlib.util.find_spec(name)]
+          if bad:
+              raise SystemExit(f"unexpected heavy deps installed: {bad}")
+          print("ok: no heavy deps installed")
+          PY
+      - name: Run llm-gateway tests
+        run: uv run --package metacampus-llm-gateway pytest services/llm-gateway/tests/ -v
+
   wecom-aibot:
     name: WeCom AI Bot Tests
     runs-on: ubuntu-latest
