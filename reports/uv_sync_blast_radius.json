@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "branch": "chore/p1.5-evaluate-uv-sync-blast-radius",
+  "uv_version": "uv 0.11.16 (135a36367 2026-05-21 aarch64-apple-darwin)",
+  "timestamp": "2026-05-28T07:43:35Z",
+  "summary": {
+    "cold_sync_seconds": 38.2,
+    "warm_sync_seconds": 0.05,
+    "venv_total_mb": 960,
+    "venv_file_count": 27943,
+    "total_packages_installed": 105,
+    "total_packages_resolved_in_lockfile": 145
+  },
+  "venv_breakdown": {
+    "largest_packages_mb": {
+      "torch": 390,
+      "opencv_cv2": 120,
+      "scipy": 71,
+      "transformers": 47,
+      "pandas": 40,
+      "docling_parse": 30,
+      "sympy": 29,
+      "numpy": 22,
+      "lxml": 19,
+      "rapidocr": 17,
+      "psycopg_binary": 17,
+      "pillow_PIL": 13,
+      "psycopg2": 9,
+      "faker": 8,
+      "pycryptodome": 8
+    },
+    "largest_single_file_mb": {
+      "libtorch_cpu.dylib": 241,
+      "cv2.abi3.so": 34,
+      "libtorch_python.dylib": 28,
+      "ch_PP-OCRv4_rec_infer.onnx": 11
+    },
+    "torch_percentage_of_total": 40.6,
+    "docling_family_percentage_of_total": 4.9
+  },
+  "service_contamination": {
+    "source_ingestion_service": {
+      "direct_deps": 1,
+      "transitive_packages": 200,
+      "tree_lines": 201,
+      "venv_share_mb": 920,
+      "contamination_ratio": "high \u2014 pulls torch/cv2/scipy into all services"
+    },
+    "knowledge_service": {
+      "direct_deps": 4,
+      "transitive_packages": 22,
+      "venv_share_mb": 30,
+      "contamination_ratio": "medium \u2014 fastapi/pydantic family"
+    },
+    "api_gateway": {
+      "direct_deps": 2,
+      "transitive_packages": 4,
+      "venv_share_mb": 25,
+      "contamination_ratio": "low \u2014 psycopg family only"
+    },
+    "mealbot_service": {
+      "direct_deps": 3,
+      "transitive_packages": 5,
+      "venv_share_mb": 18,
+      "contamination_ratio": "low \u2014 certifi/psycopg/pycryptodome"
+    },
+    "llm_gateway": {
+      "direct_deps": 1,
+      "transitive_packages": 1,
+      "venv_share_mb": "<1",
+      "contamination_ratio": "negligible \u2014 certifi only"
+    },
+    "wecom_adapter": {
+      "direct_deps": 1,
+      "transitive_packages": 1,
+      "venv_share_mb": "<1",
+      "contamination_ratio": "negligible \u2014 certifi only"
+    },
+    "remaining_11_services": {
+      "direct_deps": 0,
+      "transitive_packages": 0,
+      "venv_share_mb": 0,
+      "contamination_ratio": "zero \u2014 stdlib only, but root uv sync still installs 105 packages"
+    }
+  },
+  "key_findings": [
+    "Root uv sync --all-packages creates a 960 MB .venv (105 packages, 28K files)",
+    "source-ingestion-service (docling) is responsible for ~96% of total venv size",
+    "torch alone is 390 MB (40% of total) \u2014 pulled by docling -> transformers",
+    "A pure stdlib service like auth-service gets 105 packages installed for no benefit",
+    "Service-scoped uv sync would reduce auth-service install to 0 packages, 0 MB",
+    "Docker image delta: pip-only ~100 MB vs uv-sync ~1 GB (10x increase)",
+    "CI runtime delta: pip install 5 tools takes <10s vs uv sync ~38s cold"
+  ],
+  "recommendations": [
+    "DO NOT switch CI to root uv sync --all-packages \u2014 blast radius is too large",
+    "Prefer service-scoped uv sync --package <name> for CI jobs that need deps",
+    "For pure-stdlib services (11 of 17): no uv sync needed at all",
+    "Evaluate docling isolation: separate build stage or optional dependency group",
+    "Consider extras groups: source-ingestion[docling] vs source-ingestion[minimal]",
+    "Docker multi-stage: build docling-dependent images separately"
+  ],
+  "scenario_comparison": {
+    "current_pip_based": {
+      "ci_install_time": "<10s",
+      "ci_install_packages": 5,
+      "ci_install_size_mb": "<5",
+      "docker_image_mb": "<200"
+    },
+    "root_uv_sync_all": {
+      "ci_install_time": "~38s cold, ~50ms warm",
+      "ci_install_packages": 105,
+      "ci_install_size_mb": 960,
+      "docker_image_mb": "~1200",
+      "verdict": "UNACCEPTABLE for CI and Docker"
+    },
+    "service_scoped_uv_sync_light": {
+      "ci_install_time": "<1s",
+      "ci_install_packages": 0,
+      "ci_install_size_mb": 0,
+      "docker_image_mb": "<200",
+      "verdict": "ACCEPTABLE \u2014 same as pip baseline"
+    },
+    "service_scoped_uv_sync_source_ingestion": {
+      "ci_install_time": "~38s cold, ~50ms warm",
+      "ci_install_packages": 105,
+      "ci_install_size_mb": 960,
+      "docker_image_mb": "~1200",
+      "verdict": "HIGH COST \u2014 but unavoidable for docling-dependent jobs"
+    }
+  }
+}
