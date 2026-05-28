@@ -97,6 +97,26 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
           DATABASE_URL: postgresql://postgres:postgres@localhost:54329/gaokao_agent_test
 
+  recommendation-service-uv-sync:
+    name: Recommendation svc uv sync (pilot)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v4
+      - name: Sync recommendation-service only
+        run: uv sync --package metacampus-recommendation-service
+      - name: Verify no heavy deps installed
+        run: |
+          uv run python - <<'PY'
+          import importlib.util
+          blocked = ["docling", "torch", "transformers", "pandas", "numpy", "PIL"]
+          bad = [name for name in blocked if importlib.util.find_spec(name)]
+          if bad:
+              raise SystemExit(f"unexpected heavy deps installed: {bad}")
+          print("ok: no heavy deps installed")
+          PY
+
   wecom-aibot:
     name: WeCom AI Bot Tests
     runs-on: ubuntu-latest
