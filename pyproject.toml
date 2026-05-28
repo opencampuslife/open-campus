@@ -12,7 +12,11 @@ package = false
 [tool.uv.workspace]
 members = [
   "services/*",
-  "tools",
+]
+exclude = [
+  "services/ua-mcp-server",
+  "services/uploads",
+  "services/wecom-aibot-bridge",
 ]
 
 [tool.ruff]
