@@ -1,0 +1,83 @@
+version: 1
+plan:
+  name: 'Phase N2A v2 — 基准样张生成'
+  max_concurrency: 3
+  max_consecutive_failures: 2
+  max_cycles: 8
+  auto_accept: false
+  auto_reject_retries: 1
+tasks:
+  - id: n2a-gen-images
+    title: '生成周明远和沈一诺的基准样张'
+    prompt: >
+      生成 2 个 NPC 的基准样张，使用 MCP 工具 matrix_generate_image。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Prompt 文件已就位在 prompts/npcs/<npc_id>/ 下，style bible 在 docs/npc-style-bible.md。
+
+      ### admissions_director（周明远，招生办主任）
+      创建 assets/npcs/admissions_director/baseline/：
+      1. portrait_neutral.png — 读取 prompts/npcs/admissions_director/portrait_prompt.md，调用 matrix_generate_image
+      2. expression_strict.png — 使用同一 prompt，修改 expression 为 strict
+      3. sprite_idle.png — 读取 prompts/npcs/admissions_director/sprite_prompt.md
+
+      ### student_representative（沈一诺，学生代表）
+      创建 assets/npcs/student_representative/baseline/：
+      1. portrait_neutral.png — 读取 prompts/npcs/student_representative/portrait_prompt.md
+      2. expression_worried.png — 使用同一 prompt，修改 expression 为 worried
+      3. sprite_idle.png — 读取 prompts/npcs/student_representative/sprite_prompt.md
+
+      硬约束：
+      - portrait 和 sprite 必须像同一个人
+      - 256x256 (portrait) / 64x64 (sprite)，PNG 透明背景
+      - 保存 generation_metadata.json
+      - 禁止 Stardew 元素
+      - 每张图单独调用 matrix_generate_image
+
+      创建 reports/n2a-baseline-images-done.md
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. assets/npcs/admissions_director/baseline/ 下 3 张图 2. assets/npcs/student_representative/baseline/ 下 3 张图 3. 尺寸正确 4. PNG 透明背景 5. 同角色 portrait 和 sprite 面部特征一致 6. reports/n2a-baseline-images-done.md 存在
+    depends_on: []
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  - id: n2a-identity-review
+    title: '审查角色身份'
+    prompt: >
+      审查基准样张的角色身份一致性。项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      检查 2 个 NPC：读取 data/npcs/npc_<npc_id>.json，查看 assets/npcs/<npc_id>/baseline/ 图片。
+
+      输出 reports/n2a-identity-review.md：年龄感/服装/表情/职业识别/风格各维度 PASS/FAIL。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证 reports/n2a-identity-review.md 存在且包含 2 个 NPC 的完整审查
+    depends_on:
+      - n2a-gen-images
+    gates: []
+    max_retries: 2
+    timeout_ms: 900000
+
+  - id: n2a-final-review
+    title: 'N2A 最终评审'
+    prompt: >
+      汇总评审，输出 reports/npc-visual-baseline-review.md。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+      
+      评审维度：风格一致/角色身份/技术合规/可复现/同角色一致，各 PASS/FAIL。
+    assigned_to: verifier
+    verified_by: verifier
+    verify_prompt: >
+      复验最终报告各项结论
+    depends_on:
+      - n2a-gen-images
+      - n2a-identity-review
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000

@@ -1,0 +1,38 @@
+{
+  "npc_id": "homeroom_teacher",
+  "display_name": "陈芷",
+  "en_name": "Chen Zhi",
+  "role": "班主任",
+  "department": "教务处",
+  "location": "academic_affairs",
+  "personality": ["温柔干练", "高度共情"],
+  "core_conflict": "她想关心每一个学生的成长细节，但班级40多个孩子的请假、成绩、心理状态全靠她一人——她在教育理想和事务性工作之间被反复拉扯，急需AI帮她抢回时间。",
+  "player_relationship": "你是她的AI助教。她把你当作可靠的帮手——你帮她汇总请假数据、生成处理建议，她才能抽出时间去教室和学生聊聊天。她对你的信任建立在'你是不是真的帮到学生'上。",
+  "primary_metric": "school_efficiency",
+  "secondary_metric": "parent_trust",
+  "quest_ids": ["q_leave_request_001"],
+  "visual_keywords": ["浅绿色连衣裙", "低马尾辫", "办公桌上放着学生合照", "手写批注堆在教案旁"],
+  "voice_tone": "柔和但有主见，对学生像妈妈一样温暖但绝不溺爱。语调会随着学生的情况变化——开心时上扬，忧虑时放低。",
+  "forbidden_behavior": "对学生请假申请置之不理超过3天，或不经核实就批量审批驳回",
+  "metric_effects": {
+    "on_quest_complete": {
+      "school_efficiency": 10,
+      "compliance_safety": 6
+    },
+    "on_fail": {
+      "parent_trust": -8
+    }
+  },
+  "trust_level": 3,
+  "risk_tolerance": 3,
+  "favorite_topics": ["减少事务负担", "保护学生隐私", "学生反馈"],
+  "disliked_actions": ["批量驳回", "忽视学生诉求", "泄露学生信息"],
+  "schedule_id": "homeroom_teacher",
+  "relationship_events": [
+    {"trust_required": 2, "title": "请假流程优化", "description": "陈老师分享学生管理经验"},
+    {"trust_required": 4, "title": "信任AI辅助", "description": "愿意把更多审批交给AI辅助"},
+    {"trust_required": 6, "title": "学生档案管理", "description": "开放学生档案查询权限"},
+    {"trust_required": 8, "title": "教务协同工具", "description": "解锁教务自动化流程"},
+    {"trust_required": 10, "title": "教育合作伙伴", "description": "成为教育创新核心伙伴"}
+  ]
+}

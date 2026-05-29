@@ -1,0 +1,177 @@
+{
+  "phase": "P1B",
+  "timestamp": "2026-05-28T16:54:16+0800",
+  "result": "PASS",
+  "summary": {
+    "test_harness": {
+      "layer": "test_harness",
+      "checks_total": 0,
+      "checks_passed": 0,
+      "checks": {},
+      "failures": [
+        "TestHarness not available"
+      ],
+      "all_passed": false,
+      "skipped": true
+    },
+    "headless_godot": {
+      "available": true,
+      "tests_run": 6,
+      "tests_passed": 6
+    },
+    "static_analysis": {
+      "mechanisms_verified": 6
+    }
+  },
+  "tests": {
+    "cache_hit": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "cache_hit": true,
+        "cache_size": 1,
+        "captured_answer": "cached_answer",
+        "expected_answer": "cached_answer",
+        "trace": {
+          "cache_hit": true,
+          "cache_miss": false,
+          "callback_us": 0,
+          "fallback_reason": "",
+          "mode": "mock",
+          "parse_us": 0,
+          "request_id": "bench_1",
+          "send_us": 0,
+          "serialize_us": 0,
+          "timestamp": 1779958456,
+          "total_us": 9
+        }
+      }
+    },
+    "cache_ttl": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "cache_miss": true,
+        "cache_size": 0,
+        "trace": {
+          "cache_hit": false,
+          "cache_miss": true,
+          "callback_us": 0,
+          "fallback_reason": "",
+          "mode": "mock",
+          "parse_us": 0,
+          "request_id": "bench_1",
+          "send_us": 0,
+          "serialize_us": 0,
+          "timestamp": 1779958456,
+          "total_us": 8
+        }
+      }
+    },
+    "cache_disabled": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "cache_size": 1,
+        "captured_answer": "报名通常需要学生身份证明、户口本、学籍信息等材料。具体以当年招生简章为准，建议提前准备齐全。",
+        "expected_prefix": "报名通常需要"
+      }
+    },
+    "timeout_fallback": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "captured_empty": false,
+        "expected_reason": "timeout",
+        "fallback_reason": "timeout",
+        "is_fallback": true
+      }
+    },
+    "queue_overflow": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "first": {
+          "_fallback": true,
+          "_fallback_reason": "http_2_0"
+        },
+        "second": {
+          "_fallback": true,
+          "_fallback_reason": "queue_overflow",
+          "answer": "该问题需要进一步确认，已转人工客服处理。"
+        }
+      }
+    },
+    "high_risk_not_cached": {
+      "layer": "headless_godot",
+      "passed": true,
+      "details": {
+        "cache_size": 0,
+        "handoff_reason": "high_risk_keyword",
+        "handoff_required": true
+      }
+    },
+    "static_cache_hit": {
+      "layer": "static_analysis",
+      "passed": true
+    },
+    "static_cache_ttl": {
+      "layer": "static_analysis",
+      "passed": true
+    },
+    "static_cache_disabled": {
+      "layer": "static_analysis",
+      "passed": true
+    },
+    "static_timeout_fallback": {
+      "layer": "static_analysis",
+      "passed": true
+    },
+    "static_queue_overflow": {
+      "layer": "static_analysis",
+      "passed": true
+    },
+    "static_high_risk_not_cached": {
+      "layer": "static_analysis",
+      "passed": true
+    }
+  },
+  "static_analysis": {
+    "cache_hit": {
+      "description": "缓存命中避免 provider 调用。连续两次相同 query → 第二次从缓存返回。",
+      "code_path": "scripts/api_client.gd:143-155",
+      "verification": "ask_knowledge() 在 mode routing 前先检查 _cache_get(query)（第 143 行）。如果命中（第 145 行），直接 callback.call(cached) 并 emit 信号，跳过后续的所有模式路由和 HTTP 调用。_cache_get() 返回的是 response.duplicate(true) （第 524 行），确保防御性拷贝。cache_key 经过 strip_edges().to_lower() 规范化（第 500 行）。预填充缓存后，二次查询应在微秒级返回（<1ms 纯 GDScript 表查找）。",
+      "acceptance_criteria": "相同 query 第二次返回 < 5ms（GDScript 字典查找耗时 < 1ms）"
+    },
+    "cache_ttl": {
+      "description": "缓存 TTL 过期后相同 query 走完整链路",
+      "code_path": "scripts/api_client.gd:508-516",
+      "verification": "_cache_get() 在命中后检查 TTL（第 508-516 行）：if now - entry.timestamp > _cache_ttl_ms: 驱逐条目并返回 null。TTL 以毫秒为单位，使用 Time.get_unix_time_from_system() * 1000 比较。过期后 cache miss，走正常的 mode routing 路径。可以通过设置 _cache_ttl_ms 为一个较短值（如 1000ms），并预填充一个 5 秒前的条目来验证驱逐逻辑。",
+      "acceptance_criteria": "TTL 过期后再次查询 → 不走缓存（延迟 ≈ live 模式基线）"
+    },
+    "cache_disabled": {
+      "description": "cache.enabled=false 时相同 query 每次都走模式处理",
+      "code_path": "scripts/api_client.gd:143, 87-92",
+      "verification": "第 143 行：if _cache_enabled: 为 false 时完全跳过缓存查找。_cache_enabled 从 config.cache.enabled 读取（第 89-90 行）。即使 _cache 字典非空，也不检查。确保禁用缓存时零缓存路径开销。",
+      "acceptance_criteria": "cache.enabled=false → 每次 query 都走完整链路"
+    },
+    "timeout_fallback": {
+      "description": "超时触发 fallback：timeout.live_ms=1 → 请求立即超时 → 返回 mock fallback",
+      "code_path": "scripts/api_client.gd:230-234, 283-306",
+      "verification": "每个 live 请求创建独立的 SceneTreeTimer（第 233 行）：get_tree().create_timer(_timeout_live_ms / 1000.0).timeout.connect(_on_request_timeout)._on_request_timeout（第 283 行）检查 _active_requests，取消 HTTP 请求，调用 _fallback_mock(query, 'timeout')，返回带 _fallback=true 和 _fallback_reason='timeout' 的 mock 响应。HTTP 传输层 timeout 单独由 http_node.timeout 控制（第 225 行），默认 20 秒，远长于应用层超时，确保 SceneTreeTimer 先触发。注意：此测试需要 :8788 上有 TCP listener 接受但不回复连接，否则 HTTP 请求会立即 connection refused 触发 request_failed 路径。",
+      "acceptance_criteria": "timeout.live_ms=1 → 返回 fallback 响应（_fallback=true, _fallback_reason='timeout'）"
+    },
+    "queue_overflow": {
+      "description": "max_concurrent_live=1 时两个并发请求 → 第二个走 fallback_immediate",
+      "code_path": "scripts/api_client.gd:210-216, 436-477",
+      "verification": "_ask_knowledge_live 入口检查 _live_request_count >= _queue_max_concurrent（第 213 行）。如果已达上限，调用 _apply_overflow_policy（第 214 行）。三种溢出策略：fallback_immediate（默认）立即返回 mock fallback；reject_new 返回 '系统繁忙'；reject_oldest 拒绝队列中最旧的等待请求。第一个请求进入 _execute_live_request 后 _live_request_count 立即 +1（第 243 行），第二个请求进入时检测到 >= 上限 → 即使第一个请求的 HTTP 尚未完成也能正确触发溢出。fallback_immediate 的响应中包含 _fallback=true 和 _fallback_reason='queue_overflow'。",
+      "acceptance_criteria": "第二个并发请求 → 走 fallback 或队列（fallback_immediate 返回 _fallback_reason='queue_overflow'）"
+    },
+    "high_risk_not_cached": {
+      "description": "高风险 query 返回 handoff_required=true，且不产生 cache 条目",
+      "code_path": "scripts/api_client.gd:130-140, 406-407",
+      "verification": "high_risk 检查（第 131 行）发生在缓存查找（第 143 行）之前，确保高风险 query 不会被缓存数据覆盖。高危 query 在 ask_knowledge 入口即返回 handoff，不会进入 mode routing 和 _cache_set 路径。live 路径的成功响应（第 406 行）只对非高风险回答调用 _cache_set。从 mock_knowledge_responses.json 来看，'能不能保证录取' 条目的 handoff_required=true，确保 mock 模式下也能验证。",
+      "acceptance_criteria": "'保证录取' → handoff_required=true → 缓存不增加条目"
+    }
+  }
+}

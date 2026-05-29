@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dro380khjp8a2"
+
+[deps]
+
+files=["res://tools/perf_output/perf_npc_10.time.translation", "res://tools/perf_output/perf_npc_10.fps.translation", "res://tools/perf_output/perf_npc_10.process.translation", "res://tools/perf_output/perf_npc_10.physics.translation", "res://tools/perf_output/perf_npc_10.node.translation", "res://tools/perf_output/perf_npc_10.npc.translation", "res://tools/perf_output/perf_npc_10.memory.translation"]
+
+source_file="res://tools/perf_output/perf_npc_10.csv"
+dest_files=["res://tools/perf_output/perf_npc_10.time.translation", "res://tools/perf_output/perf_npc_10.fps.translation", "res://tools/perf_output/perf_npc_10.process.translation", "res://tools/perf_output/perf_npc_10.physics.translation", "res://tools/perf_output/perf_npc_10.node.translation", "res://tools/perf_output/perf_npc_10.npc.translation", "res://tools/perf_output/perf_npc_10.memory.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,113 @@
+{
+  "test": "n2d-runtime-interaction-smoke",
+  "version": "1.0",
+  "total": 17,
+  "passed": 17,
+  "failed": 0,
+  "errors": [],
+  "warnings": [],
+  "details": [
+    {
+      "name": "[admissions_director] Dialogue structure: required keys present",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[admissions_director] trigger_quest IDs resolve in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[admissions_director] Choice metric_effects: keys ⊆ core, values ∈ [-30,+30]",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[admissions_director] complete_quest / fail_quest IDs exist in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[admissions_director] Simulated interaction chain: quest triggers → choice → effects",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] Dialogue structure: required keys present",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] trigger_quest IDs resolve in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] Choice metric_effects: keys ⊆ core, values ∈ [-30,+30]",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] complete_quest / fail_quest IDs exist in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] Simulated interaction chain: quest triggers → choice → effects",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[it_operator] Dialogue structure: required keys present",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[it_operator] trigger_quest IDs resolve in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[it_operator] Choice metric_effects: keys ⊆ core, values ∈ [-30,+30]",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[it_operator] complete_quest / fail_quest IDs exist in quests.json",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[it_operator] Simulated interaction chain: quest triggers → choice → effects",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[compliance_officer] High-risk branch metric validation",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "[quest_manager.gd] State transition flow documented",
+      "passed": true,
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

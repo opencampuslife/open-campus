@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://calibration_panel"]
+
+[ext_resource type="Script" path="res://scripts/csharp/debug/LocationCalibrationPanel.gd" id="1_calib"]
+
+[node name="LocationCalibrationPanel" type="CanvasLayer"]
+process_mode = 3
+layer = 200
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+alignment = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox"]
+text = "坐标校准面板 (F11)"
+
+[node name="CoordsLabel" type="Label" parent="Panel/VBox"]
+text = "移动鼠标查看坐标..."
+
+[node name="SavedLabel" type="Label" parent="Panel/VBox"]
+text = ""
+
+[node name="SnapBtn" type="Button" parent="Panel/VBox"]
+text = "Snap — 记录当前坐标"
+
+[node name="CloseBtn" type="Button" parent="Panel/VBox"]
+text = "关闭 (F11)"

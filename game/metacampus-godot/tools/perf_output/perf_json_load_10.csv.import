@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://crss571mfn8ct"
+
+[deps]
+
+files=["res://tools/perf_output/perf_json_load_10.stage.translation", "res://tools/perf_output/perf_json_load_10.time.translation"]
+
+source_file="res://tools/perf_output/perf_json_load_10.csv"
+dest_files=["res://tools/perf_output/perf_json_load_10.stage.translation", "res://tools/perf_output/perf_json_load_10.time.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

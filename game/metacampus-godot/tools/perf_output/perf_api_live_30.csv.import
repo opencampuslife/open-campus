@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dpe6772ge7g8c"
+
+[deps]
+
+files=["res://tools/perf_output/perf_api_live_30.mode.translation", "res://tools/perf_output/perf_api_live_30.timestamp.translation", "res://tools/perf_output/perf_api_live_30.total.translation", "res://tools/perf_output/perf_api_live_30.serialize.translation", "res://tools/perf_output/perf_api_live_30.send.translation", "res://tools/perf_output/perf_api_live_30.parse.translation", "res://tools/perf_output/perf_api_live_30.callback.translation", "res://tools/perf_output/perf_api_live_30.fallback.translation"]
+
+source_file="res://tools/perf_output/perf_api_live_30.csv"
+dest_files=["res://tools/perf_output/perf_api_live_30.mode.translation", "res://tools/perf_output/perf_api_live_30.timestamp.translation", "res://tools/perf_output/perf_api_live_30.total.translation", "res://tools/perf_output/perf_api_live_30.serialize.translation", "res://tools/perf_output/perf_api_live_30.send.translation", "res://tools/perf_output/perf_api_live_30.parse.translation", "res://tools/perf_output/perf_api_live_30.callback.translation", "res://tools/perf_output/perf_api_live_30.fallback.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

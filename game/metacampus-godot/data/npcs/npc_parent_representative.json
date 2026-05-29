@@ -1,0 +1,39 @@
+{
+  "npc_id": "parent_representative",
+  "display_name": "顾兰",
+  "en_name": "Gu Lan",
+  "role": "家长代表",
+  "department": "家长接待区",
+  "location": "parent_reception",
+  "personality": ["热心积极", "心思细腻"],
+  "core_conflict": "她代表家长群体发声，但每个家庭的需求各不相同——有人焦虑录取流程、有人担心材料遗漏、有人追问学校师资。她必须在集体利益和个体诉求之间找到平衡，而AI的效率让她既惊喜又担忧。",
+  "player_relationship": "你帮她整理家长诉求、发送材料催办提醒。她感激你的高效，但也担心AI太过机械化——她希望你'聪明但更要有温度'。每次你处理好一批催办，她都会发来一条感谢消息。",
+  "primary_metric": "parent_trust",
+  "secondary_metric": "school_efficiency",
+  "quest_ids": ["q_material_reminder_001"],
+  "visual_keywords": ["碎花连衣裙", "帆布袋里装着家长联名信", "手机屏幕常亮家长群", "保温杯和文件夹从不离手"],
+  "voice_tone": "语速偏快，热情洋溢但偶尔焦虑。会用'我们家孩子'开头表达诉求，但讨论制度时立刻切换到正式语气。",
+  "forbidden_behavior": "在未核实的情况下传播招生政策变动信息，或替家长做出未经授权的承诺",
+  "metric_effects": {
+    "on_quest_complete": {
+      "school_efficiency": 8,
+      "parent_trust": 5
+    },
+    "on_fail": {
+      "school_efficiency": -5,
+      "parent_trust": -4
+    }
+  },
+  "trust_level": 3,
+  "risk_tolerance": 5,
+  "favorite_topics": ["透明解释", "及时回应", "学生关怀"],
+  "disliked_actions": ["机械回复", "忽视诉求", "信息不透明"],
+  "schedule_id": "parent_representative",
+  "relationship_events": [
+    {"trust_required": 2, "title": "家长诉求整理", "description": "顾兰分享家长沟通心得"},
+    {"trust_required": 4, "title": "透明沟通", "description": "建立家长反馈透明机制"},
+    {"trust_required": 6, "title": "家校协同", "description": "开放更多家校沟通渠道"},
+    {"trust_required": 8, "title": "家长信任联盟", "description": "成为家长信任的沟通桥梁"},
+    {"trust_required": 10, "title": "家校共治伙伴", "description": "成为家校共治核心成员"}
+  ]
+}

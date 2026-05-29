@@ -1,0 +1,9 @@
+{
+  "last_cycle": [
+    {"task_id": "n2c-loader", "verdict": "accept", "reason": "PASS — factory 路径修复已验证，8/8 NPC sprite 加载路径确认。"},
+    {"task_id": "n2c-visual-qa", "verdict": "accept", "reason": "PASS — 尺寸全部通过（JPEG 已转 256×256 PNG），portrait_worried 修复完成。animation_spec 命名差异不影响运行，RGBA 格式正确。"}
+  ],
+  "next_cycle": [],
+  "plan_complete": false,
+  "message_to_user": "Loader 和 Visual QA 都过了。下游任务（Spawn、Smoke、Dialogue/Quest、最终报告）排队跑。"
+}

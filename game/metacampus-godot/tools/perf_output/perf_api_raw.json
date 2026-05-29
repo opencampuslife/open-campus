@@ -1,0 +1,1296 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-28 15:55:55",
+    "samples_per_mode": 30,
+    "godot_exec": "/Users/kevinzzz/Downloads/Godot.app/Contents/MacOS/Godot",
+    "project_dir": "/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot"
+  },
+  "modes": {
+    "mock": {
+      "summary": {
+        "samples": 30,
+        "failures": 4,
+        "min_ms": 0.01,
+        "avg_ms": 0.01,
+        "median_ms": 0.01,
+        "p95_ms": 0.03,
+        "p99_ms": 0.04,
+        "max_ms": 0.04,
+        "error_rate": 0.1333,
+        "main_bottleneck": "api_client internal routing (GDScript)"
+      },
+      "trace_count": 30,
+      "traces": [
+        {
+          "request_id": "bench_1",
+          "total_ms": 0.02,
+          "total_us": 18,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_2",
+          "total_ms": 0.01,
+          "total_us": 6,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_3",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_4",
+          "total_ms": 0.01,
+          "total_us": 8,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_5",
+          "total_ms": 0.02,
+          "total_us": 21,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_6",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_7",
+          "total_ms": 0.02,
+          "total_us": 16,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_8",
+          "total_ms": 0.02,
+          "total_us": 19,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_9",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_10",
+          "total_ms": 0.02,
+          "total_us": 20,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_11",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_12",
+          "total_ms": 0.01,
+          "total_us": 8,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_13",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_14",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_15",
+          "total_ms": 0.03,
+          "total_us": 32,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_16",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_17",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_18",
+          "total_ms": 0.01,
+          "total_us": 15,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_19",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_20",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_21",
+          "total_ms": 0.04,
+          "total_us": 41,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_22",
+          "total_ms": 0.01,
+          "total_us": 13,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_23",
+          "total_ms": 0.02,
+          "total_us": 16,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_24",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_25",
+          "total_ms": 0.01,
+          "total_us": 13,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_26",
+          "total_ms": 0.02,
+          "total_us": 16,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_27",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_28",
+          "total_ms": 0.01,
+          "total_us": 7,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_29",
+          "total_ms": 0.02,
+          "total_us": 18,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_30",
+          "total_ms": 0.01,
+          "total_us": 13,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        }
+      ]
+    },
+    "off": {
+      "summary": {
+        "samples": 29,
+        "failures": 4,
+        "min_ms": 0.01,
+        "avg_ms": 0.01,
+        "median_ms": 0.01,
+        "p95_ms": 0.04,
+        "p99_ms": 0.06,
+        "max_ms": 0.06,
+        "error_rate": 0.1379,
+        "main_bottleneck": "api_client internal routing (GDScript)"
+      },
+      "trace_count": 30,
+      "traces": [
+        {
+          "request_id": "bench_1",
+          "total_ms": 0.01,
+          "total_us": 8,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_2",
+          "total_ms": 0.0,
+          "total_us": 2,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_3",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_4",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_5",
+          "total_ms": 0.06,
+          "total_us": 58,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_6",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_7",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_8",
+          "total_ms": 0.04,
+          "total_us": 41,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_9",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_10",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_11",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_12",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_13",
+          "total_ms": 0.02,
+          "total_us": 18,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_14",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_15",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_16",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_17",
+          "total_ms": 0.02,
+          "total_us": 16,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_18",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_19",
+          "total_ms": 0.02,
+          "total_us": 16,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_20",
+          "total_ms": 0.01,
+          "total_us": 7,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_21",
+          "total_ms": 0.01,
+          "total_us": 12,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_22",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_23",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_24",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_25",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_26",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_27",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_28",
+          "total_ms": 0.01,
+          "total_us": 5,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_29",
+          "total_ms": 0.01,
+          "total_us": 10,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_30",
+          "total_ms": 0.01,
+          "total_us": 13,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": ""
+        }
+      ]
+    },
+    "live": {
+      "summary": {
+        "samples": 30,
+        "failures": 4,
+        "min_ms": 0.01,
+        "avg_ms": 4902.92,
+        "median_ms": 4890.73,
+        "p95_ms": 9165.66,
+        "p99_ms": 13349.79,
+        "max_ms": 13349.79,
+        "error_rate": 0.1333,
+        "main_bottleneck": "LLM provider API round-trip",
+        "breakdown": {
+          "avg_total_us": 4902921.4,
+          "avg_total_ms": 4902.92,
+          "serialize_pct": 0.0,
+          "send_pct": 0.0,
+          "http_provider_pct": 100.0,
+          "parse_pct": 0.0,
+          "callback_pct": 0.0
+        }
+      },
+      "trace_count": 30,
+      "traces": [
+        {
+          "request_id": "bench_1",
+          "total_ms": 4890.73,
+          "total_us": 4890729,
+          "serialize_us": 4,
+          "send_us": 2470,
+          "parse_us": 58,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_2",
+          "total_ms": 6444.61,
+          "total_us": 6444614,
+          "serialize_us": 11,
+          "send_us": 117,
+          "parse_us": 51,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_3",
+          "total_ms": 9165.66,
+          "total_us": 9165660,
+          "serialize_us": 16,
+          "send_us": 170,
+          "parse_us": 85,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_4",
+          "total_ms": 0.01,
+          "total_us": 11,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_5",
+          "total_ms": 13349.79,
+          "total_us": 13349788,
+          "serialize_us": 13,
+          "send_us": 157,
+          "parse_us": 25,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_6",
+          "total_ms": 6363.66,
+          "total_us": 6363656,
+          "serialize_us": 11,
+          "send_us": 106,
+          "parse_us": 50,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_7",
+          "total_ms": 5568.34,
+          "total_us": 5568337,
+          "serialize_us": 10,
+          "send_us": 112,
+          "parse_us": 43,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_8",
+          "total_ms": 6893.15,
+          "total_us": 6893145,
+          "serialize_us": 11,
+          "send_us": 122,
+          "parse_us": 42,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_9",
+          "total_ms": 4519.56,
+          "total_us": 4519560,
+          "serialize_us": 10,
+          "send_us": 201,
+          "parse_us": 54,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_10",
+          "total_ms": 4305.69,
+          "total_us": 4305691,
+          "serialize_us": 9,
+          "send_us": 108,
+          "parse_us": 61,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_11",
+          "total_ms": 4692.05,
+          "total_us": 4692048,
+          "serialize_us": 12,
+          "send_us": 172,
+          "parse_us": 58,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_12",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_13",
+          "total_ms": 4105.57,
+          "total_us": 4105572,
+          "serialize_us": 12,
+          "send_us": 177,
+          "parse_us": 88,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_14",
+          "total_ms": 5125.82,
+          "total_us": 5125817,
+          "serialize_us": 16,
+          "send_us": 194,
+          "parse_us": 55,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_15",
+          "total_ms": 3263.42,
+          "total_us": 3263424,
+          "serialize_us": 15,
+          "send_us": 144,
+          "parse_us": 55,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_16",
+          "total_ms": 5455.49,
+          "total_us": 5455489,
+          "serialize_us": 10,
+          "send_us": 136,
+          "parse_us": 66,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_17",
+          "total_ms": 4326.45,
+          "total_us": 4326450,
+          "serialize_us": 12,
+          "send_us": 170,
+          "parse_us": 71,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_18",
+          "total_ms": 3595.59,
+          "total_us": 3595586,
+          "serialize_us": 12,
+          "send_us": 139,
+          "parse_us": 62,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_19",
+          "total_ms": 7182.94,
+          "total_us": 7182943,
+          "serialize_us": 13,
+          "send_us": 189,
+          "parse_us": 62,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_20",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_21",
+          "total_ms": 3375.07,
+          "total_us": 3375075,
+          "serialize_us": 13,
+          "send_us": 171,
+          "parse_us": 39,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_22",
+          "total_ms": 7895.63,
+          "total_us": 7895626,
+          "serialize_us": 8,
+          "send_us": 125,
+          "parse_us": 29,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_23",
+          "total_ms": 2960.22,
+          "total_us": 2960217,
+          "serialize_us": 7,
+          "send_us": 79,
+          "parse_us": 48,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_24",
+          "total_ms": 6061.77,
+          "total_us": 6061772,
+          "serialize_us": 12,
+          "send_us": 148,
+          "parse_us": 121,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_25",
+          "total_ms": 4754.54,
+          "total_us": 4754536,
+          "serialize_us": 26,
+          "send_us": 235,
+          "parse_us": 70,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_26",
+          "total_ms": 5445.19,
+          "total_us": 5445192,
+          "serialize_us": 11,
+          "send_us": 124,
+          "parse_us": 64,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_27",
+          "total_ms": 5554.49,
+          "total_us": 5554494,
+          "serialize_us": 10,
+          "send_us": 109,
+          "parse_us": 30,
+          "callback_us": 0,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_28",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_29",
+          "total_ms": 4036.59,
+          "total_us": 4036592,
+          "serialize_us": 8,
+          "send_us": 91,
+          "parse_us": 48,
+          "callback_us": 1,
+          "fallback_reason": ""
+        },
+        {
+          "request_id": "bench_30",
+          "total_ms": 7755.58,
+          "total_us": 7755581,
+          "serialize_us": 8,
+          "send_us": 136,
+          "parse_us": 60,
+          "callback_us": 0,
+          "fallback_reason": ""
+        }
+      ]
+    },
+    "fallback": {
+      "summary": {
+        "samples": 30,
+        "failures": 30,
+        "min_ms": 0.01,
+        "avg_ms": 11.55,
+        "median_ms": 13.8,
+        "p95_ms": 14.3,
+        "p99_ms": 14.64,
+        "max_ms": 14.64,
+        "error_rate": 1.0,
+        "main_bottleneck": "HTTP timeout waiting for LLM Bridge",
+        "breakdown": {
+          "avg_total_us": 11551.8,
+          "avg_total_ms": 11.55,
+          "serialize_pct": 0.1,
+          "send_pct": 0.9,
+          "http_provider_pct": 99.0,
+          "parse_pct": 0.0,
+          "callback_pct": 0.0
+        }
+      },
+      "trace_count": 30,
+      "traces": [
+        {
+          "request_id": "bench_1",
+          "total_ms": 3.14,
+          "total_us": 3136,
+          "serialize_us": 5,
+          "send_us": 51,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_2",
+          "total_ms": 13.8,
+          "total_us": 13796,
+          "serialize_us": 6,
+          "send_us": 59,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_3",
+          "total_ms": 13.55,
+          "total_us": 13547,
+          "serialize_us": 6,
+          "send_us": 74,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_4",
+          "total_ms": 0.01,
+          "total_us": 7,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_5",
+          "total_ms": 13.8,
+          "total_us": 13803,
+          "serialize_us": 45,
+          "send_us": 149,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_6",
+          "total_ms": 13.83,
+          "total_us": 13826,
+          "serialize_us": 14,
+          "send_us": 101,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_7",
+          "total_ms": 13.79,
+          "total_us": 13786,
+          "serialize_us": 8,
+          "send_us": 133,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_8",
+          "total_ms": 13.81,
+          "total_us": 13811,
+          "serialize_us": 11,
+          "send_us": 123,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_9",
+          "total_ms": 13.83,
+          "total_us": 13830,
+          "serialize_us": 9,
+          "send_us": 111,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_10",
+          "total_ms": 13.82,
+          "total_us": 13816,
+          "serialize_us": 9,
+          "send_us": 113,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_11",
+          "total_ms": 14.3,
+          "total_us": 14301,
+          "serialize_us": 9,
+          "send_us": 102,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_12",
+          "total_ms": 0.01,
+          "total_us": 14,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_13",
+          "total_ms": 14.08,
+          "total_us": 14081,
+          "serialize_us": 8,
+          "send_us": 96,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_14",
+          "total_ms": 13.78,
+          "total_us": 13778,
+          "serialize_us": 8,
+          "send_us": 103,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_15",
+          "total_ms": 12.55,
+          "total_us": 12551,
+          "serialize_us": 8,
+          "send_us": 97,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_16",
+          "total_ms": 13.82,
+          "total_us": 13817,
+          "serialize_us": 15,
+          "send_us": 305,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_17",
+          "total_ms": 13.72,
+          "total_us": 13717,
+          "serialize_us": 16,
+          "send_us": 273,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_18",
+          "total_ms": 13.81,
+          "total_us": 13810,
+          "serialize_us": 9,
+          "send_us": 119,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_19",
+          "total_ms": 13.07,
+          "total_us": 13075,
+          "serialize_us": 13,
+          "send_us": 114,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_20",
+          "total_ms": 0.01,
+          "total_us": 8,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_21",
+          "total_ms": 13.87,
+          "total_us": 13865,
+          "serialize_us": 8,
+          "send_us": 113,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_22",
+          "total_ms": 13.84,
+          "total_us": 13840,
+          "serialize_us": 9,
+          "send_us": 117,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_23",
+          "total_ms": 13.08,
+          "total_us": 13081,
+          "serialize_us": 9,
+          "send_us": 93,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_24",
+          "total_ms": 13.78,
+          "total_us": 13775,
+          "serialize_us": 8,
+          "send_us": 104,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_25",
+          "total_ms": 13.87,
+          "total_us": 13873,
+          "serialize_us": 9,
+          "send_us": 124,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_26",
+          "total_ms": 14.64,
+          "total_us": 14645,
+          "serialize_us": 8,
+          "send_us": 52,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_27",
+          "total_ms": 13.98,
+          "total_us": 13984,
+          "serialize_us": 8,
+          "send_us": 98,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_28",
+          "total_ms": 0.01,
+          "total_us": 9,
+          "serialize_us": 0,
+          "send_us": 0,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "high_risk_keyword"
+        },
+        {
+          "request_id": "bench_29",
+          "total_ms": 13.87,
+          "total_us": 13865,
+          "serialize_us": 8,
+          "send_us": 118,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        },
+        {
+          "request_id": "bench_30",
+          "total_ms": 13.11,
+          "total_us": 13107,
+          "serialize_us": 12,
+          "send_us": 161,
+          "parse_us": 0,
+          "callback_us": 0,
+          "fallback_reason": "http_2_0"
+        }
+      ]
+    }
+  }
+}

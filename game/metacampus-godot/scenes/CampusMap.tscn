@@ -1,0 +1,226 @@
+[gd_scene load_steps=8 format=3 uid="uid://campus_map_v2"]
+
+[ext_resource type="PackedScene" uid="uid://npc_scene" path="res://scenes/NPC.tscn" id="1_npc"]
+
+[sub_resource type="RectangleShape2D" id="Rect_north"]
+size = Vector2(1280, 32)
+
+[sub_resource type="RectangleShape2D" id="Rect_south"]
+size = Vector2(1280, 32)
+
+[sub_resource type="RectangleShape2D" id="Rect_west"]
+size = Vector2(32, 960)
+
+[sub_resource type="RectangleShape2D" id="Rect_east"]
+size = Vector2(32, 960)
+
+[sub_resource type="RectangleShape2D" id="Rect_building1"]
+size = Vector2(192, 160)
+
+[sub_resource type="RectangleShape2D" id="Rect_building2"]
+size = Vector2(160, 128)
+
+[node name="CampusMap" type="Node2D"]
+
+; ── Ground background ──
+[node name="Ground" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1280, 960)
+offset_right = 1280
+offset_bottom = 960
+color = Color(0.15, 0.18, 0.12, 1)
+
+; ── Paths (visual only) ──
+[node name="MainPath_H" type="ColorRect" parent="."]
+offset_left = 0
+offset_top = 780
+offset_right = 1280
+offset_bottom = 820
+color = Color(0.35, 0.33, 0.28, 1)
+
+[node name="MainPath_V" type="ColorRect" parent="."]
+offset_left = 620
+offset_top = 0
+offset_right = 660
+offset_bottom = 960
+color = Color(0.35, 0.33, 0.28, 1)
+
+; ── Collision Manager (walls) ──
+[node name="CollisionManager" type="Node2D" parent="."]
+
+[node name="NorthWall" type="StaticBody2D" parent="CollisionManager"]
+position = Vector2(640, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionManager/NorthWall"]
+shape = SubResource("Rect_north")
+
+[node name="SouthWall" type="StaticBody2D" parent="CollisionManager"]
+position = Vector2(640, 944)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionManager/SouthWall"]
+shape = SubResource("Rect_south")
+
+[node name="WestWall" type="StaticBody2D" parent="CollisionManager"]
+position = Vector2(16, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionManager/WestWall"]
+shape = SubResource("Rect_west")
+
+[node name="EastWall" type="StaticBody2D" parent="CollisionManager"]
+position = Vector2(1264, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionManager/EastWall"]
+shape = SubResource("Rect_east")
+
+; ── Buildings (collision + visuals) ──
+[node name="Buildings" type="Node2D" parent="."]
+
+; Gate Area
+[node name="GateArea" type="StaticBody2D" parent="Buildings"]
+position = Vector2(64, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/GateArea"]
+shape = SubResource("Rect_north")
+
+[node name="GateRect" type="ColorRect" parent="Buildings/GateArea"]
+offset_left = -64
+offset_top = -16
+offset_right = 64
+offset_bottom = 16
+color = Color(0.25, 0.22, 0.18, 1)
+
+; Admission Building
+[node name="AdmissionBuilding" type="StaticBody2D" parent="Buildings"]
+position = Vector2(560, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/AdmissionBuilding"]
+shape = SubResource("Rect_building1")
+
+[node name="AdmissionRect" type="ColorRect" parent="Buildings/AdmissionBuilding"]
+offset_left = -96
+offset_top = -80
+offset_right = 96
+offset_bottom = 80
+color = Color(0.22, 0.20, 0.28, 1)
+
+; Academic Building
+[node name="AcademicBuilding" type="StaticBody2D" parent="Buildings"]
+position = Vector2(560, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/AcademicBuilding"]
+shape = SubResource("Rect_building2")
+
+[node name="AcademicRect" type="ColorRect" parent="Buildings/AcademicBuilding"]
+offset_left = -80
+offset_top = -64
+offset_right = 80
+offset_bottom = 64
+color = Color(0.20, 0.22, 0.30, 1)
+
+; Canteen Building
+[node name="CanteenBuilding" type="StaticBody2D" parent="Buildings"]
+position = Vector2(192, 640)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/CanteenBuilding"]
+shape = SubResource("Rect_building2")
+
+[node name="CanteenRect" type="ColorRect" parent="Buildings/CanteenBuilding"]
+offset_left = -80
+offset_top = -64
+offset_right = 80
+offset_bottom = 64
+color = Color(0.30, 0.22, 0.18, 1)
+
+; AI Core Building
+[node name="AICoreBuilding" type="StaticBody2D" parent="Buildings"]
+position = Vector2(960, 160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/AICoreBuilding"]
+shape = SubResource("Rect_building1")
+
+[node name="AICoreRect" type="ColorRect" parent="Buildings/AICoreBuilding"]
+offset_left = -96
+offset_top = -80
+offset_right = 96
+offset_bottom = 80
+color = Color(0.10, 0.22, 0.40, 1)
+
+; ── NPCs ──
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="NPC_ParentRep" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(480, 288)
+npc_id = "parent_representative"
+npc_name = "张同学家长"
+
+[node name="NPC_AdmissionsDirector" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(560, 288)
+npc_id = "admissions_director"
+npc_name = "周明远"
+
+[node name="NPC_StudentRep" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(560, 448)
+npc_id = "student_representative"
+npc_name = "沈一诺"
+
+[node name="NPC_LogisticsManager" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(192, 544)
+npc_id = "logistics_manager"
+npc_name = "陈后勤老师"
+
+[node name="NPC_ITOperator" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(960, 160)
+npc_id = "it_operator"
+npc_name = "小智AI助手"
+
+[node name="NPC_Principal" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(1120, 64)
+npc_id = "principal"
+npc_name = "唐毓"
+
+[node name="NPC_HomeroomTeacher" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(640, 288)
+npc_id = "homeroom_teacher"
+npc_name = "王班主任"
+
+[node name="NPC_ComplianceOfficer" parent="NPCs" instance=ExtResource("1_npc")]
+position = Vector2(800, 192)
+npc_id = "compliance_officer"
+npc_name = "林澈"
+
+; ── Region Labels ──
+[node name="RegionLabels" type="Node2D" parent="."]
+
+[node name="GateLabel" type="Label" parent="RegionLabels"]
+offset_left = 32.0
+offset_top = 760.0
+offset_right = 96.0
+offset_bottom = 780.0
+text = "校门"
+
+[node name="AdmissionLabel" type="Label" parent="RegionLabels"]
+offset_left = 464.0
+offset_top = 248.0
+offset_right = 576.0
+offset_bottom = 268.0
+text = "招生办"
+
+[node name="AcademicLabel" type="Label" parent="RegionLabels"]
+offset_left = 480.0
+offset_top = 440.0
+offset_right = 560.0
+offset_bottom = 460.0
+text = "教务处"
+
+[node name="CanteenLabel" type="Label" parent="RegionLabels"]
+offset_left = 112.0
+offset_top = 600.0
+offset_right = 160.0
+offset_bottom = 620.0
+text = "食堂"
+
+[node name="AILabel" type="Label" parent="RegionLabels"]
+offset_left = 880.0
+offset_top = 120.0
+offset_right = 960.0
+offset_bottom = 140.0
+text = "AI中枢"

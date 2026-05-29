@@ -1,0 +1,51 @@
+{
+  "npc_id": "it_operator",
+  "npc_name": "许航",
+  "dialogues": [
+    {
+      "id": "it_operator_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_dashboard_001",
+      "speaker": "许航",
+      "text": "嘿，你来了！我刚把运营驾驶舱部署好了——学校效率、家长信任、合规安全、系统稳定性四个核心指标，一目了然。你先看看仪表盘，熟悉一下数据面板。有任何异常波动它都会自动告警，不需要你一直盯着。",
+      "choices": [
+        {
+          "text": "打开运营驾驶舱，查看四个核心指标",
+          "action": "open_dashboard",
+          "metric_effects": {"school_efficiency": 10, "system_stability": 10},
+          "next_line": -1,
+          "complete_quest": "q_dashboard_001"
+        },
+        {
+          "text": "暂时跳过，下次再看",
+          "action": "skip_dashboard",
+          "metric_effects": {"school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "it_operator_canary_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": "q_canary_release_001",
+      "speaker": "许航",
+      "text": "好消息——新的知识库问答策略测试通过了，push到生产效率能提升不少。不过发布必须走canary灰度，先1%小流量观察，没问题再逐步放量。就好比你先给一桌人上一小碟试吃，不至于整锅菜端出去才发现盐放多了。你怎么选？",
+      "choices": [
+        {
+          "text": "执行Canary 1%灰度发布，监控指标后再放量",
+          "action": "canary_1pct",
+          "metric_effects": {"system_stability": 12, "compliance_safety": 10},
+          "next_line": -1,
+          "complete_quest": "q_canary_release_001"
+        },
+        {
+          "text": "直接全量发布，跳过灰度测试（高风险）",
+          "action": "full_release_no_test",
+          "metric_effects": {"system_stability": -15, "compliance_safety": -20},
+          "next_line": -1,
+          "fail_quest": "q_canary_release_001"
+        }
+      ]
+    }
+  ]
+}

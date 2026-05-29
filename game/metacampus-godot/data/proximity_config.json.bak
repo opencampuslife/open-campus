@@ -1,0 +1,9 @@
+{
+  "proximity_optimization": {
+    "enabled": true,
+    "activation_radius": 200.0,
+    "check_interval_ms": 250,
+    "proximity_shape_radius": 8.0,
+    "debug_log": false
+  }
+}

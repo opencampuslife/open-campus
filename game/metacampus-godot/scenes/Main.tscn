@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bjky8uh7wdoco"]
+
+[ext_resource type="PackedScene" path="res://scenes/CampusMap.tscn" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/DialogueBox.tscn" id="3_dialogue"]
+[ext_resource type="PackedScene" path="res://scenes/TaskBoard.tscn" id="4_taskboard"]
+[ext_resource type="PackedScene" path="res://scenes/Dashboard.tscn" id="5_dashboard"]
+[ext_resource type="PackedScene" path="res://scenes/QuestToast.tscn" id="6_toast"]
+[ext_resource type="PackedScene" path="res://scenes/HUD.tscn" id="7_hud"]
+[ext_resource type="PackedScene" path="res://scenes/SettlementReportPanel.tscn" id="8_settlement"]
+[ext_resource type="PackedScene" path="res://scenes/NPC.tscn" id="9_npc"]
+[ext_resource type="PackedScene" path="res://scenes/QuestBoard.tscn" id="11_questboard"]
+[ext_resource type="PackedScene" path="res://scenes/QuestDetailPanel.tscn" id="12_questdetail"]
+[ext_resource type="PackedScene" path="res://scenes/DebugCommandPanel.tscn" id="13_debugpanel"]
+[ext_resource type="PackedScene" path="res://scenes/LocationCalibrationPanel.tscn" id="14_calib"]
+[ext_resource type="Script" uid="uid://blnbri0kp4dqi" path="res://scripts/main.gd" id="15_main"]
+
+[node name="Main" type="Node2D" unique_id=1470318262]
+script = ExtResource("15_main")
+
+[node name="CampusMap" parent="." unique_id=71602295 instance=ExtResource("1_map")]
+
+[node name="Player" parent="." unique_id=1893080075 instance=ExtResource("2_player")]
+position = Vector2(128, 800)
+
+[node name="NPCContainer" type="Node2D" parent="." unique_id=1765832085]
+
+[node name="Npc_Principal" parent="NPCContainer" unique_id=2122787969 instance=ExtResource("9_npc")]
+npc_id = "principal"
+npc_name = "校长"
+
+[node name="Npc_AdmissionsDirector" parent="NPCContainer" unique_id=142940730 instance=ExtResource("9_npc")]
+npc_id = "admissions_director"
+npc_name = "招生办主任"
+
+[node name="Npc_HomeroomTeacher" parent="NPCContainer" unique_id=172136324 instance=ExtResource("9_npc")]
+npc_id = "homeroom_teacher"
+npc_name = "班主任"
+
+[node name="Npc_ItOperator" parent="NPCContainer" unique_id=327695909 instance=ExtResource("9_npc")]
+npc_id = "it_operator"
+npc_name = "IT运维"
+
+[node name="Npc_LogisticsManager" parent="NPCContainer" unique_id=1014578808 instance=ExtResource("9_npc")]
+npc_id = "logistics_manager"
+npc_name = "后勤主管"
+
+[node name="Npc_ComplianceOfficer" parent="NPCContainer" unique_id=324178396 instance=ExtResource("9_npc")]
+npc_id = "compliance_officer"
+npc_name = "合规专员"
+
+[node name="Npc_ParentRepresentative" parent="NPCContainer" unique_id=978222890 instance=ExtResource("9_npc")]
+npc_id = "parent_representative"
+npc_name = "家长代表"
+
+[node name="Npc_StudentRepresentative" parent="NPCContainer" unique_id=1177066977 instance=ExtResource("9_npc")]
+npc_id = "student_representative"
+npc_name = "学生代表"
+position = Vector2(1, 1)
+
+[node name="DialogueManager" parent="." unique_id=2131532105 instance=ExtResource("3_dialogue")]
+
+[node name="TaskBoard" parent="." unique_id=1554477065 instance=ExtResource("4_taskboard")]
+
+[node name="Dashboard" parent="." unique_id=473174717 instance=ExtResource("5_dashboard")]
+
+[node name="QuestBoard" parent="." unique_id=902933202 instance=ExtResource("11_questboard")]
+
+[node name="QuestDetailPanel" parent="." unique_id=1167852210 instance=ExtResource("12_questdetail")]
+
+[node name="QuestToast" parent="." unique_id=1496298909 instance=ExtResource("6_toast")]
+
+[node name="HUD" parent="." unique_id=455613139 instance=ExtResource("7_hud")]
+
+[node name="SettlementReportPanel" parent="." unique_id=350244860 instance=ExtResource("8_settlement")]
+
+[node name="DebugCommandPanel" parent="." unique_id=1407119650 instance=ExtResource("13_debugpanel")]
+
+[node name="LocationCalibrationPanel" parent="." unique_id=531203714 instance=ExtResource("14_calib")]

@@ -1,0 +1,91 @@
+{
+  "phase": "NPC-Quests",
+  "result": "PASS",
+  "checks_total": 53,
+  "checks_passed": 53,
+  "checks_failed": 0,
+  "checks": {
+    "quests_json_load": true,
+    "quests_json_is_array": true,
+    "quests_all_have_ids": true,
+    "npc_admissions_director_has_quest_ids": true,
+    "npc_admissions_director_quest_q_admission_001_exists": true,
+    "npc_compliance_officer_has_quest_ids": true,
+    "npc_compliance_officer_quest_q_admission_002_exists": true,
+    "npc_homeroom_teacher_has_quest_ids": true,
+    "npc_homeroom_teacher_quest_q_leave_request_001_exists": true,
+    "npc_it_operator_has_quest_ids": true,
+    "npc_it_operator_quest_q_dashboard_001_exists": true,
+    "npc_it_operator_quest_q_canary_release_001_exists": true,
+    "npc_logistics_manager_has_quest_ids": true,
+    "npc_logistics_manager_quest_q_meal_count_001_exists": true,
+    "npc_logistics_manager_quest_q_repair_order_001_exists": true,
+    "npc_parent_representative_has_quest_ids": true,
+    "npc_parent_representative_quest_q_material_reminder_001_exists": true,
+    "npc_principal_has_quest_ids": true,
+    "npc_principal_quest_q_dashboard_001_exists": true,
+    "npc_student_representative_has_quest_ids": true,
+    "npc_student_representative_quest_q_leave_request_001_exists": true,
+    "npc_admissions_director_primary_metric_valid": true,
+    "npc_admissions_director_secondary_metric_valid": true,
+    "npc_compliance_officer_primary_metric_valid": true,
+    "npc_homeroom_teacher_primary_metric_valid": true,
+    "npc_homeroom_teacher_secondary_metric_valid": true,
+    "npc_it_operator_primary_metric_valid": true,
+    "npc_it_operator_secondary_metric_valid": true,
+    "npc_logistics_manager_primary_metric_valid": true,
+    "npc_logistics_manager_secondary_metric_valid": true,
+    "npc_parent_representative_primary_metric_valid": true,
+    "npc_parent_representative_secondary_metric_valid": true,
+    "npc_principal_primary_metric_valid": true,
+    "npc_principal_secondary_metric_valid": true,
+    "npc_student_representative_primary_metric_valid": true,
+    "npc_student_representative_secondary_metric_valid": true,
+    "quest_def_q_admission_001_exists": true,
+    "quest_def_q_admission_002_exists": true,
+    "quest_def_q_material_reminder_001_exists": true,
+    "quest_def_q_leave_request_001_exists": true,
+    "quest_def_q_meal_count_001_exists": true,
+    "quest_def_q_repair_order_001_exists": true,
+    "quest_def_q_dashboard_001_exists": true,
+    "quest_def_q_canary_release_001_exists": true,
+    "coverage_q_admission_001": true,
+    "coverage_q_admission_002": true,
+    "coverage_q_material_reminder_001": true,
+    "coverage_q_leave_request_001": true,
+    "coverage_q_meal_count_001": true,
+    "coverage_q_repair_order_001": true,
+    "coverage_q_dashboard_001": true,
+    "coverage_q_canary_release_001": true,
+    "coverage_all_t1_t8": true
+  },
+  "failures": [],
+  "coverage_matrix": {
+    "q_admission_001": [
+      "admissions_director"
+    ],
+    "q_admission_002": [
+      "compliance_officer"
+    ],
+    "q_material_reminder_001": [
+      "parent_representative"
+    ],
+    "q_leave_request_001": [
+      "homeroom_teacher",
+      "student_representative"
+    ],
+    "q_meal_count_001": [
+      "logistics_manager"
+    ],
+    "q_repair_order_001": [
+      "logistics_manager"
+    ],
+    "q_dashboard_001": [
+      "it_operator",
+      "principal"
+    ],
+    "q_canary_release_001": [
+      "it_operator"
+    ]
+  }
+}

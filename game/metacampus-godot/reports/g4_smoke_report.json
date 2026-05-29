@@ -1,0 +1,25 @@
+{
+  "phase": "G4",
+  "result": "PASS",
+  "checks_total": 15,
+  "checks_passed": 15,
+  "checks_failed": 0,
+  "checks": {
+    "demo_reset_ok": true,
+    "demo_reset_position": true,
+    "demo_reset_metrics": true,
+    "npc_game_running": true,
+    "npc_quest_completed": true,
+    "toast_parent_trust": true,
+    "toast_compliance": true,
+    "warning_compliance_drop": true,
+    "ui_quests_visible": true,
+    "ui_taskboard": true,
+    "ui_dashboard": true,
+    "ui_status": true,
+    "ui_t1_t2_t3_available": true,
+    "regression_g2_parent_trust": true,
+    "regression_g3_api_ok": true
+  },
+  "failures": []
+}

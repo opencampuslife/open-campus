@@ -1,0 +1,57 @@
+{
+  "npc_id": "admissions_director",
+  "npc_name": "周明远",
+  "dialogues": [
+    {
+      "id": "admissions_director_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_admission_001",
+      "speaker": "周明远",
+      "text": "欢迎来到招生办公室。最近咨询报名材料的家长越来越多，我一个人实在应付不过来。你作为AI招生助手，帮我处理一下基础咨询吧。记住，回答要准确、规范，不确定的问题及时转给我。",
+      "choices": [
+        {
+          "text": "调用招生知识库查询报名材料",
+          "action": "knowledge_ask",
+          "metric_effects": {"school_efficiency": 10, "parent_trust": 12, "compliance_safety": 10},
+          "next_line": -1,
+          "complete_quest": "q_admission_001"
+        },
+        {
+          "text": "让家长自己去官网查看（推脱）",
+          "action": "redirect_out",
+          "metric_effects": {"school_efficiency": -10, "parent_trust": -12},
+          "next_line": -1
+        },
+        {
+          "text": "直接回答'目前还不清楚'（敷衍）",
+          "action": "deny",
+          "metric_effects": {"parent_trust": -15},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "admissions_director_high_risk_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "周明远",
+      "text": "等一下——刚才那位家长问的是'能不能保证录取'？这个问题必须小心处理。招生录取从来不存在'保证'一说，任何形式的录取承诺都是严重违规。你打算怎么回复？",
+      "choices": [
+        {
+          "text": "明确告知不可承诺录取，建议咨询招生办",
+          "action": "safe_answer",
+          "metric_effects": {"compliance_safety": 15, "parent_trust": 10},
+          "next_line": -1,
+          "complete_quest": "q_admission_002"
+        },
+        {
+          "text": "暗示可以通过关系运作（严重违规）",
+          "action": "promise_admission",
+          "metric_effects": {"parent_trust": 10, "compliance_safety": -20},
+          "next_line": -1,
+          "fail_quest": "q_admission_002"
+        }
+      ]
+    }
+  ]
+}

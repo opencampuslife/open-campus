@@ -1,0 +1,44 @@
+{
+  "npc_count": 100,
+  "samples": 5072,
+  "fps_avg": 144.91,
+  "fps_min": 144.0,
+  "process_time_us_p50": 0.7,
+  "process_time_us_p95": 1.4,
+  "process_time_us_p99": 1.7,
+  "physics_time_us_p50": 0.4,
+  "physics_time_us_p95": 1.1,
+  "physics_time_us_p99": 1.5,
+  "spike_count": 0,
+  "spike_frequency": 0.0,
+  "memory_start_bytes": 298116703,
+  "memory_end_bytes": 299569199,
+  "memory_delta_bytes": 1452496,
+  "json_timings": {
+    "dialogues": {
+      "cold_load_us": 45,
+      "parse_us": 119,
+      "hot_load_us": 27
+    },
+    "quests": {
+      "cold_load_us": 31,
+      "parse_us": 136,
+      "hot_load_us": 27
+    },
+    "npcs": {
+      "cold_load_us": 26,
+      "parse_us": 42,
+      "hot_load_us": 21
+    },
+    "locations": {
+      "cold_load_us": 23,
+      "parse_us": 39,
+      "hot_load_us": 20
+    },
+    "api_config": {
+      "cold_load_us": 23,
+      "parse_us": 26,
+      "hot_load_us": 19
+    }
+  }
+}

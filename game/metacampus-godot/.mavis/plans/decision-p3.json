@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "run-capture",
+      "verdict": "accept",
+      "reason": "120 条 trace 验证通过，mock/off/live/fallback 各 ≥30 样本，数据与报告交叉校验一致。bottleneck 分析完整。"
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "smoke-verify",
+      "title": "运行 Smoke g2/g3/g4——确认仪器化未引发回归",
+      "prompt": "确认 P1 仪器化未破坏现有功能。\n\n项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot\n\n执行步骤：\n1. 终止所有 Godot/Python 进程\n2. 启动 Godot（需要 display，因为 TestHarness 需要 HTTP endpoint）\n3. 等待 TestHarness 就绪 (port 16007)\n4. 依次运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py\n5. 确认 g2/g3/g4 全部通过（returncode=0）\n6. 记录总耗时\n7. 输出 Smoke 验证报告到 reports/smoke-p1-regression.md\n\n注意：BENCH_MODE 默认 false（由 env var PERF_BENCH 控制，不设则 false），smoke 测试时不需要设 PERF_BENCH。",
+      "assigned_to": "general",
+      "verified_by": "verifier",
+      "verify_prompt": "1. 检查 g2/g3/g4 是否全部通过 (returncode=0)\n2. 检查 reports/smoke-p1-regression.md 存在\n3. 如果任意 smoke 失败，FAIL 并打印错误",
+      "timeout_ms": 600000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "采集数据验证通过。现在跑 Smoke 回归确认仪器化无破坏。"
+}

@@ -1,0 +1,51 @@
+{
+  "npc_id": "parent_representative",
+  "npc_name": "顾兰",
+  "dialogues": [
+    {
+      "id": "parent_representative_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_material_reminder_001",
+      "speaker": "顾兰",
+      "text": "你好！我是家长群的联络人顾兰。最近有好几位家长反映报名材料还没交齐，但又不好意思反复催学校——你知道的，家长们都怕被嫌啰嗦。你能不能用AI系统给大家群发一个催办提醒？既高效又不会让人觉得在针对谁。",
+      "choices": [
+        {
+          "text": "使用自动提醒工具群发催办通知",
+          "action": "auto_reminder",
+          "metric_effects": {"school_efficiency": 12, "parent_trust": 10},
+          "next_line": -1,
+          "complete_quest": "q_material_reminder_001"
+        },
+        {
+          "text": "建议家长自己盯着材料清单（推卸责任）",
+          "action": "ignore_reminder",
+          "metric_effects": {"parent_trust": -15, "school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "parent_representative_high_risk_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "顾兰",
+      "text": "对了，催办的时候有家长私下问我——'报完名是不是就稳了？学校能不能给个准话？'她在家长群里地位挺高的，如果回答不好可能会引发一大波追问。但我也知道，录取这事儿不能乱说……你帮我想想怎么回？",
+      "choices": [
+        {
+          "text": "明确告知录取有规范流程，不可承诺结果",
+          "action": "safe_answer",
+          "metric_effects": {"compliance_safety": 15, "parent_trust": 10},
+          "next_line": -1,
+          "complete_quest": "q_admission_002"
+        },
+        {
+          "text": "暗示'报完名基本没问题'（合规红线）",
+          "action": "promise_admission",
+          "metric_effects": {"parent_trust": 12, "compliance_safety": -20},
+          "next_line": -1,
+          "fail_quest": "q_admission_002"
+        }
+      ]
+    }
+  ]
+}

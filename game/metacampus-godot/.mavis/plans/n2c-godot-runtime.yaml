@@ -1,0 +1,232 @@
+version: 1
+plan:
+  name: 'N2C：Godot 场景集成与运行时验收'
+  max_concurrency: 4
+  max_consecutive_failures: 2
+  max_cycles: 6
+
+tasks:
+  - id: n2c-manifest
+    title: '创建 NPC 资产 Manifest'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：创建 data/npc_assets_manifest.json，列出所有 8 个 NPC 的资产路径和规格。
+
+      8 个 NPC（目录 assets/npcs/<npc_id>/baseline/）：
+      - admissions_director
+      - compliance_officer
+      - it_operator
+      - homeroom_teacher
+      - logistics_manager
+      - parent_representative
+      - student_representative
+      - principal
+
+      每个 NPC 需要记录：
+      - portrait_neutral.png, portrait_happy.png, portrait_worried.png, portrait_strict.png
+      - sprite_idle.png
+      - walk_down.png, walk_up.png, walk_left.png, walk_right.png
+
+      格式示例：
+      {
+        "npc_id": "admissions_director",
+        "asset_root": "assets/npcs/admissions_director/baseline",
+        "portraits": { "neutral": "...", "happy": "...", "worried": "...", "strict": "..." },
+        "sprite_idle": "...",
+        "walk_sheet": { "down": "...", "up": "...", "left": "...", "right": "..." }
+      }
+
+      验证每个文件存在后再写入 JSON。用 Python 遍历 assets/npcs/ 下的 baseline 目录统计实际文件。
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: |
+      独立验证 data/npc_assets_manifest.json：
+      1. 读取 JSON
+      2. 对每个 NPC，用 Python pathlib 验证所有 9 个文件路径都存在且为有效 PNG
+      3. 验证 PNG 规格（portrait 256×256、sprite 64×64、walk 256×64）
+      4. 报告通过/失败列表
+    timeout_ms: 300000
+    depends_on: []
+    gates: []
+
+  - id: n2c-loader
+    title: 'Loader 和 Factory 路径确认'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：确认 npc_sprite_loader.gd 和 npc_factory.gd 能正确加载 data/npc_assets_manifest.json 中的资产路径。
+
+      检查清单：
+      1. npc_sprite_loader.gd — has_sprite() 和 load_sprite() 是否兼容 baseline/ 子目录路径？当前路径解析是什么模式？
+      2. npc_factory.gd — 能否接受 manifest 中的资产路径构建 AnimatedSprite2D？
+      3. data/npcs/npc_*.json — 是否已关联到正确的资产路径？
+      4. 如有不兼容，写出具体 diff，不要大改，只修路径兼容性问题
+
+      输出：
+      - 确认报告（哪些路径已正确，哪些需要改）
+      - 如有修改，列出改动内容
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: |
+      验证 loader/factory 路径兼容性：
+      1. 读取 npc_sprite_loader.gd 的 has_sprite() 和 load_sprite() 逻辑
+      2. 确认对 assets/npcs/<npc_id>/baseline/sprite_idle.png 的解析路径
+      3. 读取 npc_factory.gd 的 AnimatedSprite2D 构建逻辑
+      4. 确认使用 animation_spec.json 或 manifest 路径的正确性
+      5. 列出任何路径不匹配的项
+    timeout_ms: 300000
+    depends_on: [n2c-manifest]
+    gates: []
+
+  - id: n2c-spawn
+    title: 'Spawn 配置与场景放置'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：确认 8 NPC 可在 Godot 场景中实例化。
+
+      检查清单：
+      1. 检查 data/npc_spawn_config.json 是否存在？格式是什么？
+      2. 如不存在或格式不对，创建/更新它，包含 8 NPC 的 spawn 位置配置
+      3. 确认 npc_registry.gd 能读取 spawn config 并实例化 NPC
+      4. 确认现有场景（main.tscn 或其他）中有 NPC 挂载点
+
+      输出：npc_spawn_config.json（已更新）+ 确认报告
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: |
+      验证 spawn 配置完整性：
+      1. 读取 data/npc_spawn_config.json
+      2. 验证 8 个 NPC 都在配置中
+      3. 每个 NPC 有 position/scene 字段
+      4. 读取 npc_registry.gd 确认能加载 spawn config
+    timeout_ms: 300000
+    depends_on: [n2c-loader]
+    gates: []
+
+  - id: n2c-smoke
+    title: 'Runtime 冒烟测试'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：用 Godot headless 模式验证 8 NPC 可加载和实例化。
+
+      验证步骤：
+      1. 确认 Godot 4.x 可执行文件路径（godot --version）
+      2. 写 GDScript smoke 测试脚本（extends SceneTree），用 ClassDB 或 preload 加载每个 NPC 的 sprite
+      3. 验证 npc_sprite_loader.gd 可解析 manifest 中的路径
+      4. 验证 npc_factory.gd 可构建 AnimatedSprite2D
+
+      运行命令（用 Godot headless）：
+      godot --headless --script smoke_test.gd
+
+      输出：每个 NPC 的加载结果（成功/失败 + 错误信息）
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: |
+      独立运行 Godot headless smoke 测试：
+      1. 写 GDScript 测试脚本，加载 data/npc_assets_manifest.json
+      2. 遍历 8 个 NPC，尝试加载 sprite_idle.png
+      3. 运行 godot --headless --script <test>.gd
+      4. 报告 8/8 是否全部通过
+      5. 如有失败，报告具体 NPC 和错误类型
+    timeout_ms: 600000
+    depends_on: [n2c-spawn]
+    gates: []
+
+  - id: n2c-visual-qa
+    title: 'Visual QA 身份一致性检查'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：验证 8 NPC 资产的视觉一致性（身份一致、尺寸正确、透明背景）。
+
+      检查：读取 assets/npcs/<npc_id>/baseline/ 下的 PNG
+      1. portrait 尺寸 256×256、sprite 64×64、walk 256×64
+      2. 读取 animation_spec.json 确认 naming_convention
+      3. 确认无意外文件（如旧的 expression_*.png）
+      4. 确认 walk sheet 的 4 帧布局正确（每个方向 64px 宽）
+
+      输出：通过/失败清单
+    assigned_to: verifier
+    verified_by: verifier
+    verify_prompt: |
+      独立视觉 QA：
+      1. 用 Python struct 解析每个 PNG 验证尺寸
+      2. 对比 animation_spec.json 确认命名
+      3. 检查透明背景（color_type=6 且非白底）
+      4. 检查 walk sheet 帧间距（4 帧等宽）
+      5. 报告通过/失败清单
+    timeout_ms: 300000
+    depends_on: [n2c-manifest]
+    gates: []
+
+  - id: n2c-dialogue-quest
+    title: 'Dialogue 和 Quest 绑定验证'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：验证 8 NPC 的对话包和任务绑定可读。
+
+      检查清单：
+      1. data/dialogues/ 下是否有 8 个对应的 dialogue 文件
+      2. data/npcs/npc_*.json 中的 dialogue_path 是否指向存在的文件
+      3. data/quests/ 下 NPC quest binding 是否可读
+      4. npc_registry.gd 读取 quest binding 是否正常
+
+      输出：8/8 对话和任务绑定状态报告
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: |
+      独立验证对话和任务绑定：
+      1. 列出 data/dialogues/ 下所有文件
+      2. 读取 data/npcs/npc_*.json 检查 dialogue_path 字段
+      3. 验证每个 dialogue_path 指向的文件存在
+      4. 读取 data/quests/ 确认 quest binding 结构
+      5. 报告通过/失败清单
+    timeout_ms: 300000
+    depends_on: [n2c-spawn]
+    gates: []
+
+  - id: n2c-report
+    title: '最终报告 N2C'
+    prompt: |
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      目标：生成 reports/n2c-godot-runtime-integration.md
+
+      报告结构：
+      ## 检查项清单
+      - [x] Manifest：8/8 NPC 资产路径完整
+      - [x] PNG 加载：每个文件可解析
+      - [x] Loader/Factory 路径兼容性
+      - [x] Spawn 配置：8/8 NPC 可实例化
+      - [x] Runtime smoke：Godot headless 通过
+      - [x] Visual QA：身份一致、尺寸正确、透明背景
+      - [x] 对话绑定：8/8 可读
+      - [x] 任务绑定：8/8 可读
+
+      ## 通过项
+      （列出实际通过的项）
+
+      ## 失败项（如有）
+      （列出失败的项及原因）
+
+      ## 技术债（如有）
+      （列出未修复但需跟踪的项）
+
+      ## 下一步建议
+      （基于验收结果给出 N2D 建议）
+    assigned_to: verifier
+    verified_by: verifier
+    verify_prompt: |
+      验证报告完整性：
+      1. 报告必须包含所有 8 个检查项
+      2. 每个检查项有明确 PASS/FAIL 结论
+      3. 如有 FAIL，描述具体错误和 root cause
+      4. 技术债有量化描述（不是"有些问题"而是"需要修 X 处"）
+      5. 下一步建议与报告结论对应
+    timeout_ms: 300000
+    depends_on: [n2c-smoke, n2c-visual-qa, n2c-dialogue-quest]
+    gates: []

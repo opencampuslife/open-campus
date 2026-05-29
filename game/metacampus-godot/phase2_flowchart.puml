@@ -1,0 +1,134 @@
+@startuml
+!define LIGHTBLUE #E1F5FE
+!define LIGHTGREEN #E8F5E9
+!define LIGHTYELLOW #FFF9C4
+!define LIGHTRED #FFCDD2
+!define LIGHTPURPLE #F3E5F5
+
+title MetaCampus 2D - Phase 2 系统流程图
+
+' ========== 日循环 ==========
+package "TimeManager (日循环)" as TM LIGHTBLUE {
+  () "新的一天开始" as DayStart
+  () "时间推进 (7:00-22:00)" as TimeTick
+  () "日末检测 (22:00)" as DayEnd
+}
+
+' ========== 核心系统 ==========
+package "核心系统" as CORE {
+  component "ResourceManager\n(AP/算力/预算)" as RM LIGHTGREEN
+  component "MetricManager\n(4主指标+子指标)" as MM LIGHTYELLOW
+  component "SkillManager\n(6技能x10级)" as SM #E8EAF6
+  component "EventManager\n(随机事件)" as EM #FCE4EC
+  component "NpcRegistry\n(信任度/日程)" as NR #FFF3E0
+}
+
+' ========== UI层 ==========
+package "UI层 (Phase 2)" as UI {
+  component "HUD面板" as HUD LIGHTPURPLE {
+    () "时间显示" as HUD_Time
+    () "AP/算力/预算" as HUD_Res
+    () "四大指标" as HUD_Metric
+    () "任务提醒" as HUD_Quest
+  }
+  
+  component "Dashboard面板" as DASH LIGHTPURPLE {
+    () "主指标+子指标" as DASH_Metric
+    () "技能进度条" as DASH_Skill
+    () "NPC信任等级" as DASH_NPC
+    () "升级项进度" as DASH_Upg
+    () "事件提醒" as DASH_Event
+  }
+}
+
+' ========== 任务系统 ==========
+package "QuestManager (四层任务)" as QM {
+  () "主线任务\n(章节推进)" as Q_Main
+  () "每日委托\n(每日刷新)" as Q_Daily
+  () "NPC支线\n(信任解锁)" as Q_NPC
+  () "随机事件\n(概率触发)" as Q_Event
+}
+
+' ========== 每日结算 ==========
+package "每日结算系统" as SETTLE LIGHTRED {
+  () "读取任务/事件记录" as S1
+  () "ResourceManager结算" as S2
+  () "MetricManager结算\n(含子指标阈值)" as S3
+  () "EventManager\n触发次日事件" as S4
+  () "SaveManager存档" as S5
+  () "HUD/Dashboard更新" as S6
+}
+
+' ========== 流程图连接 ==========
+
+' 日循环流程
+DayStart -down-> TimeTick : 开始新的一天\nstart_day()
+TimeTick -down-> DayEnd : 到达22:00\n_end_day()
+
+' 日末触发结算
+DayEnd -right-> S1 : 自动触发\nDailySettlement()
+S1 --> S2
+S2 --> S3
+S3 --> S4
+S4 --> S5
+S5 --> S6
+
+' 结算完成后
+S6 -down-> DayStart : 进入下一天\n_advance_day()
+
+' UI数据绑定
+TM -up-> HUD_Time : time_changed信号
+RM -up-> HUD_Res : ap_changed/compute_changed/budget_changed
+MM -up-> HUD_Metric : metric_changed/all_metrics_updated
+QM -up-> HUD_Quest : quest_status_changed
+
+RM -up-> DASH_Upg : get_save_data()
+MM -up-> DASH_Metric : get_all_with_sub_metrics()
+SM -up-> DASH_Skill : get_all_skills()
+NR -up-> DASH_NPC : get_trust_level()
+EM -up-> DASH_Event : pending_events_changed
+
+' 任务系统连接
+QM -right-> Q_Main : Chapter 1-6
+QM -right-> Q_Daily : 每日刷新
+QM -right-> Q_NPC : NPC信任解锁
+QM -right-> Q_Event : EventManager联动
+
+' 系统互连
+RM <--> MM : 指标影响预算\n预算影响升级
+RM <--> SM : 行为给予技能XP
+MM <--> EM : 指标阈值\n触发事件
+NR <--> QM : NPC信任\n解锁支线
+SM <--> Q_NPC : 技能等级\n影响任务选项
+
+' 每日结算详细流程
+S2 : 处理AP恢复\n算力消耗统计\n预算收支
+S3 : 计算任务奖励\n子指标变化\n阈值检测
+S4 : 根据概率\n选定次日事件\n受指标影响
+S5 : 存档所有系统状态
+
+note right of S3
+  阈值后果检测：
+  - 合规<40：审计预警
+  - 系统<40：工具不可用
+  - 家长信任<35：投诉增加
+  - 效率<35：工单翻倍
+end note
+
+note bottom of HUD
+  实时显示 (CanvasLayer)
+  - 时间/阶段
+  - AP/算力/预算
+  - 4大指标(带颜色警告)
+  - 当前任务提示
+end note
+
+note bottom of DASH
+  分页显示 (TabContainer)
+  Tab1: 指标详情+子指标
+  Tab2: 6大技能进度
+  Tab3: 8 NPC信任+关系事件
+  Tab4: 升级项+每日结算报告
+end note
+
+@enduml

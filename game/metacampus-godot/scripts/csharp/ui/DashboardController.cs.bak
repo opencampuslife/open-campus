@@ -1,0 +1,566 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class DashboardController : CanvasLayer
+{
+    private Control _root = null!;
+    private Button _closeButton = null!;
+
+    private VBoxContainer _metricsVBox = null!;
+    private VBoxContainer _skillsVBox = null!;
+    private VBoxContainer _npcVBox = null!;
+    private VBoxContainer _upgradesVBox = null!;
+
+    private MetricManager _metricManager = null!;
+    private SkillManager _skillManager = null!;
+    private NpcRegistry _npcRegistry = null!;
+    private ResourceManager _resourceManager = null!;
+
+    private readonly Dictionary<string, ProgressBar> _metricBars = new();
+    private readonly Dictionary<string, Label> _metricLabels = new();
+    private readonly Dictionary<string, Label> _subMetricLabels = new();
+
+    private readonly Dictionary<string, ProgressBar> _skillBars = new();
+    private readonly Dictionary<string, Label> _skillLabels = new();
+
+    private readonly Dictionary<string, ProgressBar> _npcTrustBars = new();
+    private readonly Dictionary<string, Label> _npcTrustLabels = new();
+
+    private readonly Dictionary<string, Label> _upgradeLabels = new();
+
+    public override void _Ready()
+    {
+        BindNodes();
+        BindManagers();
+        BindSignals();
+
+        Visible = false;
+
+        BuildAllTabs();
+        RefreshAll();
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("toggle_dashboard"))
+        {
+            Toggle();
+            GetViewport().SetInputAsHandled();
+        }
+    }
+
+    public void Toggle()
+    {
+        Visible = !Visible;
+        if (Visible)
+            RefreshAll();
+    }
+
+    public void Open()
+    {
+        Visible = true;
+        RefreshAll();
+    }
+
+    public void Close()
+    {
+        Visible = false;
+    }
+
+    private void BindNodes()
+    {
+        _root = GetNode<Control>("Root");
+        _closeButton = GetNode<Button>("Root/Panel/VBox/HeaderRow/CloseButton");
+
+        _metricsVBox = GetNode<VBoxContainer>("Root/Panel/VBox/Tabs/MetricsTab/MetricsVBox");
+        _skillsVBox = GetNode<VBoxContainer>("Root/Panel/VBox/Tabs/SkillsTab/SkillsVBox");
+        _npcVBox = GetNode<VBoxContainer>("Root/Panel/VBox/Tabs/NpcTab/NpcVBox");
+        _upgradesVBox = GetNode<VBoxContainer>("Root/Panel/VBox/Tabs/UpgradesTab/UpgradesVBox");
+
+        _closeButton.Pressed += Close;
+    }
+
+    private void BindManagers()
+    {
+        _metricManager = GetNode<MetricManager>("/root/MetricManager");
+        _skillManager = GetNode<SkillManager>("/root/SkillManager");
+        _npcRegistry = GetNode<NpcRegistry>("/root/NpcRegistry");
+        _resourceManager = GetNode<ResourceManager>("/root/ResourceManager");
+    }
+
+    private void BindSignals()
+    {
+        _metricManager.MetricChanged += OnMetricChanged;
+        _metricManager.ThresholdTriggered += OnThresholdTriggered;
+        _skillManager.SkillXpChanged += OnSkillXpChanged;
+        _skillManager.SkillLeveledUp += OnSkillLeveledUp;
+        _npcRegistry.NpcTrustChanged += OnNpcTrustChanged;
+        _resourceManager.ResourceChanged += OnResourceChanged;
+    }
+
+    private void BuildAllTabs()
+    {
+        BuildMetricsTab();
+        BuildSkillsTab();
+        BuildNpcTab();
+        BuildUpgradesTab();
+    }
+
+    private void RefreshAll()
+    {
+        RefreshMetricsTab();
+        RefreshSkillsTab();
+        RefreshNpcTab();
+        RefreshUpgradesTab();
+    }
+
+    // --------------------
+    // Tab 1: Metrics
+    // --------------------
+
+    private void BuildMetricsTab()
+    {
+        ClearChildren(_metricsVBox);
+        _metricBars.Clear();
+        _metricLabels.Clear();
+        _subMetricLabels.Clear();
+
+        AddSectionTitle(_metricsVBox, "主指标");
+
+        foreach (var metricId in GetMainMetricIds())
+        {
+            var row = CreateProgressRow(
+                GetMetricDisplayName(metricId),
+                0,
+                100,
+                out var label,
+                out var bar
+            );
+            _metricsVBox.AddChild(row);
+            _metricLabels[metricId] = label;
+            _metricBars[metricId] = bar;
+        }
+
+        AddSectionTitle(_metricsVBox, "子指标");
+
+        var subSnapshot = _metricManager.GetSubMetricSnapshot();
+        foreach (var metricKey in subSnapshot.Keys)
+        {
+            var metricStr = metricKey.ToString();
+            var subDict = (Godot.Collections.Dictionary)subSnapshot[metricKey];
+            foreach (var subKey in subDict.Keys)
+            {
+                var subStr = subKey.ToString();
+                var subVal = (int)subDict[subKey];
+                var label = new Label
+                {
+                    Text = $"{GetSubMetricDisplayName(subStr)}：{subVal}"
+                };
+                _metricsVBox.AddChild(label);
+                _subMetricLabels[subStr] = label;
+            }
+        }
+    }
+
+    private void RefreshMetricsTab()
+    {
+        foreach (var metricId in GetMainMetricIds())
+        {
+            var value = _metricManager.GetMetric(metricId);
+
+            if (_metricLabels.TryGetValue(metricId, out var label))
+                label.Text = $"{GetMetricDisplayName(metricId)}：{value}";
+
+            if (_metricBars.TryGetValue(metricId, out var bar))
+            {
+                bar.Value = value;
+                ApplyWarningColor(label, bar, value);
+            }
+        }
+
+        var subSnapshot = _metricManager.GetSubMetricSnapshot();
+        foreach (var metricKey in subSnapshot.Keys)
+        {
+            var subDict = (Godot.Collections.Dictionary)subSnapshot[metricKey];
+            foreach (var subKey in subDict.Keys)
+            {
+                var subStr = subKey.ToString();
+                var subVal = (int)subDict[subKey];
+                if (_subMetricLabels.TryGetValue(subStr, out var label))
+                    label.Text = $"{GetSubMetricDisplayName(subStr)}：{subVal}";
+            }
+        }
+    }
+
+    // --------------------
+    // Tab 2: Skills
+    // --------------------
+
+    private void BuildSkillsTab()
+    {
+        ClearChildren(_skillsVBox);
+        _skillBars.Clear();
+        _skillLabels.Clear();
+
+        AddSectionTitle(_skillsVBox, "技能进度");
+
+        foreach (var skillId in GetSkillIds())
+        {
+            var row = CreateProgressRow(
+                GetSkillDisplayName(skillId),
+                0,
+                100,
+                out var label,
+                out var bar
+            );
+            _skillsVBox.AddChild(row);
+            _skillLabels[skillId] = label;
+            _skillBars[skillId] = bar;
+        }
+    }
+
+    private void RefreshSkillsTab()
+    {
+        var snapshot = _skillManager.GetSkillSnapshot();
+
+        foreach (var skillId in GetSkillIds())
+        {
+            if (!snapshot.ContainsKey(skillId))
+                continue;
+
+            var data = (Godot.Collections.Dictionary)snapshot[skillId];
+            var level = (int)data["level"];
+            var xp = (int)data["xp"];
+            var nextXp = (int)data["next_xp"];
+
+            if (_skillLabels.TryGetValue(skillId, out var label))
+                label.Text = $"{GetSkillDisplayName(skillId)}：Lv.{level}  {xp}/{nextXp} XP";
+
+            if (_skillBars.TryGetValue(skillId, out var bar))
+            {
+                bar.MaxValue = nextXp > 0 ? nextXp : 100;
+                bar.Value = Mathf.Clamp(xp, 0, (int)bar.MaxValue);
+            }
+        }
+    }
+
+    // --------------------
+    // Tab 3: NPC Trust
+    // --------------------
+
+    private void BuildNpcTab()
+    {
+        ClearChildren(_npcVBox);
+        _npcTrustBars.Clear();
+        _npcTrustLabels.Clear();
+
+        AddSectionTitle(_npcVBox, "NPC 信任度");
+
+        foreach (var npcId in GetNpcIds())
+        {
+            var row = CreateProgressRow(
+                GetNpcDisplayName(npcId),
+                0,
+                10,
+                out var label,
+                out var bar
+            );
+            _npcVBox.AddChild(row);
+            _npcTrustLabels[npcId] = label;
+            _npcTrustBars[npcId] = bar;
+        }
+
+        AddSectionTitle(_npcVBox, "关系事件");
+
+        var events = _npcRegistry.GetRelationshipEventSnapshot();
+        if (events.Count == 0)
+        {
+            _npcVBox.AddChild(new Label { Text = "暂无关系事件记录" });
+        }
+        else
+        {
+            foreach (var npcKey in events.Keys)
+            {
+                var npcStr = npcKey.ToString();
+                var evtArray = (Godot.Collections.Array)events[npcKey];
+                var evtStr = string.Join("、", evtArray);
+                _npcVBox.AddChild(new Label { Text = $"{GetNpcDisplayName(npcStr)}：{evtStr}" });
+            }
+        }
+    }
+
+    private void RefreshNpcTab()
+    {
+        var snapshot = _npcRegistry.GetTrustSnapshot();
+
+        foreach (var npcId in GetNpcIds())
+        {
+            var value = snapshot.ContainsKey(npcId) ? (int)snapshot[npcId] : 0;
+
+            if (_npcTrustLabels.TryGetValue(npcId, out var label))
+                label.Text = $"{GetNpcDisplayName(npcId)}：信任 {value}/10";
+
+            if (_npcTrustBars.TryGetValue(npcId, out var bar))
+                bar.Value = value;
+        }
+    }
+
+    // --------------------
+    // Tab 4: Upgrades
+    // --------------------
+
+    private void BuildUpgradesTab()
+    {
+        ClearChildren(_upgradesVBox);
+        _upgradeLabels.Clear();
+
+        AddSectionTitle(_upgradesVBox, "升级项进度");
+
+        var snapshot = _resourceManager.GetUpgradeUnlockSnapshot();
+        foreach (var key in snapshot.Keys)
+        {
+            var upgradeId = key.ToString();
+            var unlocked = (bool)snapshot[key];
+            var label = new Label { Text = BuildUpgradeText(upgradeId, unlocked) };
+            _upgradesVBox.AddChild(label);
+            _upgradeLabels[upgradeId] = label;
+        }
+    }
+
+    private void RefreshUpgradesTab()
+    {
+        var snapshot = _resourceManager.GetUpgradeUnlockSnapshot();
+        foreach (var key in snapshot.Keys)
+        {
+            var upgradeId = key.ToString();
+            var unlocked = (bool)snapshot[key];
+            if (_upgradeLabels.TryGetValue(upgradeId, out var label))
+                label.Text = BuildUpgradeText(upgradeId, unlocked);
+        }
+    }
+
+    // --------------------
+    // Signal handlers (match actual manager signal signatures)
+    // --------------------
+
+    private void OnMetricChanged(string metricId, int oldValue, int newValue)
+    {
+        if (!Visible) return;
+        RefreshMetricsTab();
+    }
+
+    private void OnThresholdTriggered(string metricId, string consequenceId)
+    {
+        if (!Visible) return;
+        RefreshMetricsTab();
+    }
+
+    private void OnSkillXpChanged(string skillId, int level, int xp, int maxXp)
+    {
+        if (!Visible) return;
+        RefreshSkillsTab();
+    }
+
+    private void OnSkillLeveledUp(string skillId, int newLevel, string unlock)
+    {
+        if (!Visible) return;
+        RefreshSkillsTab();
+    }
+
+    private void OnNpcTrustChanged(string npcId, int oldLevel, int newLevel)
+    {
+        if (!Visible) return;
+        RefreshNpcTab();
+    }
+
+    private void OnResourceChanged(string resourceId, int value, int maxValue = 0)
+    {
+        if (!Visible) return;
+        RefreshUpgradesTab();
+    }
+
+    // --------------------
+    // UI helpers
+    // --------------------
+
+    private static Control CreateProgressRow(
+        string title,
+        double min,
+        double max,
+        out Label label,
+        out ProgressBar bar
+    )
+    {
+        var box = new VBoxContainer();
+
+        label = new Label { Text = title };
+
+        bar = new ProgressBar
+        {
+            MinValue = min,
+            MaxValue = max,
+            Value = min,
+            ShowPercentage = false,
+            CustomMinimumSize = new Vector2(360, 18)
+        };
+
+        box.AddChild(label);
+        box.AddChild(bar);
+        return box;
+    }
+
+    private static void AddSectionTitle(VBoxContainer parent, string title)
+    {
+        parent.AddChild(new Label { Text = $"【{title}】" });
+    }
+
+    private static void ClearChildren(Node node)
+    {
+        foreach (var child in node.GetChildren())
+        {
+            if (child is Node childNode)
+                childNode.QueueFree();
+        }
+    }
+
+    private static void ApplyWarningColor(Label label, ProgressBar bar, int value)
+    {
+        if (value < 20)
+        {
+            label.Modulate = new Color(1f, 0.25f, 0.25f);
+            bar.Modulate = new Color(1f, 0.25f, 0.25f);
+        }
+        else if (value < 40)
+        {
+            label.Modulate = new Color(1f, 0.75f, 0.2f);
+            bar.Modulate = new Color(1f, 0.75f, 0.2f);
+        }
+        else
+        {
+            label.Modulate = Colors.White;
+            bar.Modulate = Colors.White;
+        }
+    }
+
+    private static string BuildUpgradeText(string upgradeId, bool unlocked)
+    {
+        var status = unlocked ? "已解锁 ✓" : "未解锁";
+        return $"{GetUpgradeDisplayName(upgradeId)}：{status}";
+    }
+
+    // --------------------
+    // Static data
+    // --------------------
+
+    private static string[] GetMainMetricIds() => new[]
+    {
+        "school_efficiency",
+        "parent_trust",
+        "compliance_safety",
+        "system_stability"
+    };
+
+    private static string[] GetSkillIds() => new[]
+    {
+        "admissions",
+        "academic_affairs",
+        "compliance",
+        "operations",
+        "data_intelligence",
+        "communication"
+    };
+
+    private static string[] GetNpcIds() => new[]
+    {
+        "principal",
+        "admissions_director",
+        "homeroom_teacher",
+        "it_operator",
+        "logistics_manager",
+        "compliance_officer",
+        "parent_representative",
+        "student_representative"
+    };
+
+    private static string GetMetricDisplayName(string id)
+    {
+        return id switch
+        {
+            "school_efficiency" => "学校效率",
+            "parent_trust" => "家长信任",
+            "compliance_safety" => "合规安全",
+            "system_stability" => "系统稳定",
+            _ => id
+        };
+    }
+
+    private static string GetSubMetricDisplayName(string id)
+    {
+        return id switch
+        {
+            "work_order_backlog" => "工单积压",
+            "enrollment_conversion" => "招生转化",
+            "response_time" => "响应时间",
+            "complaint_rate" => "投诉率",
+            "student_satisfaction" => "学生满意度",
+            "reputation" => "声誉",
+            "ai_hallucination_rate" => "AI 幻觉率",
+            "kb_freshness" => "知识库新鲜度",
+            "kb_coverage" => "知识库覆盖率",
+            "api_latency" => "API 延迟",
+            "kb_accuracy" => "知识库准确率",
+            "citation_completeness" => "引文完整度",
+            _ => id
+        };
+    }
+
+    private static string GetSkillDisplayName(string id)
+    {
+        return id switch
+        {
+            "admissions" => "招生咨询",
+            "academic_affairs" => "教务处理",
+            "compliance" => "合规治理",
+            "operations" => "系统运维",
+            "data_intelligence" => "数据智能",
+            "communication" => "沟通协调",
+            _ => id
+        };
+    }
+
+    private static string GetNpcDisplayName(string id)
+    {
+        return id switch
+        {
+            "principal" => "校长",
+            "admissions_director" => "招生办主任",
+            "homeroom_teacher" => "班主任",
+            "it_operator" => "IT 运维",
+            "logistics_manager" => "后勤主管",
+            "compliance_officer" => "合规专员",
+            "parent_representative" => "家长代表",
+            "student_representative" => "学生代表",
+            _ => id
+        };
+    }
+
+    private static string GetUpgradeDisplayName(string id)
+    {
+        return id switch
+        {
+            "rag_knowledge_base" => "RAG 知识库",
+            "compliance_filter" => "合规拦截器",
+            "ticket_router" => "工单分流器",
+            "parent_notification_bot" => "家长通知机器人",
+            "academic_summarizer" => "教务摘要器",
+            "canary_console" => "Canary 控制台",
+            "public_opinion_radar" => "舆情雷达",
+            "ops_dashboard" => "运营驾驶舱",
+            "privacy_masker" => "隐私脱敏器",
+            "sla_monitor" => "SLA 监控器",
+            "policy_diff_checker" => "政策差异检测器",
+            "multi_agent_orchestrator" => "多 Agent 编排器",
+            _ => id
+        };
+    }
+}

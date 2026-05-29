@@ -1,0 +1,9 @@
+{
+  "last_cycle": [
+    {"task_id": "n2b3-fixup-b-assets", "verdict": "accept", "reason": "20/20 独立验证通过。owner 手动将文件从 root 移到 baseline/ 以匹配目录规范。"},
+    {"task_id": "n2b3-fixup-b-report", "verdict": "accept", "reason": "owner 已写入 reports/n2b3-fixup-b-validation.md。"}
+  ],
+  "next_cycle": [],
+  "plan_complete": true,
+  "message_to_user": "Fixup-B 完成。4 NPC × 9 文件 = 36 张图全部到位，N2C 可以恢复了。"
+}

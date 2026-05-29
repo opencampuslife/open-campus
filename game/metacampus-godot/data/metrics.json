@@ -1,0 +1,172 @@
+{
+  "metrics": [
+    {
+      "metric_id": "school_efficiency",
+      "name": "学校效率",
+      "initial": 40,
+      "min": 0,
+      "max": 100,
+      "description": "校园事务处理速度，衡量AI辅助下事务完成效率",
+      "thresholds": {
+        "danger": 30,
+        "warning": 60,
+        "good": 80
+      },
+      "effects": {
+        "auto_reminder": 8,
+        "task_complete": 3,
+        "use_ai_tool": 5,
+        "task_overdue_1d": -5,
+        "task_overdue_3d": -15
+      },
+      "sub_metrics": {
+        "work_order_backlog": {
+          "name": "工单积压量",
+          "initial": 0,
+          "min": 0,
+          "max": 100,
+          "description": "当前积压未处理的工单数量"
+        },
+        "enrollment_conversion": {
+          "name": "招生转化率",
+          "initial": 50,
+          "min": 0,
+          "max": 100,
+          "description": "家长咨询转化为实际报名的比例"
+        },
+        "response_time": {
+          "name": "AI响应速度",
+          "initial": 80,
+          "min": 0,
+          "max": 100,
+          "description": "AI系统响应速度评分"
+        }
+      }
+    },
+    {
+      "metric_id": "parent_trust",
+      "name": "家长信任",
+      "initial": 50,
+      "min": 0,
+      "max": 100,
+      "description": "家长对学校服务的满意度，反映家校沟通质量",
+      "thresholds": {
+        "danger": 30,
+        "warning": 50,
+        "good": 80
+      },
+      "effects": {
+        "correct_answer": 8,
+        "promise_admission": 2,
+        "poor_answer": -10,
+        "wrong_info": -12
+      },
+      "sub_metrics": {
+        "complaint_rate": {
+          "name": "投诉率",
+          "initial": 10,
+          "min": 0,
+          "max": 100,
+          "description": "家长投诉频率，越低越好"
+        },
+        "student_satisfaction": {
+          "name": "学生满意度",
+          "initial": 60,
+          "min": 0,
+          "max": 100,
+          "description": "学生对校园服务的满意度评分"
+        },
+        "reputation": {
+          "name": "声誉",
+          "initial": 40,
+          "min": 0,
+          "max": 100,
+          "description": "学校在社区中的声誉评价"
+        }
+      }
+    },
+    {
+      "metric_id": "compliance_safety",
+      "name": "合规安全",
+      "initial": 70,
+      "min": 0,
+      "max": 100,
+      "description": "AI是否守住边界，涵盖隐私保护、不做错误承诺、复核机制",
+      "thresholds": {
+        "danger": 40,
+        "warning": 60,
+        "good": 80
+      },
+      "effects": {
+        "transfer_human": 10,
+        "cite_policy": 8,
+        "promise_admission": -20,
+        "privacy_leak": -25
+      },
+      "sub_metrics": {
+        "ai_hallucination_rate": {
+          "name": "AI幻觉率",
+          "initial": 5,
+          "min": 0,
+          "max": 100,
+          "description": "AI回答出现幻觉或错误的频率，越低越好"
+        },
+        "kb_freshness": {
+          "name": "知识库新鲜度",
+          "initial": 60,
+          "min": 0,
+          "max": 100,
+          "description": "知识库内容是否包含最新政策信息"
+        },
+        "kb_coverage": {
+          "name": "知识库覆盖率",
+          "initial": 40,
+          "min": 0,
+          "max": 100,
+          "description": "知识库能回答的问题类型占比"
+        }
+      }
+    },
+    {
+      "metric_id": "system_stability",
+      "name": "系统稳定性",
+      "initial": 60,
+      "min": 0,
+      "max": 100,
+      "description": "AI系统发布是否稳健，衡量灰度发布和发布安全的执行情况",
+      "thresholds": {
+        "danger": 40,
+        "warning": 60,
+        "good": 80
+      },
+      "effects": {
+        "canary_release": 12,
+        "full_release": -15,
+        "shadow_mode": 8
+      },
+      "sub_metrics": {
+        "api_latency": {
+          "name": "API延迟",
+          "initial": 80,
+          "min": 0,
+          "max": 100,
+          "description": "系统接口响应时间评分"
+        },
+        "kb_accuracy": {
+          "name": "知识库准确率",
+          "initial": 70,
+          "min": 0,
+          "max": 100,
+          "description": "知识库回答的正确性评分"
+        },
+        "citation_completeness": {
+          "name": "引用完整度",
+          "initial": 50,
+          "min": 0,
+          "max": 100,
+          "description": "AI回答是否给出完整引用来源"
+        }
+      }
+    }
+  ]
+}

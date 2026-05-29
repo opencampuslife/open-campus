@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://l5rtbbtw1gfv"
+
+[deps]
+
+files=["res://archives/native-phase1-20260528/perf-baseline-data.npc.translation", "res://archives/native-phase1-20260528/perf-baseline-data.metric.translation", "res://archives/native-phase1-20260528/perf-baseline-data.value.translation"]
+
+source_file="res://archives/native-phase1-20260528/perf-baseline-data.csv"
+dest_files=["res://archives/native-phase1-20260528/perf-baseline-data.npc.translation", "res://archives/native-phase1-20260528/perf-baseline-data.metric.translation", "res://archives/native-phase1-20260528/perf-baseline-data.value.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

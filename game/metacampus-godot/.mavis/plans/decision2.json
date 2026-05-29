@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "display-polish",
+      "verdict": "accept",
+      "reason": "8 NPC runtime display verified. sprite_idle 8/8 OK, walk sheets 32/32 OK, animation_spec 8/8 OK, spawn_config 8/8. 2 corrupt portrait PNGs (principal + parent_representative portrait_neutral) documented as known issue - to be fixed by pixel-artist regeneration. Verifier PASS."
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "regen-corrupt-portraits",
+      "title": "Regenerate corrupt portrait_neutral.png for principal + parent_representative",
+      "prompt": "Two portrait PNG files are corrupt (IDAT truncated, cannot be decoded). Regenerate them via matrix_generate_image.\n\nFiles to regenerate:\n1. /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/assets/npcs/principal/baseline/portrait_neutral.png\n2. /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/assets/npcs/parent_representative/baseline/portrait_neutral.png\n\nFor each file:\n- Use matrix_generate_image with the same style as the valid portrait files in the same directory\n- Output must be valid PNG: 256x256, RGBA, transparent background\n- Use sips to verify and convert if needed\n- Overwrite the corrupt files\n\nCharacter details:\n- principal (唐毓): warm campus style, formal/authoritative, use the same style as portrait_happy.png in same directory\n- parent_representative: warm campus parent style, use same style as portrait_happy.png in same directory\n\nIMPORTANT: Check existing valid portrait files first to understand the style. Do NOT use the corrupt portrait_neutral.png as reference - use portrait_happy.png or portrait_worried.png instead.",
+      "assigned_to": "pixel-artist",
+      "verified_by": "verifier",
+      "verify_prompt": "Verify: run python3 -c \"import struct,zlib; data=open('/path','rb').read(); pos=8; [print(f'{d[4:8].decode()} len={struct.unpack(\">I\",d[:4])[0]}') for pos in range(8,len(data),12+struct.unpack(\">I\",data[pos:pos+4])[0])]\" on each file. Verify w=256 h=256, IDAT decompresses correctly.",
+      "timeout_ms": 1800000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "display-polish 验收通过，2 个损坏的 portrait PNG 已记录为已知问题，pixel-artist 正在重生成。"
+}

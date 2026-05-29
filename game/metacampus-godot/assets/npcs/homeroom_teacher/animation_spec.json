@@ -1,0 +1,134 @@
+{
+  "version": "1.0",
+  "date": "2026-05-28",
+  "author": "Narrative Designer",
+  "npc_id": "homeroom_teacher",
+  "display_name": "陈芷",
+  "role": "班主任",
+  "location": "academic_office",
+
+  "frame_size": {
+    "width": 64,
+    "height": 64,
+    "note": "单帧尺寸（含4px底部阴影空间），与npc-style-bible.md §11.3一致"
+  },
+
+  "frame_count": {
+    "per_direction": 4,
+    "note": "walk cycle：接触帧→过渡帧→交叉帧→过渡帧（150ms/帧≈6.67fps）"
+  },
+
+  "directions": 4,
+  "note": "上下左右四方向，每个方向独立walk sheet文件",
+
+  "anchor_point": {
+    "x": 32,
+    "y": 60,
+    "note": "锚点在脚底中心偏下，便于与地面tile对齐"
+  },
+
+  "transparent_padding": {
+    "top": 4,
+    "left": 8,
+    "right": 8,
+    "bottom": 4,
+    "note": "头顶留4px，左右各8px，底部已含4px阴影；实际角色占用区域约48×56px"
+  },
+
+  "animations": {
+    "idle": {
+      "type": "static",
+      "frames": [0],
+      "frame_rate": 0,
+      "note": "idle使用sprite_idle.png作为基准帧"
+    },
+    "walk": {
+      "type": "loop",
+      "frames": [0, 1, 2, 3],
+      "frame_rate": 150,
+      "note": "walk sheet每帧间隔150ms；walk sheet文件：homeroom_teacher_walk_{direction}.png"
+    },
+    "talk": {
+      "type": "loop",
+      "frames": [0, 1],
+      "frame_rate": 400,
+      "note": "可选：嘴部微动，2帧即可"
+    }
+  },
+
+  "walk_sheet_layout": {
+    "sheet_dimensions": {
+      "width": 256,
+      "height": 64
+    },
+    "grid": "1 row × 4 columns",
+    "frame_order": [
+      "frame_0_contact",
+      "frame_1_transition",
+      "frame_2_cross",
+      "frame_3_transition"
+    ],
+    "note": "单sheet 256×64px（4帧横向排列）；4个方向各需独立文件"
+  },
+
+  "naming_convention": {
+    "idle_sprite": "sprite_idle.png",
+    "walk_sheet": "walk_{direction}.png",
+    "directions": ["down", "up", "left", "right"],
+    "frame_naming": "homeroom_teacher_walk_{direction}_frame{n}.png",
+    "example_walk_down": "walk_down.png",
+    "example_walk_up": "walk_up.png",
+    "example_walk_left": "walk_left.png",
+    "example_walk_right": "walk_right.png"
+  },
+
+  "style_constraints": {
+    "proportions": {
+      "total_height": 64,
+      "head_ratio": "1/4",
+      "head_px": 16,
+      "torso_px": 20,
+      "legs_px": 28,
+      "note": "1:4头身比，参考npc-style-bible.md §11.1"
+    },
+    "outline": "1px 深色描边 #1A1A2E",
+    "shadow": "4px底部椭圆阴影 20%透明度",
+    "colors": {
+      "primary": "#60A5FA",
+      "pants": "#1E3A5F",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E",
+      "tablet": "#374151"
+    },
+    "max_color_count": 5,
+    "texture_filter": "Nearest（Godot导入设置）"
+  },
+
+  "character_description": {
+    "age": "约30-35岁",
+    "body_type": "站姿温和",
+    "clothing": "浅蓝色长袖衬衫（卷袖，#60A5FA）+ 深色西裤（#1E3A5F）",
+    "accessories": "手持平板或教案",
+    "hair": "整洁发型",
+    "posture": "站姿温和专业，略微前倾表示关注学生"
+  },
+
+  "portraits": {
+    "neutral": "portrait_neutral.png",
+    "happy": "portrait_happy.png",
+    "worried": "portrait_worried.png",
+    "strict": "portrait_strict.png"
+  },
+
+  "source_sprites": [
+    "assets/npcs/homeroom_teacher/sprite_idle.png"
+  ],
+
+  "godot_integration": {
+    "import_mode": "2D",
+    "texture_filter": "Nearest",
+    "hframes": 4,
+    "vframes": 1,
+    "sprite_frames_resource": "homeroom_teacher_sprites.tres"
+  }
+}

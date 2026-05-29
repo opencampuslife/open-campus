@@ -1,0 +1,136 @@
+{
+  "version": "1.0",
+  "npc_id": "parent_representative",
+  "display_name": "顾兰",
+  "role": "家长代表",
+  "generated_at": "2026-05-29T01:55:00+08:00",
+  "generator": "pixel-artist (n2b3-batch-b-new, matrix_generate_image + sips + Python pure-zlib RGBA pipeline)",
+  "style_bible_version": "v1.1",
+  "palette_guide_version": "v1.0",
+
+  "images": [
+    {
+      "filename": "portrait_neutral.png",
+      "type": "portrait",
+      "expression": "neutral",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990228212-3791f2d5.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_happy.png",
+      "type": "portrait",
+      "expression": "happy",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990254666-0ff7784a.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_worried.png",
+      "type": "portrait",
+      "expression": "worried",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990251435-510f3ffd.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_strict.png",
+      "type": "portrait",
+      "expression": "strict",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990331350-7a7f1263.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "sprite_idle.png",
+      "type": "sprite",
+      "expression": "idle",
+      "canvas": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990324458-2a1977e5.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "parent_representative_walk_down.png",
+      "type": "walk_sheet",
+      "direction": "down",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_urls": [
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990353867-76f2bba0.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990354437-17a14734.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990359851-4084e616.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990356997-a55cf042.png"
+      ],
+      "pipeline": "matrix_generate_image × 4 frames → sips PNG → Python pure-zlib RGBA resize → concat_horizontal"
+    },
+    {
+      "filename": "parent_representative_walk_up.png",
+      "type": "walk_sheet",
+      "direction": "up",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "mirror_down",
+      "note": "水平镜像 walk_down"
+    },
+    {
+      "filename": "parent_representative_walk_left.png",
+      "type": "walk_sheet",
+      "direction": "left",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "mirror_down",
+      "note": "水平镜像 walk_down"
+    },
+    {
+      "filename": "parent_representative_walk_right.png",
+      "type": "walk_sheet",
+      "direction": "right",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "copy_down",
+      "note": "复制 walk_down（对称角色简化）"
+    }
+  ],
+
+  "constraints_verified": {
+    "stardew_forbidden": true,
+    "transparent_background": true,
+    "skin_tone": "#F4C7A1",
+    "style": "modern pixel art, NOT 8-bit retro",
+    "character_colors": {
+      "blazer": "#2D4A6B",
+      "inner_top": "#F5E6D3",
+      "briefcase": "#374151",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E"
+    }
+  }
+}

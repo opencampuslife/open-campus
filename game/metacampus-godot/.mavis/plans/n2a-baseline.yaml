@@ -1,0 +1,194 @@
+version: 1
+plan:
+  name: 'Phase N2A — NPC视觉基准样张'
+  max_concurrency: 4
+  max_consecutive_failures: 2
+  max_cycles: 10
+  auto_accept: false
+  auto_reject_retries: 1
+tasks:
+  - id: n2a-prompts
+    title: '生成全部 8 个 NPC 的图片/视频 prompt'
+    prompt: >
+      你是一个像素艺术风格设计师（pixel-artist），当前使用 MiniMax-M2.7 模型。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      为全部 8 个 NPC 生成三类 prompt 文件，使用已有的 prompt 模板：
+
+      1. 读取 prompts/npc_image_prompt_template.md 和 prompts/npc_video_prompt_template.md
+      2. 读取 data/npcs/npc_*.json 获取每个 NPC 的 visual_keywords、clothing、personality
+      3. 读取 docs/npc-style-bible.md 获取风格约束
+
+      为每个 NPC 创建：
+      - prompts/npcs/<npc_id>/portrait_prompt.md — 立绘生图 prompt（正面/3/4视角，含服装、表情、灯光）
+      - prompts/npcs/<npc_id>/sprite_prompt.md — 64x64 sprite prompt（idle + walk sheet 4帧）
+      - prompts/npcs/<npc_id>/video_prompt.md — 5秒动作视频 prompt
+
+      8 个 NPC：admissions_director, compliance_officer, it_operator, homeroom_teacher,
+      logistics_manager, parent_representative, student_representative, principal
+
+      硬约束：
+      - 禁止 Stardew Valley、农场、牧场、矿洞、村庄、田园风格
+      - 必须现代校园、教育科技风格
+      - 柔和暖色调色板
+      - 每个 prompt 末尾必须追加禁止词（Negative Prompt）
+      - 使用模板中的变量占位符填充
+
+      完成后创建 reports/n2a-prompts-done.md
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. prompts/npcs/ 下 8 个 NPC 目录各含 portrait_prompt.md / sprite_prompt.md / video_prompt.md 2. 每个 prompt 引用 NPC profile 的 visual_keywords 3. 每个 prompt 末尾含 Negative Prompt 4. 无 Stardew 漂移 5. reports/n2a-prompts-done.md 存在
+    depends_on: []
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000
+
+  - id: n2a-baseline-images
+    title: '生成 admissions_director + student_representative 基准样张'
+    prompt: >
+      你是一个像素艺术风格设计师，使用 MiniMax-M2.7 模型生成图片。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      仅生成 2 个 NPC 的基准样张：admissions_director（周明远）和 student_representative（沈一诺）。
+
+      使用 MCP 工具 matrix_generate_image 生成以下资产：
+
+      对每个 NPC 创建 assets/npcs/<npc_id>/baseline/ 目录：
+
+      admissions_director（周明远，招生办主任，深蓝西装+领带，中年男性）：
+      1. portrait_neutral.png — 256x256，正面/3/4视角，胸口以上，中性表情
+      2. expression_strict.png — 同角色，严肃表情（眉头微皱，嘴角下压）
+      3. sprite_idle.png — 64x64，俯视视角，灰发深蓝西装站立
+      
+      student_representative（沈一诺，学生代表，校服白衬衫+深蓝西装外套，年轻女学生）：
+      1. portrait_neutral.png — 256x256，正面/3/4视角，胸口以上，中性微笑
+      2. expression_worried.png — 同角色，担忧表情
+      3. sprite_idle.png — 64x64，俯视视角，黑发校服站立
+
+      关键要求：
+      - portrait 和 sprite 必须看起来是同一个角色（面部特征一致）
+      - 风格一致（2D cozy campus simulation style）
+      - 柔和暖色调色板
+      - 透明背景（PNG）
+      - 禁止 Stardew-like 元素
+      - 现代校园、教育科技感
+      - 每张图单独调用 matrix_generate_image，传入对应 prompt 文件的内容
+      - 保存每张图的生成参数到 generation_metadata.json
+
+      完成后创建 reports/n2a-baseline-images-done.md
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. assets/npcs/admissions_director/baseline/ 有 portrait_neutral.png / expression_strict.png / sprite_idle.png 2. assets/npcs/student_representative/baseline/ 有 portrait_neutral.png / expression_worried.png / sprite_idle.png 3. portrait 和 sprite 面部特征一致（同一个角色） 4. 风格一致无 Stardew 漂移 5. 尺寸正确（256x256 / 64x64） 6. PNG 透明背景 7. generation_metadata.json 存在 8. reports/n2a-baseline-images-done.md 存在
+    depends_on:
+      - n2a-prompts
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  - id: n2a-identity-review
+    title: '审查角色身份和视觉保真度'
+    prompt: >
+      你是一个游戏叙事设计师，审查 N2A 基准样张的角色身份。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      检查 2 个 NPC 的基准样张是否符合其设定：
+
+      对于每个 NPC：
+      1. 读取 data/npcs/npc_<npc_id>.json 确认角色身份
+      2. 查看 assets/npcs/<npc_id>/baseline/ 中的图片（如有）
+      3. 检查：年龄感是否符合设定、服装是否符合角色规范、表情是否传达正确情绪
+      4. 检查：职业可识别性（招生办主任像不像职员、学生代表像不像学生）
+      5. 检查：2D cozy campus 风格一致性
+
+      输出审查报告到 reports/n2a-identity-review.md：
+      | NPC | 年龄感 | 服装 | 表情 | 职业识别 | 风格 | 结论 |
+      |-----|--------|------|------|---------|------|------|
+      | admissions_director | ✅/❌ | ... | ... | ... | ... | PASS/FAIL |
+      | student_representative | ✅/❌ | ... | ... | ... | ... | PASS/FAIL |
+
+      如果有 FAIL 项，具体说明问题便于 pixel-artist 修正。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. reports/n2a-identity-review.md 存在 2. 包含 2 个 NPC 的身份审查 3. 每个审查包含年龄感/服装/表情/职业识别/风格/结论 4. 有具体问题描述（如有 FAIL）
+    depends_on:
+      - n2a-baseline-images
+    gates: []
+    max_retries: 2
+    timeout_ms: 900000
+
+  - id: n2a-asset-check
+    title: '检查资产尺寸、命名、Godot 导入兼容性'
+    prompt: >
+      你是一个 Godot 开发者，检查 N2A 基准样张的技术合规性。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      检查 assets/npcs/ 下 2 个 NPC 的 baseline 目录：
+
+      1. 文件命名：是否符合 Style Bible 规范（portrait_neutral.png, expression_strict.png 等）
+      2. 图片尺寸：portrait 是否为 256x256，sprite 是否为 64x64
+      3. 格式：是否 PNG，是否透明背景
+      4. 可导入性：文件是否可被 Godot 正常读取（检查文件头魔数）
+      5. 目录结构：baseline/ 目录结构是否正确
+
+      输出检查报告到 reports/n2a-asset-check.md：
+      | NPC | 文件 | 命名 | 尺寸 | 格式 | 透明背景 | 可导入 | 结论 |
+      |-----|------|------|------|------|---------|--------|------|
+      | ... | ... | ... | ... | ... | ... | ... | PASS/FAIL |
+
+      使用 Python PIL/Pillow 或 ImageMagick 检查图片属性。
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. reports/n2a-asset-check.md 存在 2. 包含 2 个 NPC 的全部 asset 检查 3. 图片尺寸/格式/透明背景检查有实际数值依据
+    depends_on:
+      - n2a-baseline-images
+    gates: []
+    max_retries: 2
+    timeout_ms: 900000
+
+  - id: n2a-final-review
+    title: 'N2A 基准样张最终评审'
+    prompt: >
+      你是一个证据驱动的验证专家，对 N2A 基准样张进行最终评审。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      汇总前三项评审（identity / asset / prompt），输出最终评审报告到 reports/npc-visual-baseline-review.md。
+
+      评审维度：
+      1. 风格一致性：2D cozy campus，无 Stardew 漂移
+      2. 角色身份：年龄/职业/服装/表情正确
+      3. 技术合规：尺寸/格式/命名/Godot可导入
+      4. Prompt 质量：8 个 NPC 全部有 prompt，含 Negative Prompt
+      5. 可复现性：generation_metadata.json 存在且完整
+      6. 同角色一致性：portrait 和 sprite 面部特征一致
+
+      格式：
+      | 维度 | 状态 | 备注 |
+      |------|------|------|
+      | 风格 | ✅/❌ | ... |
+      | 身份 | ✅/❌ | ... |
+      | 技术 | ✅/❌ | ... |
+      | Prompt | ✅/❌ | ... |
+      | 可复现 | ✅/❌ | ... |
+      | 一致性 | ✅/❌ | ... |
+
+      结论：✅ N2A 基线通过，可进入 N2B / ❌ 需修复，列出具体问题
+    assigned_to: verifier
+    verified_by: verifier
+    verify_prompt: >
+      验证：复验报告中每一项检查，确认结论准确。重点抽查：随机选 1 个 NPC 的 portrait 和 sprite，独立比对面部特征。
+    depends_on:
+      - n2a-prompts
+      - n2a-identity-review
+      - n2a-asset-check
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000

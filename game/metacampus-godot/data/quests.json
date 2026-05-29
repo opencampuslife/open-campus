@@ -1,0 +1,186 @@
+[
+  {
+    "quest_id": "q_admission_001",
+    "title": "T1: 家长招生咨询",
+    "description": "家长张同学家长在招生办等待咨询，需要准确回答关于报名材料的问题。调用知识库提供答案并引用来源。",
+    "npc_id": "parent_001",
+    "location": "admission_office",
+    "required_steps": ["talk_to_parent", "use_knowledge_tool", "show_citation"],
+    "objectives": [
+      {"id": "obj_1", "description": "与家长沟通并了解其咨询需求", "status": "active"},
+      {"id": "obj_2", "description": "调用知识库工具查询招生材料信息", "status": "active"},
+      {"id": "obj_3", "description": "向家长展示答案并引用来源", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 3,
+      "parent_trust": 8,
+      "compliance_safety": 5
+    },
+    "fail_condition": {
+      "action": "promise_admission",
+      "penalty": {
+        "compliance_safety": -20,
+        "parent_trust": 2
+      }
+    }
+  },
+  {
+    "quest_id": "q_admission_002",
+    "title": "T2: 拦截高风险问题",
+    "description": "家长问能不能保证录取，这是高风险问题。必须选择正确分支，不承诺录取结果，转人工处理。",
+    "npc_id": "parent_001",
+    "location": "admission_office",
+    "required_steps": ["intercept_high_risk_question", "transfer_to_human"],
+    "objectives": [
+      {"id": "obj_1", "description": "识别家长提问中的高风险要素（承诺录取）", "status": "active"},
+      {"id": "obj_2", "description": "选择正确分支，不承诺录取结果", "status": "active"},
+      {"id": "obj_3", "description": "转人工处理，将对话转给招生办老师", "status": "active"}
+    ],
+    "reward": {
+      "compliance_safety": 10,
+      "parent_trust": 6
+    },
+    "fail_condition": {
+      "action": "promise_admission",
+      "penalty": {
+        "compliance_safety": -20,
+        "parent_trust": 2
+      }
+    }
+  },
+  {
+    "quest_id": "q_material_reminder_001",
+    "title": "T3: 材料催办",
+    "description": "家长还没交齐报名材料，使用自动提醒工具发送催交通知，减少人工处理。",
+    "npc_id": "parent_001",
+    "location": "admission_office",
+    "required_steps": ["check_material_status", "use_auto_reminder"],
+    "objectives": [
+      {"id": "obj_1", "description": "检查家长材料提交状态", "status": "active"},
+      {"id": "obj_2", "description": "使用自动提醒工具发送催交通知", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 8,
+      "parent_trust": 5
+    },
+    "fail_condition": {
+      "action": "ignore_reminder",
+      "penalty": {
+        "school_efficiency": -5,
+        "parent_trust": -4
+      }
+    }
+  },
+  {
+    "quest_id": "q_leave_request_001",
+    "title": "T4: 请假处理",
+    "description": "班主任王老师手上有多个学生请假申请需要处理，使用AI辅助汇总并生成处理建议。",
+    "npc_id": "teacher_class_001",
+    "location": "academic_affairs",
+    "required_steps": ["talk_to_teacher", "use_ai_tool", "approve_leaves"],
+    "objectives": [
+      {"id": "obj_1", "description": "与班主任沟通，了解请假申请数量", "status": "active"},
+      {"id": "obj_2", "description": "使用AI工具辅助汇总请假信息", "status": "active"},
+      {"id": "obj_3", "description": "生成处理建议并审批通过", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 10,
+      "compliance_safety": 6
+    },
+    "fail_condition": {
+      "action": "overdue_3days",
+      "penalty": {
+        "parent_trust": -8
+      }
+    }
+  },
+  {
+    "quest_id": "q_meal_count_001",
+    "title": "T5: 订餐统计",
+    "description": "在食堂统计今日订餐数、退餐数、忌口统计和加餐需求，生成后勤汇总表。",
+    "npc_id": "staff_logistics_001",
+    "location": "canteen",
+    "required_steps": ["collect_meal_data", "generate_summary_table"],
+    "objectives": [
+      {"id": "obj_1", "description": "收集今日订餐数、退餐数、忌口统计和加餐需求", "status": "active"},
+      {"id": "obj_2", "description": "生成后勤汇总表并提交", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 10,
+      "compliance_safety": 6
+    },
+    "fail_condition": {
+      "action": "wrong_meal_count",
+      "penalty": {
+        "parent_trust": -12
+      }
+    }
+  },
+  {
+    "quest_id": "q_repair_order_001",
+    "title": "T6: 报修工单",
+    "description": "处理宿舍区报修工单，包括水龙头漏水、空调不制冷、门锁损坏等，使用AI系统自动派单并设置48小时自动提醒。",
+    "npc_id": "staff_logistics_001",
+    "location": "canteen",
+    "required_steps": ["check_repair_orders", "use_ai_dispatch", "set_reminder"],
+    "objectives": [
+      {"id": "obj_1", "description": "检查宿舍区报修工单状态", "status": "active"},
+      {"id": "obj_2", "description": "使用AI系统自动派单", "status": "active"},
+      {"id": "obj_3", "description": "设置48小时自动提醒", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 8,
+      "compliance_safety": 5
+    },
+    "fail_condition": {
+      "action": "overdue_7days",
+      "penalty": {
+        "parent_trust": -10
+      }
+    }
+  },
+  {
+    "quest_id": "q_dashboard_001",
+    "title": "T7: 运营驾驶舱",
+    "description": "在AI中枢查看学校运营驾驶舱，了解4个核心指标的当前数值和状态。",
+    "npc_id": "ai_assistant_001",
+    "location": "ai_hub",
+    "required_steps": ["go_to_ai_hub", "talk_to_ai_assistant", "open_dashboard"],
+    "objectives": [
+      {"id": "obj_1", "description": "前往AI中枢", "status": "active"},
+      {"id": "obj_2", "description": "与AI助手对话了解系统", "status": "active"},
+      {"id": "obj_3", "description": "打开运营驾驶舱查看核心指标", "status": "active"}
+    ],
+    "reward": {
+      "school_efficiency": 5
+    },
+    "fail_condition": {
+      "action": "none",
+      "penalty": {}
+    }
+  },
+  {
+    "quest_id": "q_canary_release_001",
+    "title": "T8: Canary发布",
+    "description": "使用canary灰度发布新的知识库问答策略，选择合适的灰度比例逐步放量，确保系统稳定性。",
+    "npc_id": "ai_assistant_001",
+    "location": "ai_hub",
+    "required_steps": ["learn_canary", "choose_release_strategy", "execute_release"],
+    "objectives": [
+      {"id": "obj_1", "description": "学习canary灰度发布机制", "status": "active"},
+      {"id": "obj_2", "description": "选择合适的灰度比例", "status": "active"},
+      {"id": "obj_3", "description": "执行灰度发布并监控稳定性", "status": "active"}
+    ],
+    "reward": {
+      "system_stability": 12,
+      "compliance_safety": 8
+    },
+    "fail_condition": {
+      "action": "full_release",
+      "penalty": {
+        "system_stability": -15,
+        "compliance_safety": -10
+      }
+    }
+  }
+]

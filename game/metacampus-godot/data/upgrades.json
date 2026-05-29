@@ -1,0 +1,206 @@
+{
+  "upgrades": [
+    {
+      "upgrade_id": "rag_kb_v2",
+      "name": "RAG 知识库 v2",
+      "description": "提升回答准确率，减少幻觉率",
+      "category": "ai_system",
+      "cost": 5000,
+      "effects": {
+        "rag_accuracy": 0.15,
+        "hallucination_rate": -0.08,
+        "compliance_safety": 5
+      },
+      "unlock_requirement": {
+        "data_intelligence_skill": 3,
+        "budget": 5000
+      },
+      "location": "ai_hub"
+    },
+    {
+      "upgrade_id": "compliance_interceptor",
+      "name": "合规拦截器",
+      "description": "自动检测并拦截高风险回复",
+      "category": "ai_system",
+      "cost": 8000,
+      "effects": {
+        "compliance_safety": 10,
+        "violation_rate": -0.12,
+        "parent_trust": 3
+      },
+      "unlock_requirement": {
+        "compliance_skill": 4,
+        "budget": 8000
+      },
+      "location": "compliance_office"
+    },
+    {
+      "upgrade_id": "ticket_router",
+      "name": "工单分流器",
+      "description": "提升后勤工单处理效率，自动派单",
+      "category": "automation",
+      "cost": 3000,
+      "effects": {
+        "school_efficiency": 8,
+        "logistics_trust": 5,
+        "ap_saving": 2
+      },
+      "unlock_requirement": {
+        "operations_skill": 2,
+        "budget": 3000
+      },
+      "location": "logistics_area"
+    },
+    {
+      "upgrade_id": "parent_bot",
+      "name": "家长通知机器人",
+      "description": "自动发送提醒和通知，提升催办效率",
+      "category": "automation",
+      "cost": 4000,
+      "effects": {
+        "school_efficiency": 6,
+        "parent_trust": 5,
+        "communication_xp": 50
+      },
+      "unlock_requirement": {
+        "communication_skill": 3,
+        "budget": 4000
+      },
+      "location": "parent_reception"
+    },
+    {
+      "upgrade_id": "academic_summarizer",
+      "name": "教务摘要器",
+      "description": "自动生成请假、排课摘要，降低审批时间",
+      "category": "automation",
+      "cost": 4500,
+      "effects": {
+        "school_efficiency": 10,
+        "academic_affairs_xp": 50,
+        "ap_saving": 3
+      },
+      "unlock_requirement": {
+        "academic_affairs_skill": 3,
+        "budget": 4500
+      },
+      "location": "academic_affairs"
+    },
+    {
+      "upgrade_id": "canary_console",
+      "name": "Canary 控制台",
+      "description": "降低发布风险，实时监控灰度指标",
+      "category": "ai_system",
+      "cost": 6000,
+      "effects": {
+        "system_stability": 8,
+        "release_risk": -0.15,
+        "operations_xp": 40
+      },
+      "unlock_requirement": {
+        "operations_skill": 4,
+        "budget": 6000
+      },
+      "location": "ai_hub"
+    },
+    {
+      "upgrade_id": "opinion_radar",
+      "name": "舆情雷达",
+      "description": "提前发现投诉风险，监控家长群和社交媒体",
+      "category": "monitoring",
+      "cost": 7000,
+      "effects": {
+        "parent_trust": 8,
+        "reputation": 5,
+        "compliance_safety": 3
+      },
+      "unlock_requirement": {
+        "communication_skill": 5,
+        "budget": 7000
+      },
+      "location": "principal_office"
+    },
+    {
+      "upgrade_id": "dashboard_v2",
+      "name": "运营驾驶舱 v2",
+      "description": "提升指标可见性，增加趋势预测功能",
+      "category": "monitoring",
+      "cost": 5500,
+      "effects": {
+        "school_efficiency": 5,
+        "data_intelligence_xp": 60,
+        "all_metrics_visible": true
+      },
+      "unlock_requirement": {
+        "data_intelligence_skill": 4,
+        "budget": 5500
+      },
+      "location": "ai_hub"
+    },
+    {
+      "upgrade_id": "server_upgrade",
+      "name": "服务器扩容",
+      "description": "增加算力上限，提升系统响应速度",
+      "category": "infrastructure",
+      "cost": 10000,
+      "effects": {
+        "max_compute": 150,
+        "system_stability": 10,
+        "response_time": -0.3
+      },
+      "unlock_requirement": {
+        "operations_skill": 5,
+        "budget": 10000
+      },
+      "location": "it_office"
+    },
+    {
+      "upgrade_id": "knowledge_expansion",
+      "name": "知识库模块扩展",
+      "description": "购买专业领域知识模块（招生、教务、后勤、合规）",
+      "category": "ai_system",
+      "cost": 8000,
+      "effects": {
+        "kb_coverage": 0.20,
+        "rag_accuracy": 0.10,
+        "data_intelligence_xp": 80
+      },
+      "unlock_requirement": {
+        "data_intelligence_skill": 6,
+        "budget": 8000
+      },
+      "location": "ai_hub"
+    },
+    {
+      "upgrade_id": "temp_staff",
+      "name": "招募临时人员",
+      "description": "在高峰期补充人力，减少玩家工作负担",
+      "category": "staff",
+      "cost": 3000,
+      "effects": {
+        "max_ap": 12,
+        "school_efficiency": 5
+      },
+      "unlock_requirement": {
+        "budget": 3000
+      },
+      "location": "principal_office"
+    },
+    {
+      "upgrade_id": "campus_facilities",
+      "name": "校园设施维护升级",
+      "description": "降低后勤故障率，提升报修响应速度",
+      "category": "infrastructure",
+      "cost": 6000,
+      "effects": {
+        "school_efficiency": 6,
+        "system_stability": 3,
+        "logistics_trust": 8
+      },
+      "unlock_requirement": {
+        "logistics_trust": 5,
+        "budget": 6000
+      },
+      "location": "logistics_area"
+    }
+  ]
+}

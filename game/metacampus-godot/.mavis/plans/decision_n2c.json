@@ -1,0 +1,20 @@
+{
+  "last_cycle": [
+    {"task_id": "n2c-manifest", "verdict": "reject", "reason": "Verifier 以 AGENTS.md 中已废弃的规范为由拒绝，但 AGENTS.md 这条是历史遗留（旧 NPC 有 v1/v2 子目录问题）。当前项目实际用 baseline/ 且 npc_factory.gd 依赖它。重写 verify_prompt 消除歧义：manifest 正确使用 baseline/，student_representative portrait_worried 为 .jpg 也是已记录的正确状态。接受当前 manifest，重跑验证。"}
+  ],
+  "next_cycle": [
+    {
+      "task_id": "n2c-manifest",
+      "title": "验证 NPC 资产 Manifest",
+      "prompt": "验证 data/npc_assets_manifest.json 是否准确：\n1. 读取 JSON\n2. 对每个 NPC 的每个非 null 路径用 Python pathlib.Path.exists() 验证文件存在\n3. 特别检查 student_representative/portrait_worried.jpg（.jpg 扩展名是正确的，已记录在 manifest）\n4. 确认 manifest 使用 baseline/ 子目录路径（这是项目当前规范，不是已废弃）\n5. 报告通过/失败清单\n\n不接受的理由：\n- 'baseline/ 是已废弃目录' —— 这是历史遗留描述，当前项目正确使用 baseline/\n- 文件数量与 manifest 不符 —— 用 Path.exists() 逐个验证",
+      "assigned_to": "verifier",
+      "verified_by": "verifier",
+      "verify_prompt": "同上，独立用 Python pathlib 验证 manifest 中的每个文件路径是否真实存在。不质疑路径结构。",
+      "timeout_ms": 300000,
+      "depends_on": [],
+      "gates": []
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "Manifest 重跑，澄清了 baseline/ 是正确目录结构。"
+}

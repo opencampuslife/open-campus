@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://brg53fosaoxqv"
+
+[deps]
+
+files=["res://tools/perf_output/npc_pressure_10_signals.elapsed.translation", "res://tools/perf_output/npc_pressure_10_signals.fps.translation", "res://tools/perf_output/npc_pressure_10_signals.process.translation", "res://tools/perf_output/npc_pressure_10_signals.physics.translation", "res://tools/perf_output/npc_pressure_10_signals.node.translation", "res://tools/perf_output/npc_pressure_10_signals.npc.translation", "res://tools/perf_output/npc_pressure_10_signals.signal.translation", "res://tools/perf_output/npc_pressure_10_signals.prox.translation", "res://tools/perf_output/npc_pressure_10_signals.behavior.translation", "res://tools/perf_output/npc_pressure_10_signals.anim.translation", "res://tools/perf_output/npc_pressure_10_signals.collision.translation", "res://tools/perf_output/npc_pressure_10_signals.memory.translation"]
+
+source_file="res://tools/perf_output/npc_pressure_10_signals.csv"
+dest_files=["res://tools/perf_output/npc_pressure_10_signals.elapsed.translation", "res://tools/perf_output/npc_pressure_10_signals.fps.translation", "res://tools/perf_output/npc_pressure_10_signals.process.translation", "res://tools/perf_output/npc_pressure_10_signals.physics.translation", "res://tools/perf_output/npc_pressure_10_signals.node.translation", "res://tools/perf_output/npc_pressure_10_signals.npc.translation", "res://tools/perf_output/npc_pressure_10_signals.signal.translation", "res://tools/perf_output/npc_pressure_10_signals.prox.translation", "res://tools/perf_output/npc_pressure_10_signals.behavior.translation", "res://tools/perf_output/npc_pressure_10_signals.anim.translation", "res://tools/perf_output/npc_pressure_10_signals.collision.translation", "res://tools/perf_output/npc_pressure_10_signals.memory.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

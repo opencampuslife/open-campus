@@ -1,0 +1,193 @@
+using Godot;
+using System;
+using System.Linq;
+
+public partial class DebugCommandPanel : CanvasLayer
+{
+    private bool _visible = false;
+
+    public override void _Ready()
+    {
+        Visible = false;
+
+        var root = GetNode<Control>("DebugPanel");
+        var vbox = root.GetNode<VBoxContainer>("VBox");
+
+        AddButton(vbox, "跳到 21:50 (结算前)", OnSkipToEvening);
+        AddButton(vbox, "立即 EndDay()", OnEndDayNow);
+        AddSeparator(vbox);
+        AddButton(vbox, "AP +5", () => ModResource("ap", 5));
+        AddButton(vbox, "AP -5", () => ModResource("ap", -5));
+        AddButton(vbox, "算力 +20", () => ModResource("compute", 20));
+        AddButton(vbox, "算力 -20", () => ModResource("compute", -20));
+        AddButton(vbox, "预算 +5000", () => ModResource("budget", 5000));
+        AddButton(vbox, "预算 -5000", () => ModResource("budget", -5000));
+        AddSeparator(vbox);
+        AddButton(vbox, "效率 +10", () => ModMetric("school_efficiency", 10));
+        AddButton(vbox, "效率 -10", () => ModMetric("school_efficiency", -10));
+        AddButton(vbox, "家长信任 +10", () => ModMetric("parent_trust", 10));
+        AddButton(vbox, "家长信任 -10", () => ModMetric("parent_trust", -10));
+        AddButton(vbox, "合规安全 +10", () => ModMetric("compliance_safety", 10));
+        AddButton(vbox, "合规安全 -10", () => ModMetric("compliance_safety", -10));
+        AddButton(vbox, "系统稳定 +10", () => ModMetric("system_stability", 10));
+        AddButton(vbox, "系统稳定 -10", () => ModMetric("system_stability", -10));
+        AddSeparator(vbox);
+        AddButton(vbox, "技能 XP +50 (admissions)", () => ModSkillXp("admissions", 50));
+        AddButton(vbox, "技能 XP +50 (compliance)", () => ModSkillXp("compliance", 50));
+        AddButton(vbox, "技能 XP +50 (data_intelligence)", () => ModSkillXp("data_intelligence", 50));
+        AddSeparator(vbox);
+        AddButton(vbox, "刷新每日任务", OnRefreshDaily);
+        AddButton(vbox, "完成首个活跃任务", OnCompleteActiveQuest);
+        AddButton(vbox, "失败首个活跃任务", OnFailActiveQuest);
+        AddSeparator(vbox);
+        AddButton(vbox, "解锁全部升级", OnUnlockAllUpgrades);
+        AddButton(vbox, "NPC 信任 +3 (全部)", OnBoostAllNpcTrust);
+        AddSeparator(vbox);
+        AddButton(vbox, "打印系统状态到控制台", OnPrintStatus);
+        AddSeparator(vbox);
+        AddButton(vbox, "关闭调试面板", OnClose);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+        {
+            if (keyEvent.Keycode == Key.F12)
+            {
+                Toggle();
+            }
+        }
+    }
+
+    private void Toggle()
+    {
+        _visible = !_visible;
+        Visible = _visible;
+        GetTree().Paused = _visible;
+    }
+
+    private void OnSkipToEvening()
+    {
+        var tm = GetNode<TimeManager>("/root/TimeManager");
+        tm.SetTime(21, 50);
+    }
+
+    private void OnEndDayNow()
+    {
+        var tm = GetNode<TimeManager>("/root/TimeManager");
+        tm.EndDay();
+    }
+
+    private void ModResource(string id, int delta)
+    {
+        var rm = GetNode<ResourceManager>("/root/ResourceManager");
+        rm.AddResource(id, delta);
+        GD.Print($"[Debug] 资源 {id} 变更 {delta:+#;-#;0}，当前 = {rm.GetResource(id)}");
+    }
+
+    private void ModMetric(string id, int delta)
+    {
+        var mm = GetNode<MetricManager>("/root/MetricManager");
+        mm.AddMetric(id, delta);
+        GD.Print($"[Debug] 指标 {id} 变更 {delta:+#;-#;0}，当前 = {mm.GetMetric(id)}");
+    }
+
+    private void ModSkillXp(string skillId, int xp)
+    {
+        var sm = GetNode<SkillManager>("/root/SkillManager");
+        sm.AddXp(skillId, xp);
+        GD.Print($"[Debug] 技能 {skillId} XP +{xp}，等级 = {sm.GetSkillLevel(skillId)}");
+    }
+
+    private void OnRefreshDaily()
+    {
+        var qm = GetNode<QuestManager>("/root/QuestManager");
+        qm.RefreshDailyQuests();
+        GD.Print("[Debug] 每日任务已刷新");
+    }
+
+    private void OnCompleteActiveQuest()
+    {
+        var qm = GetNode<QuestManager>("/root/QuestManager");
+        var active = qm.GetActiveQuests();
+        if (active.Count > 0)
+        {
+            qm.CompleteQuest(active[0].ToString());
+            GD.Print($"[Debug] 完成任务: {active[0]}");
+        }
+        else
+        {
+            GD.Print("[Debug] 无活跃任务");
+        }
+    }
+
+    private void OnFailActiveQuest()
+    {
+        var qm = GetNode<QuestManager>("/root/QuestManager");
+        var active = qm.GetActiveQuests();
+        if (active.Count > 0)
+        {
+            qm.FailQuest(active[0].ToString());
+            GD.Print($"[Debug] 失败任务: {active[0]}");
+        }
+        else
+        {
+            GD.Print("[Debug] 无活跃任务");
+        }
+    }
+
+    private void OnUnlockAllUpgrades()
+    {
+        var rm = GetNode<ResourceManager>("/root/ResourceManager");
+        var upgrades = new[] { "auto_reply", "compliance_interceptor", "rag_ranker", "canary_simulator" };
+        foreach (var id in upgrades)
+        {
+            rm.UnlockUpgrade(id);
+        }
+        GD.Print("[Debug] 已解锁全部升级: " + string.Join(", ", upgrades));
+    }
+
+    private void OnBoostAllNpcTrust()
+    {
+        var nr = GetNode<NpcRegistry>("/root/NpcRegistry");
+        var npcIds = new[] { "principal", "admissions_director", "homeroom_teacher", "it_operator", "logistics_manager", "compliance_officer", "parent_representative", "student_representative" };
+        foreach (var id in npcIds)
+        {
+            nr.AddTrust(id, 3);
+        }
+        GD.Print("[Debug] 全部 NPC 信任 +3");
+    }
+
+    private void OnPrintStatus()
+    {
+        var tm = GetNode<TimeManager>("/root/TimeManager");
+        var rm = GetNode<ResourceManager>("/root/ResourceManager");
+        var mm = GetNode<MetricManager>("/root/MetricManager");
+        var sm = GetNode<SkillManager>("/root/SkillManager");
+        var qm = GetNode<QuestManager>("/root/QuestManager");
+
+        GD.Print("========== 系统状态 ==========");
+        GD.Print($"时间: 第{tm.GetCurrentDay()}天 {tm.GetCurrentHour():00}:{tm.GetCurrentMinute():00}");
+        GD.Print($"AP={rm.GetResource("ap")}/{rm.GetMaxResource("ap")}  算力={rm.GetResource("compute")}  预算={rm.GetResource("budget")}");
+        GD.Print($"效率={mm.GetMetric("school_efficiency")}  家长信任={mm.GetMetric("parent_trust")}  合规={mm.GetMetric("compliance_safety")}  稳定={mm.GetMetric("system_stability")}");
+        GD.Print($"活跃任务数: {qm.GetActiveQuests().Count}");
+        GD.Print("===============================");
+    }
+
+    private void OnClose()
+    {
+        Toggle();
+    }
+
+    private static void AddButton(VBoxContainer parent, string text, Action action)
+    {
+        var btn = new Button { Text = text };
+        btn.Pressed += action;
+        parent.AddChild(btn);
+    }
+
+    private static void AddSeparator(VBoxContainer parent)
+    {
+        parent.AddChild(new HSeparator());
+    }
+}

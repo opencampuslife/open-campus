@@ -1,0 +1,161 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class QuestDetailPanel : CanvasLayer
+{
+    private Label _titleLabel = null!;
+    private Label _typeLabel = null!;
+    private RichTextLabel _descriptionLabel = null!;
+    private Label _deadlineLabel = null!;
+    private RichTextLabel _objectivesLabel = null!;
+    private RichTextLabel _rewardsLabel = null!;
+    private VBoxContainer _buttonRow = null!;
+    private Button _acceptButton = null!;
+    private Button _closeButton = null!;
+
+    private QuestManager _questManager = null!;
+    private string _currentQuestId = "";
+
+    public override void _Ready()
+    {
+        _titleLabel = GetNode<Label>("Panel/VBox/TitleLabel");
+        _typeLabel = GetNode<Label>("Panel/VBox/TypeLabel");
+        _descriptionLabel = GetNode<RichTextLabel>("Panel/VBox/DescriptionLabel");
+        _deadlineLabel = GetNode<Label>("Panel/VBox/DeadlineLabel");
+        _objectivesLabel = GetNode<RichTextLabel>("Panel/VBox/ObjectivesLabel");
+        _rewardsLabel = GetNode<RichTextLabel>("Panel/VBox/RewardsLabel");
+        _acceptButton = GetNode<Button>("Panel/VBox/ButtonRow/AcceptButton");
+        _closeButton = GetNode<Button>("Panel/VBox/ButtonRow/CloseButton");
+
+        _questManager = GetNode<QuestManager>("/root/QuestManager");
+
+        _acceptButton.Pressed += OnAcceptPressed;
+        _closeButton.Pressed += Close;
+
+        Visible = false;
+    }
+
+    public void ShowQuest(string questId)
+    {
+        _currentQuestId = questId;
+        PopulateQuestInfo(questId);
+        Visible = true;
+    }
+
+    public void Close()
+    {
+        Visible = false;
+        _currentQuestId = "";
+    }
+
+    private void PopulateQuestInfo(string questId)
+    {
+        var title = _questManager.GetQuestTitle(questId);
+        var description = _questManager.GetQuestDescription(questId);
+        var type = _questManager.GetQuestType(questId);
+        var isActive = _questManager.IsQuestActive(questId);
+        var isAvailable = _questManager.IsQuestAvailable(questId);
+
+        _titleLabel.Text = title;
+        _typeLabel.Text = type switch
+        {
+            "main" => "主线任务",
+            "daily" => "每日委托",
+            "npc" => "NPC 支线",
+            "random_event" => "随机事件",
+            _ => type
+        };
+
+        _descriptionLabel.Text = description;
+
+        var deadlineStr = BuildDeadlineText(questId);
+        _deadlineLabel.Text = deadlineStr;
+
+        var objectivesText = BuildObjectivesText(questId);
+        _objectivesLabel.Text = objectivesText;
+
+        var rewardsText = BuildRewardsText(questId);
+        _rewardsLabel.Text = rewardsText;
+
+        _acceptButton.Visible = isAvailable && !isActive;
+        _acceptButton.Disabled = !isAvailable;
+    }
+
+    private string BuildDeadlineText(string questId)
+    {
+        var deadline = _questManager.GetQuestDeadline(questId);
+        return string.IsNullOrEmpty(deadline) ? "截止时间：无" : $"截止时间：{deadline}";
+    }
+
+    private string BuildObjectivesText(string questId)
+    {
+        var objectives = _questManager.GetQuestObjectiveTexts(questId);
+        if (objectives.Count == 0)
+            return "目标：无";
+
+        var lines = new List<string>();
+        foreach (var obj in objectives)
+            lines.Add($"  • {obj}");
+        return "目标：\n" + string.Join("\n", lines);
+    }
+
+    private string BuildRewardsText(string questId)
+    {
+        var rewards = _questManager.GetQuestRewardSummary(questId);
+        if (rewards.Count == 0)
+            return "奖励：无";
+
+        var lines = new List<string>();
+        foreach (var key in rewards.Keys)
+        {
+            var keyStr = key.ToString();
+            var value = (int)rewards[key];
+            var displayName = GetRewardDisplayName(keyStr);
+            lines.Add($"  • {displayName} {value}");
+        }
+
+        return "奖励：\n" + string.Join("\n", lines);
+    }
+
+    private static string GetRewardDisplayName(string key)
+    {
+        if (key.StartsWith("resource:"))
+            return key["resource:".Length..] switch
+            {
+                "ap" => "AP",
+                "compute" => "算力",
+                "budget" => "预算 ¥",
+                _ => key["resource:".Length..]
+            };
+
+        if (key.StartsWith("metric:"))
+            return key["metric:".Length..] switch
+            {
+                "school_efficiency" => "学校效率",
+                "parent_trust" => "家长信任",
+                "compliance_safety" => "合规安全",
+                "system_stability" => "系统稳定",
+                _ => key["metric:".Length..]
+            };
+
+        if (key.StartsWith("xp:"))
+            return $"{key["xp:".Length..]} 经验";
+
+        if (key.StartsWith("trust:"))
+            return $"{key["trust:".Length..]} 信任";
+
+        return key;
+    }
+
+    private void OnAcceptPressed()
+    {
+        if (string.IsNullOrEmpty(_currentQuestId))
+            return;
+
+        if (_questManager.StartQuest(_currentQuestId))
+        {
+            GD.Print($"Quest accepted: {_currentQuestId}");
+            Close();
+        }
+    }
+}

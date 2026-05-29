@@ -1,0 +1,318 @@
+{
+  "random_events": [
+    {
+      "event_id": "parent_rumor",
+      "name": "家长群误传招生谣言",
+      "description": "家长群中误传学校招生政策发生变化，需要紧急澄清。",
+      "type": "reputation",
+      "trigger_phase": ["morning", "forenoon"],
+      "probability": 0.15,
+      "effects": {
+        "parent_trust": -8,
+        "reputation": -5
+      },
+      "choices": [
+        {
+          "text": "发布官方澄清通知",
+          "ap_cost": 3,
+          "compute_cost": 5,
+          "effects": {"parent_trust": 5, "compliance_safety": 3}
+        },
+        {
+          "text": "让招生办主任召开说明会",
+          "ap_cost": 6,
+          "compute_cost": 0,
+          "effects": {"parent_trust": 10, "school_efficiency": -3}
+        },
+        {
+          "text": "忽略，等待自然平息",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "effects": {"parent_trust": -15, "reputation": -10}
+        }
+      ]
+    },
+    {
+      "event_id": "kb_outdated",
+      "name": "知识库引用旧政策",
+      "description": "AI 回答中引用了已过期的学生管理规定，需要紧急更新。",
+      "type": "system",
+      "trigger_phase": ["afternoon"],
+      "probability": 0.12,
+      "effects": {
+        "compliance_safety": -5
+      },
+      "choices": [
+        {
+          "text": "立即更新知识库条目",
+          "ap_cost": 4,
+          "compute_cost": 15,
+          "effects": {"compliance_safety": 8, "data_intelligence_xp": 20}
+        },
+        {
+          "text": "标记过期并暂时移除",
+          "ap_cost": 2,
+          "compute_cost": 5,
+          "effects": {"compliance_safety": 3}
+        },
+        {
+          "text": "忽略，继续观察",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "effects": {"compliance_safety": -12, "parent_trust": -5}
+        }
+      ]
+    },
+    {
+      "event_id": "ai_hallucination",
+      "name": "AI 自动回复出现幻觉",
+      "description": "系统自动回复给出了错误的学生考核标准，家长表示质疑。",
+      "type": "system",
+      "trigger_phase": ["forenoon", "afternoon"],
+      "probability": 0.10,
+      "effects": {
+        "parent_trust": -10,
+        "compliance_safety": -8
+      },
+      "choices": [
+        {
+          "text": "立即撤回并更正回复",
+          "ap_cost": 3,
+          "compute_cost": 8,
+          "effects": {"parent_trust": 3, "compliance_safety": 5}
+        },
+        {
+          "text": "人工复核所有待发消息",
+          "ap_cost": 8,
+          "compute_cost": 10,
+          "effects": {"compliance_safety": 12, "school_efficiency": -5}
+        },
+        {
+          "text": "关闭自动回复功能",
+          "ap_cost": 2,
+          "compute_cost": 0,
+          "effects": {"school_efficiency": -15, "compliance_safety": 8}
+        }
+      ]
+    },
+    {
+      "event_id": "principal_urgent",
+      "name": "校长要求快速上线新功能",
+      "description": "校长希望明天就能上线新的人工智能问答功能，但合规审查尚未完成。",
+      "type": "decision",
+      "trigger_phase": ["morning"],
+      "probability": 0.08,
+      "effects": {},
+      "choices": [
+        {
+          "text": "同意上线，增加监控",
+          "ap_cost": 0,
+          "compute_cost": 20,
+          "effects": {"compliance_safety": -15, "school_efficiency": 10}
+        },
+        {
+          "text": "建议灰度发布（1%）",
+          "ap_cost": 2,
+          "compute_cost": 30,
+          "effects": {"compliance_safety": 3, "system_stability": -5}
+        },
+        {
+          "text": "坚持完成合规审查",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "effects": {"compliance_safety": 8, "parent_trust": -3}
+        }
+      ]
+    },
+    {
+      "event_id": "compliance_pause",
+      "name": "合规专员要求暂停发布",
+      "description": "合规专员发现新功能存在隐私风险，要求立即停止发布并进行审查。",
+      "type": "system",
+      "trigger_phase": ["afternoon", "evening"],
+      "probability": 0.10,
+      "effects": {
+        "system_stability": -5
+      },
+      "choices": [
+        {
+          "text": "立即暂停并配合审查",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "effects": {"compliance_safety": 10, "system_stability": 3}
+        },
+        {
+          "text": "申请例外放行",
+          "ap_cost": 4,
+          "compute_cost": 0,
+          "effects": {"compliance_safety": -20, "school_efficiency": 8}
+        },
+        {
+          "text": "回滚到上一版本",
+          "ap_cost": 2,
+          "compute_cost": 15,
+          "effects": {"system_stability": 8, "compliance_safety": 5}
+        }
+      ]
+    },
+    {
+      "event_id": "it_api_error",
+      "name": "IT 发现接口异常",
+      "description": "运维部门发现 AI 中枢与外部系统的接口出现异常，可能导致数据同步失败。",
+      "type": "system",
+      "trigger_phase": ["afternoon"],
+      "probability": 0.12,
+      "effects": {
+        "system_stability": -10
+      },
+      "choices": [
+        {
+          "text": "立即切换备用接口",
+          "ap_cost": 3,
+          "compute_cost": 10,
+          "effects": {"system_stability": 12, "operations_xp": 15}
+        },
+        {
+          "text": "重启接口服务",
+          "ap_cost": 4,
+          "compute_cost": 15,
+          "effects": {"system_stability": 8, "school_efficiency": -5}
+        },
+        {
+          "text": "临时降级服务",
+          "ap_cost": 2,
+          "compute_cost": 5,
+          "effects": {"system_stability": 5, "school_efficiency": -10}
+        }
+      ]
+    },
+    {
+      "event_id": "student_complaint",
+      "name": "学生代表投诉 AI 回答生硬",
+      "description": "学生代表反映 AI 系统在回答学生问题时语气生硬，缺乏人文关怀。",
+      "type": "reputation",
+      "trigger_phase": ["afternoon", "evening"],
+      "probability": 0.10,
+      "effects": {
+        "parent_trust": -5
+      },
+      "choices": [
+        {
+          "text": "优化提示词，增加温和语气",
+          "ap_cost": 3,
+          "compute_cost": 10,
+          "effects": {"parent_trust": 8, "communication_xp": 15}
+        },
+        {
+          "text": "人工复核所有学生咨询",
+          "ap_cost": 8,
+          "compute_cost": 5,
+          "effects": {"school_efficiency": -8, "parent_trust": 5}
+        },
+        {
+          "text": "忽略，系统回答准确即可",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "effects": {"parent_trust": -12, "compliance_safety": -3}
+        }
+      ]
+    },
+    {
+      "event_id": "canteen_data_lost",
+      "name": "食堂订餐数据丢失",
+      "description": "食堂订餐系统出现数据异常，部分学生的订餐记录丢失。",
+      "type": "system",
+      "trigger_phase": ["morning"],
+      "probability": 0.08,
+      "effects": {
+        "system_stability": -8,
+        "parent_trust": -5
+      },
+      "choices": [
+        {
+          "text": "从备份恢复数据",
+          "ap_cost": 4,
+          "compute_cost": 20,
+          "effects": {"system_stability": 10, "parent_trust": 5}
+        },
+        {
+          "text": "手动重新统计",
+          "ap_cost": 9,
+          "compute_cost": 0,
+          "effects": {"school_efficiency": -12, "parent_trust": 3}
+        },
+        {
+          "text": "紧急联系后勤补录",
+          "ap_cost": 5,
+          "compute_cost": 0,
+          "effects": {"parent_trust": 6, "logistics_trust": 5}
+        }
+      ]
+    },
+    {
+      "event_id": "media_inquiry",
+      "name": "媒体询问学校 AI 系统是否侵犯隐私",
+      "description": "有媒体记者联系学校，询问 AI 系统收集和使用学生数据的情况。",
+      "type": "reputation",
+      "trigger_phase": ["forenoon"],
+      "probability": 0.06,
+      "effects": {
+        "reputation": -10,
+        "compliance_safety": -5
+      },
+      "choices": [
+        {
+          "text": "发布透明数据使用报告",
+          "ap_cost": 6,
+          "compute_cost": 15,
+          "effects": {"compliance_safety": 12, "reputation": 8}
+        },
+        {
+          "text": "邀请媒体参观 AI 中枢",
+          "ap_cost": 8,
+          "compute_cost": 5,
+          "effects": {"reputation": 15, "parent_trust": 5}
+        },
+        {
+          "text": "委托法务回应",
+          "ap_cost": 3,
+          "compute_cost": 0,
+          "effects": {"compliance_safety": 3, "reputation": -5}
+        }
+      ]
+    },
+    {
+      "event_id": "dorm_repair_pileup",
+      "name": "宿舍报修积压严重",
+      "description": "近期宿舍设施故障增多，报修工单已积压超过 50 单，后勤压力巨大。",
+      "type": "efficiency",
+      "trigger_phase": ["morning", "afternoon"],
+      "probability": 0.12,
+      "effects": {
+        "school_efficiency": -10,
+        "parent_trust": -5
+      },
+      "choices": [
+        {
+          "text": "启用自动派单系统",
+          "ap_cost": 2,
+          "compute_cost": 15,
+          "effects": {"school_efficiency": 12, "logistics_trust": 8}
+        },
+        {
+          "text": "增加临时维修人员",
+          "ap_cost": 0,
+          "compute_cost": 0,
+          "budget_cost": 1000,
+          "effects": {"school_efficiency": 8, "budget": -1000}
+        },
+        {
+          "text": "优先级排序，分批处理",
+          "ap_cost": 4,
+          "compute_cost": 8,
+          "effects": {"school_efficiency": 5, "parent_trust": -3}
+        }
+      ]
+    }
+  ]
+}

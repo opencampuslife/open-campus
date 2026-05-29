@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dng70tjtn3e11"
+
+[deps]
+
+files=["res://tools/perf_output/perf_json_load_50.stage.translation", "res://tools/perf_output/perf_json_load_50.time.translation"]
+
+source_file="res://tools/perf_output/perf_json_load_50.csv"
+dest_files=["res://tools/perf_output/perf_json_load_50.stage.translation", "res://tools/perf_output/perf_json_load_50.time.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

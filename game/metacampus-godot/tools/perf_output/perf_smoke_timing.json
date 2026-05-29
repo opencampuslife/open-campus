@@ -1,0 +1,17 @@
+{
+  "G2": {
+    "duration_sec": 4.37,
+    "passed": true,
+    "returncode": 0
+  },
+  "G3": {
+    "duration_sec": 1.08,
+    "passed": true,
+    "returncode": 0
+  },
+  "G4": {
+    "duration_sec": 5.39,
+    "passed": true,
+    "returncode": 0
+  }
+}

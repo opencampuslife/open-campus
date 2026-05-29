@@ -1,0 +1,160 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class QuestBoardController : CanvasLayer
+{
+    private Button _closeButton = null!;
+    private VBoxContainer _dailyQuestList = null!;
+    private VBoxContainer _riskQuestList = null!;
+    private VBoxContainer _activeQuestList = null!;
+
+    private QuestManager _questManager = null!;
+
+    private readonly Dictionary<string, Button> _questButtons = new();
+
+    public override void _Ready()
+    {
+        _closeButton = GetNode<Button>("Root/Panel/VBox/HeaderRow/CloseButton");
+        _dailyQuestList = GetNode<VBoxContainer>("Root/Panel/VBox/CategoryTabs/DailyTab/DailyQuestList");
+        _riskQuestList = GetNode<VBoxContainer>("Root/Panel/VBox/CategoryTabs/RiskTab/RiskQuestList");
+        _activeQuestList = GetNode<VBoxContainer>("Root/Panel/VBox/CategoryTabs/ActiveTab/ActiveQuestList");
+
+        _closeButton.Pressed += Close;
+
+        _questManager = GetNode<QuestManager>("/root/QuestManager");
+        _questManager.DailyQuestsRefreshed += OnDailyQuestsRefreshed;
+        _questManager.QuestStarted += OnQuestStateChanged;
+        _questManager.QuestCompleted += OnQuestStateChanged;
+        _questManager.QuestFailed += OnQuestStateChanged;
+        _questManager.QuestExpired += OnQuestStateChanged;
+
+        Visible = false;
+        RefreshLists();
+    }
+
+    public void Open()
+    {
+        Visible = true;
+        RefreshLists();
+    }
+
+    public void Close()
+    {
+        Visible = false;
+    }
+
+    private void RefreshLists()
+    {
+        RefreshDailyList();
+        RefreshRiskList();
+        RefreshActiveList();
+    }
+
+    private void RefreshDailyList()
+    {
+        ClearChildren(_dailyQuestList);
+        _questButtons.Clear();
+
+        var dailyQuests = _questManager.GetDailyQuests();
+        if (dailyQuests.Count == 0)
+        {
+            _dailyQuestList.AddChild(new Label { Text = "暂无每日委托" });
+            return;
+        }
+
+        foreach (var questId in dailyQuests)
+        {
+            var button = CreateQuestButton(questId, "每日");
+            _dailyQuestList.AddChild(button);
+            _questButtons[questId] = button;
+        }
+    }
+
+    private void RefreshRiskList()
+    {
+        ClearChildren(_riskQuestList);
+
+        var riskQuests = _questManager.GetAvailableQuestsByType("random_event");
+        if (riskQuests.Count == 0)
+        {
+            _riskQuestList.AddChild(new Label { Text = "暂无高风险事件" });
+            return;
+        }
+
+        foreach (var questId in riskQuests)
+        {
+            var button = CreateQuestButton(questId, "高风险");
+            _riskQuestList.AddChild(button);
+        }
+    }
+
+    private void RefreshActiveList()
+    {
+        ClearChildren(_activeQuestList);
+
+        var activeQuests = _questManager.GetActiveQuests();
+        if (activeQuests.Count == 0)
+        {
+            _activeQuestList.AddChild(new Label { Text = "暂无进行中的任务" });
+            return;
+        }
+
+        foreach (var questId in activeQuests)
+        {
+            var button = CreateQuestButton(questId, "进行中");
+            _activeQuestList.AddChild(button);
+        }
+    }
+
+    private Button CreateQuestButton(string questId, string category)
+    {
+        var title = _questManager.GetQuestTitle(questId);
+        var priority = _questManager.GetQuestPriority(questId);
+        var priorityTag = priority >= 3 ? "[高]" : priority >= 2 ? "[中]" : "[低]";
+
+        var button = new Button
+        {
+            Text = $"{priorityTag} {title}",
+            TooltipText = _questManager.GetQuestDescription(questId)
+        };
+
+        button.Pressed += () => OnQuestSelected(questId);
+        return button;
+    }
+
+    private void OnQuestSelected(string questId)
+    {
+        if (_questManager.IsQuestActive(questId))
+        {
+            GD.Print($"Quest already active: {questId}");
+            return;
+        }
+
+        if (_questManager.IsQuestAvailable(questId))
+        {
+            _questManager.StartQuest(questId);
+            RefreshLists();
+        }
+    }
+
+    private void OnDailyQuestsRefreshed(Godot.Collections.Array<string> questIds)
+    {
+        if (Visible)
+            RefreshDailyList();
+    }
+
+    private void OnQuestStateChanged(string questId)
+    {
+        if (Visible)
+            RefreshLists();
+    }
+
+    private static void ClearChildren(Node parent)
+    {
+        foreach (var child in parent.GetChildren())
+        {
+            if (child is Node node)
+                node.QueueFree();
+        }
+    }
+}

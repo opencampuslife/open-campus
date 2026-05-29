@@ -1,0 +1,52 @@
+[
+  {
+    "npc_id": "parent_001",
+    "name": "张同学家长",
+    "role": "家长",
+    "location": "admission_office",
+    "sprite": "parent_32x32",
+    "dialogue_id": "dlg_admission_001",
+    "quest_ids": ["q_admission_001", "q_admission_002"],
+    "indicator_tint": "#10b981"
+  },
+  {
+    "npc_id": "teacher_admission_001",
+    "name": "李招生老师",
+    "role": "招生老师",
+    "location": "admission_office",
+    "sprite": "teacher_admission_32x32",
+    "dialogue_id": "dlg_admission_handoff",
+    "quest_ids": ["q_admission_001"],
+    "indicator_tint": "#7c3aed"
+  },
+  {
+    "npc_id": "teacher_class_001",
+    "name": "王班主任",
+    "role": "班主任",
+    "location": "academic_affairs",
+    "sprite": "teacher_class_32x32",
+    "dialogue_id": "dlg_leave_request",
+    "quest_ids": ["q_leave_request_001"],
+    "indicator_tint": "#7c3aed"
+  },
+  {
+    "npc_id": "staff_logistics_001",
+    "name": "陈后勤老师",
+    "role": "后勤老师",
+    "location": "canteen",
+    "sprite": "staff_logistics_32x32",
+    "dialogue_id": "dlg_meal_count",
+    "quest_ids": ["q_meal_count_001", "q_repair_order_001"],
+    "indicator_tint": "#f59e0b"
+  },
+  {
+    "npc_id": "ai_assistant_001",
+    "name": "小智AI助手",
+    "role": "AI助手",
+    "location": "ai_hub",
+    "sprite": "ai_assistant_32x32",
+    "dialogue_id": "dlg_ai_intro",
+    "quest_ids": ["q_dashboard_001", "q_canary_release_001"],
+    "indicator_tint": "#06b6d4"
+  }
+]

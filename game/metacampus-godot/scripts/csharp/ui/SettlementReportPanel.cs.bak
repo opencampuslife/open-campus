@@ -1,0 +1,195 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class SettlementReportPanel : CanvasLayer
+{
+    private Label _titleLabel = null!;
+    private Label _resourceBeforeLabel = null!;
+    private Label _resourceAfterLabel = null!;
+
+    private Label _efficiencyBeforeLabel = null!;
+    private Label _parentTrustBeforeLabel = null!;
+    private Label _complianceBeforeLabel = null!;
+    private Label _stabilityBeforeLabel = null!;
+
+    private ProgressBar _efficiencyBar = null!;
+    private ProgressBar _parentTrustBar = null!;
+    private ProgressBar _complianceBar = null!;
+    private ProgressBar _stabilityBar = null!;
+
+    private Label _questSummaryLabel = null!;
+    private Label _consequencesLabel = null!;
+    private Label _eventsLabel = null!;
+
+    private Button _continueButton = null!;
+
+    private TimeManager _timeManager = null!;
+
+    public override void _Ready()
+    {
+        Visible = false;
+        BindNodes();
+        _timeManager = GetNode<TimeManager>("/root/TimeManager");
+        _timeManager.SettlementGenerated += OnSettlementGenerated;
+        ProcessMode = ProcessModeEnum.Always;
+    }
+
+    private void BindNodes()
+    {
+        _titleLabel = GetNode<Label>("Panel/VBox/TitleLabel");
+        _resourceBeforeLabel = GetNode<Label>("Panel/VBox/ResourceBeforeLabel");
+        _resourceAfterLabel = GetNode<Label>("Panel/VBox/ResourceAfterLabel");
+
+        _efficiencyBeforeLabel = GetNode<Label>("Panel/VBox/MetricsGrid/EfficiencyBox/EfficiencyLabel");
+        _parentTrustBeforeLabel = GetNode<Label>("Panel/VBox/MetricsGrid/ParentTrustBox/ParentTrustLabel");
+        _complianceBeforeLabel = GetNode<Label>("Panel/VBox/MetricsGrid/ComplianceBox/ComplianceLabel");
+        _stabilityBeforeLabel = GetNode<Label>("Panel/VBox/MetricsGrid/StabilityBox/StabilityLabel");
+
+        _efficiencyBar = GetNode<ProgressBar>("Panel/VBox/MetricsGrid/EfficiencyBox/EfficiencyBar");
+        _parentTrustBar = GetNode<ProgressBar>("Panel/VBox/MetricsGrid/ParentTrustBox/ParentTrustBar");
+        _complianceBar = GetNode<ProgressBar>("Panel/VBox/MetricsGrid/ComplianceBox/ComplianceBar");
+        _stabilityBar = GetNode<ProgressBar>("Panel/VBox/MetricsGrid/StabilityBox/StabilityBar");
+
+        _questSummaryLabel = GetNode<Label>("Panel/VBox/QuestSummaryLabel");
+        _consequencesLabel = GetNode<Label>("Panel/VBox/ConsequencesLabel");
+        _eventsLabel = GetNode<Label>("Panel/VBox/EventsLabel");
+
+        _continueButton = GetNode<Button>("Panel/VBox/ContinueBtn");
+        _continueButton.Pressed += OnContinuePressed;
+    }
+
+    private void OnSettlementGenerated(SettlementReport report)
+    {
+        PopulateReport(report);
+        GetTree().Paused = true;
+        Visible = true;
+    }
+
+    private void PopulateReport(SettlementReport report)
+    {
+        var semesterName = _timeManager.GetSemesterName();
+        _titleLabel.Text = $"第 {report.Day} 天 结算报告 — {semesterName}";
+
+        var resBefore = report.ResourceBefore;
+        var resAfter = report.ResourceAfter;
+        _resourceBeforeLabel.Text =
+            $"资源变化前：AP {resBefore.GetValueOrDefault("ap", 0)} / 算力 {resBefore.GetValueOrDefault("compute", 0)} / 预算 ¥{resBefore.GetValueOrDefault("budget", 0)}";
+        _resourceAfterLabel.Text =
+            $"资源变化后：AP {resAfter.GetValueOrDefault("ap", 0)} / 算力 {resAfter.GetValueOrDefault("compute", 0)} / 预算 ¥{resAfter.GetValueOrDefault("budget", 0)}";
+
+        var metricsBefore = report.MetricBefore;
+        var metricsAfter = report.MetricAfter;
+        DisplayMetricDelta("school_efficiency", "效率", metricsBefore, metricsAfter, _efficiencyBeforeLabel, _efficiencyBar);
+        DisplayMetricDelta("parent_trust", "家长信任", metricsBefore, metricsAfter, _parentTrustBeforeLabel, _parentTrustBar);
+        DisplayMetricDelta("compliance_safety", "合规", metricsBefore, metricsAfter, _complianceBeforeLabel, _complianceBar);
+        DisplayMetricDelta("system_stability", "稳定", metricsBefore, metricsAfter, _stabilityBeforeLabel, _stabilityBar);
+
+        var questParts = new System.Collections.Generic.List<string>();
+        if (report.CompletedQuests.Count > 0)
+        {
+            var completedTitle = GetQuestTitles(report.CompletedQuests);
+            questParts.Add($"完成：{completedTitle}");
+        }
+        if (report.FailedOrExpiredQuests.Count > 0)
+        {
+            var failedTitle = GetQuestTitles(report.FailedOrExpiredQuests);
+            questParts.Add($"失败/过期：{failedTitle}");
+        }
+        _questSummaryLabel.Text = questParts.Count > 0
+            ? $"任务总结：{string.Join(" | ", questParts)}"
+            : "任务总结：无变化";
+
+        if (report.TriggeredConsequences.Count > 0)
+        {
+            var consequenceTexts = new System.Collections.Generic.List<string>();
+            foreach (var c in report.TriggeredConsequences)
+                consequenceTexts.Add(GetConsequenceDisplay(c));
+            _consequencesLabel.Text = $"阈值后果：{string.Join("、", consequenceTexts)}";
+        }
+        else
+        {
+            _consequencesLabel.Text = "阈值后果：无";
+        }
+
+        if (report.NextDayEvents.Count > 0)
+        {
+            _eventsLabel.Text = $"次日事件：{string.Join("、", report.NextDayEvents)}";
+        }
+        else
+        {
+            _eventsLabel.Text = "次日事件：无";
+        }
+    }
+
+    private void DisplayMetricDelta(
+        string metricId,
+        string displayName,
+        Godot.Collections.Dictionary before,
+        Godot.Collections.Dictionary after,
+        Label label,
+        ProgressBar bar)
+    {
+        var beforeVal = (int)before.GetValueOrDefault(metricId, 0);
+        var afterVal = (int)after.GetValueOrDefault(metricId, 0);
+        var delta = afterVal - beforeVal;
+        var deltaStr = delta >= 0 ? $"+{delta}" : $"{delta}";
+
+        bar.MinValue = 0;
+        bar.MaxValue = 100;
+        bar.Value = afterVal;
+        bar.ShowPercentage = false;
+
+        label.Text = $"{displayName}: {beforeVal} → {afterVal} ({deltaStr})";
+
+        if (afterVal < 20)
+        {
+            label.Modulate = new Color(1.0f, 0.25f, 0.25f);
+            bar.Modulate = new Color(1.0f, 0.25f, 0.25f);
+        }
+        else if (afterVal < 40)
+        {
+            label.Modulate = new Color(1.0f, 0.75f, 0.2f);
+            bar.Modulate = new Color(1.0f, 0.75f, 0.2f);
+        }
+        else
+        {
+            label.Modulate = Colors.White;
+            bar.Modulate = Colors.White;
+        }
+    }
+
+    private string GetQuestTitles(Godot.Collections.Array<string> questIds)
+    {
+        var questManager = GetNode<QuestManager>("/root/QuestManager");
+        var titles = new System.Collections.Generic.List<string>();
+        foreach (var id in questIds)
+        {
+            var title = questManager.GetQuestTitle(id);
+            if (!string.IsNullOrEmpty(title))
+                titles.Add(title);
+        }
+        return string.Join("、", titles);
+    }
+
+    private static string GetConsequenceDisplay(string consequenceId)
+    {
+        return consequenceId switch
+        {
+            "audit_warning" => "合规预警",
+            "suspend_ai_auto_reply" => "暂停 AI 自动回复",
+            "ai_tools_intermittent" => "AI 工具间歇性不可用",
+            "system_outage" => "系统宕机",
+            "complaint_increase" => "家长投诉增加",
+            "reputation_crisis" => "声誉危机",
+            "task_backlog_double" => "任务积压翻倍",
+            "principal_accountability" => "校长问责",
+            _ => consequenceId
+        };
+    }
+
+    private void OnContinuePressed()
+    {
+        Visible = false;
+        GetTree().Paused = false;
+    }
+}

@@ -1,0 +1,141 @@
+{
+  "skills": [
+    {
+      "skill_id": "admissions",
+      "name": "招生咨询",
+      "description": "提升家长问答质量、材料审核效率",
+      "exp_source": [
+        "回答招生咨询 +5",
+        "材料审核 +3",
+        "拦截违规承诺 +10"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "高风险词提醒"},
+        "2": {"xp_required": 100, "unlock": "招生承诺检测"},
+        "3": {"xp_required": 250, "unlock": "隐私字段脱敏"},
+        "4": {"xp_required": 500, "unlock": "自动生成合规话术"},
+        "5": {"xp_required": 800, "unlock": "高风险任务预警"},
+        "6": {"xp_required": 1200, "unlock": "政策冲突检测"},
+        "7": {"xp_required": 1700, "unlock": "审计日志自动归档"},
+        "8": {"xp_required": 2300, "unlock": "舆情风险预测"},
+        "9": {"xp_required": 3000, "unlock": "多部门合规联动"},
+        "10": {"xp_required": 4000, "unlock": "合规沙盒推演"}
+      }
+    },
+    {
+      "skill_id": "academic_affairs",
+      "name": "教务处理",
+      "description": "提升请假、排课、成绩事务处理能力",
+      "exp_source": [
+        "处理请假审批 +5",
+        "排课调整 +8",
+        "成绩录入 +3",
+        "学生事务处理 +4"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "快速审批模板"},
+        "2": {"xp_required": 100, "unlock": "自动催办提醒"},
+        "3": {"xp_required": 250, "unlock": "批量处理工具"},
+        "4": {"xp_required": 500, "unlock": "智能排课建议"},
+        "5": {"xp_required": 800, "unlock": "学生风险预警"},
+        "6": {"xp_required": 1200, "unlock": "教务数据洞察"},
+        "7": {"xp_required": 1700, "unlock": "跨部门协同审批"},
+        "8": {"xp_required": 2300, "unlock": "AI 辅助决策"},
+        "9": {"xp_required": 3000, "unlock": "教务流程自动化"},
+        "10": {"xp_required": 4000, "unlock": "智慧教务中枢"}
+      }
+    },
+    {
+      "skill_id": "compliance",
+      "name": "合规治理",
+      "description": "降低高风险回答、隐私泄露、违规承诺概率",
+      "exp_source": [
+        "拦截违规承诺 +10",
+        "隐私字段脱敏 +5",
+        "合规审查 +8",
+        "政策更新同步 +6"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "高风险词提醒"},
+        "2": {"xp_required": 120, "unlock": "招生承诺检测"},
+        "3": {"xp_required": 300, "unlock": "隐私字段脱敏"},
+        "4": {"xp_required": 600, "unlock": "自动生成合规话术"},
+        "5": {"xp_required": 1000, "unlock": "高风险任务预警"},
+        "6": {"xp_required": 1500, "unlock": "政策冲突检测"},
+        "7": {"xp_required": 2100, "unlock": "审计日志自动归档"},
+        "8": {"xp_required": 2800, "unlock": "舆情风险预测"},
+        "9": {"xp_required": 3600, "unlock": "多部门合规联动"},
+        "10": {"xp_required": 4500, "unlock": "合规沙盒推演"}
+      }
+    },
+    {
+      "skill_id": "operations",
+      "name": "系统运维",
+      "description": "提升稳定性、发布成功率、故障恢复速度",
+      "exp_source": [
+        "Canary 发布 +15",
+        "故障恢复 +10",
+        "系统监控 +5",
+        "日志分析 +8"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "基础监控面板"},
+        "2": {"xp_required": 150, "unlock": "自动告警通知"},
+        "3": {"xp_required": 350, "unlock": "快速回滚能力"},
+        "4": {"xp_required": 700, "unlock": "灰度发布优先"},
+        "5": {"xp_required": 1100, "unlock": "故障预测模型"},
+        "6": {"xp_required": 1600, "unlock": "自动扩容策略"},
+        "7": {"xp_required": 2200, "unlock": "跨区容灾机制"},
+        "8": {"xp_required": 2900, "unlock": "智能根因分析"},
+        "9": {"xp_required": 3700, "unlock": "自愈系统框架"},
+        "10": {"xp_required": 4600, "unlock": "零故障架构"}
+      }
+    },
+    {
+      "skill_id": "data_intelligence",
+      "name": "数据智能",
+      "description": "提升 RAG 检索、报表、预测、归因分析能力",
+      "exp_source": [
+        "RAG 查询 +3",
+        "报表生成 +8",
+        "数据分析 +10",
+        "知识库优化 +12"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "基础 RAG 检索"},
+        "2": {"xp_required": 130, "unlock": "检索结果排序优化"},
+        "3": {"xp_required": 320, "unlock": "引文自动标注"},
+        "4": {"xp_required": 650, "unlock": "知识库新鲜度监控"},
+        "5": {"xp_required": 1050, "unlock": "多模态数据融合"},
+        "6": {"xp_required": 1550, "unlock": "预测性分析模型"},
+        "7": {"xp_required": 2150, "unlock": "归因分析引擎"},
+        "8": {"xp_required": 2850, "unlock": "自动化知识图谱"},
+        "9": {"xp_required": 3650, "unlock": "跨源数据治理"},
+        "10": {"xp_required": 4550, "unlock": "认知智能中枢"}
+      }
+    },
+    {
+      "skill_id": "communication",
+      "name": "沟通协调",
+      "description": "提升 NPC 信任、投诉化解、跨部门协作能力",
+      "exp_source": [
+        "深度沟通 +6",
+        "投诉化解 +12",
+        "跨部门协作 +8",
+        "家校沟通 +5"
+      ],
+      "levels": {
+        "1": {"xp_required": 0, "unlock": "基础沟通技巧"},
+        "2": {"xp_required": 100, "unlock": "情绪识别能力"},
+        "3": {"xp_required": 250, "unlock": "冲突调解技巧"},
+        "4": {"xp_required": 500, "unlock": "信任快速建立"},
+        "5": {"xp_required": 800, "unlock": "危机公关话术"},
+        "6": {"xp_required": 1200, "unlock": "跨部门协作机制"},
+        "7": {"xp_required": 1700, "unlock": "组织影响力扩展"},
+        "8": {"xp_required": 2300, "unlock": "文化变革引导"},
+        "9": {"xp_required": 3000, "unlock": "战略沟通能力"},
+        "10": {"xp_required": 4000, "unlock": "卓越领导力"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+version: 1
+plan:
+  name: 'P1 API 延迟拆解——mock/live/off/fallback 各层耗时归因'
+  max_concurrency: 10
+  max_consecutive_failures: 2
+  max_cycles: 10
+tasks:
+  # ── Task 1: 仪器化 Python 桥接层 ──
+  - id: instrument-bridge
+    title: '仪器化 llm_bridge.py——添加 X-Bench 请求级耗时追踪'
+    prompt: |
+      在 tools/llm_bridge.py (185行, HTTP Server on :8788) 中添加 bench 模式耗时追踪:
+
+      1. 当请求携带 X-Bench: 1 header 时（或在 query 中带 ?bench=1），为每个请求产出一个 JSON timing 日志行
+      2. 计时点：
+         - bridge_receive_ms: 收到完整请求的时间
+         - bridge_process_ms: session 查找 + message append 时间
+         - provider_latency_ms: call_deepseek() 全耗时（mock/off 模式此项=0，仅 live 模式有意义）
+         - bridge_response_ms: 序列化 + 写回响应时间
+      3. 响应 JSON 中附加 "_timing" 字段：{bridge_receive_ms, bridge_process_ms, provider_latency_ms, bridge_response_ms}
+      4. 日志同时写入 stdout（供 Python 编排器捕获）和可选的日志文件
+      5. 所有变更 bench-gated：正常请求（无 X-Bench header 或 ?bench=1）不产生 timing 开销
+      6. 不修改 API KEY、不暴露密钥、不修改业务逻辑
+      7. 不影响 session_id 生成、conversation history 存储、error handling 等现有行为
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+      交付物: tools/llm_bridge.py (timing instrumented 版本)
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 llm_bridge.py 中 timing 代码是否为 bench-gated（仅在 X-Bench header 或 ?bench=1 时激活）
+      2. 检查无 bench 请求时是否不产生任何 timing 开销
+      3. 检查 API KEY 和 secrets 是否仍被保护
+      4. 检查 Python 语法无错误：python3 -c "import ast; ast.parse(open('tools/llm_bridge.py').read())"
+      5. 确认响应 JSON 在有 bench 时包含 "_timing" 字段
+    timeout_ms: 600000
+
+  # ── Task 2: 仪器化 Godot ApiClient + 创建采集脚本 ──
+  - id: instrument-godot
+    title: '仪器化 api_client.gd + 创建 api_latency_capture.gd——按 trace 点插入 bench-gated 计时'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 对 API 调用链添加 bench-gated 耗时仪器化：
+
+      1. 在 scripts/api_client.gd (280行) 顶部添加：const BENCH_MODE: bool = false（默认关闭）
+      2. 在以下关键路径插入 BENCH_MODE 守卫的计时代码（使用 Time.get_ticks_usec()）：
+         - mock 路径: _ask_knowledge_mock() 外层总耗时
+         - off 路径: _make_offline_response() 外层总耗时
+         - live 路径: _ask_knowledge_live() 中记录 serialize_ms + send_ms
+         - _on_request_completed() 中记录 parse_ms + callback_dispatch_ms
+         - fallback 路径: _fallback_mock() 中记录 fallback 触发和耗时
+      3. 每请求产出 Dictionary: {request_id, mode, timestamp, total_us, serialize_us, send_us, parse_us, callback_us, fallback_reason}
+      4. 创建 tools/api_latency_capture.gd（extends SceneTree, --headless 友好）：
+         - 接受命令行参数 --mode=mock/live/off 控制测试模式
+         - 循环调用 api_client.ask_knowledge() 或直接 HTTP 到 TestHarness/bridge
+         - 每条请求记录 trace 点耗时
+         - 输出 CSV 到 stdout 和 tools/perf_output/perf_api_*.csv
+         - 采样数可配（默认 --samples=30）
+         - 请求间隔可配（默认 --interval_ms=100）
+      5. tools/perf_output/ 目录已存在
+      6. smoke_g2/3/4 不应因为 api_client.gd 的 BENCH_MODE 常量而损坏
+
+      注意：不修改业务逻辑，不触及模式切换代码，bench 代码必须通过 BENCH_MODE 守卫。
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: |
+      1. 确认 api_client.gd 中 BENCH_MODE 默认=false
+      2. 确认 BENCH_MODE=false 时无额外代码路径执行
+      3. 确认 api_latency_capture.gd 可被 Godot --headless 加载（extends SceneTree）
+      4. 确认 smoke_g2.py 运行后仍 68/68（用 --skip-mode-check 跳过额外检查）
+      5. 检查 csv 输出格式: request_id,mode,total_us,serialize_us,send_us,parse_us,callback_us,fallback_reason
+    timeout_ms: 600000
+
+  # ── Task 3: 创建 orchestrator ──
+  - id: orchestrator
+    title: '创建 tools/api_latency_bench.py——编排多 mode 采集 + 生成报告'
+    prompt: |
+      基于 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 现有的 tools/perf_baseline.py 风格，
+      创建 tools/api_latency_bench.py，功能：
+
+      1. 编排流程：
+         a) 启动 Godot（headless 或带 display） + 启动 LLM Bridge
+         b) 等 TestHarness 就绪（port 16007）和 Bridge 就绪（port 8788）
+         c) 对 mock/live/off/fallback 各 mode 跑采集
+         d) 汇总数据生成报告
+      2. mode 测试：
+         - mock: 从 TestHarness HTTP /api/ask 或直接调用 api_client（取决于哪种可获取 trace 数据）
+         - off: Godot api_client set_mode("off") + 请求
+         - live: 需 LLM Bridge 运行 + api_client set_mode("live") + 请求（注意：live 模式耗时会显著更长，且需要 API key）
+         - fallback: 模拟 live 请求到不可达端点，验证 fallback 行为
+      3. 每个 mode 采集 ≥30 样本
+      4. 原始数据存 tools/perf_output/perf_api_raw.json
+      5. 生成两份报告：
+         - reports/api-latency-breakdown.md (Markdown 表格 + 分析)
+         - reports/api-latency-breakdown.json (结构化数据)
+      6. 报告中必须包含验收表：
+         | mode | samples | avg | median | P95 | P99 | error rate | main bottleneck |
+
+      参考 perf_baseline.py 的项目常量路径模式:
+         PROJECT_DIR, GODOT_EXEC, TOOLS_DIR, REPORTS_DIR, OUTPUT_DIR
+    assigned_to: general
+    depends_on: [instrument-bridge, instrument-godot]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 api_latency_bench.py 语法: python3 -c "import ast; ast.parse(open('tools/api_latency_bench.py').read())"
+      2. 检查报告模板是否包含所有 4 个 mode 的验收表
+      3. 检查是否有 exposed secrets
+      4. 检查输出文件路径是否在 reports/ 和 tools/perf_output/ 下
+    timeout_ms: 600000
+
+  # ── Task 4: 执行采集 ──
+  - id: run-capture
+    title: '执行 API 延迟采集——对所有 mode 跑测量'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 执行 API 延迟采集：
+
+      1. 先终止所有 Godot / Python 残留进程
+      2. 启动 LLM Bridge: python3 tools/llm_bridge.py &
+      3. 启动 Godot（带 display，因为 TestHarness 需要）
+      4. 等 TestHarness 和 Bridge 就绪
+      5. 运行: python3 tools/api_latency_bench.py
+      6. 确认输出：
+         - tools/perf_output/perf_api_raw.json
+         - reports/api-latency-breakdown.md
+         - reports/api-latency-breakdown.json
+      7. 如果 live 模式因 API key 问题失败，跳过 live，在其他 mode 收集足够数据
+      8. 清理后台进程
+
+      安全规则：不打印 API key，不提交带 key 的代码，如果 live 模式不可用跳过即可。
+    assigned_to: general
+    depends_on: [orchestrator]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 reports/api-latency-breakdown.md 是否存在且非空
+      2. 检查 reports/api-latency-breakdown.json 是否存在且非空
+      3. 每个 mode 样本数 ≥30（live 模式可跳过）
+      4. 确认报告中包含 bottleneck 分析
+      5. 确认 smoke g2 仍可运行（不强制跑，至少脚本未损坏）
+    timeout_ms: 1800000
+
+  # ── Task 5: Smoke 回归验证 ──
+  - id: smoke-verify
+    title: '运行 Smoke g2/g3/g4——确认仪器化未引发回归'
+    prompt: |
+      确认 P1 仪器化未破坏现有功能：
+
+      1. 终止所有 Godot/Python 进程
+      2. 启动 Godot 并等待 TestHarness 就绪
+      3. 依次运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py
+      4. 确认 g2/g3/g4 均 68/68 pass
+      5. 记录总耗时
+      6. 输出 smoke 验证报告到 reports/smoke-p1-regression.md
+    assigned_to: general
+    depends_on: [run-capture]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 g2/g3/g4 是否全部通过 (returncode=0)
+      2. 检查 reports/smoke-p1-regression.md 存在
+      3. 如果任意 smoke 失败，FAIL 并打印错误
+    timeout_ms: 600000

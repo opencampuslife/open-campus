@@ -1,0 +1,20 @@
+# These GDScript files have been migrated to C# and can be removed:
+scripts/quest_manager.gd
+scripts/quest_manager.gd.uid
+scripts/metric_manager.gd
+scripts/resource_manager.gd
+scripts/resource_manager.gd.uid
+scripts/skill_manager.gd
+scripts/skill_manager.gd.uid
+scripts/event_manager.gd
+scripts/event_manager.gd.uid
+scripts/save_manager.gd
+scripts/save_manager.gd.uid
+scripts/time_manager.gd
+scripts/time_manager.gd.uid
+scripts/npc_registry.gd
+scripts/npc_registry.gd.uid
+scripts/json_loader.gd
+scripts/json_loader.gd.uid
+scripts/test_harness.gd
+scripts/test_harness.gd.uid

@@ -1,0 +1,169 @@
+version: 1
+plan:
+  name: 'N2D-2~4：运行时 Polish + 交互 Smoke + Demo'
+  max_concurrency: 10
+  max_consecutive_failures: 3
+  max_cycles: 15
+  auto_reject_retries: 2
+tasks:
+  - id: display-polish
+    title: 'N2D-2：运行时显示 Polish'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Verify and polish runtime display for all 8 NPCs. N2D-1 已完成（border 透明率检测、trigger_quest 清理、Godot headless 可用）。
+
+      Steps:
+      1. Read scripts/npc_factory.gd and scripts/npc_sprite_loader.gd to understand asset path resolution.
+      2. Verify all 8 NPCs have correct asset paths:
+         - For each npc_id, confirm assets/npcs/<npc_id>/baseline/sprite_idle.png exists and is valid PNG
+         - For each npc_id, confirm assets/npcs/<npc_id>/baseline/animation_spec.json exists
+         - For each npc_id, confirm portrait files exist (portrait_neutral/happy/worried/strict.png)
+      3. Check data/npc_spawn_config.json: all 8 NPCs, positions don't overlap, valid coordinates.
+      4. Check default idle/down pose: read npc_factory.gd to see how default animation is set.
+      5. Check fallback: does missing asset crash the system? Read the has_sprite() logic.
+      6. If Godot headless is available (TD-2 confirmed yes), try running the project:
+         `godot --headless --path .` and check for errors. Skip if Godot binary not found.
+
+      Context: TD-1 发现 principal 和 parent_representative 的 portrait 是 solid background（100% opaque border），
+      但这是资产层问题（需 pixel-artist 重生成），N2D-2 不做修复——只记录为已知问题。
+
+      Deliverables:
+      - reports/n2d-runtime-display-polish.md
+      - Any config/code fixes needed
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      Independently verify:
+      1. assets/npcs/<npc_id>/baseline/ for all 8 NPCs — confirm sprite_idle.png + animation_spec.json exist
+      2. data/npc_spawn_config.json has all 8 NPCs
+      3. npc_factory.gd fallback logic — read and confirm no crash on missing sprite
+      4. Do NOT re-read producer's deliverable.md. Re-check source files yourself.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: interaction-smoke
+    title: 'N2D-3：交互 Smoke 测试'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Write a Python offline smoke test for NPC interaction chains. N2D-1 + N2D-2 已完成。
+
+      Write tools/smoke_npc_runtime_interaction.py that validates:
+      NPC near → interact → dialogue opens → choice selected → quest updated → metric effects applied.
+
+      1. Read dialogue JSON for admissions_director, compliance_officer, it_operator.
+      2. For each: load NPC dialogue, find entries where trigger_quest matches quest_ids.
+      3. Simulate choice selection (first valid choice).
+      4. Validate: metric_effects keys are 4 core metrics, values in [-30, +30].
+      5. Validate: complete_quest references exist in data/quests.json.
+      6. Specifically validate the compliance_officer high-risk branch:
+         - "promise_admission" choice → compliance_safety=-20 (error case)
+         - "safe_answer" choice → compliance_safety=+15 (correct case)
+      7. Check quest_manager.gd for state transitions (read and document flow in comments).
+
+      Run the script and confirm all checks pass.
+
+      Deliverables:
+      - tools/smoke_npc_runtime_interaction.py
+      - reports/n2d-runtime-interaction-smoke.md
+    assigned_to: qa-demo-lead
+    depends_on: [display-polish]
+    verified_by: verifier
+    verify_prompt: >
+      Independently verify:
+      1. Run python3 tools/smoke_npc_runtime_interaction.py — does it produce correct output?
+      2. Spot-check 2-3 assertions against source data manually.
+      3. Confirm compliance_officer high-risk branch is tested.
+      4. Confirm quest_id references resolve to actual quests.
+      5. Do NOT re-read producer's deliverable.md. Re-run and spot-check yourself.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: demo-scene
+    title: 'N2D-4：Demo 场景验证'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Validate a presentable demo scene with 3 representative NPCs.
+
+      Select: admissions_director (招生), compliance_officer (合规), it_operator (系统稳定).
+
+      For each NPC:
+      1. Read dialogue JSON — confirm ≥2 dialogue entries
+      2. Read quest JSON — confirm quest chains connected
+      3. Read persona (data/personas/<npc_id>.md)
+      4. Read spawn config and note scene position
+
+      Write a validation report confirming:
+      - Each NPC has complete interaction chain (dialogue → choice → quest → metric)
+      - 3 NPCs together cover all 4 core metrics
+      - At least one multi-step quest chain (≥2 steps)
+      - Demo flow: spawn → talk → choose → see metric change → quest complete
+
+      Deliverable:
+      - reports/n2d-demo-scene-pass.md
+    assigned_to: qa-demo-lead
+    depends_on: [interaction-smoke]
+    verified_by: verifier
+    verify_prompt: >
+      Independently verify:
+      1. Pick one NPC (e.g. admissions_director) and trace full chain: dialogue → choice → quest
+      2. Confirm all 4 core metrics covered across 3 NPCs
+      3. Confirm ≥1 multi-step quest chain exists
+      4. Do NOT re-read producer's deliverable.md. Trace from source data.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: final-report
+    title: 'N2D 最终验收报告'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Write N2D final consolidation report.
+
+      Read:
+      - reports/n2d-td-border-cleanup.md (TD-1 results)
+      - reports/n2d-td-headless.md or outputs/td-headless/ (TD-2 results)
+      - reports/n2d-td-triggerquest.md or outputs/td-triggerquest/ (TD-3 results)
+      - reports/n2d-runtime-display-polish.md (N2D-2)
+      - reports/n2d-runtime-interaction-smoke.md (N2D-3)
+      - reports/n2d-demo-scene-pass.md (N2D-4)
+
+      Write reports/n2d-runtime-polish-final.md:
+
+      ## 验收总表
+      | # | 任务 | 结果 | 说明 |
+      |---|------|------|------|
+      | 1 | TD-1: Border 透明率 | ? | principal+parent_representative 100% opaque |
+      | 2 | TD-2: Godot headless | PASS | 4.6.3 installed |
+      | 3 | TD-3: trigger_quest | PASS | 0 empty strings, 6 missing→null |
+      | 4 | N2D-2: Display Polish | ? | |
+      | 5 | N2D-3: Interaction Smoke | ? | |
+      | 6 | N2D-4: Demo Scene | ? | |
+
+      ## 验收标准
+      - [ ] 3 N2C 技术债关闭或明确 owner
+      - [ ] 8 NPC 显示验证
+      - [ ] 3 NPC 交互链路验证
+      - [ ] 旧 smoke 不回退
+      - [ ] 无 N2B/N2C 资产被覆盖
+
+      ## 残余技术债
+      - 列出未修复问题（owner/blocker）
+
+      ## 验收结论
+      PASS / FAIL
+
+      Deliverable:
+      - reports/n2d-runtime-polish-final.md
+    assigned_to: general
+    depends_on: [display-polish, interaction-smoke, demo-scene]
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. Read EACH sub-report to confirm final report accurately summarizes them
+      2. Check that checklist matches actual results
+      3. Do NOT re-read producer's deliverable.md. Read the sub-reports yourself.
+    timeout_ms: 1800000
+    max_retries: 1
