@@ -101,7 +101,35 @@ describe("routeCutover", () => {
     rmSync(tmpDir, { recursive: true, force: true });
   });
 
+  it("shadow mode does not write report when no shadow config", () => {
+    const tmpDir = join(tmpdir(), `cutover_no_shadow_${randomUUID()}`);
+    mkdirSync(tmpDir, { recursive: true });
+
+    const config = setCutoverMode(DEFAULT_CUTOVER_CONFIG, "markdown_normalizer", "shadow");
+    routeCutover(config, "markdown_normalizer", "test");
+
+    const files = readdirSync(tmpDir);
+    expect(files.length).toBe(0);
+    rmSync(tmpDir, { recursive: true, force: true });
+  });
+
   it("throws for unknown module", () => {
     expect(() => routeCutover(DEFAULT_CUTOVER_CONFIG, "nonexistent", "test")).toThrow("Unknown cutover module");
+  });
+
+  it("throws for invalid mode at runtime", () => {
+    const badConfig: CutoverConfig = {
+      routes: {
+        bad: {
+          module: "bad",
+          mode: "invalid" as "python",
+          pythonFile: "/dev/null",
+          pythonFunc: "f",
+          tsFunc: () => null,
+          repoRoot: REPO_ROOT,
+        },
+      },
+    };
+    expect(() => routeCutover(badConfig, "bad", "x")).toThrow("Invalid cutover mode");
   });
 });

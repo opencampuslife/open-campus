@@ -64,6 +64,9 @@ export function routeCutover(config: CutoverConfig, moduleName: string, input: u
 
       return { module: moduleName, mode, result: pythonResult };
     }
+
+    default:
+      throw new Error(`Invalid cutover mode for ${moduleName}: ${mode}`);
   }
 }
 
