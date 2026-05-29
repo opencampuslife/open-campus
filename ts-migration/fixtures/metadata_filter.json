@@ -1,0 +1,585 @@
+[
+  {
+    "input": {
+      "chunks": [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "public"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": [
+          "internal_pricing",
+          "sales_script"
+        ]
+      }
+    },
+    "output": [
+      [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      []
+    ]
+  },
+  {
+    "input": {
+      "chunks": [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [
+            "internal_pricing"
+          ],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "public"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": [
+          "internal_pricing",
+          "sales_script"
+        ]
+      }
+    },
+    "output": [
+      [],
+      [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "reason": "forbidden_tag"
+        }
+      ]
+    ]
+  },
+  {
+    "input": {
+      "chunks": [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        },
+        {
+          "chunk_id": "c2",
+          "doc_id": "d2",
+          "review_status": "approved",
+          "visibility": "internal",
+          "data_level": "internal",
+          "allowed_roles": [
+            "sales"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        },
+        {
+          "chunk_id": "c3",
+          "doc_id": "d3",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [
+            "sales_script"
+          ],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "public"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": [
+          "internal_pricing",
+          "sales_script"
+        ]
+      }
+    },
+    "output": [
+      [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      [
+        {
+          "chunk_id": "c2",
+          "doc_id": "d2",
+          "reason": "visibility_denied"
+        },
+        {
+          "chunk_id": "c3",
+          "doc_id": "d3",
+          "reason": "forbidden_tag"
+        }
+      ]
+    ]
+  },
+  {
+    "input": {
+      "chunks": [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "review_status": "pending",
+          "visibility": "public",
+          "data_level": "public",
+          "allowed_roles": [
+            "visitor"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "2020-01-01",
+          "expiry_date": "9999-12-31"
+        }
+      ],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "public"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": [
+          "internal_pricing",
+          "sales_script"
+        ]
+      }
+    },
+    "output": [
+      [],
+      [
+        {
+          "chunk_id": "c1",
+          "doc_id": "d1",
+          "reason": "not_approved"
+        }
+      ]
+    ]
+  },
+  {
+    "input": {
+      "chunks": [],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "public"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": [
+          "internal_pricing",
+          "sales_script"
+        ]
+      }
+    },
+    "output": [
+      [],
+      []
+    ]
+  },
+  {
+    "input": {
+      "chunks": [
+        {
+          "chunk_id": "c_null_0",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": null
+        },
+        {
+          "chunk_id": "c_null_1",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": null
+        },
+        {
+          "chunk_id": "c_null_2",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": null,
+          "expiry_date": null
+        },
+        {
+          "chunk_id": "c_null_3",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": ""
+        },
+        {
+          "chunk_id": "c_null_4",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": ""
+        },
+        {
+          "chunk_id": "c_null_5",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "None"
+        },
+        {
+          "chunk_id": "c_null_6",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": "None"
+        },
+        {
+          "chunk_id": "c_null_7",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": "null"
+        },
+        {
+          "chunk_id": "c_null_8",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": "null"
+        }
+      ],
+      "scope": {
+        "role": "visitor",
+        "campus": "all",
+        "auth_level": "public",
+        "allowed_visibility": [
+          "public"
+        ],
+        "allowed_data_levels": [
+          "L1"
+        ],
+        "allowed_roles": [
+          "visitor"
+        ],
+        "forbidden_tags": []
+      }
+    },
+    "output": [
+      [
+        {
+          "chunk_id": "c_null_1",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": null
+        },
+        {
+          "chunk_id": "c_null_3",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "effective_date": ""
+        },
+        {
+          "chunk_id": "c_null_6",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": "None"
+        },
+        {
+          "chunk_id": "c_null_8",
+          "doc_id": "d_null",
+          "review_status": "approved",
+          "visibility": "public",
+          "data_level": "L1",
+          "allowed_roles": [
+            "visitor",
+            "student",
+            "parent",
+            "customer"
+          ],
+          "campus_scope": [
+            "all"
+          ],
+          "business_tags": [],
+          "expiry_date": "null"
+        }
+      ],
+      [
+        {
+          "chunk_id": "c_null_0",
+          "doc_id": "d_null",
+          "reason": "not_effective"
+        },
+        {
+          "chunk_id": "c_null_2",
+          "doc_id": "d_null",
+          "reason": "not_effective"
+        },
+        {
+          "chunk_id": "c_null_4",
+          "doc_id": "d_null",
+          "reason": "expired"
+        },
+        {
+          "chunk_id": "c_null_5",
+          "doc_id": "d_null",
+          "reason": "not_effective"
+        },
+        {
+          "chunk_id": "c_null_7",
+          "doc_id": "d_null",
+          "reason": "not_effective"
+        }
+      ]
+    ]
+  }
+]

@@ -1,0 +1,249 @@
+[
+  {
+    "input": {
+      "profile": {},
+      "allowed_evidence": [],
+      "campus": null,
+      "role": "parent",
+      "consultation_stage": "NEEDS_ASSESSMENT"
+    },
+    "output": {
+      "recommended_class_type": null,
+      "confidence": "low",
+      "reasons": [
+        "当前画像信息不足以做出班型推荐"
+      ],
+      "not_suitable_if": [],
+      "missing_info": [
+        "current_score",
+        "subject_type",
+        "target_school_level",
+        "weak_subjects",
+        "self_discipline_level",
+        "budget_range",
+        "preferred_campus",
+        "boarding_preference"
+      ],
+      "next_questions": [
+        "请问孩子是物理类还是历史类？",
+        "目前考试成绩大概在多少分？"
+      ],
+      "risk_warnings": [
+        "信息不足时不做班型推荐，以免误导"
+      ],
+      "evidence_ids": []
+    }
+  },
+  {
+    "input": {
+      "profile": {
+        "current_score": 370,
+        "weak_subjects": [
+          "math",
+          "english"
+        ],
+        "self_discipline_level": "low",
+        "target_school_level": "本科"
+      },
+      "allowed_evidence": [
+        {
+          "chunk_id": "e1",
+          "content": "小班强化课程"
+        }
+      ]
+    },
+    "output": {
+      "recommended_class_type": "小班强化班",
+      "confidence": "medium",
+      "reasons": [
+        "当前分数370分，目标为本科，存在提升空间",
+        "检测到2个薄弱科目：math、english",
+        "自律水平为中等偏低，需要稳定管理与反馈"
+      ],
+      "not_suitable_if": [
+        "学生自律性极强且只需单科补弱",
+        "预算明显低于该班型区间"
+      ],
+      "missing_info": [
+        "budget_range",
+        "preferred_campus",
+        "boarding_preference",
+        "subject_type"
+      ],
+      "next_questions": [
+        "孩子更倾向走读还是住宿？",
+        "预算方面有什么考虑？"
+      ],
+      "risk_warnings": [
+        "不承诺提分幅度，最终录取以高考实际表现为准"
+      ],
+      "evidence_ids": [
+        "e1"
+      ]
+    }
+  },
+  {
+    "input": {
+      "profile": {
+        "current_score": 320,
+        "self_discipline_level": "low",
+        "boarding_preference": "boarding"
+      },
+      "allowed_evidence": [
+        {
+          "chunk_id": "e2",
+          "content": "全日制封闭式管理"
+        }
+      ]
+    },
+    "output": {
+      "recommended_class_type": "全日制封闭班",
+      "confidence": "medium",
+      "reasons": [
+        "自律性较低或家长关注管理",
+        "需要封闭式学习环境以确保学习纪律",
+        "适合需要全天候管理支持的学生"
+      ],
+      "not_suitable_if": [
+        "学生不住校且家庭可提供稳定监督",
+        "走读需求明确"
+      ],
+      "missing_info": [
+        "preferred_campus",
+        "budget_range",
+        "subject_type",
+        "target_school_level",
+        "weak_subjects"
+      ],
+      "next_questions": [
+        "是否接受住宿式管理？",
+        "离哪个校区比较方便？"
+      ],
+      "risk_warnings": [
+        "封闭式环境适应期是个体化的，建议试听确认"
+      ],
+      "evidence_ids": [
+        "e2"
+      ]
+    }
+  },
+  {
+    "input": {
+      "profile": {
+        "current_score": 400,
+        "weak_subjects": [
+          "physics"
+        ],
+        "self_discipline_level": "high"
+      },
+      "allowed_evidence": []
+    },
+    "output": {
+      "recommended_class_type": "单科突破班",
+      "confidence": "medium",
+      "reasons": [
+        "只有一个主要薄弱科目：physics",
+        "自律水平较高，可独立完成大部分学习",
+        "总分相对稳定，建议集中突破薄弱科目"
+      ],
+      "not_suitable_if": [
+        "多科薄弱（≥2科）",
+        "自律性明显偏低"
+      ],
+      "missing_info": [
+        "target_school_level",
+        "subject_type",
+        "budget_range",
+        "preferred_campus",
+        "boarding_preference"
+      ],
+      "next_questions": [
+        "对于physics，目前主要问题是基础不牢还是解题技巧？"
+      ],
+      "risk_warnings": [
+        "单科突破通常需要配合整体学习节奏，建议先做学情诊断"
+      ],
+      "evidence_ids": []
+    }
+  },
+  {
+    "input": {
+      "profile": {
+        "current_score": 520,
+        "target_score": 550
+      },
+      "allowed_evidence": [
+        {
+          "chunk_id": "e3",
+          "content": "高考冲刺应试技巧"
+        }
+      ]
+    },
+    "output": {
+      "recommended_class_type": "冲刺班",
+      "confidence": "medium",
+      "reasons": [
+        "当前520分，目标550分，差距适中",
+        "距离考试较近，侧重查漏补缺和应试技巧",
+        "适合有明确目标且基础较好的学生"
+      ],
+      "not_suitable_if": [
+        "基础差距过大（≥80分）",
+        "需要长期系统补课"
+      ],
+      "missing_info": [
+        "weak_subjects",
+        "exam_year",
+        "subject_type",
+        "target_school_level",
+        "self_discipline_level",
+        "budget_range",
+        "preferred_campus",
+        "boarding_preference"
+      ],
+      "next_questions": [
+        "距离高考还有多少时间？",
+        "主要想加强哪些题型的训练？"
+      ],
+      "risk_warnings": [
+        "冲刺班以提分效率为导向，需要学生已有较强基础"
+      ],
+      "evidence_ids": [
+        "e3"
+      ]
+    }
+  },
+  {
+    "input": {
+      "profile": {
+        "current_score": 250
+      },
+      "allowed_evidence": []
+    },
+    "output": {
+      "recommended_class_type": null,
+      "confidence": "low",
+      "reasons": [
+        "当前画像信息不足以做出班型推荐"
+      ],
+      "not_suitable_if": [],
+      "missing_info": [
+        "subject_type",
+        "target_school_level",
+        "weak_subjects",
+        "self_discipline_level",
+        "budget_range",
+        "preferred_campus",
+        "boarding_preference"
+      ],
+      "next_questions": [
+        "请问孩子是物理类还是历史类？",
+        "目前考试成绩大概在多少分？"
+      ],
+      "risk_warnings": [
+        "信息不足时不做班型推荐，以免误导"
+      ],
+      "evidence_ids": []
+    }
+  }
+]

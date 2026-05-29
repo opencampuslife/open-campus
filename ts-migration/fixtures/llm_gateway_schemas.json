@@ -1,0 +1,632 @@
+[
+  {
+    "desc": "evidence_chunk full construction",
+    "group": "evidence_chunk",
+    "input": {
+      "kwargs": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    }
+  },
+  {
+    "desc": "evidence_chunk from_chunk full",
+    "group": "evidence_chunk",
+    "input": {
+      "chunk": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    }
+  },
+  {
+    "desc": "evidence_chunk from_chunk missing source_uri",
+    "group": "evidence_chunk",
+    "input": {
+      "chunk": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": ""
+      }
+    }
+  },
+  {
+    "desc": "evidence_chunk from_chunk missing allowed_roles",
+    "group": "evidence_chunk",
+    "input": {
+      "chunk": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "source_uri": "https://example.com/doc1"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [],
+        "source_uri": "https://example.com/doc1"
+      }
+    }
+  },
+  {
+    "desc": "evidence_chunk from_chunk null source_uri",
+    "group": "evidence_chunk",
+    "input": {
+      "chunk": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": null
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "None"
+      }
+    }
+  },
+  {
+    "desc": "evidence_chunk from_chunk null allowed_roles",
+    "group": "evidence_chunk",
+    "input": {
+      "chunk": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": null,
+        "source_uri": "https://example.com/doc1"
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "'NoneType' object is not iterable"
+    }
+  },
+  {
+    "desc": "evidence_chunk to_prompt_dict",
+    "group": "evidence_chunk",
+    "input": {
+      "kwargs": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "chunk_id": "c1",
+        "doc_id": "d1",
+        "title": "Doc Title",
+        "content": "Document content here",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student"
+        ],
+        "source_uri": "https://example.com/doc1"
+      }
+    }
+  },
+  {
+    "desc": "llm_request minimal",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ],
+        "answer_policy": {},
+        "output_format": "plain_text_with_sources",
+        "risk_level": "low",
+        "session_id": "",
+        "campus": "all"
+      }
+    }
+  },
+  {
+    "desc": "llm_request full",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ],
+        "answer_policy": {
+          "require_citation": true
+        },
+        "output_format": "json",
+        "risk_level": "high",
+        "session_id": "sess_123",
+        "campus": "bj-campus"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ],
+        "answer_policy": {
+          "require_citation": true
+        },
+        "output_format": "json",
+        "risk_level": "high",
+        "session_id": "sess_123",
+        "campus": "bj-campus"
+      }
+    }
+  },
+  {
+    "desc": "llm_request default answer_policy",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ],
+        "answer_policy": {},
+        "output_format": "plain_text_with_sources",
+        "risk_level": "low",
+        "session_id": "",
+        "campus": "all"
+      }
+    }
+  },
+  {
+    "desc": "llm_request missing user_role",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "LLMRequest.__init__() missing 1 required positional argument: 'user_role'"
+    }
+  },
+  {
+    "desc": "llm_request empty evidence",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": []
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [],
+        "answer_policy": {},
+        "output_format": "plain_text_with_sources",
+        "risk_level": "low",
+        "session_id": "",
+        "campus": "all"
+      }
+    }
+  },
+  {
+    "desc": "llm_request to_policy_dict minimal",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "task": "admissions_answer",
+        "message": "What are the requirements?",
+        "intent": "inquiry",
+        "scope": {
+          "role": "visitor",
+          "campus": "all"
+        },
+        "risk_level": "low",
+        "session_id": "",
+        "answer_policy": {},
+        "output_format": "plain_text_with_sources",
+        "evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "desc": "llm_request to_policy_dict full",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "visitor",
+        "intent": "inquiry",
+        "user_query": "What are the requirements?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ],
+        "answer_policy": {
+          "require_citation": true
+        },
+        "output_format": "json",
+        "risk_level": "high",
+        "session_id": "sess_123",
+        "campus": "bj-campus"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "task": "admissions_answer",
+        "message": "What are the requirements?",
+        "intent": "inquiry",
+        "scope": {
+          "role": "visitor",
+          "campus": "bj-campus"
+        },
+        "risk_level": "high",
+        "session_id": "sess_123",
+        "answer_policy": {
+          "require_citation": true
+        },
+        "output_format": "json",
+        "evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "desc": "llm_request to_policy_dict with evidence",
+    "group": "llm_request",
+    "input": {
+      "kwargs": {
+        "user_role": "parent",
+        "intent": "score_inquiry",
+        "user_query": "My child's score?",
+        "allowed_evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "task": "admissions_answer",
+        "message": "My child's score?",
+        "intent": "score_inquiry",
+        "scope": {
+          "role": "parent",
+          "campus": "all"
+        },
+        "risk_level": "low",
+        "session_id": "",
+        "answer_policy": {},
+        "output_format": "plain_text_with_sources",
+        "evidence": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "d1",
+            "title": "Doc Title",
+            "content": "Document content here",
+            "visibility": "public",
+            "data_level": "L1",
+            "allowed_roles": [
+              "visitor",
+              "student"
+            ],
+            "source_uri": "https://example.com/doc1"
+          }
+        ]
+      }
+    }
+  }
+]

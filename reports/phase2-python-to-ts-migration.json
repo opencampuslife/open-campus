@@ -1,0 +1,127 @@
+{
+  "report": "Phase 2: Python → TypeScript Migration Report",
+  "date": "2026-05-29",
+  "status": "Frozen",
+  "pr_title": "Phase 2: migrate LLM Gateway and RAG service Python modules to TypeScript parity",
+
+  "summary": {
+    "python_files_migrated": 10,
+    "typescript_files_created": 10,
+    "test_files_created": 9,
+    "total_parity_tests": 248,
+    "service_packages": 2,
+    "golden_fixture_sets": 10,
+    "rounds": 9
+  },
+
+  "combined_phase1_phase2": {
+    "python_files_migrated": 21,
+    "typescript_files_created": 22,
+    "test_files_created": 19,
+    "total_parity_tests": 516,
+    "service_packages": 7,
+    "golden_fixture_sets": 14,
+    "rounds": 13
+  },
+
+  "file_mapping": [
+    { "round": "R1", "service": "rag-service", "python": "src/reranker.py", "typescript": "ts-src/reranker.ts", "tests": 25, "status": "completed" },
+    { "round": "R2", "service": "llm-gateway", "python": "src/schemas.py", "typescript": "ts-src/schemas.ts", "tests": 24, "status": "completed" },
+    { "round": "R3", "service": "rag-service", "python": "src/query_rewriter.py", "typescript": "ts-src/queryRewriter.ts", "tests": 26, "status": "completed" },
+    { "round": "R4", "service": "llm-gateway", "python": "src/redactor.py", "typescript": "ts-src/redactor.ts", "tests": 34, "status": "completed" },
+    { "round": "R5", "service": "llm-gateway", "python": "src/model_router.py", "typescript": "ts-src/modelRouter.ts", "tests": 10, "status": "completed" },
+    { "round": "R6", "service": "llm-gateway", "python": "src/prompt_guard.py", "typescript": "ts-src/promptGuard.ts", "tests": 23, "status": "completed" },
+    { "round": "R7", "service": "llm-gateway", "python": "src/llm_logger.py", "typescript": "ts-src/llmLogger.ts", "tests": 22, "status": "completed" },
+    { "round": "R8", "service": "llm-gateway", "python": "src/provider_deepseek.py", "typescript": "ts-src/providerDeepseek.ts", "tests": 38, "status": "completed" },
+    { "round": "R9", "service": "llm-gateway", "python": "src/gateway.py", "typescript": "ts-src/gateway.ts", "tests": 33, "status": "completed" }
+  ],
+
+  "test_matrix": {
+    "ts-migration": { "test_files": 1, "tests": 6, "typecheck": "pass" },
+    "source-ingestion-service": { "test_files": 1, "tests": 11, "typecheck": "pass" },
+    "rag-service": { "test_files": 4, "tests": 97, "typecheck": "pass" },
+    "recommendation-service": { "test_files": 2, "tests": 22, "typecheck": "pass" },
+    "compliance-service": { "test_files": 1, "tests": 48, "typecheck": "pass" },
+    "permission-service": { "test_files": 3, "tests": 148, "typecheck": "pass" },
+    "llm-gateway": { "test_files": 7, "tests": 184, "typecheck": "pass" },
+    "total": { "test_files": 19, "tests": 516, "typecheck": "7/7 pass" }
+  },
+
+  "verification": {
+    "no_python_files_modified": true,
+    "no_contracts_modified": true,
+    "no_configs_modified": true,
+    "no_real_network_calls": true,
+    "no_production_path_in_ts": true,
+    "all_ts_tests_pass": true,
+    "all_typecheck_pass": true,
+    "python_tests_still_pass": true
+  },
+
+  "fixture_inventory": {
+    "reranker.json": { "count": 19, "source": "rag-service/src/reranker.py" },
+    "llm_gateway_schemas.json": { "count": 16, "source": "llm-gateway/src/schemas.py" },
+    "query_rewriter.json": { "count": 30, "source": "rag-service/src/query_rewriter.py" },
+    "redactor.json": { "count": 43, "source": "llm-gateway/src/redactor.py" },
+    "model_router.json": { "count": 9, "source": "llm-gateway/src/model_router.py" },
+    "prompt_guard.json": { "count": 25, "source": "llm-gateway/src/prompt_guard.py" },
+    "llm_logger.json": { "count": 17, "source": "llm-gateway/src/llm_logger.py" },
+    "provider_deepseek.json": { "count": 25, "source": "llm-gateway/src/provider_deepseek.py" },
+    "gateway.json": { "count": 29, "source": "llm-gateway/src/gateway.py" },
+    "citation_builder.json": { "count": 6, "source": "rag-service/src/citation_builder.py" },
+    "metadata_filter.json": { "count": 6, "source": "rag-service/src/metadata_filter.py" },
+    "permission_service.json": { "count": 14, "source": "permission-service/src/access_checker.py" },
+    "compliance_checker.json": { "count": 10, "source": "compliance-service/src/checker.py" },
+    "recommendation_model.json": { "count": 6, "source": "recommendation-service/src/recommendation_engine.py" }
+  },
+
+  "key_decisions": [
+    "Zod .strict() for dataclass extra field parity",
+    "pyRepr() helper for Python str(dict) format in messages",
+    "\\u201c\\u201d for Chinese quotation marks in system prompt",
+    "Transport injection for testable HTTP (matches Python Callable[[Request, float], bytes])",
+    "Error name wrappers for golden fixture parity (KeyError, IndexError, RuntimeError, JSONDecodeError)",
+    "pyRuntimeError() helper: Error.name = 'RuntimeError'",
+    "noUncheckedIndexedAccess guards for Python-compatible KeyError/IndexError behavior",
+    "Microsecond-precision UTC timestamps matching Python datetime.utcnow().isoformat()"
+  ],
+
+  "remaining_risks": [
+    {
+      "id": "RISK-1",
+      "description": "Chinese quotation marks (\\u201c\\u201d) in system prompt string — must not be replaced with ASCII \"",
+      "severity": "low",
+      "module": "gateway.ts"
+    },
+    {
+      "id": "RISK-2",
+      "description": "Evidence string formatting via pyRepr() must match Python dataclass asdict() repr exactly",
+      "severity": "medium",
+      "module": "gateway.ts"
+    },
+    {
+      "id": "RISK-3",
+      "description": "Production default transport (fetch + AbortController) not validated in tests; only mock transport is tested",
+      "severity": "medium",
+      "module": "providerDeepseek.ts"
+    },
+    {
+      "id": "RISK-4",
+      "description": "Environment variables (DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL, DEEPSEEK_ENABLE_LLM) scattered across 4 modules — no centralized config",
+      "severity": "low",
+      "module": "cross-cutting"
+    },
+    {
+      "id": "RISK-5",
+      "description": "gateway.py::_clean_chunk() is dead code (defined but never called in generate_admissions_answer) — not migrated",
+      "severity": "low",
+      "module": "gateway.py"
+    },
+    {
+      "id": "RISK-6",
+      "description": "Zod strict mode rejects extra fields; Python dataclass silently ignores them. Any caller passing extra fields gets TypeError from TS but not from Python",
+      "severity": "medium",
+      "module": "schemas.ts"
+    }
+  ]
+}

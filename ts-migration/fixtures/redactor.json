@@ -1,0 +1,436 @@
+[
+  {
+    "function": "redact_text",
+    "desc": "无敏感信息文本",
+    "input": "你好，今天天气不错",
+    "output": {
+      "ok": true,
+      "result": "你好，今天天气不错"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号",
+    "input": "我的手机号是13800138000",
+    "output": {
+      "ok": true,
+      "result": "我的手机号是[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "多个手机号",
+    "input": "13800138000和13912345678都是手机号",
+    "output": {
+      "ok": true,
+      "result": "[REDACTED_PHONE]和[REDACTED_PHONE]都是手机号"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号在句首",
+    "input": "13800138000是我的电话",
+    "output": {
+      "ok": true,
+      "result": "[REDACTED_PHONE]是我的电话"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号在句尾",
+    "input": "联系我：13800138000",
+    "output": {
+      "ok": true,
+      "result": "联系我：[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号带区号",
+    "input": "+86 13800138000",
+    "output": {
+      "ok": true,
+      "result": "+86 [REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号不足11位",
+    "input": "1380013800不是完整手机号",
+    "output": {
+      "ok": true,
+      "result": "1380013800不是完整手机号"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号过长",
+    "input": "138001380000不是合法手机号",
+    "output": {
+      "ok": true,
+      "result": "138001380000不是合法手机号"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号前有数字",
+    "input": "数字113800138000包含边界",
+    "output": {
+      "ok": true,
+      "result": "数字113800138000包含边界"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "手机号后有数字",
+    "input": "手机号138001380001后有多余数字",
+    "output": {
+      "ok": true,
+      "result": "手机号138001380001后有多余数字"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "身份证号",
+    "input": "110101199001011234是我的身份证",
+    "output": {
+      "ok": true,
+      "result": "110101199001011234是我的身份证"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "邮箱",
+    "input": "联系我请发邮件到test@example.com",
+    "output": {
+      "ok": true,
+      "result": "联系我请发邮件到test@example.com"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "邮箱近似但非法",
+    "input": "这不是邮箱test@example",
+    "output": {
+      "ok": true,
+      "result": "这不是邮箱test@example"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "邮箱带用户名特殊字符",
+    "input": "user.name+tag@example.com",
+    "output": {
+      "ok": true,
+      "result": "user.name+tag@example.com"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "微信号",
+    "input": "我的微信号是wechat123",
+    "output": {
+      "ok": true,
+      "result": "我的微信号是wechat123"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "API key",
+    "input": "sk-abc123def456ghi789",
+    "output": {
+      "ok": true,
+      "result": "[REDACTED_API_KEY]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "API key带sk-前缀",
+    "input": "使用sk-mysecretkey123456",
+    "output": {
+      "ok": true,
+      "result": "使用[REDACTED_API_KEY]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "API key短于8位",
+    "input": "sk-abcde不匹配",
+    "output": {
+      "ok": true,
+      "result": "sk-abcde不匹配"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "token-like但不命中",
+    "input": "token_abc123def456",
+    "output": {
+      "ok": true,
+      "result": "token_abc123def456"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "URL",
+    "input": "https://example.com/page",
+    "output": {
+      "ok": true,
+      "result": "https://example.com/page"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "中文文本",
+    "input": "我想报名复读班，请问学费多少",
+    "output": {
+      "ok": true,
+      "result": "我想报名复读班，请问学费多少"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "英文文本",
+    "input": "Please contact me at 13800138000",
+    "output": {
+      "ok": true,
+      "result": "Please contact me at [REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "中英混合",
+    "input": "我的邮箱是test@example.com，电话13800138000",
+    "output": {
+      "ok": true,
+      "result": "我的邮箱是test@example.com，电话[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "空字符串",
+    "input": "",
+    "output": {
+      "ok": true,
+      "result": ""
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "仅空白",
+    "input": "   ",
+    "output": {
+      "ok": true,
+      "result": "   "
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "换行文本",
+    "input": "电话：13800138000\n邮箱：test@example.com",
+    "output": {
+      "ok": true,
+      "result": "电话：[REDACTED_PHONE]\n邮箱：test@example.com"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "emoji文本",
+    "input": "😊欢迎咨询13800138000",
+    "output": {
+      "ok": true,
+      "result": "😊欢迎咨询[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "全角符号",
+    "input": "电话：１３８００１３８０００",
+    "output": {
+      "ok": true,
+      "result": "电话：１３８００１３８０００"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "已经脱敏",
+    "input": "我的手机是[REDACTED_PHONE]和sk-[REDACTED_API_KEY]",
+    "output": {
+      "ok": true,
+      "result": "我的手机是[REDACTED_PHONE]和sk-[REDACTED_API_KEY]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "多规则同时命中",
+    "input": "我的手机13800138000和密钥sk-abc123def456ghi",
+    "output": {
+      "ok": true,
+      "result": "我的手机[REDACTED_PHONE]和密钥[REDACTED_API_KEY]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "重复同一规则多手机号",
+    "input": "手机号13800138000和13912345678",
+    "output": {
+      "ok": true,
+      "result": "手机号[REDACTED_PHONE]和[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "边界手机号在数字上下文",
+    "input": "aaa13800138000bbb",
+    "output": {
+      "ok": true,
+      "result": "aaa[REDACTED_PHONE]bbb"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "多个API key",
+    "input": "sk-key1和sk-key2都是密钥",
+    "output": {
+      "ok": true,
+      "result": "sk-key1和sk-key2都是密钥"
+    }
+  },
+  {
+    "function": "redact_text",
+    "desc": "None text",
+    "input": null,
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "expected string or bytes-like object, got 'NoneType'"
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload str",
+    "input": "我的手机13800138000",
+    "output": {
+      "ok": true,
+      "result": "我的手机[REDACTED_PHONE]"
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload list",
+    "input": [
+      "手机13800138000",
+      "密钥sk-abc123"
+    ],
+    "output": {
+      "ok": true,
+      "result": [
+        "手机[REDACTED_PHONE]",
+        "密钥sk-abc123"
+      ]
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload dict",
+    "input": {
+      "phone": "13800138000",
+      "key": "sk-abc123def456",
+      "name": "张三"
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "phone": "[REDACTED_PHONE]",
+        "key": "[REDACTED_API_KEY]",
+        "name": "张三"
+      }
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload nested dict",
+    "input": {
+      "user": {
+        "phone": "13800138000",
+        "key": "sk-secret"
+      },
+      "items": [
+        "test",
+        "sk-xyz789abc"
+      ]
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "user": {
+          "phone": "[REDACTED_PHONE]",
+          "key": "sk-secret"
+        },
+        "items": [
+          "test",
+          "[REDACTED_API_KEY]"
+        ]
+      }
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload empty list",
+    "input": [],
+    "output": {
+      "ok": true,
+      "result": []
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload empty dict",
+    "input": {},
+    "output": {
+      "ok": true,
+      "result": {}
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload int",
+    "input": 12345,
+    "output": {
+      "ok": true,
+      "result": 12345
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload null",
+    "input": null,
+    "output": {
+      "ok": true,
+      "result": null
+    }
+  },
+  {
+    "function": "redact_payload",
+    "desc": "payload mixed types",
+    "input": [
+      "text",
+      42,
+      {
+        "key": "sk-abc123"
+      },
+      null
+    ],
+    "output": {
+      "ok": true,
+      "result": [
+        "text",
+        42,
+        {
+          "key": "sk-abc123"
+        },
+        null
+      ]
+    }
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "function": "route_model",
+    "desc": "basic query",
+    "input": {
+      "task": "admissions_answer",
+      "scope": {
+        "role": "visitor",
+        "campus": "all"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "admissions_answer",
+        "role": "visitor"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "empty scope",
+    "input": {
+      "task": "admissions_answer",
+      "scope": {}
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "admissions_answer",
+        "role": "unknown"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "unknown role",
+    "input": {
+      "task": "score_inquiry",
+      "scope": {
+        "role": "unknown"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "score_inquiry",
+        "role": "unknown"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "parent role",
+    "input": {
+      "task": "chat",
+      "scope": {
+        "role": "parent",
+        "campus": "bj-campus"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "chat",
+        "role": "parent"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "student role",
+    "input": {
+      "task": "faq",
+      "scope": {
+        "role": "student"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "faq",
+        "role": "student"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "minimal scope",
+    "input": {
+      "task": "test_task",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "test_task",
+        "role": "visitor"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "null role in scope",
+    "input": {
+      "task": "task",
+      "scope": {
+        "role": null
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "task",
+        "role": null
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "custom model env var",
+    "input": {
+      "task": "admissions_answer",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "custom-model-v1",
+        "task": "admissions_answer",
+        "role": "visitor"
+      }
+    }
+  },
+  {
+    "function": "route_model",
+    "desc": "missing env var uses default",
+    "input": {
+      "task": "admissions_answer",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "task": "admissions_answer",
+        "role": "visitor"
+      }
+    }
+  }
+]
