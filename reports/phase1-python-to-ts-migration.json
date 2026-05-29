@@ -1,0 +1,87 @@
+{
+  "phase": 1,
+  "status": "accepted",
+  "date": "2026-05-29",
+  "summary": {
+    "python_files": 11,
+    "typescript_files": 12,
+    "total_tests": 268,
+    "packages": 5,
+    "typecheck_packages": 6
+  },
+  "migration_rounds": [
+    { "round": 0, "module": "scaffold", "python_files": 0, "ts_files": 0, "tests": 6, "status": "done" },
+    { "round": 1, "module": "markdown_normalizer", "python_files": 1, "ts_files": 1, "tests": 11, "service": "source-ingestion-service", "status": "done" },
+    { "round": 2, "module": "citation_builder", "python_files": 1, "ts_files": 1, "tests": 11, "service": "rag-service", "status": "done" },
+    { "round": 3, "module": "recommendation_model+class_rules+engine", "python_files": 3, "ts_files": 3, "tests": 10, "service": "recommendation-service", "status": "done" },
+    { "round": 4, "module": "recommendation_explainer", "python_files": 1, "ts_files": 1, "tests": 12, "service": "recommendation-service", "status": "done" },
+    { "round": 5, "module": "compliance_checker", "python_files": 1, "ts_files": 1, "tests": 48, "service": "compliance-service", "status": "done" },
+    { "round": 6, "module": "metadata_filter", "python_files": 1, "ts_files": 1, "tests": 33, "service": "rag-service", "status": "done" },
+    { "round": 7, "module": "policy_loader", "python_files": 1, "ts_files": 1, "tests": 31, "service": "permission-service", "status": "done" },
+    { "round": 8, "module": "scope_builder", "python_files": 1, "ts_files": 1, "tests": 39, "service": "permission-service", "status": "done" },
+    { "round": 9, "module": "access_checker", "python_files": 1, "ts_files": 1, "tests": 67, "service": "permission-service", "status": "done" }
+  ],
+  "file_mapping": [
+    { "python": "services/source-ingestion-service/src/markdown_normalizer.py", "ts": "services/source-ingestion-service/ts-src/markdownNormalizer.ts" },
+    { "python": "services/rag-service/src/citation_builder.py", "ts": "services/rag-service/ts-src/citationBuilder.ts" },
+    { "python": "services/recommendation-service/src/recommendation_model.py", "ts": "services/recommendation-service/ts-src/recommendationModel.ts" },
+    { "python": "services/recommendation-service/src/class_rules.py", "ts": "services/recommendation-service/ts-src/classRules.ts" },
+    { "python": "services/recommendation-service/src/recommendation_engine.py", "ts": "services/recommendation-service/ts-src/recommendationEngine.ts" },
+    { "python": "services/recommendation-service/src/recommendation_explainer.py", "ts": "services/recommendation-service/ts-src/recommendationExplainer.ts" },
+    { "python": "services/compliance-service/src/checker.py", "ts": "services/compliance-service/ts-src/checker.ts" },
+    { "python": "services/rag-service/src/metadata_filter.py", "ts": "services/rag-service/ts-src/metadataFilter.ts" },
+    { "python": "services/permission-service/src/policy_loader.py", "ts": "services/permission-service/ts-src/policyLoader.ts" },
+    { "python": "services/permission-service/src/scope_builder.py", "ts": "services/permission-service/ts-src/scopeBuilder.ts" },
+    { "python": "services/permission-service/src/access_checker.py", "ts": "services/permission-service/ts-src/accessChecker.ts" }
+  ],
+  "verification": {
+    "ts_tests_pass": true,
+    "ts_tests_count": 268,
+    "ts_typecheck_pass": true,
+    "ts_typecheck_packages": 6,
+    "python_tests_pass": true,
+    "python_tests_count": 13,
+    "no_python_files_modified": true,
+    "no_contracts_modified": true,
+    "no_configs_modified": true,
+    "no_production_path_switched": true,
+    "no_any_used": true
+  },
+  "risks": [
+    {
+      "id": "R1",
+      "title": "canAccess duplicate in metadataFilter vs accessChecker",
+      "level": "LOW",
+      "action": "Phase 2 pre-cleanup task A"
+    },
+    {
+      "id": "R2",
+      "title": "Python str(None) vs TS String(null) date handling",
+      "level": "LOW",
+      "action": "Phase 2 pre-cleanup task B"
+    },
+    {
+      "id": "R3",
+      "title": "permission_service.json fixture coverage biased",
+      "level": "LOW",
+      "action": "Phase 2 pre-cleanup task C"
+    },
+    {
+      "id": "R4",
+      "title": "simple_yaml.py vs yaml npm package divergence",
+      "level": "LOW",
+      "action": "Accepted; revisit if YAML structure changes"
+    },
+    {
+      "id": "R5",
+      "title": "TS Error vs Python ValueError type mismatch",
+      "level": "LOW",
+      "action": "Accepted; test-verified compatible"
+    }
+  ],
+  "phase2_pre_cleanup": [
+    "Task A: Deduplicate canAccess logic (metadataFilter → accessChecker)",
+    "Task B: Add null date fixture for effective_date/expiry_date",
+    "Task C: Expand permission_service.json fixture with full 8-dimension coverage"
+  ]
+}

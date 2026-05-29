@@ -1,0 +1,517 @@
+[
+  {
+    "input": {
+      "user_id": "u1",
+      "role": "visitor",
+      "campus": "all",
+      "auth_level": "anonymous"
+    },
+    "output": {
+      "user_id": "u1",
+      "role": "visitor",
+      "campus": "all",
+      "auth_level": "anonymous",
+      "allowed_visibility": [
+        "public"
+      ],
+      "allowed_data_levels": [
+        "L1"
+      ],
+      "allowed_roles": [
+        "visitor",
+        "student",
+        "parent",
+        "customer"
+      ],
+      "forbidden_tags": [
+        "internal_pricing",
+        "sales_script",
+        "crm_rule"
+      ]
+    }
+  },
+  {
+    "input": {
+      "user_id": "u2",
+      "role": "parent",
+      "campus": "bj-campus",
+      "auth_level": "authenticated"
+    },
+    "output": {
+      "user_id": "u2",
+      "role": "parent",
+      "campus": "bj-campus",
+      "auth_level": "authenticated",
+      "allowed_visibility": [
+        "public",
+        "protected"
+      ],
+      "allowed_data_levels": [
+        "L1",
+        "L2"
+      ],
+      "allowed_roles": [
+        "visitor",
+        "student",
+        "parent",
+        "customer"
+      ],
+      "forbidden_tags": [
+        "internal_pricing",
+        "sales_script",
+        "crm_rule"
+      ]
+    }
+  },
+  {
+    "input": {
+      "user_id": "u3",
+      "role": "sales",
+      "campus": "sh-campus",
+      "auth_level": "authenticated"
+    },
+    "output": {
+      "user_id": "u3",
+      "role": "sales",
+      "campus": "sh-campus",
+      "auth_level": "authenticated",
+      "allowed_visibility": [
+        "public",
+        "protected",
+        "internal"
+      ],
+      "allowed_data_levels": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "allowed_roles": [
+        "visitor",
+        "student",
+        "parent",
+        "sales"
+      ],
+      "forbidden_tags": []
+    }
+  },
+  {
+    "input": {
+      "user_id": "u4",
+      "role": "super_admin",
+      "campus": "all",
+      "auth_level": "admin"
+    },
+    "output": {
+      "error": "Unknown role: super_admin"
+    }
+  },
+  {
+    "input": {
+      "user_id": "u5",
+      "role": "student",
+      "campus": "gz-campus",
+      "auth_level": "authenticated"
+    },
+    "output": {
+      "user_id": "u5",
+      "role": "student",
+      "campus": "gz-campus",
+      "auth_level": "authenticated",
+      "allowed_visibility": [
+        "public",
+        "protected"
+      ],
+      "allowed_data_levels": [
+        "L1",
+        "L2"
+      ],
+      "allowed_roles": [
+        "visitor",
+        "student",
+        "parent",
+        "customer"
+      ],
+      "forbidden_tags": [
+        "internal_pricing",
+        "sales_script",
+        "crm_rule"
+      ]
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "public",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": "2020-01-01",
+        "expiry_date": "9999-12-31"
+      },
+      "scope_role": "parent"
+    },
+    "output": {
+      "ok": false,
+      "reason": "data_level_denied"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "review_status": "approved",
+        "visibility": "internal",
+        "data_level": "public",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": "2020-01-01",
+        "expiry_date": "9999-12-31"
+      },
+      "scope_role": "parent"
+    },
+    "output": {
+      "ok": false,
+      "reason": "visibility_denied"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "public",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "bj-campus"
+        ],
+        "business_tags": [],
+        "effective_date": "2020-01-01",
+        "expiry_date": "9999-12-31"
+      },
+      "scope_role": "parent"
+    },
+    "output": {
+      "ok": false,
+      "reason": "data_level_denied"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "public",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [
+          "internal_pricing"
+        ],
+        "effective_date": "2020-01-01",
+        "expiry_date": "9999-12-31"
+      },
+      "scope_role": "parent"
+    },
+    "output": {
+      "ok": false,
+      "reason": "data_level_denied"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "public",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": "2099-01-01",
+        "expiry_date": "9999-12-31"
+      },
+      "scope_role": "parent"
+    },
+    "output": {
+      "ok": false,
+      "reason": "data_level_denied"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_0",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": null
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": false,
+      "reason": "not_effective"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_1",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "expiry_date": null
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": true,
+      "reason": "allowed"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_2",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": null,
+        "expiry_date": null
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": false,
+      "reason": "not_effective"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_3",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": ""
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": true,
+      "reason": "allowed"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_4",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "expiry_date": ""
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": false,
+      "reason": "expired"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_5",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": "None"
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": false,
+      "reason": "not_effective"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_6",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "expiry_date": "None"
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": true,
+      "reason": "allowed"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_7",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "effective_date": "null"
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": false,
+      "reason": "not_effective"
+    }
+  },
+  {
+    "input": {
+      "item": {
+        "chunk_id": "c_null_8",
+        "doc_id": "d_null",
+        "review_status": "approved",
+        "visibility": "public",
+        "data_level": "L1",
+        "allowed_roles": [
+          "visitor",
+          "student",
+          "parent",
+          "customer"
+        ],
+        "campus_scope": [
+          "all"
+        ],
+        "business_tags": [],
+        "expiry_date": "null"
+      },
+      "scope_role": "visitor"
+    },
+    "output": {
+      "ok": true,
+      "reason": "allowed"
+    }
+  }
+]

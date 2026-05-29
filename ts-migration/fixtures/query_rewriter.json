@@ -1,0 +1,357 @@
+[
+  {
+    "desc": "普通中文查询",
+    "function": "expand_query",
+    "args": [
+      "学费多少"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费多少 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "普通英文查询",
+    "function": "expand_query",
+    "args": [
+      "How much is tuition"
+    ],
+    "output": {
+      "ok": true,
+      "result": "How much is tuition 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "中英混合查询",
+    "function": "expand_query",
+    "args": [
+      "学费多少 how much"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费多少 how much 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "空字符串",
+    "function": "expand_query",
+    "args": [
+      ""
+    ],
+    "output": {
+      "ok": true,
+      "result": " 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "仅空白字符串",
+    "function": "expand_query",
+    "args": [
+      "   "
+    ],
+    "output": {
+      "ok": true,
+      "result": "    说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "very short query",
+    "function": "expand_query",
+    "args": [
+      "学费"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "very long query",
+    "function": "expand_query",
+    "args": [
+      "招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生"
+    ],
+    "output": {
+      "ok": true,
+      "result": "招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生招生 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含标点",
+    "function": "expand_query",
+    "args": [
+      "学费多少?"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费多少? 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含全角标点",
+    "function": "expand_query",
+    "args": [
+      "学费多少，多少钱啊！"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费多少，多少钱啊！ 费用 收费 价格 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含 emoji",
+    "function": "expand_query",
+    "args": [
+      "学费多少😊"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费多少😊 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含换行",
+    "function": "expand_query",
+    "args": [
+      "学费\n多少"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费\n多少 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含重复空格",
+    "function": "expand_query",
+    "args": [
+      "学费    多少"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费    多少 费用 收费 价格 多少钱 一年多少钱 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含业务词",
+    "function": "expand_query",
+    "args": [
+      "复读班价格多少"
+    ],
+    "output": {
+      "ok": true,
+      "result": "复读班价格多少 高考复读 全日制复读 复读学校 复读课程 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 含敏感词",
+    "function": "expand_query",
+    "args": [
+      "高考答案是真的吗"
+    ],
+    "output": {
+      "ok": true,
+      "result": "高考答案是真的吗 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 已经是完整问题",
+    "function": "expand_query",
+    "args": [
+      "我想了解一下你们的复读课程怎么收费"
+    ],
+    "output": {
+      "ok": true,
+      "result": "我想了解一下你们的复读课程怎么收费 高考复读 全日制复读 复读学校 复读班 全日制复读班 教学安排 课时 课程体系 上课 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 是关键词列表",
+    "function": "expand_query",
+    "args": [
+      "复读 学费 班型"
+    ],
+    "output": {
+      "ok": true,
+      "result": "复读 学费 班型 费用 收费 价格 多少钱 一年多少钱 高考复读 全日制复读 复读学校 复读班 复读课程 课程类型 全日制冲刺 基础巩固 个性化小班 班型对比 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "query 是数字或年级",
+    "function": "expand_query",
+    "args": [
+      "高三"
+    ],
+    "output": {
+      "ok": true,
+      "result": "高三 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "expand_query explicit intent=pricing_consulting",
+    "function": "expand_query",
+    "args": [
+      "复读多少钱",
+      "pricing_consulting"
+    ],
+    "output": {
+      "ok": true,
+      "result": "复读多少钱 高考复读 全日制复读 复读学校 复读班 复读课程 价格 费用 收费 学费 优惠"
+    }
+  },
+  {
+    "desc": "expand_query intent keywords already in query",
+    "function": "expand_query",
+    "args": [
+      "价格多少",
+      "pricing_consulting"
+    ],
+    "output": {
+      "ok": true,
+      "result": "价格多少 费用 收费 学费 优惠"
+    }
+  },
+  {
+    "desc": "multiple synonym keywords",
+    "function": "expand_query",
+    "args": [
+      "学费和住宿怎么样"
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费和住宿怎么样 费用 收费 价格 多少钱 一年多少钱 宿舍 寝室 生活管理 住校 住宿条件 几个人一间 说明 介绍 指南 常见问题 如何"
+    }
+  },
+  {
+    "desc": "query with intent-unrelated content",
+    "function": "expand_query",
+    "args": [
+      "请问在吗"
+    ],
+    "output": {
+      "ok": true,
+      "result": "请问在吗 说明 介绍 指南 常见问题 怎么样 如何"
+    }
+  },
+  {
+    "desc": "None query",
+    "function": "expand_query",
+    "args": [
+      null
+    ],
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "argument of type 'NoneType' is not iterable"
+    }
+  },
+  {
+    "desc": "None intent",
+    "function": "expand_query",
+    "args": [
+      "学费",
+      null
+    ],
+    "output": {
+      "ok": true,
+      "result": "学费 费用 收费 价格 多少钱 一年多少钱"
+    }
+  },
+  {
+    "desc": "expand_with_tags basic",
+    "function": "expand_with_tags",
+    "args": [
+      "查询内容",
+      [
+        "tag1",
+        "tag2"
+      ]
+    ],
+    "output": {
+      "ok": true,
+      "result": "查询内容 tag1 tag2"
+    }
+  },
+  {
+    "desc": "expand_with_tags empty tags",
+    "function": "expand_with_tags",
+    "args": [
+      "查询内容",
+      []
+    ],
+    "output": {
+      "ok": true,
+      "result": "查询内容"
+    }
+  },
+  {
+    "desc": "expand_with_tags single tag",
+    "function": "expand_with_tags",
+    "args": [
+      "查询内容",
+      [
+        "promotion"
+      ]
+    ],
+    "output": {
+      "ok": true,
+      "result": "查询内容 promotion"
+    }
+  },
+  {
+    "desc": "expand_with_tags Chinese tags",
+    "function": "expand_with_tags",
+    "args": [
+      "课程推荐",
+      [
+        "热门推荐",
+        "限时优惠"
+      ]
+    ],
+    "output": {
+      "ok": true,
+      "result": "课程推荐 热门推荐 限时优惠"
+    }
+  },
+  {
+    "desc": "expand_with_tags empty query",
+    "function": "expand_with_tags",
+    "args": [
+      "",
+      [
+        "tag1"
+      ]
+    ],
+    "output": {
+      "ok": true,
+      "result": " tag1"
+    }
+  },
+  {
+    "desc": "expand_with_tags None query",
+    "function": "expand_with_tags",
+    "args": [
+      null,
+      [
+        "tag1"
+      ]
+    ],
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "sequence item 0: expected str instance, NoneType found"
+    }
+  },
+  {
+    "desc": "expand_with_tags None tags",
+    "function": "expand_with_tags",
+    "args": [
+      "test",
+      null
+    ],
+    "output": {
+      "ok": false,
+      "error": "TypeError",
+      "message": "'NoneType' object is not iterable"
+    }
+  }
+]

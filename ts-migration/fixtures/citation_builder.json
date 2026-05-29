@@ -1,0 +1,131 @@
+[
+  {
+    "input": [
+      {
+        "doc_id": "d1",
+        "title": "Title 1",
+        "source_uri": "https://a.com/1",
+        "chunk_id": "c1"
+      },
+      {
+        "doc_id": "d2",
+        "title": "Title 2",
+        "source_uri": "https://a.com/2",
+        "chunk_id": "c2"
+      },
+      {
+        "doc_id": "d1",
+        "title": "Title 1",
+        "source_uri": "https://a.com/1",
+        "chunk_id": "c3"
+      }
+    ],
+    "output": [
+      {
+        "doc_id": "d1",
+        "title": "Title 1",
+        "source_uri": "https://a.com/1"
+      },
+      {
+        "doc_id": "d2",
+        "title": "Title 2",
+        "source_uri": "https://a.com/2"
+      }
+    ]
+  },
+  {
+    "input": [
+      {
+        "doc_id": "d1",
+        "title": "Only Doc",
+        "source_uri": "https://x.com",
+        "chunk_id": "c1"
+      },
+      {
+        "doc_id": "d1",
+        "title": "Only Doc",
+        "source_uri": "https://x.com",
+        "chunk_id": "c2"
+      }
+    ],
+    "output": [
+      {
+        "doc_id": "d1",
+        "title": "Only Doc",
+        "source_uri": "https://x.com"
+      }
+    ]
+  },
+  {
+    "input": [],
+    "output": []
+  },
+  {
+    "input": [
+      {
+        "doc_id": "a",
+        "title": "A",
+        "source_uri": "u1",
+        "chunk_id": "c1"
+      },
+      {
+        "doc_id": "b",
+        "title": "B",
+        "source_uri": "u2",
+        "chunk_id": "c2"
+      },
+      {
+        "doc_id": "c",
+        "title": "C",
+        "source_uri": "u3",
+        "chunk_id": "c3"
+      }
+    ],
+    "output": [
+      {
+        "doc_id": "a",
+        "title": "A",
+        "source_uri": "u1"
+      },
+      {
+        "doc_id": "b",
+        "title": "B",
+        "source_uri": "u2"
+      },
+      {
+        "doc_id": "c",
+        "title": "C",
+        "source_uri": "u3"
+      }
+    ]
+  },
+  {
+    "input": [
+      {
+        "doc_id": "x",
+        "title": "X",
+        "source_uri": "u",
+        "chunk_id": "c1"
+      },
+      {
+        "doc_id": "x",
+        "title": "X",
+        "source_uri": "u",
+        "chunk_id": "c2"
+      },
+      {
+        "doc_id": "x",
+        "title": "X",
+        "source_uri": "u",
+        "chunk_id": "c3"
+      }
+    ],
+    "output": [
+      {
+        "doc_id": "x",
+        "title": "X",
+        "source_uri": "u"
+      }
+    ]
+  }
+]

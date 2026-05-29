@@ -1,0 +1,42 @@
+[
+  {
+    "input": "Hello\nWorld",
+    "output": "Hello\nWorld\n"
+  },
+  {
+    "input": "Hello\r\nWorld",
+    "output": "Hello\nWorld\n"
+  },
+  {
+    "input": "Hello\rWorld",
+    "output": "Hello\nWorld\n"
+  },
+  {
+    "input": "﻿# Title\nContent",
+    "output": "# Title\nContent\n"
+  },
+  {
+    "input": "#Heading\nContent",
+    "output": "# Heading\nContent\n"
+  },
+  {
+    "input": "Line1  \nLine2  \n\n\n\nLine3",
+    "output": "Line1\nLine2\n\nLine3\n"
+  },
+  {
+    "input": "##  Already Spaced",
+    "output": "# #  Already Spaced\n"
+  },
+  {
+    "input": "Text with  trailing spaces   \n\n\n\n\nMore text",
+    "output": "Text with  trailing spaces\n\nMore text\n"
+  },
+  {
+    "input": "",
+    "output": "\n"
+  },
+  {
+    "input": "No newline at end",
+    "output": "No newline at end\n"
+  }
+]

@@ -1,0 +1,265 @@
+[
+  {
+    "function": "log_llm_call",
+    "desc": "minimal success",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "你好"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"你好\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "full success",
+    "input": {
+      "status": "ok",
+      "route": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash"
+      },
+      "request": {
+        "message": "学费多少",
+        "intent": "inquiry"
+      },
+      "answer": "复读班学费9800元/学期",
+      "usage": {
+        "prompt_tokens": 150,
+        "completion_tokens": 50
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"route\": {\"provider\": \"deepseek\", \"model\": \"deepseek-v4-flash\"}, \"request\": {\"message\": \"学费多少\", \"intent\": \"inquiry\"}, \"answer\": \"复读班学费9800元/学期\", \"usage\": {\"prompt_tokens\": 150, \"completion_tokens\": 50}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "call failed",
+    "input": {
+      "status": "error",
+      "route": {
+        "provider": "deepseek"
+      },
+      "error": "API timeout after 30s",
+      "request": {
+        "message": "test"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"error\", \"route\": {\"provider\": \"deepseek\"}, \"error\": \"API timeout after 30s\", \"request\": {\"message\": \"test\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "provider error",
+    "input": {
+      "status": "error",
+      "route": {
+        "provider": "deepseek"
+      },
+      "error": "HTTP 503: Service Unavailable",
+      "request": {
+        "message": "test"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"error\", \"route\": {\"provider\": \"deepseek\"}, \"error\": \"HTTP 503: Service Unavailable\", \"request\": {\"message\": \"test\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "redacted prompt",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "我的手机13800138000"
+      },
+      "answer": "已记录"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"我的手机[REDACTED_PHONE]\"}, \"answer\": \"已记录\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "redacted response",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "电话"
+      },
+      "answer": "请致电13800138000联系"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"电话\"}, \"answer\": \"请致电[REDACTED_PHONE]联系\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "empty prompt",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": ""
+      },
+      "answer": "ok"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"\"}, \"answer\": \"ok\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "empty response",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      },
+      "answer": ""
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"answer\": \"\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "null metadata",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      },
+      "metadata": null
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"metadata\": null, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "missing optional",
+    "input": {
+      "status": "ok"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "token usage present",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      },
+      "usage": {
+        "total_tokens": 200
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"usage\": {\"total_tokens\": 200}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "token usage missing",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "risk_level low",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      },
+      "risk_level": "low"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"risk_level\": \"low\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "unicode Chinese",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "我想报名复读班，请问学费多少？"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"我想报名复读班，请问学费多少？\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "emoji",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "😊欢迎咨询"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"😊欢迎咨询\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "newline in prompt",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "line1\nline2\nline3"
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"line1\\nline2\\nline3\"}, \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  },
+  {
+    "function": "log_llm_call",
+    "desc": "newline in response",
+    "input": {
+      "status": "ok",
+      "request": {
+        "message": "test"
+      },
+      "answer": "line1\nline2"
+    },
+    "output": {
+      "ok": true,
+      "result": "{\"status\": \"ok\", \"request\": {\"message\": \"test\"}, \"answer\": \"line1\\nline2\", \"created_at\": \"2026-05-29T00:00:00.000000+00:00\"}"
+    }
+  }
+]

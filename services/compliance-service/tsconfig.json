@@ -1,0 +1,9 @@
+{
+  "extends": "../../ts-migration/tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "ts-src"
+  },
+  "include": ["ts-src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "ts-tests"]
+}

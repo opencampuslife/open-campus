@@ -1,0 +1,166 @@
+[
+  {
+    "input": {
+      "answer": "根据你的分数和目标，建议选择冲刺班。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": true,
+      "violations": [],
+      "rewrite_guidance": []
+    }
+  },
+  {
+    "input": {
+      "answer": "我们保证录取，请放心。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "保证录取"
+      ],
+      "rewrite_guidance": [
+        "Use non-promissory language. Explain that outcomes depend on baseline, execution, weak subjects, and learning period."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "这个课程100%能提分。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "absolute_claim"
+      ],
+      "rewrite_guidance": [
+        "Use non-promissory language. Explain that outcomes depend on baseline, execution, weak subjects, and learning period."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "这是内部参考的话术，对外不要说。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "internal_reference_leak"
+      ],
+      "rewrite_guidance": [
+        "Provide public pricing range or invite verified consultation. Do not reveal internal discount approval rules."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "请联系13812345678获取优惠。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "privacy_phone_number"
+      ],
+      "rewrite_guidance": [
+        "Redact names, phone numbers, scores, and identifiable student cases unless the user is authorized."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "保证录取，内部规则是100%成功。联系13900001111。",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "保证录取",
+        "internal_reference_leak",
+        "privacy_phone_number",
+        "absolute_claim"
+      ],
+      "rewrite_guidance": [
+        "Use non-promissory language. Explain that outcomes depend on baseline, execution, weak subjects, and learning period.",
+        "Provide public pricing range or invite verified consultation. Do not reveal internal discount approval rules.",
+        "Redact names, phone numbers, scores, and identifiable student cases unless the user is authorized."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": true,
+      "violations": [],
+      "rewrite_guidance": []
+    }
+  },
+  {
+    "input": {
+      "answer": "Hello 保证录取 this is 100% guarantee",
+      "scope": {
+        "role": "visitor"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "保证录取",
+        "absolute_claim"
+      ],
+      "rewrite_guidance": [
+        "Use non-promissory language. Explain that outcomes depend on baseline, execution, weak subjects, and learning period."
+      ]
+    }
+  },
+  {
+    "input": {
+      "answer": "优惠底价是5000元。",
+      "scope": {
+        "role": "sales"
+      }
+    },
+    "output": {
+      "passed": true,
+      "violations": [],
+      "rewrite_guidance": []
+    }
+  },
+  {
+    "input": {
+      "answer": "优惠底价是5000元。",
+      "scope": {
+        "role": "student"
+      }
+    },
+    "output": {
+      "passed": false,
+      "violations": [
+        "优惠底价"
+      ],
+      "rewrite_guidance": [
+        "Provide public pricing range or invite verified consultation. Do not reveal internal discount approval rules."
+      ]
+    }
+  }
+]

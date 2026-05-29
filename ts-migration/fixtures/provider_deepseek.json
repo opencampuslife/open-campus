@@ -1,0 +1,1168 @@
+[
+  {
+    "desc": "minimal valid request",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "Hello!"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "Hello!"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "full valid request with base_url",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-v4-flash",
+      "base_url": "https://api.deepseek.com",
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "ok"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "ok"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-v4-flash",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "multi-turn messages",
+    "input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": "What is 2+2?"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "2+2 equals 4."
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "2+2 equals 4."
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a helpful assistant."
+          },
+          {
+            "role": "user",
+            "content": "What is 2+2?"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "API key from env var",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": null,
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "Hello!"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "Hello!"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer env-key-abc"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "missing API key raises RuntimeError",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": null,
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "uri_error",
+      "reason": ""
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DEEPSEEK_API_KEY is not set"
+    },
+    "request_snapshot": {}
+  },
+  {
+    "desc": "unicode Chinese response",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "你好，请问学费多少？"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "复读班学费：9800元/学期"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "复读班学费：9800元/学期"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "你好，请问学费多少？"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "emoji response",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "😊欢迎咨询"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "😊欢迎咨询我们的课程！"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "😊欢迎咨询我们的课程！"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "😊欢迎咨询"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "provider returns usage",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "Usage info"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 15,
+          "completion_tokens": 5,
+          "total_tokens": 20
+        }
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "Usage info"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "provider does not return usage",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "No usage"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "No usage"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "HTTP 400 Bad Request",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "http_error",
+      "code": 400,
+      "detail": "{\"error\":{\"message\":\"Invalid request\",\"type\":\"invalid_request_error\"}}"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API error 400: {\"error\":{\"message\":\"Invalid request\",\"type\":\"invalid_request_error\"}}"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "HTTP 401 Unauthorized",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "http_error",
+      "code": 401,
+      "detail": "{\"error\":{\"message\":\"Invalid API key\",\"type\":\"authentication_error\"}}"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API error 401: {\"error\":{\"message\":\"Invalid API key\",\"type\":\"authentication_error\"}}"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "HTTP 429 Rate Limited",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "http_error",
+      "code": 429,
+      "detail": "{\"error\":{\"message\":\"Rate limit exceeded\",\"type\":\"rate_limit_error\"}}"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API error 429: {\"error\":{\"message\":\"Rate limit exceeded\",\"type\":\"rate_limit_error\"}}"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "HTTP 500 Server Error",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "http_error",
+      "code": 500,
+      "detail": "{\"error\":{\"message\":\"Internal server error\",\"type\":\"server_error\"}}"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API error 500: {\"error\":{\"message\":\"Internal server error\",\"type\":\"server_error\"}}"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "response missing choices field",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "id": "123"
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "KeyError",
+      "message": "'choices'"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "response choices is empty array",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": []
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "IndexError",
+      "message": "list index out of range"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "response message missing content",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "index": 0,
+            "message": {}
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "KeyError",
+      "message": "'content'"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "response choices[0] missing message",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "index": 0
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": false,
+      "error": "KeyError",
+      "message": "'message'"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "non-JSON response error",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "invalid_json",
+      "body": "This is not JSON"
+    },
+    "output": {
+      "ok": false,
+      "error": "JSONDecodeError",
+      "message": "Expecting value: line 1 column 1 (char 0)"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "timeout raises RuntimeError",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "uri_error",
+      "reason": "timed out"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API network error: timed out"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "network error raises RuntimeError",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "uri_error",
+      "reason": "Connection refused"
+    },
+    "output": {
+      "ok": false,
+      "error": "RuntimeError",
+      "message": "DeepSeek API network error: Connection refused"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "stream field always false in payload",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "ok"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "ok"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "temperature and max_tokens absent from payload",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "ok"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "ok"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "custom base_url from env var",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": null,
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "Hello!"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "Hello!"
+    },
+    "request_snapshot": {
+      "url": "https://custom.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer env-key-base-url"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "multi-turn messages with unicode",
+    "input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是复读学校招生助手"
+        },
+        {
+          "role": "user",
+          "content": "全日制复读班学费多少？"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": "test-key-12345",
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "全日制复读班学费为9800元/学期。"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "全日制复读班学费为9800元/学期。"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-12345"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是复读学校招生助手"
+          },
+          {
+            "role": "user",
+            "content": "全日制复读班学费多少？"
+          }
+        ],
+        "stream": false
+      }
+    }
+  },
+  {
+    "desc": "default base_url used when not specified",
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "model": "deepseek-chat",
+      "base_url": null,
+      "api_key": null,
+      "timeout": 30.0
+    },
+    "mock": {
+      "type": "success",
+      "response_body": {
+        "choices": [
+          {
+            "message": {
+              "content": "ok"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "ok": true,
+      "result": "ok"
+    },
+    "request_snapshot": {
+      "url": "https://api.deepseek.com/chat/completions",
+      "method": "POST",
+      "headers": {
+        "Content-type": "application/json",
+        "Authorization": "Bearer test-key-default-url"
+      },
+      "body": {
+        "model": "deepseek-chat",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hello"
+          }
+        ],
+        "stream": false
+      }
+    }
+  }
+]
