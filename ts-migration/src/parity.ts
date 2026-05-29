@@ -28,14 +28,15 @@ export function runPythonModule(
   repoRoot: string,
 ): string {
   const argsJson = JSON.stringify(args);
-  const script = `
-import json, sys
-sys.path.insert(0, ${JSON.stringify(repoRoot)})
-exec(open(${JSON.stringify(modulePath)}).read())
-result = ${funcName}(*json.loads(${JSON.stringify(argsJson)}))
-print(json.dumps(result, ensure_ascii=False, default=str))
-`;
-  const output = execSync("python3 -c " + JSON.stringify(script), {
+  const script = [
+    "import json, sys",
+    `sys.path.insert(0, ${JSON.stringify(repoRoot)})`,
+    `exec(open(${JSON.stringify(modulePath)}).read())`,
+    `result = ${funcName}(*json.loads(${JSON.stringify(argsJson)}))`,
+    `print(json.dumps(result, ensure_ascii=False, default=str))`,
+  ].join("\n");
+  const output = execSync("python3", {
+    input: script,
     cwd: repoRoot,
     encoding: "utf-8",
     timeout: 30_000,
