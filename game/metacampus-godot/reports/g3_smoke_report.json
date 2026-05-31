@@ -1,0 +1,28 @@
+{
+  "phase": "G3",
+  "result": "PASS",
+  "checks_total": 18,
+  "checks_passed": 18,
+  "checks_failed": 0,
+  "checks": {
+    "mode_readable": true,
+    "mode_set_mock": true,
+    "mode_set_live": true,
+    "mock_q_admission": true,
+    "mock_q_admission_answer": true,
+    "mock_q_admission_citations": true,
+    "mock_q_admission_no_handoff": true,
+    "mock_q_guarantee_handoff": true,
+    "mock_q_guarantee_reason": true,
+    "mock_q_default_ok": true,
+    "guard_保证录取": true,
+    "guard_内部名额": true,
+    "guard_特殊照顾": true,
+    "guard_走后门": true,
+    "guard_包进": true,
+    "off_q_ok_false": true,
+    "g2_init_metrics": true,
+    "g2_t1_parent_trust": true
+  },
+  "failures": []
+}

@@ -1,0 +1,49 @@
+{
+  "npc_id": "student_representative",
+  "npc_name": "沈一诺",
+  "dialogues": [
+    {
+      "id": "student_representative_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_leave_request_001",
+      "speaker": "沈一诺",
+      "text": "嗨！我是学生会副主席沈一诺。最近好多同学跟我抱怨请假流程太麻烦了——写申请、等审批、查结果，每一步都要等好久。陈老师那边也忙不过来。你能不能用AI帮我们把请假数据整理一下，让流程变快一点？",
+      "choices": [
+        {
+          "text": "协助收集学生请假数据，提交AI汇总",
+          "action": "collect_leave_data",
+          "metric_effects": {"parent_trust": 10, "school_efficiency": 10},
+          "next_line": -1,
+          "complete_quest": "q_leave_request_001"
+        },
+        {
+          "text": "告诉她按现有流程慢慢处理即可",
+          "action": "dismiss",
+          "metric_effects": {"parent_trust": -15, "school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "student_representative_feedback_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "沈一诺",
+      "text": "AI汇总的请假数据真的快了很多！但同学们也有一个担心：AI会不会只看数据不看人？比如有个同学确实家里有特殊困难，请假频次高但不是故意的。你觉得AI能理解这些'人情'吗？还是我们该保留人工复核环节？",
+      "choices": [
+        {
+          "text": "AI辅助+人工复核结合，特殊个案人工处理",
+          "action": "hybrid_approach",
+          "metric_effects": {"parent_trust": 12, "school_efficiency": 10},
+          "next_line": -1
+        },
+        {
+          "text": "AI全自动审批，效率优先（忽略了特殊情况）",
+          "action": "full_auto",
+          "metric_effects": {"parent_trust": -15, "school_efficiency": 10},
+          "next_line": -1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class HudController : CanvasLayer
+{
+    private Label _timeLabel = null!;
+    private Label _apLabel = null!;
+    private Label _computeLabel = null!;
+    private Label _budgetLabel = null!;
+
+    private Label _efficiencyLabel = null!;
+    private Label _parentTrustLabel = null!;
+    private Label _complianceLabel = null!;
+    private Label _stabilityLabel = null!;
+
+    private ProgressBar _efficiencyBar = null!;
+    private ProgressBar _parentTrustBar = null!;
+    private ProgressBar _complianceBar = null!;
+    private ProgressBar _stabilityBar = null!;
+
+    private Label _questHintLabel = null!;
+
+    private TimeManager _timeManager = null!;
+    private ResourceManager _resourceManager = null!;
+    private MetricManager _metricManager = null!;
+    private QuestManager _questManager = null!;
+
+    private readonly Dictionary<string, Label> _metricLabels = new();
+    private readonly Dictionary<string, ProgressBar> _metricBars = new();
+
+    public override void _Ready()
+    {
+        BindNodes();
+        BindManagers();
+        BindSignals();
+        InitializeMetricMaps();
+        RefreshAll();
+    }
+
+    private void BindNodes()
+    {
+        _timeLabel = GetNode<Label>("RootMargin/Panel/VBox/TopRow/TimeLabel");
+        _apLabel = GetNode<Label>("RootMargin/Panel/VBox/TopRow/ApLabel");
+        _computeLabel = GetNode<Label>("RootMargin/Panel/VBox/TopRow/ComputeLabel");
+        _budgetLabel = GetNode<Label>("RootMargin/Panel/VBox/TopRow/BudgetLabel");
+
+        _efficiencyLabel = GetNode<Label>("RootMargin/Panel/VBox/MetricRow/EfficiencyBox/EfficiencyLabel");
+        _parentTrustLabel = GetNode<Label>("RootMargin/Panel/VBox/MetricRow/ParentTrustBox/ParentTrustLabel");
+        _complianceLabel = GetNode<Label>("RootMargin/Panel/VBox/MetricRow/ComplianceBox/ComplianceLabel");
+        _stabilityLabel = GetNode<Label>("RootMargin/Panel/VBox/MetricRow/StabilityBox/StabilityLabel");
+
+        _efficiencyBar = GetNode<ProgressBar>("RootMargin/Panel/VBox/MetricRow/EfficiencyBox/EfficiencyBar");
+        _parentTrustBar = GetNode<ProgressBar>("RootMargin/Panel/VBox/MetricRow/ParentTrustBox/ParentTrustBar");
+        _complianceBar = GetNode<ProgressBar>("RootMargin/Panel/VBox/MetricRow/ComplianceBox/ComplianceBar");
+        _stabilityBar = GetNode<ProgressBar>("RootMargin/Panel/VBox/MetricRow/StabilityBox/StabilityBar");
+
+        _questHintLabel = GetNode<Label>("RootMargin/Panel/VBox/QuestRow/QuestHintLabel");
+    }
+
+    private void BindManagers()
+    {
+        _timeManager = GetNode<TimeManager>("/root/TimeManager");
+        _resourceManager = GetNode<ResourceManager>("/root/ResourceManager");
+        _metricManager = GetNode<MetricManager>("/root/MetricManager");
+        _questManager = GetNode<QuestManager>("/root/QuestManager");
+    }
+
+    private void BindSignals()
+    {
+        _timeManager.TimeChanged += OnTimeChanged;
+        _timeManager.DayEnded += OnDayEnded;
+
+        _resourceManager.ResourceChanged += OnResourceChanged;
+
+        _metricManager.MetricChanged += OnMetricChanged;
+        _metricManager.ThresholdTriggered += OnThresholdTriggered;
+
+        _questManager.QuestStarted += OnQuestChanged;
+        _questManager.QuestUpdated += OnQuestChanged;
+        _questManager.QuestCompleted += OnQuestChanged;
+        _questManager.QuestFailed += OnQuestChanged;
+        _questManager.QuestExpired += OnQuestChanged;
+        _questManager.DailyQuestsRefreshed += OnDailyQuestsRefreshed;
+    }
+
+    private void InitializeMetricMaps()
+    {
+        _metricLabels["efficiency"] = _efficiencyLabel;
+        _metricLabels["parent_trust"] = _parentTrustLabel;
+        _metricLabels["compliance"] = _complianceLabel;
+        _metricLabels["stability"] = _stabilityLabel;
+
+        _metricBars["efficiency"] = _efficiencyBar;
+        _metricBars["parent_trust"] = _parentTrustBar;
+        _metricBars["compliance"] = _complianceBar;
+        _metricBars["stability"] = _stabilityBar;
+
+        foreach (var bar in _metricBars.Values)
+        {
+            bar.MinValue = 0;
+            bar.MaxValue = 100;
+            bar.ShowPercentage = false;
+        }
+    }
+
+    private void RefreshAll()
+    {
+        RefreshTime();
+        RefreshResources();
+        RefreshAllMetrics();
+        RefreshQuestHint();
+    }
+
+    private void RefreshTime()
+    {
+        var semesterName = _timeManager.GetSemesterName();
+        var day = _timeManager.GetCurrentDay();
+        var hour = _timeManager.GetCurrentHour();
+        var minute = _timeManager.GetCurrentMinute();
+
+        _timeLabel.Text = $"{semesterName} · 第 {day} 天 · {hour:00}:{minute:00}";
+    }
+
+    private void RefreshResources()
+    {
+        var ap = _resourceManager.GetResource("ap");
+        var apMax = _resourceManager.GetMaxResource("ap");
+        var compute = _resourceManager.GetResource("compute");
+        var budget = _resourceManager.GetResource("budget");
+
+        _apLabel.Text = $"AP {ap}/{apMax}";
+        _computeLabel.Text = $"算力 {compute}";
+        _budgetLabel.Text = $"预算 ¥{budget}";
+    }
+
+    private void RefreshAllMetrics()
+    {
+        RefreshMetric("efficiency");
+        RefreshMetric("parent_trust");
+        RefreshMetric("compliance");
+        RefreshMetric("stability");
+    }
+
+    private void RefreshMetric(string metricId)
+    {
+        var value = _metricManager.GetMetric(metricId);
+
+        if (!_metricLabels.TryGetValue(metricId, out var label))
+            return;
+
+        if (!_metricBars.TryGetValue(metricId, out var bar))
+            return;
+
+        label.Text = $"{GetMetricDisplayName(metricId)} {value}";
+        bar.Value = value;
+
+        ApplyMetricWarningStyle(label, bar, value);
+    }
+
+    private void RefreshQuestHint()
+    {
+        var activeQuests = _questManager.GetActiveQuests();
+
+        if (activeQuests.Count <= 0)
+        {
+            var dailyQuests = _questManager.GetDailyQuests();
+
+            if (dailyQuests.Count <= 0)
+            {
+                _questHintLabel.Text = "当前任务：暂无";
+                return;
+            }
+
+            var firstDaily = dailyQuests[0];
+            _questHintLabel.Text = $"每日委托：{_questManager.GetQuestTitle(firstDaily)}";
+            return;
+        }
+
+        var firstActive = activeQuests[0];
+        _questHintLabel.Text = $"当前任务：{_questManager.GetQuestTitle(firstActive)}";
+    }
+
+    private void ApplyMetricWarningStyle(Label label, ProgressBar bar, int value)
+    {
+        if (value < 20)
+        {
+            label.Modulate = new Color(1.0f, 0.25f, 0.25f);
+            bar.Modulate = new Color(1.0f, 0.25f, 0.25f);
+        }
+        else if (value < 40)
+        {
+            label.Modulate = new Color(1.0f, 0.75f, 0.2f);
+            bar.Modulate = new Color(1.0f, 0.75f, 0.2f);
+        }
+        else
+        {
+            label.Modulate = Colors.White;
+            bar.Modulate = Colors.White;
+        }
+    }
+
+    private static string GetMetricDisplayName(string metricId)
+    {
+        return metricId switch
+        {
+            "efficiency" => "效率",
+            "parent_trust" => "家长信任",
+            "compliance" => "合规",
+            "stability" => "稳定",
+            _ => metricId
+        };
+    }
+
+    private void OnTimeChanged(int hour, int minute)
+    {
+        RefreshTime();
+    }
+
+    private void OnDayEnded(int day)
+    {
+        RefreshTime();
+        RefreshResources();
+        RefreshAllMetrics();
+        RefreshQuestHint();
+    }
+
+    private void OnResourceChanged(string resourceId, int value, int maxValue = 0)
+    {
+        RefreshResources();
+    }
+
+    private void OnMetricChanged(string metricId, int oldValue, int newValue)
+    {
+        RefreshMetric(metricId);
+    }
+
+    private void OnThresholdTriggered(string metricId, string consequenceId)
+    {
+        var message = consequenceId switch
+        {
+            "audit_warning" => "高风险预警：合规低于安全阈值",
+            "system_outage" => "严重故障：系统稳定性过低",
+            "complaint_increase" => "家长投诉风险上升",
+            "task_backlog" => "任务积压风险上升",
+            _ => $"风险事件：{consequenceId}"
+        };
+
+        _questHintLabel.Text = message;
+    }
+
+    private void OnQuestChanged(string questId)
+    {
+        RefreshQuestHint();
+    }
+
+    private void OnDailyQuestsRefreshed(Godot.Collections.Array<string> questIds)
+    {
+        RefreshQuestHint();
+    }
+}

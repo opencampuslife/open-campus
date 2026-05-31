@@ -1,0 +1,178 @@
+version: 1
+plan:
+  name: 'N2B-3: Full 8 NPC Asset Batch'
+  max_concurrency: 2
+  max_consecutive_failures: 2
+  max_cycles: 12
+
+tasks:
+  - id: n2b3-batch-a-new
+    title: '生成 Batch A 新 NPC 资产（4 NPC）'
+    prompt: |
+      任务：为 compliance_officer、it_operator、homeroom_teacher、logistics_manager 生成完整资产集（portrait×4 + sprite idle + walk×4 + spec + metadata）。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      技术规格（已验证，不变）：
+      - portrait：256×256 PNG RGBA，透明背景
+      - sprite idle：64×64 PNG RGBA，透明背景
+      - walk sheet：256×64 PNG RGBA，4帧×64×64，透明背景
+      - 后处理：sips crop + add_transparency.py（脚本在 /Users/kevinzzz/.mavis/plans/plan_71d97796/workspace/add_transparency.py）
+
+      美术规范：docs/npc-palette-guide-v1.md
+
+      每个 NPC 的角色规格：
+
+      **compliance_officer（林澈）**
+      - 角色：合规专员，灰色职业套装
+      - 主色：S2 中灰 #6B7280，辅色：P2 暖白 #F5E6D3，肤色：P5 #F4C7A1
+      - 服装：灰色西装外套 + 浅色衬衫 + 黑框眼镜 + 手持文件夹
+      - 正面关键词：professional compliance officer, grey suit, warm skin tone
+      - 禁止：Stardew, retro pixel, fantasy, dark tone, 法式乡村
+
+      **it_operator（许航）**
+      - 角色：IT 运维，深灰 polo 衫
+      - 主色：S1 深灰 #374151，辅色：S2 中灰 #6B7280，肤色：P5 #F4C7A1
+      - 服装：深灰色 polo 衫 + 深色休闲裤 + 可选黑框眼镜 + 挂绳工牌
+      - 正面关键词：campus IT operator, dark grey polo shirt, professional
+      - 禁止：Stardew, retro pixel, fantasy, dark tone
+
+      **homeroom_teacher（陈芷）**
+      - 角色：班主任，浅蓝衬衫
+      - 主色：S3 浅蓝 #60A5FA，辅色：S6 深蓝辅 #1E3A5F，肤色：P5 #F4C7A1
+      - 服装：浅蓝色长袖衬衫（卷袖）+ 深色西裤 + 手持平板或教案
+      - 正面关键词：homeroom teacher, light blue shirt, warm campus style
+      - 禁止：Stardew, retro pixel, fantasy, dark tone
+
+      **logistics_manager（赵启山）**
+      - 角色：后勤主管，卡其工装
+      - 主色：S4 卡其 #C4A77D，辅色：S5 深棕 #5C4033，肤色：P5 #F4C7A1
+      - 服装：卡其工装夹克 + 深棕色工装裤 + 腰间对讲机 + 工具夹
+      - 正面关键词：logistics manager, khaki work jacket, warm campus facilities
+      - 禁止：Stardew, retro pixel, fantasy, dark tone, farming
+
+      每个 NPC 需生成：
+      1. portrait_neutral.png（256×256 RGBA）
+      2. portrait_happy.png（256×256 RGBA）
+      3. portrait_worried.png（256×256 RGBA）
+      4. portrait_strict.png（256×256 RGBA）
+      5. sprite_idle.png（64×64 RGBA）
+      6. walk_down.png（256×64 RGBA）
+      7. walk_up.png（256×64 RGBA）
+      8. walk_left.png（256×64 RGBA）
+      9. walk_right.png（256×64 RGBA）
+      10. animation_spec.json
+      11. generation_metadata.json
+
+      目录结构：assets/npcs/<npc_id>/（直接放，不要 baseline/ 子目录，与 admissions_director/student_representative 现有结构一致）
+
+      animation_spec.json 格式（来自 N2B-1）：
+      {
+        "npc_id": "<id>",
+        "frame_width": 64,
+        "frame_height": 64,
+        "frames_per_direction": 4,
+        "directions": ["down","up","left","right"],
+        "animation_speed_fps": 6.67,
+        "anchor_offset": [32, 60],
+        "walk_sheet_path": "walk_{direction}.png",
+        "idle_sprite_path": "sprite_idle.png",
+        "portrait_path": "portrait_neutral.png"
+      }
+
+      写 deliverable.md 到 outputs/n2b3-batch-a-new/deliverable.md。
+
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: |
+      独立验证（Python struct+zlib，不用 PIL）：
+      1. 每个 NPC 9 个 PNG 文件存在：portrait（4个256×256 RGBA）+ sprite idle（64×64 RGBA）+ walk sheets（4个256×64 RGBA）。
+      2. PNG header：width/height/color_type=6 验证（读 IHDR chunk）。
+      3. animation_spec.json 存在且 frame_width=64, frame_height=64, frames=4。
+      4. generation_metadata.json 存在且记录了所有文件。
+      报告每 NPC 每项 PASS/FAIL。
+    timeout_ms: 2400000
+
+  - id: n2b3-batch-a-existing
+    title: '补全 Batch A 已有 NPC 表情 + 重命名 v2 为正式版'
+    prompt: |
+      任务：为 admissions_director 和 student_representative 补全缺少的表情帧，并把 v2 资产重命名为正式版文件名。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      已有 v2 资产（使用这些作为 portrait_neutral 和 sprite_idle 的基础，不要重复生成）：
+      - admissions_director/baseline/portrait_neutral_v2.png → 重命名为 portrait_neutral.png
+      - admissions_director/baseline/sprite_idle_v2.png → 重命名为 sprite_idle.png
+      - admissions_director/baseline/admissions_director_walk_*_v2.png → 重命名为 walk_*.png
+      - student_representative/baseline/portrait_neutral_v2.png → 重命名为 portrait_neutral.png
+      - student_representative/baseline/sprite_idle_v2.png → 重命名为 sprite_idle.png
+      - student_representative/baseline/student_representative_walk_*_v2.png → 重命名为 walk_*.png
+
+      需要新增的表情（基于 npc-palette-guide-v1.md + revised prompts）：
+      - admissions_director（周明远）需要：portrait_happy.png、portrait_worried.png、portrait_strict.png（用 revised-prompts-admissions-director.md 中的 prompt）
+      - student_representative（沈一诺）需要：portrait_happy.png、portrait_strict.png（portrait_worried.png 在 N2A 已生成 expression_worried.png，需要检查是否与 v2 portrait 身份一致，如不一致则重新生成）
+
+      清理：删除旧的 v1 文件（无 v2 后缀的旧版本 *_fixed.png, *_old.png 等临时文件）。
+
+      每个 NPC 目录最终应有：
+      1. portrait_neutral.png（已有 v2，重命名）
+      2. portrait_happy.png（新增）
+      3. portrait_worried.png（新增或确认）
+      4. portrait_strict.png（新增）
+      5. sprite_idle.png（已有 v2，重命名）
+      6. walk_down.png（已有 v2，重命名）
+      7. walk_up.png（已有 v2，重命名）
+      8. walk_left.png（已有 v2，重命名）
+      9. walk_right.png（已有 v2，重命名）
+      10. animation_spec.json（更新路径指向正式文件名）
+      11. generation_metadata.json（更新）
+
+      技术规格：256×256 RGBA portrait，64×64 RGBA sprite，256×64 RGBA walk sheet，透明背景。
+
+      写 deliverable.md 到 outputs/n2b3-batch-a-existing/deliverable.md。
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: |
+      独立验证（Python struct+zlib）：
+      1. admissions_director 和 student_representative 目录各有 9 个 PNG + 2 个 JSON = 11 个文件。
+      2. 无 *_v2.png 或 *_fixed.png 等临时文件残留（ls 检查）。
+      3. portrait × 4 均为 256×256 RGBA。
+      4. sprite_idle 为 64×64 RGBA。
+      5. walk sheets × 4 均为 256×64 RGBA。
+      6. animation_spec.json 存在且有效。
+      报告每项 PASS/FAIL。
+    timeout_ms: 600000
+
+  - id: n2b3-final-report
+    title: 'N2B-3 最终报告'
+    prompt: |
+      任务：汇总 N2B-3 Batch A 全部产出，验证完整性，产出最终报告。
+
+      前置条件：n2b3-batch-a-new 和 n2b3-batch-a-existing 均完成。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      产出：reports/n2b3-full-asset-batch.md
+
+      必须包含：
+      1. 执行摘要（Batch A 完成状态）
+      2. 完整资产清单（8 NPC × 11 文件 = 88 个文件，逐 NPC 表格）
+      3. PNG 验证汇总（dimensions + RGBA）
+      4. 风格合规检查（palette guide + 无 Stardew 漂移）
+      5. Godot loader 兼容性（路径可解析，无 regression）
+      6. 已知限制
+      7. Batch B 启动条件（Batch A 通过后执行）
+
+      写 deliverable.md + reports/n2b3-full-asset-batch.md。
+
+    assigned_to: general
+    depends_on: [n2b3-batch-a-new, n2b3-batch-a-existing]
+    verified_by: verifier
+    verify_prompt: |
+      独立验证：
+      1. 读取 reports/n2b3-full-asset-batch.md，验证包含执行摘要、资产清单（8 NPC）、PNG 验证、风格检查、Godot 兼容性、已知限制、Batch B 条件。
+      2. ls 命令验证 8 个 NPC 目录均存在。
+      3. 抽查每个 NPC 至少 3 个 PNG 文件存在。
+      报告 PASS/FAIL。
+    timeout_ms: 300000

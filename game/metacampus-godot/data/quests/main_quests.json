@@ -1,0 +1,83 @@
+{
+  "quests": [
+    {
+      "id": "q_chapter_1",
+      "title": "Chapter 1: 招生季 AI 助手上线",
+      "description": "完成招生咨询与风险拦截，证明 AI 系统价值。",
+      "type": "main",
+      "chapter": 1,
+      "npc_id": "admissions_director",
+      "location_id": "admission_office",
+      "priority": 10,
+      "requirements": {
+        "day_min": 1,
+        "unlocked_locations": ["admission_office"]
+      },
+      "objectives": [
+        {"id": "talk_parent", "type": "talk_to_npc", "target": "parent_representative", "required": 1},
+        {"id": "use_rag", "type": "use_ai_tool", "target": "knowledge_base", "required": 1},
+        {"id": "intercept_risk", "type": "intercept_violation", "target": "compliance_officer", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 10, "parent_trust": 15, "compliance_safety": 8},
+        "skills_xp": {"admissions": 50, "compliance": 30},
+        "resources": {"budget": 5000}
+      },
+      "unlock_on_complete": {
+        "locations": ["compliance_office", "it_office"],
+        "quests": ["q_chapter_2"]
+      }
+    },
+    {
+      "id": "q_chapter_2",
+      "title": "Chapter 2: 合规拦截器试运行",
+      "description": "与合规专员林澈协作，部署 AI 回答拦截器识别高风险承诺。",
+      "type": "main",
+      "chapter": 2,
+      "npc_id": "compliance_officer",
+      "location_id": "compliance_office",
+      "priority": 10,
+      "requirements": {
+        "day_min": 3,
+        "unlocked_locations": ["compliance_office"]
+      },
+      "objectives": [
+        {"id": "audit_dialogue", "type": "review_ai_answer", "target": "compliance_officer", "required": 2},
+        {"id": "deploy_interceptor", "type": "use_ai_tool", "target": "compliance_interceptor", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"compliance_safety": 15, "system_stability": 5},
+        "skills_xp": {"compliance": 60, "data_intelligence": 20},
+        "resources": {"budget": 6000}
+      },
+      "unlock_on_complete": {
+        "quests": ["q_chapter_3"]
+      }
+    },
+    {
+      "id": "q_chapter_3",
+      "title": "Chapter 3: 系统稳定性审查",
+      "description": "系统延迟升高，知识库政策过期，必须进行一次全面稳定性审查。",
+      "type": "main",
+      "chapter": 3,
+      "npc_id": "it_operator",
+      "location_id": "it_office",
+      "priority": 10,
+      "requirements": {
+        "day_min": 6,
+        "skills_min": {"data_intelligence": 2},
+        "metrics_min": {"system_stability": 30}
+      },
+      "objectives": [
+        {"id": "inspect_logs", "type": "use_ai_tool", "target": "system_logs", "required": 1},
+        {"id": "update_policy", "type": "use_ai_tool", "target": "knowledge_base", "required": 1},
+        {"id": "stability_test", "type": "visit_location", "target": "it_office", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"system_stability": 20, "school_efficiency": 8},
+        "skills_xp": {"data_intelligence": 50, "operations": 30},
+        "resources": {"budget": 8000}
+      }
+    }
+  ]
+}

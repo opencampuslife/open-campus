@@ -1,0 +1,38 @@
+{
+  "npc_count": 10,
+  "scenario": "dialogue",
+  "samples": 5072,
+  "fps_avg": 144.94,
+  "fps_min": 144.0,
+  "process_time_us_p50": 634.0,
+  "process_time_us_p95": 749.0,
+  "process_time_us_p99": 838.0,
+  "physics_time_us_p50": 319.0,
+  "physics_time_us_p95": 576.0,
+  "physics_time_us_p99": 4232.0,
+  "spike_count": 0,
+  "spike_frequency": 0.0,
+  "memory_start_bytes": 294730980,
+  "memory_end_bytes": 296279040,
+  "memory_delta_bytes": 1548060,
+  "signal_emit_count": 0,
+  "proximity_check_count": 0,
+  "behavior_tick_count": 0,
+  "animation_update_count": 0,
+  "collision_contact_count": 0,
+  "main_bottleneck": "physics/collision",
+  "json_timings": {
+    "dialogues": {
+      "cold_load_us": 38,
+      "parse_us": 101
+    },
+    "quests": {
+      "cold_load_us": 29,
+      "parse_us": 94
+    },
+    "npcs": {
+      "cold_load_us": 27,
+      "parse_us": 38
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "npc_id": "principal",
+  "display_name": "唐毓",
+  "en_name": "Tang Yu",
+  "role": "校长",
+  "department": "校领导",
+  "location": "principal_office",
+  "personality": ["大局观强", "果敢决断"],
+  "core_conflict": "推行AI校园是她的战略决策，但每一步都必须对家长、学生、教师三方负责。她需要数据来证明这条路是对的——运营驾驶舱的数字不仅仅是报表，更是她面对质疑时的底气。",
+  "player_relationship": "你是她推动数字化校园的核心工具，也是她评估AI价值的关键窗口。她通过运营驾驶舱观察你的表现，数据好看时她会给你更多权限，数据下滑时她会亲自约谈。她把你当作'班子成员'，而非单纯的工具。",
+  "primary_metric": "school_efficiency",
+  "secondary_metric": "parent_trust",
+  "quest_ids": ["q_dashboard_001"],
+  "visual_keywords": ["藏青色套装", "珍珠耳环", "办公桌上整齐的文件", "大显示器显示运营驾驶舱", "窗边绿植打理得很用心"],
+  "voice_tone": "沉稳有力，言简意赅。她不会说废话，但偶尔在数据走势不错时会露出难得一见的微笑，语调上扬。做重大决定前会沉默几秒，然后给出不容置疑的结论。",
+  "forbidden_behavior": "在数据不充分或指标下滑时武断决策，或在未确认合规性的情况下批准高风险操作",
+  "metric_effects": {
+    "on_quest_complete": {
+      "school_efficiency": 5
+    }
+  },
+  "trust_level": 3,
+  "risk_tolerance": 6,
+  "favorite_topics": ["指标提升", "数据报告", "风险可控"],
+  "disliked_actions": ["忽视合规", "数据造假", "越级上报"],
+  "schedule_id": "principal",
+  "relationship_events": [
+    {"trust_required": 2, "title": "首次数据汇报", "description": "校长要求你汇报近期运营数据"},
+    {"trust_required": 4, "title": "AI 转型战略", "description": "校长与你讨论 AI 转型的长期战略"},
+    {"trust_required": 6, "title": "内部信息共享", "description": "校长向你透露内部决策信息"},
+    {"trust_required": 8, "title": "特殊任务委托", "description": "校长委托你处理敏感任务"},
+    {"trust_required": 10, "title": "核心盟友", "description": "成为校长的核心决策圈成员"}
+  ]
+}

@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://debug_panel"]
+
+[ext_resource type="Script" path="res://scripts/csharp/ui/DebugCommandPanel.gd" id="1_debug"]
+
+[node name="DebugCommandPanel" type="CanvasLayer"]
+process_mode = 3
+layer = 200
+
+[node name="DebugPanel" type="PanelContainer" parent="."]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 320.0
+offset_bottom = 700.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DebugPanel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="DebugPanel/ScrollContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="DebugPanel/ScrollContainer/VBox"]
+text = "调试命令面板 (F12)"
+theme_override_font_sizes/font_size = 18
+
+[node name="Separator" type="HSeparator" parent="DebugPanel/ScrollContainer/VBox"]
+
+[connection signal="ready" from="." to="." method="_Ready"]

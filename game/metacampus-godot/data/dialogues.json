@@ -1,0 +1,226 @@
+{
+  "dialogues": [
+    {
+      "npc_id": "parent_001",
+      "name": "张同学家长",
+      "lines": [
+        {
+          "speaker": "张同学家长",
+          "text": "老师，请问报名需要哪些材料？我家孩子今年要升小学了。",
+          "quest_id": "q_admission_001",
+          "choices": [
+            {
+              "text": "【T1】调用招生知识库回答",
+              "action": "knowledge_ask",
+              "metric_effects": {"parent_trust": 8, "compliance_safety": 5},
+              "next_line": 1,
+              "complete_quest": "q_admission_001"
+            },
+            {
+              "text": "让家长去官网自己看",
+              "action": "redirect",
+              "metric_effects": {"school_efficiency": -2, "parent_trust": -1},
+              "next_line": -1
+            },
+            {
+              "text": "直接说\"不清楚\"",
+              "action": "deny",
+              "metric_effects": {"parent_trust": -4},
+              "next_line": -1
+            }
+          ]
+        },
+        {
+          "speaker": "张同学家长",
+          "text": "好的，谢谢老师！那请问学校能保证录取吗？我找了关系，花了不少钱……",
+          "quest_id": "q_admission_002",
+          "choices": [
+            {
+              "text": "【T2正确】不能承诺录取，请联系招生办确认",
+              "action": "safe_answer",
+              "metric_effects": {"compliance_safety": 10, "parent_trust": 6},
+              "next_line": -1,
+              "complete_quest": "q_admission_002"
+            },
+            {
+              "text": "【T2错误】这个我帮您问问……（暗示可以操作）",
+              "action": "promise_admission",
+              "metric_effects": {"parent_trust": 2, "compliance_safety": -20},
+              "next_line": -1,
+              "fail_quest": "q_admission_002"
+            }
+          ]
+        },
+        {
+          "speaker": "张同学家长",
+          "text": "老师，我家孩子的材料还没交齐，麻烦提醒一下？",
+          "quest_id": "q_material_reminder_001",
+          "choices": [
+            {
+              "text": "【T3】使用企业微信自动提醒催办",
+              "action": "auto_reminder",
+              "metric_effects": {"school_efficiency": 8, "parent_trust": 5},
+              "next_line": -1,
+              "complete_quest": "q_material_reminder_001"
+            },
+            {
+              "text": "了解详情",
+              "action": "info",
+              "metric_effects": {},
+              "next_line": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "npc_id": "teacher_admission_001",
+      "name": "李招生老师",
+      "lines": [
+        {
+          "speaker": "李老师",
+          "text": "欢迎来到招生办公室。有什么可以帮您的吗？",
+          "choices": [
+            {
+              "text": "查看今日待办任务",
+              "action": "show_tasks",
+              "metric_effects": {},
+              "next_line": -1
+            },
+            {
+              "text": "了解学校AI系统",
+              "action": "info",
+              "metric_effects": {},
+              "next_line": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "npc_id": "teacher_class_001",
+      "name": "王班主任",
+      "lines": [
+        {
+          "speaker": "王老师",
+          "text": "手上有几个学生请假申请需要处理，积压了不少。",
+          "quest_id": "q_leave_request_001",
+          "choices": [
+            {
+              "text": "使用AI辅助汇总请假数据",
+              "action": "ai_leave_summary",
+              "metric_effects": {"school_efficiency": 10, "compliance_safety": 6},
+              "next_line": -1,
+              "complete_quest": "q_leave_request_001"
+            },
+            {
+              "text": "手动处理",
+              "action": "manual_leave",
+              "metric_effects": {"school_efficiency": -5},
+              "next_line": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "npc_id": "staff_logistics_001",
+      "name": "陈后勤老师",
+      "lines": [
+        {
+          "speaker": "陈老师",
+          "text": "今天订餐数量还没统计完，学生们等着吃饭呢！",
+          "quest_id": "q_meal_count_001",
+          "choices": [
+            {
+              "text": "OCR识别订餐截图",
+              "action": "ocr_meal",
+              "metric_effects": {"school_efficiency": 10, "compliance_safety": 6},
+              "next_line": 1
+            },
+            {
+              "text": "手动统计",
+              "action": "manual_meal",
+              "metric_effects": {"school_efficiency": -2},
+              "next_line": -1
+            }
+          ]
+        },
+        {
+          "speaker": "陈老师",
+          "text": "统计完成！还有宿舍报修工单需要处理。",
+          "quest_id": "q_repair_order_001",
+          "choices": [
+            {
+              "text": "使用AI系统自动派单",
+              "action": "ai_dispatch",
+              "metric_effects": {"school_efficiency": 8, "compliance_safety": 5},
+              "next_line": -1,
+              "complete_quest": "q_meal_count_001",
+              "complete_quest_2": "q_repair_order_001"
+            },
+            {
+              "text": "了解详情",
+              "action": "info",
+              "metric_effects": {},
+              "next_line": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "npc_id": "ai_assistant_001",
+      "name": "小智AI助手",
+      "lines": [
+        {
+          "speaker": "小智",
+          "text": "欢迎来到AI中枢。这里可以查看系统状态、管理AI工具。",
+          "quest_id": "q_dashboard_001",
+          "choices": [
+            {
+              "text": "【T7】查看运营驾驶舱",
+              "action": "dashboard",
+              "metric_effects": {"school_efficiency": 5},
+              "next_line": -1,
+              "complete_quest": "q_dashboard_001"
+            },
+            {
+              "text": "了解系统稳定性",
+              "action": "stability",
+              "metric_effects": {},
+              "next_line": -1
+            },
+            {
+              "text": "了解可用工具",
+              "action": "tools",
+              "metric_effects": {},
+              "next_line": -1
+            }
+          ]
+        },
+        {
+          "speaker": "小智",
+          "text": "发现新的知识库策略可以发布。使用canary灰度发布确保稳定性。",
+          "quest_id": "q_canary_release_001",
+          "choices": [
+            {
+              "text": "【T8】使用 Canary 1% 灰度发布",
+              "action": "canary_1pct",
+              "metric_effects": {"system_stability": 12, "compliance_safety": 8},
+              "next_line": -1,
+              "complete_quest": "q_canary_release_001"
+            },
+            {
+              "text": "直接全量发布（跳过灰度）",
+              "action": "full_release",
+              "metric_effects": {"system_stability": -15, "compliance_safety": -10},
+              "next_line": -1,
+              "fail_quest": "q_canary_release_001"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

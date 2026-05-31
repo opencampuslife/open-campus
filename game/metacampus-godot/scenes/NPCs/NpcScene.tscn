@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[sub_resource type="CapsuleShape2D" id="capsule_shape"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="circle_shape"]
+radius = 30.0
+
+[node name="NpcCharacter" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("capsule_shape")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 1
+
+[node name="InteractionShape" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("circle_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Label3D" type="Label" parent="."]
+position = Vector2(0, -40)
+horizontal_alignment = 1
+text = "NPC"

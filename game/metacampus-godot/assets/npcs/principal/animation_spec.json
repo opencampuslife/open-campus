@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "date": "2026-05-29",
+  "author": "Narrative Designer",
+  "npc_id": "principal",
+  "display_name": "唐毓",
+  "role": "校长",
+  "location": "principal_office",
+
+  "frame_size": {
+    "width": 64,
+    "height": 64,
+    "note": "单帧尺寸（含4px底部阴影空间）"
+  },
+
+  "frame_count": {
+    "per_direction": 4,
+    "note": "walk cycle：接触帧→过渡帧→交叉帧→过渡帧（150ms/帧≈6.67fps）"
+  },
+
+  "directions": 4,
+  "note": "上下左右四方向，每个方向独立walk sheet文件",
+
+  "anchor_point": {
+    "x": 32,
+    "y": 60,
+    "note": "锚点在脚底中心偏下"
+  },
+
+  "transparent_padding": {
+    "top": 4,
+    "left": 8,
+    "right": 8,
+    "bottom": 4,
+    "note": "头顶留4px，左右各8px，底部已含4px阴影"
+  },
+
+  "animations": {
+    "idle": {
+      "type": "static",
+      "frames": [0],
+      "frame_rate": 0,
+      "note": "idle使用sprite_idle.png"
+    },
+    "walk": {
+      "type": "loop",
+      "frames": [0, 1, 2, 3],
+      "frame_rate": 150,
+      "note": "walk sheet每帧间隔150ms"
+    }
+  },
+
+  "walk_sheet_layout": {
+    "sheet_dimensions": {
+      "width": 256,
+      "height": 64
+    },
+    "grid": "1 row × 4 columns",
+    "frame_order": [
+      "frame_0_contact",
+      "frame_1_transition",
+      "frame_2_cross",
+      "frame_3_transition"
+    ]
+  },
+
+  "naming_convention": {
+    "idle_sprite": "baseline/sprite_idle.png",
+    "walk_sheet": "baseline/principal_walk_{direction}.png",
+    "directions": ["down", "up", "left", "right"]
+  },
+
+  "style_constraints": {
+    "proportions": {
+      "total_height": 64,
+      "head_ratio": "1/4",
+      "head_px": 16,
+      "torso_px": 20,
+      "legs_px": 28
+    },
+    "outline": "1px 深色描边 #1A1A2E",
+    "shadow": "4px底部椭圆阴影 20%透明度",
+    "colors": {
+      "suit": "#374151",
+      "shirt": "#F5E6D3",
+      "badge": "#D4A843",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E"
+    },
+    "max_color_count": 5,
+    "texture_filter": "Nearest"
+  },
+
+  "character_description": {
+    "age": "约55-65岁",
+    "body_type": "站姿庄重挺拔",
+    "clothing": "深灰西装三件套（#374151）+ 白衬衫（#F5E6D3）+ 校徽金徽章（#D4A843）",
+    "accessories": "金色校徽（#D4A843）",
+    "skin": "#F4C7A1",
+    "note": "校长角色，需体现权威与亲和并存"
+  },
+
+  "godot_integration": {
+    "import_mode": "2D",
+    "texture_filter": "Nearest",
+    "hframes": 4,
+    "vframes": 1
+  }
+}

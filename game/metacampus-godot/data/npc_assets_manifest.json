@@ -1,0 +1,152 @@
+{
+  "_comment": "NPC asset manifest — magic-byte verified against assets/npcs/<npc_id>/baseline/",
+  "_generated": "2026-05-29T02:07:30+08:00",
+  "_scan_method": "Python os.walk + magic-byte check (FF D8 FF = JPEG, 89 50 4E = PNG)",
+  "npcs": [
+    {
+      "npc_id": "admissions_director",
+      "asset_root": "assets/npcs/admissions_director/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/admissions_director/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/admissions_director/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/admissions_director/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/admissions_director/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/admissions_director/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/admissions_director/baseline/admissions_director_walk_down.png",
+        "up":    "assets/npcs/admissions_director/baseline/admissions_director_walk_up.png",
+        "left":  "assets/npcs/admissions_director/baseline/admissions_director_walk_left.png",
+        "right": "assets/npcs/admissions_director/baseline/admissions_director_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "compliance_officer",
+      "asset_root": "assets/npcs/compliance_officer/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/compliance_officer/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/compliance_officer/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/compliance_officer/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/compliance_officer/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/compliance_officer/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/compliance_officer/baseline/compliance_officer_walk_down.png",
+        "up":    "assets/npcs/compliance_officer/baseline/compliance_officer_walk_up.png",
+        "left":  "assets/npcs/compliance_officer/baseline/compliance_officer_walk_left.png",
+        "right": "assets/npcs/compliance_officer/baseline/compliance_officer_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "homeroom_teacher",
+      "asset_root": "assets/npcs/homeroom_teacher/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/homeroom_teacher/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/homeroom_teacher/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/homeroom_teacher/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/homeroom_teacher/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/homeroom_teacher/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/homeroom_teacher/baseline/homeroom_teacher_walk_down.png",
+        "up":    "assets/npcs/homeroom_teacher/baseline/homeroom_teacher_walk_up.png",
+        "left":  "assets/npcs/homeroom_teacher/baseline/homeroom_teacher_walk_left.png",
+        "right": "assets/npcs/homeroom_teacher/baseline/homeroom_teacher_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "it_operator",
+      "asset_root": "assets/npcs/it_operator/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/it_operator/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/it_operator/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/it_operator/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/it_operator/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/it_operator/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/it_operator/baseline/it_operator_walk_down.png",
+        "up":    "assets/npcs/it_operator/baseline/it_operator_walk_up.png",
+        "left":  "assets/npcs/it_operator/baseline/it_operator_walk_left.png",
+        "right": "assets/npcs/it_operator/baseline/it_operator_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "logistics_manager",
+      "asset_root": "assets/npcs/logistics_manager/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/logistics_manager/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/logistics_manager/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/logistics_manager/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/logistics_manager/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/logistics_manager/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/logistics_manager/baseline/logistics_manager_walk_down.png",
+        "up":    "assets/npcs/logistics_manager/baseline/logistics_manager_walk_up.png",
+        "left":  "assets/npcs/logistics_manager/baseline/logistics_manager_walk_left.png",
+        "right": "assets/npcs/logistics_manager/baseline/logistics_manager_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "parent_representative",
+      "asset_root": "assets/npcs/parent_representative/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/parent_representative/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/parent_representative/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/parent_representative/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/parent_representative/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/parent_representative/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/parent_representative/baseline/parent_representative_walk_down.png",
+        "up":    "assets/npcs/parent_representative/baseline/parent_representative_walk_up.png",
+        "left":  "assets/npcs/parent_representative/baseline/parent_representative_walk_left.png",
+        "right": "assets/npcs/parent_representative/baseline/parent_representative_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "principal",
+      "asset_root": "assets/npcs/principal/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/principal/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/principal/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/principal/baseline/portrait_worried.png",
+        "strict":    "assets/npcs/principal/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/principal/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/principal/baseline/principal_walk_down.png",
+        "up":    "assets/npcs/principal/baseline/principal_walk_up.png",
+        "left":  "assets/npcs/principal/baseline/principal_walk_left.png",
+        "right": "assets/npcs/principal/baseline/principal_walk_right.png"
+      }
+    },
+    {
+      "npc_id": "student_representative",
+      "asset_root": "assets/npcs/student_representative/baseline",
+      "portraits": {
+        "neutral":   "assets/npcs/student_representative/baseline/portrait_neutral.png",
+        "happy":     "assets/npcs/student_representative/baseline/portrait_happy.png",
+        "worried":   "assets/npcs/student_representative/baseline/portrait_worried.jpg",
+        "strict":    "assets/npcs/student_representative/baseline/portrait_strict.png"
+      },
+      "sprite_idle": "assets/npcs/student_representative/baseline/sprite_idle.png",
+      "walk_sheet": {
+        "down":  "assets/npcs/student_representative/baseline/student_representative_walk_down.png",
+        "up":    "assets/npcs/student_representative/baseline/student_representative_walk_up.png",
+        "left":  "assets/npcs/student_representative/baseline/student_representative_walk_left.png",
+        "right": "assets/npcs/student_representative/baseline/student_representative_walk_right.png"
+      }
+    }
+  ],
+  "_coverage_summary": {
+    "total_npcs": 8,
+    "portraits_complete": 8,
+    "sprite_idle_complete": 8,
+    "walk_sheet_complete": 8,
+    "format_anomalies": [
+      "student_representative/baseline/portrait_worried.jpg: magic-byte JPEG (FF D8 FF) — extension corrected from .png to .jpg"
+    ]
+  }
+}

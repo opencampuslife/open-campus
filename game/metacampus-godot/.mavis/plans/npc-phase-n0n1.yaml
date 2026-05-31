@@ -1,0 +1,338 @@
+version: 1
+plan:
+  name: 'NPC Track Phase N0/N1 — 风格圣经 + 8个MVP角色卡'
+  max_concurrency: 6
+  max_consecutive_failures: 2
+  max_cycles: 12
+  auto_accept: false
+  auto_reject_retries: 1
+tasks:
+  # ── 内容线 ──
+  - id: npc-style-bible
+    title: '产出 NPC 风格圣经'
+    prompt: >
+      你是一个游戏叙事设计师，负责为 MetaCampus 项目建立 NPC 风格圣经。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      创建 docs/npc-style-bible.md，内容必须包含：
+
+      1. 世界观定位：现代中国国际学校/教育科技校园，核心身份是校园AI运营模拟。明确禁止：农场、牧场、矿洞、村庄模拟、Stardew Valley-like元素。
+
+      2. 角色视觉规范：2D cozy campus simulation style，干净可读的人物剪影，柔和暖色调色板，Godot sprite 可读性优先。
+
+      3. 表情规则：每个NPC 4种表情（neutral/happy/worried/strict），面部轮廓不变仅眼眉嘴变化。
+
+      4. 命名规则：npc_id 用 snake_case，display_name 用中文姓名，location 用英文场景标识。
+
+      5. 资产目录结构：assets/npcs/<npc_id>/ 下有 portrait.png、各个表情、sprite、prompt文件。
+
+      6. JSON数据规范：所有profile必须包含quest_ids和metric_effects字段。
+
+      7. Persona安全规则：不得承诺录取、不得绕过合规、不得编造法规。
+
+      8. 禁止事项（Hard Rules）：禁止Stardew-like元素、禁止版权角色、禁止第三方参考资料。
+
+      同时创建 reports/npc-style-bible-done.md 作为完成标记。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. docs/npc-style-bible.md 存在 2. 包含世界观定位 3. 包含视觉规范 4. 包含表情规则 5. 包含命名规则 6. 包含资产结构 7. 包含JSON规范 8. 包含安全规则 9. 包含禁止事项 10. reports/npc-style-bible-done.md 存在
+    depends_on: []
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000
+
+  - id: npc-roster-v1
+    title: '产出 8 个 MVP NPC 角色卡'
+    prompt: >
+      你是一个游戏叙事设计师，为 MetaCampus 设计 8 个 MVP NPC 角色卡。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      8个NPC列表（必须全部覆盖）：
+      1. admissions_director / 周明远 / 招生办主任 / admission_office
+      2. compliance_officer / 林澈 / 合规专员 / compliance_office
+      3. it_operator / 许航 / IT运维 / server_room
+      4. homeroom_teacher / 陈芷 / 班主任 / teacher_office
+      5. logistics_manager / 赵启山 / 后勤主管 / logistics_department
+      6. parent_representative / 顾兰 / 家长代表 / reception_area
+      7. student_representative / 沈一诺 / 学生代表 / classroom
+      8. principal / 唐毓 / 校长 / principal_office
+
+      每个NPC创建独立的JSON profile文件存放到 data/npcs/npc_<npc_id>.json，包含以下必填字段：
+      npc_id, display_name, en_name, role, location, personality(至少2个关键词),
+      core_conflict(中文描述), player_relationship, primary_metric(4个核心指标之一),
+      secondary_metric(可选), quest_ids(至少1个), visual_keywords, voice_tone,
+      forbidden_behavior, metric_effects
+
+      绑定任务要求：每个NPC绑定至少一个现有MVP任务(T1-T8)，覆盖所有8个任务。现有任务ID：
+      q_admission_001(T1), q_admission_002(T2), q_material_reminder_001(T3),
+      q_leave_request_001(T4), q_meal_count_001(T5), q_repair_order_001(T6),
+      q_dashboard_001(T7), q_canary_release_001(T8)
+
+      核心指标：school_efficiency, parent_trust, compliance_safety, system_stability
+
+      创建 reports/npc-roster-v1.md 包含8个NPC概览表格。
+      创建 reports/npc-roster-v1-done.md 作为完成标记。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. reports/npc-roster-v1.md 存在且包含8个NPC 2. data/npcs/ 下有8个JSON文件 3. 每个JSON包含所有必填字段 4. 所有NPC的quest_ids覆盖T1-T8 5. 所有NPC绑定核心指标 6. reports/npc-roster-v1-done.md 存在
+    depends_on: []
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  - id: npc-persona-prompts
+    title: '产出 8 个 NPC Persona Prompt'
+    prompt: >
+      你是一个游戏叙事设计师和LLM prompt工程师，为8个NPC编写Persona Prompt。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      首先读取 data/npcs/ 目录下每个NPC的JSON profile，然后为每个NPC创建 data/personas/<npc_id>.md。
+
+      每个persona文件必须包含：
+      - 身份与背景
+      - 性格关键词(至少2个)
+      - 对话风格(短句/长句/术语/口语/正式)
+      - 核心冲突(想要X但不能Y)
+      - 禁止行为(至少3条，必须包含"不得承诺录取结果")
+      - 游戏功能
+      - 指标影响(正面/负面行为对应的指标变化)
+      - 典型对话示例(至少2个，包含正确和错误分支)
+      - LLM system prompt片段(可直接用于ApiClient调用)
+
+      确保每个persona与对应的NPC profile一致。
+      创建 reports/npc-persona-prompts-done.md 作为完成标记。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. data/personas/ 下有8个 .md 文件 2. 每个文件包含所有必填部分(身份/性格/对话风格/冲突/禁止行为/功能/指标/对话示例/system prompt) 3. 与对应NPC profile一致 4. reports/npc-persona-prompts-done.md 存在
+    depends_on:
+      - npc-roster-v1
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  - id: npc-dialogue-stubs
+    title: '产出 8 个 NPC 对话包'
+    prompt: >
+      你是一个游戏叙事设计师，为8个NPC编写基础对话包。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      首先读取 data/npcs/ 目录下的NPC profile JSON和 data/quests.json 了解现有任务结构。
+
+      为每个NPC创建 data/dialogues/<npc_id>_dialogues.json。对话包格式：
+      {
+        "npc_id": "...",
+        "npc_name": "...",
+        "dialogues": [
+          {
+            "id": "<npc_id>_intro_001",
+            "trigger": "quest_start",
+            "trigger_quest": "<quest_id>",
+            "speaker": "<中文名>",
+            "text": "<开场对白>",
+            "choices": [...]
+          },
+          {
+            "id": "<npc_id>_high_risk_001",
+            "trigger": "quest_trigger",
+            "speaker": "...",
+            "text": "...",
+            "choices": [
+              {"text": "正确分支", "action": "safe_answer", "metric_effects": {...}, "next_line": -1, "complete_quest": "..."},
+              {"text": "错误分支", "action": "promise_admission", "metric_effects": {...}, "next_line": -1, "fail_quest": "..."}
+            ]
+          }
+        ]
+      }
+
+      要求：每个NPC至少2个dialogue entry，涉及合规风险的对话必须有正确/错误分支，
+      metric_effects必须合理(+/-10到+/-25范围)，对话文本使用中文符合NPC voice_tone。
+      确保格式与现有 data/dialogues.json 兼容。
+
+      创建 reports/npc-dialogue-stubs-done.md 作为完成标记。
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. data/dialogues/ 下有8个对话包JSON 2. 每个至少2个dialogue entry 3. 每个entry包含必填字段(id/trigger/speaker/text/choices) 4. metric_effects在-25到+25范围 5. JSON parse通过 6. reports/npc-dialogue-stubs-done.md 存在
+    depends_on:
+      - npc-roster-v1
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  # ── 视觉规范线 ──
+  - id: visual-style-rules
+    title: '产出视觉规范和 Prompt 模板'
+    prompt: >
+      你是一个像素艺术风格设计师，为MetaCampus NPC项目建立视觉规范。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      任务1：追加内容到 docs/npc-style-bible.md（不覆盖已有内容，追加到末尾）：
+      - 角色比例规范：头部身高1/4，整体64px高sprite
+      - 立绘规格：256x256px，正面/3/4视角
+      - Sprite规范：64x64px，4帧walk sheet，帧间隔150ms
+      - 表情绘制规则：4种表情，面部轮廓不变仅眼眉嘴形变化
+      - 服装规范：招生办主任(深蓝西装)、合规专员(灰色职业套装)、IT运维(深灰polo衫+眼镜可选)、班主任(浅蓝衬衫)、后勤主管(卡其色工装)、家长代表(商务休闲)、学生代表(校服白衬衫+深蓝西装外套)、校长(深灰西装)
+      - 色板：主色#2D4A6B(深蓝)、辅色#F5E6D3(暖白)、强调色#E8734A(橙红)、安全色#5BA87B(绿)、人物肤色#F4C7A1
+      - 禁止视觉元素：农田/牧场/矿洞/稻草人/木屋/法式乡村/复古像素风(8-bit)/任何Stardew Valley元素。必须是现代校园、教育科技的视觉。
+
+      任务2：创建 prompts/npc_image_prompt_template.md，包含portrait/expression/sprite prompt模板，使用变量占位符{{NPC_ID}}、{{EXPRESSION}}、{{CLOTHING}}。
+
+      任务3：创建 prompts/npc_video_prompt_template.md，包含5秒动作视频和场景视频prompt模板。
+
+      创建 reports/visual-style-rules-done.md 作为完成标记。
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. docs/npc-style-bible.md 已追加视觉规范内容(角色比例/立绘/sprite/表情/服装/色板/禁止元素) 2. prompts/npc_image_prompt_template.md 存在 3. prompts/npc_video_prompt_template.md 存在 4. 模板使用变量占位符 5. reports/visual-style-rules-done.md 存在
+    depends_on:
+      - npc-style-bible
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000
+
+  # ── 工程线 ──
+  - id: npc-schema
+    title: '产出 NPC Profile JSON Schema'
+    prompt: >
+      你是一个Godot开发者，为MetaCampus NPC项目建立JSON Schema。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      创建 schemas/npc_profile.schema.json，定义NPC profile的数据结构约束。
+
+      Schema必须包含以下required字段：npc_id(snake_case pattern), display_name, role, location,
+      personality(数组minItems:2), core_conflict, primary_metric(enum:4个核心指标),
+      quest_ids(数组minItems:1), visual_keywords, voice_tone, forbidden_behavior, metric_effects
+
+      primary_metric和secondary_metric的enum值必须是：
+      school_efficiency, parent_trust, compliance_safety, system_stability
+
+      metric_effects结构：{"metric_id": {"positive": number, "negative": number}}
+
+      确保 schemas/ 目录存在。完成后用这个schema验证 data/npcs/ 下的所有NPC profile。
+      创建 reports/npc-schema-done.md 作为完成标记。
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. schemas/npc_profile.schema.json 存在 2. JSON parse通过 3. 包含所有必填字段定义 4. npc_id使用snake_case 5. primary_metric限制为4个核心指标 6. personality至少2个 7. quest_ids至少1个 8. reports/npc-schema-done.md 存在
+    depends_on: []
+    gates: []
+    max_retries: 2
+    timeout_ms: 1200000
+
+  - id: npc-registry
+    title: '产出 Godot NPC Registry 模块'
+    prompt: >
+      你是一个Godot开发者，实现NPC Registry模块。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      1. 创建 scripts/npc_registry.gd：Autoload单例，功能：
+         - _load_all_npcs()：从 data/npcs/ 加载所有NPC profile JSON
+         - get_npc(npc_id) -> Dictionary
+         - get_all_npcs() -> Array
+         - get_npcs_by_location(location) -> Array
+         - get_npcs_by_quest(quest_id) -> Array
+         - 优雅降级：缺失文件不崩溃
+
+      2. 创建 scripts/npc_factory.gd：根据NPC profile生成场景节点
+         - create_npc(npc_id) -> Node2D
+
+      3. 创建 scripts/npc_persona_bridge.gd：连接NPC persona与LLM Bridge
+         - get_persona_prompt(npc_id) -> String (读取 data/personas/<npc_id>.md)
+
+      4. 在 project.godot 中注册 NpcRegistry 为Autoload（如果不破坏现有TestHarness/JsonLoader/QuestManager/MetricManager/ApiClient/VisualFeedback）
+
+      创建 reports/npc-registry-done.md 作为完成标记。
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. scripts/npc_registry.gd 存在且功能完整 2. scripts/npc_factory.gd 存在 3. scripts/npc_persona_bridge.gd 存在 4. 所有GDScript语法正确 5. project.godot中NpcRegistry已注册 6. 不破坏现有Autoload 7. reports/npc-registry-done.md 存在
+    depends_on:
+      - npc-schema
+      - npc-roster-v1
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  - id: npc-smoke
+    title: '产出 NPC Smoke 测试脚本'
+    prompt: >
+      你是一个QA工程师，为NPC项目实现smoke测试脚本。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      创建3个Python smoke脚本：
+
+      1. tools/smoke_npc_assets.py：检查8个NPC profile JSON存在、必填字段完整、persona文件存在、dialogue文件存在。输出JSON报告到 reports/smoke_npc_assets.json。
+
+      2. tools/smoke_npc_dialogues.py：检查所有对话包JSON parse通过、必填字段完整(id/trigger/speaker/text/choices)、metric_effects在-25到+25范围、quest标记正确。输出JSON报告到 reports/smoke_npc_dialogues.json。
+
+      3. tools/smoke_npc_quests.py：检查NPC quest_ids对应任务在data/quests.json中存在、每个NPC绑定核心指标、所有8个NPC覆盖T1-T8。输出JSON报告到 reports/smoke_npc_quests.json。
+
+      确保不修改现有smoke g2/g3/g4脚本。
+
+      运行这3个脚本并输出结果到对应报告。
+      创建 reports/npc-smoke-done.md 包含测试结果摘要。
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      验证：1. tools/smoke_npc_assets.py 存在 2. tools/smoke_npc_dialogues.py 存在 3. tools/smoke_npc_quests.py 存在 4. 脚本执行不报错 5. 每个脚本输出JSON报告 6. reports/npc-smoke-done.md 存在
+    depends_on:
+      - npc-roster-v1
+      - npc-dialogue-stubs
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000
+
+  # ── 最终验收线 ──
+  - id: final-validation
+    title: 'NPC Track Phase N0/N1 最终验收'
+    prompt: >
+      你是一个证据驱动的验证专家，对NPC Track Phase N0/N1进行最终验收。
+
+      项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      逐一验证以下10个检查项，每个记录通过/失败：
+
+      1. Style Bible验收：docs/npc-style-bible.md存在，包含世界观/视觉规范/表情规则/服装规范/色板/禁止事项
+      2. NPC Roster验收：reports/npc-roster-v1.md存在+8个NPC，data/npcs/下8个JSON，必填字段完整，quest覆盖T1-T8，绑定核心指标
+      3. Persona验收：data/personas/下8个文件，包含所有必填部分，与NPC profile一致
+      4. Dialogue验收：data/dialogues/下8个对话包，每个>=2个entry，JSON parse通过
+      5. Schema验收：schemas/npc_profile.schema.json存在，JSON parse通过，验证所有profile
+      6. Registry验收：scripts/npc_registry.gd存在，factory.gd存在，persona_bridge.gd存在，Autoload已注册
+      7. Smoke验收：3个smoke脚本存在，执行不报错，输出JSON报告
+      8. Visual Rules验收：Style Bible含视觉规范追加，prompt模板存在
+      9. 无Stardew漂移验收：检查所有产出不含Stardew Valley/农场/牧场/矿洞/村庄元素
+      10. 现有smoke通过验收：运行tools/smoke_g2.py/tools/smoke_g3.py/tools/smoke_g4.py验证不被破坏
+
+      创建 reports/npc-phase-n0n1-final-report.md 包含完整验收报告，格式：
+      | 检查项 | 状态 | 备注 |
+      |--------|------|------|
+      | ... | ✅/❌ | ... |
+
+      总结：总计X项，通过X，失败X，结论：✅通过/❌需修复
+    assigned_to: verifier
+    verified_by: verifier
+    verify_prompt: >
+      独立验证最终报告中的每一项检查结果，确认没有误报或遗漏。抽取3-5个关键检查项进行独立复验。
+    depends_on:
+      - npc-style-bible
+      - npc-roster-v1
+      - npc-persona-prompts
+      - npc-dialogue-stubs
+      - visual-style-rules
+      - npc-schema
+      - npc-registry
+      - npc-smoke
+    gates: []
+    max_retries: 2
+    timeout_ms: 1800000

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaCampus 2D — 架构 &amp; GDExtension 覆写方案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f5f0; --panel: #ffffff; --line: #e9e3d6; --line-soft: #f0ebdf;
+      --text: #1f2533; --text-2: #3a4256; --muted: #7c7a72; --ink: #14171e;
+      --primary: #2f6f5e; --accent: #c97b3f; --blue: #3b82f6; --red: #ef4444; --green: #10b981; --amber: #f59e0b;
+      --purple: #7c3aed;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(47,111,94,.04) 0%, transparent 45%),
+        radial-gradient(at 100% 0%, rgba(124,58,237,.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 48px 24px 96px; }
+
+    /* hero */
+    header.hero {
+      padding: 44px 52px; border-radius: 22px;
+      background: linear-gradient(135deg, #f9f6ee, #e6e1d8);
+      border: 1px solid var(--line); margin-bottom: 48px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 8px 32px -20px rgba(20,23,30,.14);
+    }
+    header.hero h1 {
+      font-family: 'DM Serif Display', 'Source Han Serif SC', Georgia, serif;
+      font-size: 38px; font-weight: 400; line-height: 1.15; margin: 8px 0 0; color: var(--ink); letter-spacing: -0.01em;
+    }
+    header.hero .sub { color: var(--text-2); font-size: 16px; margin: 12px 0 0; max-width: 720px; }
+    .badge { display: inline-flex; gap: 6px; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: var(--primary); color: #fff; }
+    .phase-summary { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .phase-summary span { padding: 4px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; background: var(--panel); border: 1px solid var(--line); }
+    .phase-summary span.done { background: #ecfdf5; border-color: #6ee7b7; color: #065f46; }
+    .phase-summary span.next { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+
+    /* sections */
+    h2 {
+      font-family: 'DM Serif Display', 'Source Han Serif SC', serif;
+      font-size: 26px; font-weight: 400; margin: 56px 0 20px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--line); color: var(--ink); display: flex; align-items: center; gap: 14px;
+    }
+    h2 .num {
+      width: 34px; height: 34px; border-radius: 9px; font-size: 13px;
+      font-family: 'Outfit', sans-serif; font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), #1f4e42); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    h2 .num.alt { background: linear-gradient(135deg, var(--purple), #5b21b6); }
+    h3 { font-size: 19px; font-weight: 600; margin: 28px 0 10px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+    h3 .dot.alt { background: var(--purple); }
+
+    /* cards */
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform .15s, box-shadow .15s; margin-bottom: 16px;
+    }
+    .card:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba(20,23,30,.14); }
+    .card-sm { padding: 14px 18px; }
+    .card-purple { border-left: 3px solid var(--purple); }
+
+    /* grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    /* tables */
+    table.data { width: 100%; font-size: 13px; border-collapse: collapse; }
+    table.data th { text-align: left; padding: 8px 10px; color: var(--muted); font-weight: 600; border-bottom: 2px solid var(--line); font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; }
+    table.data td { padding: 8px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+    table.data tr:hover td { background: #f9f8f4; }
+
+    /* bench */
+    .bench-row { display: grid; grid-template-columns: 140px 1fr 60px; gap: 12px; align-items: center; padding: 6px 0; }
+    .bench-row .label { font-size: 13px; color: var(--text-2); font-weight: 500; }
+    .bench-row .val { font-size: 13px; font-weight: 600; text-align: right; font-family: 'JetBrains Mono', monospace; }
+    .bar-bg { height: 16px; background: var(--line-soft); border-radius: 6px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 6px; transition: width .4s; }
+    .bar-fill.g { background: linear-gradient(90deg, #10b981, #34d399); }
+    .bar-fill.b { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .bar-fill.a { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .bar-fill.p { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+
+    /* timeline */
+    .timeline { position: relative; padding-left: 56px; }
+    .timeline::before { content: ""; position: absolute; left: 20px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--primary), var(--accent)); border-radius: 1px; }
+    .step { position: relative; margin-bottom: 28px; }
+    .step-icon { position: absolute; left: -36px; top: 0; width: 32px; height: 32px; border-radius: 50%; background: white; border: 2px solid var(--primary); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: var(--primary); }
+    .step-icon.done { background: var(--primary); color: #fff; }
+    .step-icon.done::after { content: "✓"; }
+    .step-icon.future { border-color: var(--purple); color: var(--purple); }
+
+    /* code */
+    pre { background: #1a1e2b; color: #cdd6f4; border-radius: 10px; padding: 16px 20px; overflow-x: auto; font-size: 12px; line-height: 1.55; margin: 12px 0; border: 1px solid #2a2f3f; }
+    code { font-family: 'JetBrains Mono', 'SF Mono', monospace; font-size: 0.9em; }
+    .inline-code { background: var(--line-soft); padding: 2px 7px; border-radius: 4px; font-size: 0.88em; color: var(--primary); }
+
+    /* mermaid */
+    .mermaid-wrap { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 12px 0; overflow-x: auto; }
+
+    /* kv */
+    .kv-card { display: grid; grid-template-columns: 110px 1fr; gap: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    .kv-card .kv { padding: 10px 14px; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
+    .kv-card .kv:last-child, .kv-card .kv:nth-last-child(2) { border-bottom: none; }
+    .kv-card .k { font-weight: 600; color: var(--muted); background: var(--bg); }
+    .kv-card .v { color: var(--text); border-left: 1px solid var(--line-soft); }
+
+    /* grade tag */
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 5px; font-size: 12px; font-weight: 600; }
+    .tag-rec { background: #ecfdf5; color: #065f46; }
+    .tag-opt { background: #fef7ed; color: #92400e; }
+    .tag-skip { background: #f1f5f9; color: #64748b; }
+
+    .footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .toc a { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; text-decoration: none; background: var(--panel); border: 1px solid var(--line); color: var(--text-2); transition: all .15s; }
+    .toc a:hover { border-color: var(--primary); color: var(--primary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start">
+    <div style="flex:1;min-width:280px">
+      <div class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Godot 4.6 &middot; GDScript &middot; GDExtension (C++) &middot; DeepSeek v4-pro
+      </div>
+      <h1>MetaCampus 2D</h1>
+      <p class="sub">2D 校园 AI 运营模拟游戏 — 架构报告 + GDExtension 覆写迁移方案。68/68 自动化检查通过，5 个迭代 Phase 验收，现规划 C++ 原生扩展路线以提升性能与可维护性。</p>
+    </div>
+    <div style="text-align:center;flex-shrink:0">
+      <svg width="110" height="110" viewBox="0 0 110 110" style="opacity:0.7">
+        <rect x="15" y="50" width="80" height="42" rx="6" fill="none" stroke="#2f6f5e" stroke-width="2.5"/>
+        <rect x="30" y="20" width="24" height="28" rx="4" fill="#2f6f5e" opacity="0.12" stroke="#2f6f5e" stroke-width="1.5"/>
+        <rect x="60" y="32" width="24" height="22" rx="4" fill="#7c3aed" opacity="0.12" stroke="#7c3aed" stroke-width="1.5"/>
+        <rect x="38" y="60" width="18" height="18" rx="4" fill="#10b981" opacity="0.25" stroke="#10b981" stroke-width="2"/>
+        <rect x="62" y="65" width="18" height="18" rx="4" fill="#3b82f6" opacity="0.25" stroke="#3b82f6" stroke-width="2"/>
+        <text x="55" y="102" text-anchor="middle" font-size="9" font-family="Outfit" fill="#7c7a72">GDScript → C++</text>
+      </svg>
+    </div>
+  </div>
+  <div class="phase-summary">
+    <span class="done">G0 概念</span><span class="done">G1 骨架</span><span class="done">G2 闭环</span><span class="done">G2.1 验收</span><span class="done">G3 Bridge</span><span class="done">G4 Polish</span><span class="next">G5 打包</span>
+    <span style="margin-left:12px;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600;background:#f5f3ff;border:1px solid #c4b5fd;color:#5b21b6;">⏭ GDExtension 覆写</span>
+  </div>
+</header>
+
+<!-- ═══ TOC ═══ -->
+<nav class="toc">
+  <a href="#s1">01 架构总览</a><a href="#s2">02 Phase &amp; Benchmark</a><a href="#s3">03 GDScript 模式</a>
+  <a href="#s4">04 数据流 &amp; 桥接</a><a href="#s5">05 指标 &amp; 任务</a><a href="#s6">06 测试管线</a>
+  <a href="#s7">07 GDExtension 选型</a><a href="#s8">08 模块覆写清单</a><a href="#s9">09 迁移计划</a>
+  <a href="#s10">10 构建 &amp; CI</a><a href="#s11">11 代码示例</a><a href="#s12">12 风险 &amp; 验收</a>
+</nav>
+
+<!-- ═══ 01 架构 ═══ -->
+<h2 id="s1"><span class="num">01</span>架构总览 — 五层组件树</h2>
+<div class="card">
+  <div class="grid-arch" style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start;margin-bottom:14px">
+    <span style="font-size:12px;font-weight:700;color:var(--muted);padding:8px 0;text-align:right">UI 层</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">DialogueManager</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">TaskBoard</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">Dashboard</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">QuestToast</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--accent);background:#fef7ed;color:#92400e">VisualFeedback</span></div>
+  </div>
+  <div class="grid-arch" style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start;margin-bottom:14px">
+    <span style="font-size:12px;font-weight:700;color:var(--muted);padding:8px 0;text-align:right">逻辑层<br><small style="font-weight:400">Autoload</small></span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">JsonLoader</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">QuestManager</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--primary);background:#ecfdf5;color:#065f46">MetricManager</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--accent);background:#fef7ed;color:#92400e">ApiClient</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--accent);background:#fef7ed;color:#92400e">TestHarness</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start;margin-bottom:14px">
+    <span style="font-size:12px;font-weight:700;color:var(--muted);padding:8px 0;text-align:right">场景层</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">Player</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">NPC×5</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">CampusMap</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">Main</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start;margin-bottom:14px">
+    <span style="font-size:12px;font-weight:700;color:var(--muted);padding:8px 0;text-align:right">数据层<br><small style="font-weight:400">JSON</small></span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">dialogues</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">quests</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">metrics</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">npcs</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">tools</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">api_config</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;background:var(--bg);border:1px solid var(--line);color:var(--text-2)">mock_knowledge</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start">
+    <span style="font-size:12px;font-weight:700;color:var(--muted);padding:8px 0;text-align:right">工具层<br><small style="font-weight:400">Python</small></span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--blue);background:#eff6ff;color:#1d4ed8">llm_bridge :8788</span><span style="padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;border:1px solid var(--blue);background:#eff6ff;color:#1d4ed8">smoke_g2/g3/g4</span></div>
+  </div>
+</div>
+
+<!-- ═══ 02 Phase Pipeline ═══ -->
+<h2 id="s2"><span class="num">02</span>Phase Pipeline &amp; Benchmark</h2>
+
+<div class="timeline">
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G0 — 概念锁定</h3><p style="margin:0;color:var(--muted);font-size:14px">game-design.md v1.1 · 6 核心指标 · 4 结局 · MVP 范围 · JSON Schema</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅</span></div></div></div>
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G1 — Godot 原型骨架</h3><p style="margin:0;color:var(--muted);font-size:14px">project.godot · Main.tscn · Player 移动 · Camera2D · CampusMap 碰撞 · NPC · DialogueBox</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅</span></div></div></div>
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G2 — 任务闭环</h3><p style="margin:0;color:var(--muted);font-size:14px">DialogueManager · QuestManager · MetricManager · TaskBoard · Dashboard · QuestToast</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅</span></div></div></div>
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G2.1 — 自动化游戏验收</h3><p style="margin:0;color:var(--muted);font-size:14px">TestHarness HTTP :16007 · 18 端点 · smoke_g2.py</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅ 35/35</span></div></div></div>
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G3 — API Bridge</h3><p style="margin:0;color:var(--muted);font-size:14px">ApiClient 三模式 · mock/live/off · 高危词拦截 · fallback</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅ 18/18</span></div></div></div>
+  <div class="step"><div class="step-icon done"></div><div class="card card-sm" style="margin-bottom:0"><h3 style="margin:0 0 4px">G4 — 展示 Polish + LLM 接入</h3><p style="margin:0;color:var(--muted);font-size:14px">NPC 状态图标 · Metric Toast · ColorRect 可视化 · llm_bridge.py DeepSeek</p><div class="phase-summary" style="margin-top:6px"><span class="done">✅ 15/15</span></div></div></div>
+  <div class="step"><div class="step-icon future">5</div><div class="card card-sm" style="margin-bottom:0;opacity:0.8"><h3 style="margin:0 0 4px">G5 — 提交打包</h3><p style="margin:0;color:var(--muted);font-size:14px">视频录制 · 文档打包 · 发布</p><div class="phase-summary" style="margin-top:6px"><span class="next">⏭</span></div></div></div>
+</div>
+
+<div class="card" style="margin-top:20px">
+  <h3 style="margin-top:0"><span class="dot"></span>Smoke Test 总矩阵 — 68/68 全通过</h3>
+  <div class="bench-row"><span class="label">G2 游戏可玩性</span><div class="bar-bg"><div class="bar-fill g" style="width:100%"></div></div><span class="val">35/35</span></div>
+  <div class="bench-row"><span class="label">G3 API Bridge</span><div class="bar-bg"><div class="bar-fill b" style="width:100%"></div></div><span class="val">18/18</span></div>
+  <div class="bench-row"><span class="label">G4 展示 Polish</span><div class="bar-bg"><div class="bar-fill a" style="width:100%"></div></div><span class="val">15/15</span></div>
+  <div style="text-align:center;margin-top:10px;font-weight:700;font-size:18px;color:var(--primary)">总计 68/68 · 100% 通过率</div>
+</div>
+
+<!-- ═══ 03 GDScript 模式 ═══ -->
+<h2 id="s3"><span class="num">03</span>GDScript 架构模式</h2>
+<div class="grid-2">
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>Autoload 单例</h3><pre>; project.godot [autoload]
+JsonLoader="*res://scripts/json_loader.gd"
+QuestManager="*res://scripts/quest_manager.gd"
+MetricManager="*res://scripts/metric_manager.gd"</pre></div>
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>Group 发现</h3><pre>func _ready():
+    add_to_group("quest_manager")
+var qm = get_tree()\
+  .get_first_node_in_group("quest_manager")</pre></div>
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>Signal 解耦</h3><pre>quest_completed.emit(quest_data)
+quest_manager.quest_completed\
+  .connect(_on_quest_completed)</pre></div>
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>TCP 内联 HTTP</h3><pre>server = TCPServer.new()
+server.listen(16007, "127.0.0.1")
+if server.is_connection_available():
+    _handle_connection(server.take_connection())</pre></div>
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>Fire-and-forget</h3><pre>Input.action_press("move_up")
+get_tree().create_timer(0.12)\
+  .timeout.connect(func(): Input.action_release("move_up"))</pre></div>
+  <div class="card"><h3 style="margin-top:0"><span class="dot"></span>Mock/Live 双模式</h3><pre>match config.get("mode", "mock"):
+    "live":  _ask_knowledge_live(query, cb)
+    "mock":  _ask_knowledge_mock(query)</pre></div>
+</div>
+
+<!-- ═══ 04 数据流 ═══ -->
+<h2 id="s4"><span class="num">04</span>数据流 &amp; 双桥接</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0"><span class="dot"></span>游戏内数据流</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 0">
+      <span style="padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#ecfdf5;color:#065f46">E键</span><span style="color:var(--muted)">→</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#eff6ff;color:#1d4ed8">NPC.interact()</span><span style="color:var(--muted)">→</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#fef7ed;color:#92400e">show_dialogue()</span><span style="color:var(--muted)">→</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#fce7f3;color:#9d174d">choice→metric_effects</span><span style="color:var(--muted)">→</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#ecfdf5;color:#065f46">MetricManager</span>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0"><span class="dot"></span>双桥接端口</h3>
+    <table style="width:100%;font-size:12px"><tr><td style="font-weight:600;padding:4px;color:var(--primary)">:16007</td><td style="padding:4px">TestHarness · Godot TCPServer · 游戏操控 API</td></tr><tr><td style="font-weight:600;padding:4px;color:var(--purple)">:8788</td><td style="padding:4px">LLM Bridge · Python http.server · DeepSeek 对话</td></tr></table>
+  </div>
+</div>
+
+<!-- ═══ 05 指标 ═══ -->
+<h2 id="s5"><span class="num">05</span>核心指标 &amp; 任务闭环保真</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0"><span class="dot"></span>4 核心指标</h3>
+    <table class="data"><tr><th>指标</th><th>初始</th><th>警告</th></tr>
+    <tr><td>学校效率 school_efficiency</td><td>40</td><td style="color:var(--red)">&lt;30</td></tr>
+    <tr><td>家长信任 parent_trust</td><td>50</td><td style="color:var(--red)">&lt;30</td></tr>
+    <tr><td>合规安全 compliance_safety</td><td>70</td><td style="color:var(--red)">&lt;40</td></tr>
+    <tr><td>系统稳定 system_stability</td><td>60</td><td style="color:var(--red)">&lt;40</td></tr></table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0"><span class="dot"></span>8 MVP 任务</h3>
+    <table class="data"><tr><th>ID</th><th>任务</th><th>关键效果</th></tr>
+    <tr><td style="font-weight:700">T1</td><td>回答报名材料</td><td style="color:var(--green)">trust +8 · compliance +5</td></tr>
+    <tr><td style="font-weight:700">T2</td><td>拦截保证录取</td><td style="color:var(--red)">错误: -20</td></tr>
+    <tr><td style="font-weight:700">T3</td><td>材料催办</td><td style="color:var(--green)">efficiency +8</td></tr>
+    <tr><td>T4-T8</td><td>请假/订餐/报修/驾驶舱/Canary</td><td style="color:var(--blue)">5 项指标联动</td></tr></table>
+  </div>
+</div>
+
+<!-- ═══ 06 测试管线 ═══ -->
+<h2 id="s6"><span class="num">06</span>自动化测试管线</h2>
+<div class="card">
+<pre>python3 tools/smoke_g2.py   # 35 checks — 游戏可玩性 (L1 健康 · L2 操控 · L3 任务 · L4 UI)
+python3 tools/smoke_g3.py   # 18 checks — API Bridge (mock/live/off · high-risk guard · fallback)
+python3 tools/smoke_g4.py   # 15 checks — 展示 Polish (NPC icon · toast · warning · demo-reset)</pre>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- ═══ 07 GDExtension 选型 ═══ -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<h2 id="s7"><span class="num alt">07</span>GDExtension 技术选型</h2>
+
+<div style="background:#f5f3ff;border:1px solid #c4b5fd;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:14px;color:#5b21b6;font-weight:500">
+  <strong>评估结论：有条件通过，一期范围已收敛。</strong> 原方案覆盖 6 模块 17 人日偏激进。按评估反馈调整为「构建链 PoC + 一个性能热点模块（寻路）」，前置性能基准作为迁移准入条件。对话/任务/MetricManager/TestHarness 不纳入一期。
+</div>
+
+<div class="card card-purple">
+  <h3 style="margin-top:0"><span class="dot alt"></span>方案对比</h3>
+  <table class="data">
+    <tr><th>方案</th><th>语言</th><th>性能</th><th>跨平台</th><th>推荐</th></tr>
+    <tr>
+      <td style="font-weight:700;color:var(--purple)">GDExtension (C++)</td>
+      <td>C++</td>
+      <td>最高，3–5× 加速【15†L27-L29】；直接访问引擎底层</td>
+      <td>Win/Mac/Linux 编译动态库，无需 .NET 运行时</td>
+      <td><span class="tag tag-rec">✅ 推荐</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">GDNative (C++)</td>
+      <td>C++</td>
+      <td>类似</td>
+      <td>仅 Godot 3.x，Godot 4 不兼容【23†L58-L60】</td>
+      <td><span class="tag tag-skip">❌ 废弃</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">Godot C# (Mono)</td>
+      <td>C#</td>
+      <td>开发效率高，但与引擎交互有编组开销【21†L5960-L5964】</td>
+      <td>仅桌面平台【26†L8308-L8311】，需附带 Mono 运行时</td>
+      <td><span class="tag tag-opt">⚠ 备选</span></td>
+    </tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted);margin:10px 0 0">结论：GDExtension (C++) 是唯一符合性能目标和跨平台要求的方案。GDNative 已被 Godot 4 废弃，C# 受限于桌面平台导出和额外运行时体积。</p>
+</div>
+
+<div class="card card-purple">
+  <h3 style="margin-top:0"><span class="dot alt"></span>GDExtension 工作原理</h3>
+  <p style="font-size:13px;color:var(--muted)">GDExtension 以动态库 (.dll/.dylib/.so) 形式加载，通过 <code>godot-cpp</code> 绑定层与引擎交互，无需重新编译 Godot 源码【23†L39-L46】【10†L8072-L8073】。每个扩展在 <code>.gdextension</code> 配置文件中声明入口符号，引擎启动时自动加载。</p>
+  <pre>; example.gdextension
+[configuration]
+entry_symbol = "example_library_init"
+compatibility_minimum = "4.3"
+
+[libraries]
+macos.debug = "res://bin/libexample.macos.debug.dylib"
+windows.debug = "res://bin/libexample.windows.debug.dll"
+linux.debug = "res://bin/libexample.linux.debug.so"</pre>
+</div>
+
+<!-- ═══ 08 模块覆写清单 ═══ -->
+<h2 id="s8"><span class="num alt">08</span>模块覆写清单（评估反馈后调整）</h2>
+
+<div class="card card-purple">
+  <h3 style="margin-top:0"><span class="dot alt"></span>一期：P0–P1（必做）</h3>
+  <table class="data">
+    <tr><th>优先级</th><th>模块</th><th>重写目标</th><th>语言</th><th>人日</th><th>入选理由</th></tr>
+    <tr>
+      <td><span class="tag tag-rec">P0</span></td>
+      <td style="font-weight:700">GDExtension PoC + 构建链</td>
+      <td>可编译、可加载、可导出的最小扩展</td>
+      <td>C++</td>
+      <td>3–5</td>
+      <td>先证明工程链路可用。不完成这一步，所有后续迁移无基础。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-rec">P1</span></td>
+      <td style="font-weight:700">性能基准框架</td>
+      <td>NPC 数量/FPS/P95 耗时/API 延迟/Smoke 耗时基线</td>
+      <td>GDScript + Python</td>
+      <td>2–3</td>
+      <td>迁移准入条件。没有基线数据，无法判断优化是否有效。必须前置。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-rec">P1</span></td>
+      <td style="font-weight:700">寻路系统</td>
+      <td>A* / NavMesh 路径计算<br><small>NativePathfinder 类</small></td>
+      <td>C++</td>
+      <td>5–7</td>
+      <td>最适合 C++ 的模块：边界清晰、计算密集、收益量化。多 NPC 大地图场景下 P95 帧耗时预期下降 ≥30%。</td>
+    </tr>
+  </table>
+
+  <h3 style="margin-top:22px"><span class="dot alt"></span>暂缓 / 不建议一期迁移</h3>
+  <table class="data">
+    <tr><th>优先级</th><th>模块</th><th>原计划</th><th>不优先的原因</th></tr>
+    <tr>
+      <td><span class="tag tag-opt">P2</span></td>
+      <td style="font-weight:700">数据解析 / 批量规则计算</td>
+      <td>指标累加 + 存储优化 (1d)</td>
+      <td>收益太小。保留 GDScript 即可。若有大批量规则计算需求可再评估。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-opt">P3</span></td>
+      <td style="font-weight:700">ApiClient 网络层</td>
+      <td>HTTP + JSON + 高危拦截 (4d)</td>
+      <td>端到端延迟瓶颈在网络和 LLM 推理，不在 GDScript。优先做超时/缓存/队列优化。暂不做 C++ 覆写。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-skip">P4</span></td>
+      <td style="font-weight:700">对话/任务核心逻辑</td>
+      <td>DialogueManager + QuestManager (3d)</td>
+      <td>高变动业务逻辑，性能瓶颈不在语言。C++ 化会削弱 JSON 数据驱动优势和非程序人员可调性。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-skip">P4</span></td>
+      <td style="font-weight:700">MetricManager</td>
+      <td>指标累加 (1d)</td>
+      <td>收益极小，保留 GDScript。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-skip">P4</span></td>
+      <td style="font-weight:700">TestHarness HTTP</td>
+      <td>内部 HTTP 控制逻辑 (2d)</td>
+      <td>测试工具追求稳定而非性能。迁移风险 > 收益。</td>
+    </tr>
+  </table>
+  <p style="font-size:12px;color:var(--muted);margin-top:8px">一期总人日：PoC (3–5) + 性能基准 (2–3) + 寻路 (5–7) = <strong>10–15 人日</strong>（含三平台 Linux + macOS 验证，Windows 二期验收）</p>
+</div>
+
+<!-- ═══ 09 迁移计划 ═══ -->
+<h2 id="s9"><span class="num alt">09</span>迁移计划 &amp; 甘特图（收敛后）</h2>
+
+<div class="card card-purple">
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+gantt
+    dateFormat  YYYY-MM-DD
+    title       MetaCampus GDExtension 迁移计划（收敛后）
+    section 前置：性能基准
+    采集 NPC/FPS/P95/API 基线   :crit, 2026-06-01, 3d
+    基准报告 + 准入判定          :crit, 2026-06-04, 1d
+    section PoC
+    编译环境验证                 :done, 2026-06-05, 1d
+    样例扩展开发 + .gdextension  :2026-06-06, 4d
+    section 一期：寻路模块
+    NativePathfinder 实现        :2026-06-10, 7d
+    native_enabled flag 集成      :2026-06-10, 5d
+    section 集成测试
+    功能一致性验证 + Smoke 回归  :2026-06-17, 3d
+    性能对比：P95 ≥30% 改善      :2026-06-17, 3d
+    section CI/CD
+    CI 脚本 + 双平台动态库产出   :2026-06-20, 3d
+    文档 (Runbook · 接口说明)    :2026-06-20, 2d
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-top:12px">
+    <div class="card card-sm"><strong>交付物</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">性能基准报告 · metacampus_native.gdextension · NativePathfinder C++ 源码 · Linux+macOS 动态库</p></div>
+    <div class="card card-sm"><strong>准入条件</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">性能基准数据已采集；PoC 可编译加载；Smoke 68/68 通过；P95 帧耗时下降 ≥30% 方可合并</p></div>
+    <div class="card card-sm"><strong>回滚</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">关闭 native_enabled flag → 完整回退 GDScript；Smoke 基线不受影响</p></div>
+  </div>
+</div>
+
+<!-- ═══ 10 构建与 CI ═══ -->
+<h2 id="s10"><span class="num alt">10</span>构建部署 &amp; CI/CD</h2>
+
+<div class="grid-2">
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>构建链</h3>
+    <ul style="font-size:13px;color:var(--text-2);padding-left:18px">
+      <li>使用 <code>godot-cpp</code> 官方绑定库【10†L8078-L8083】</li>
+      <li>SCons: <code style="font-size:12px">scons platform=macos target=release</code></li>
+      <li>CMake 备选方案</li>
+      <li>三平台编译: .dll / .dylib / .so</li>
+      <li><code>.gdextension</code> 配置文件声明入口符号</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>导出打包</h3>
+    <ul style="font-size:13px;color:var(--text-2);padding-left:18px">
+      <li>GDExtension 仅需附带动态库文件</li>
+      <li>无需 .NET/Mono 运行时</li>
+      <li>TestHarness + smoke 脚本保持 JSON 接口兼容</li>
+      <li>CI 中通过命令行启动 Godot 加载扩展后运行 smoke</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-purple" style="margin-top:16px">
+  <h3 style="margin-top:0"><span class="dot alt"></span>GitHub Actions CI 配置</h3>
+<pre>name: Build and Test GDExtension
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install deps
+        run: sudo apt-get update && sudo apt-get install -y scons build-essential git python3
+      - name: Build C++ bindings
+        run: cd godot-cpp && scons platform=linux target=release
+      - name: Build GDExtension
+        run: cd src && scons
+      - name: Run Smoke Tests
+        run: |
+          python3 tools/smoke_g2.py
+          python3 tools/smoke_g3.py
+          python3 tools/smoke_g4.py</pre>
+</div>
+
+<!-- ═══ 11 代码示例 ═══ -->
+<h2 id="s11"><span class="num alt">11</span>代码示例</h2>
+
+<div class="grid-2">
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>GDExtension (C++)</h3>
+<pre>#include &lt;godot_cpp/classes/node.hpp&gt;
+using namespace godot;
+
+class MyNode : public Node {
+    GDCLASS(MyNode, Node);
+public:
+    void _ready() { Godot::print("Hello from C++!"); }
+    static void _bind_methods() {
+        ClassDB::bind_method(D_METHOD("set_position", "pos"), &MyNode::set_position);
+    }
+    void set_position(const Vector2 &pos) { /* ... */ }
+};
+
+extern "C" GDNativeBool GDN_EXPORT
+example_library_init(const GDNativeInterface *iface,
+    const GDNativeExtensionClassLibraryPtr lib,
+    GDNativeInitialization *init) {
+    GDExtensionBinding::InitObject init_obj(iface, lib, init);
+    init_obj.register_class&lt;MyNode&gt;();
+    return init_obj.init();
+}</pre>
+  </div>
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>C# (备选)</h3>
+<pre>using Godot;
+public partial class YourClass : Node
+{
+    private int _counter = 0;
+    public override void _Ready()
+    {
+        GD.Print("Hello from C#!");
+    }
+    public override void _Process(double delta)
+    {
+        _counter++;
+        if (_counter % 60 == 0)
+            GD.Print("Frames: ", _counter);
+    }
+}</pre>
+  </div>
+</div>
+
+<!-- ═══ 12 风险与验收 ═══ -->
+<h2 id="s12"><span class="num alt">12</span>风险评估 &amp; 验收清单</h2>
+
+<div class="grid-2">
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>风险与缓解</h3>
+    <table class="data">
+      <tr><td style="font-weight:600">学习曲线</td><td>团队从 GDScript → C++。缓解：分步 PoC，保留 GDScript 基线</td></tr>
+      <tr><td style="font-weight:600">构建复杂度</td><td>多平台 SCons/CMake。缓解：标准化 CI，Docker/VM 模拟多平台</td></tr>
+      <tr><td style="font-weight:600">兼容性</td><td>Godot 版本升级。缓解：锁定 4.x，利用接口版本哈希【15†L64-L70】</td></tr>
+      <tr><td style="font-weight:600">调试难度</td><td>C++ 崩溃不如脚本直观。缓解：GDB/VS 连接编辑器，充足日志</td></tr>
+      <tr><td style="font-weight:600">回归风险</td><td>逻辑差异。缓解：全量 Smoke 测试 + 单元测试对比算法输出</td></tr>
+    </table>
+  </div>
+  <div class="card card-purple">
+    <h3 style="margin-top:0"><span class="dot alt"></span>量化验收清单</h3>
+    <table class="data">
+      <tr><th>类别</th><th>验收标准</th><th>硬门槛</th><th>状态</th></tr>
+      <tr>
+        <td style="font-weight:600">功能一致性</td>
+        <td>GDScript 与 C++ 同一输入下输出一致，核心用例 100% 通过</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--amber)">待验证</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">Smoke 回归</td>
+        <td>g2/g3/g4 仍为 68/68，不因 native flag 开关变化</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--green);font-weight:600">✅ GDScript 基线已通过</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">性能收益</td>
+        <td>目标模块 P95 帧耗时下降 ≥30%，否则不合并</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--amber)">待基准测试</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">稳定性</td>
+        <td>连续运行 30 分钟无崩溃、无内存持续增长</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--amber)">待验证</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">构建产出</td>
+        <td>CI 产出对应平台动态库 (.dylib/.so)，并能被 Godot 工程加载</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--amber)">待验证</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">回滚</td>
+        <td>关闭 native_enabled flag 后可完整回退到 GDScript 实现</td>
+        <td style="color:var(--red);font-weight:600">是</td>
+        <td style="color:var(--amber)">待验证</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600">可维护性</td>
+        <td>C++ API 文档、绑定说明、错误码、日志规范齐全</td>
+        <td style="color:var(--amber)">否</td>
+        <td style="color:var(--amber)">待完善</td>
+      </tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px">性能基准必须前置采集：NPC 数量增长下的 FPS（10/50/100/300 NPC）、寻路计算 P95/P99 耗时、主线程 frame spike 频率、API 调用端到端延迟（mock/live/fallback 分别统计）、JSON 冷/热加载耗时、Smoke 测试耗时。无基线数据不做迁移。</p>
+  </div>
+</div>
+
+<div class="card card-purple" style="margin-top:16px">
+  <h3 style="margin-top:0"><span class="dot alt"></span>迁移后维护建议</h3>
+  <div class="grid-3">
+    <div class="card card-sm" style="margin:0"><strong>代码所有权</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">AGENTS.md 记录维护者与跨语言接口约定</p></div>
+    <div class="card card-sm" style="margin:0"><strong>文档</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">每个模块附带功能/接口/依赖说明；README 含构建运行步骤</p></div>
+    <div class="card card-sm" style="margin:0"><strong>测试覆盖</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Smoke 100% + 模块级单元测试；CI 全量回归</p></div>
+  </div>
+  <div class="grid-2" style="margin-top:12px">
+    <div class="card card-sm" style="margin:0"><strong>性能基准</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Godot Profiler 对比优化前后帧率/延迟；设定回归阈值</p></div>
+    <div class="card card-sm" style="margin:0"><strong>监控与回归</strong><p style="margin:4px 0 0;font-size:12px;color:var(--muted)">崩溃监控 + 日志收集；发布前测试环境全量回归</p></div>
+  </div>
+</div>
+
+<!-- ═══ References ═══ -->
+<h2><span class="num">R</span>参考资料</h2>
+<div class="card">
+  <ul style="font-size:13px;color:var(--text-2);padding-left:18px;margin:0">
+    <li><strong>Godot 官方博客</strong>：Introducing GDNative's successor, GDExtension【23†L39-L46】【23†L58-L60】</li>
+    <li><strong>Godot 文档</strong>：GDExtension C++ 示例【10†L8072-L8073】；C# 基础与性能基准【21†L5960-L5964】；C# 平台支持【26†L8308-L8311】</li>
+    <li><strong>社区文章</strong>：Godot Engine GDExtension — 技术落地与生态构建指南【15†L27-L29】</li>
+    <li><strong>Godot 4.3 文档</strong>：C# 支持平台说明【26†L8308-L8310】</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>MetaCampus 2D &middot; Godot 4.6 &middot; GDScript → C++ GDExtension &middot; DeepSeek v4-pro &middot; 68/68 Smoke Checks &middot; 生成于 2026-05-28</p>
+</div>
+
+</div>
+
+<script>mermaid.initialize({startOnLoad:true,theme:'neutral',gantt:{barHeight:22,barGap:6}});</script>
+</body>
+</html>

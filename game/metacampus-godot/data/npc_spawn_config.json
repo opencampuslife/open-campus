@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "description": "NPC spawn positions for CampusMap scene. 8 NPCs from data/npcs/*.json.",
+  "spawns": [
+    {
+      "npc_id": "principal",
+      "display_name": "唐毓",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [1120, 64],
+      "location": "principal_office"
+    },
+    {
+      "npc_id": "admissions_director",
+      "display_name": "周明远",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [560, 288],
+      "location": "admission_office"
+    },
+    {
+      "npc_id": "student_representative",
+      "display_name": "沈一诺",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [560, 448],
+      "location": "classroom"
+    },
+    {
+      "npc_id": "parent_representative",
+      "display_name": "家长代表",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [480, 288],
+      "location": "reception_area"
+    },
+    {
+      "npc_id": "logistics_manager",
+      "display_name": "后勤主管",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [192, 544],
+      "location": "canteen"
+    },
+    {
+      "npc_id": "homeroom_teacher",
+      "display_name": "班主任",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [640, 288],
+      "location": "teacher_lounge"
+    },
+    {
+      "npc_id": "it_operator",
+      "display_name": "IT运维",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [960, 160],
+      "location": "it_room"
+    },
+    {
+      "npc_id": "compliance_officer",
+      "display_name": "林澈",
+      "scene_path": "res://scenes/NPC.tscn",
+      "spawn_position": [800, 192],
+      "location": "compliance_office"
+    }
+  ]
+}

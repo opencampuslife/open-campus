@@ -1,0 +1,79 @@
+{
+  "report_type": "api-latency-breakdown",
+  "generated_at": "2026-05-28 15:55:55",
+  "environment": {
+    "platform": "macOS (Apple Silicon)",
+    "godot": "4.6.3.stable",
+    "renderer": "headless (SceneTree)",
+    "capture_script": "tools/api_latency_capture.gd",
+    "samples_per_mode": 30
+  },
+  "modes": {
+    "mock": {
+      "samples": 30,
+      "failures": 4,
+      "min_ms": 0.01,
+      "avg_ms": 0.01,
+      "median_ms": 0.01,
+      "p95_ms": 0.03,
+      "p99_ms": 0.04,
+      "max_ms": 0.04,
+      "error_rate": 0.1333,
+      "main_bottleneck": "api_client internal routing (GDScript)"
+    },
+    "off": {
+      "samples": 29,
+      "failures": 4,
+      "min_ms": 0.01,
+      "avg_ms": 0.01,
+      "median_ms": 0.01,
+      "p95_ms": 0.04,
+      "p99_ms": 0.06,
+      "max_ms": 0.06,
+      "error_rate": 0.1379,
+      "main_bottleneck": "api_client internal routing (GDScript)"
+    },
+    "live": {
+      "samples": 30,
+      "failures": 4,
+      "min_ms": 0.01,
+      "avg_ms": 4902.92,
+      "median_ms": 4890.73,
+      "p95_ms": 9165.66,
+      "p99_ms": 13349.79,
+      "max_ms": 13349.79,
+      "error_rate": 0.1333,
+      "main_bottleneck": "LLM provider API round-trip",
+      "breakdown": {
+        "avg_total_us": 4902921.4,
+        "avg_total_ms": 4902.92,
+        "serialize_pct": 0.0,
+        "send_pct": 0.0,
+        "http_provider_pct": 100.0,
+        "parse_pct": 0.0,
+        "callback_pct": 0.0
+      }
+    },
+    "fallback": {
+      "samples": 30,
+      "failures": 30,
+      "min_ms": 0.01,
+      "avg_ms": 11.55,
+      "median_ms": 13.8,
+      "p95_ms": 14.3,
+      "p99_ms": 14.64,
+      "max_ms": 14.64,
+      "error_rate": 1.0,
+      "main_bottleneck": "HTTP timeout waiting for LLM Bridge",
+      "breakdown": {
+        "avg_total_us": 11551.8,
+        "avg_total_ms": 11.55,
+        "serialize_pct": 0.1,
+        "send_pct": 0.9,
+        "http_provider_pct": 99.0,
+        "parse_pct": 0.0,
+        "callback_pct": 0.0
+      }
+    }
+  }
+}

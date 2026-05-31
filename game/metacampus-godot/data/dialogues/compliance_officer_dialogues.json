@@ -1,0 +1,51 @@
+{
+  "npc_id": "compliance_officer",
+  "npc_name": "林澈",
+  "dialogues": [
+    {
+      "id": "compliance_officer_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_admission_002",
+      "speaker": "林澈",
+      "text": "我是林澈，学校合规专员。AI系统在招生场景的回答记录我会逐条审查。按照《招生合规手册》第三条规定，任何暗示'保证录取'的表述都属于严重违规。你的每一句回答，都要经得起政策检验。现在，先看看最近的对话记录吧。",
+      "choices": [
+        {
+          "text": "逐条审查AI对话记录，标记可疑内容",
+          "action": "review_records",
+          "metric_effects": {"compliance_safety": 12, "school_efficiency": 10},
+          "next_line": -1,
+          "complete_quest": "q_admission_002"
+        },
+        {
+          "text": "快速跳过审核（赶时间）",
+          "action": "skip_review",
+          "metric_effects": {"compliance_safety": -15},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "compliance_officer_high_risk_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "林澈",
+      "text": "系统告警——刚刚检测到一段高风险对话。家长在追问'录取概率'，并表示'找了关系'。按照第12条规定，这种谈话必须立即拦截并转入人工处理。你的选择是？",
+      "choices": [
+        {
+          "text": "立即拦截对话，转人工处理，并标注合规风险",
+          "action": "safe_intercept",
+          "metric_effects": {"compliance_safety": 15, "school_efficiency": 10},
+          "next_line": -1,
+          "complete_quest": "q_admission_002"
+        },
+        {
+          "text": "觉得问题不大，放过去算了（合规事故）",
+          "action": "let_slide",
+          "metric_effects": {"compliance_safety": -20, "parent_trust": 10},
+          "next_line": -1,
+          "fail_quest": "q_admission_002"
+        }
+      ]
+    }
+  ]
+}

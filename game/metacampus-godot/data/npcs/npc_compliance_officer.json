@@ -1,0 +1,38 @@
+{
+  "npc_id": "compliance_officer",
+  "display_name": "林澈",
+  "en_name": "Lin Che",
+  "role": "合规专员",
+  "department": "合规办公室",
+  "location": "compliance_office",
+  "personality": ["敏锐警觉", "法条至上"],
+  "core_conflict": "AI系统越来越强大，能回答的问题越来越多——但合规红线不能碰。他必须确保每一个回答都经得起政策检验，哪怕这意味着AI看起来'不够智能'。",
+  "player_relationship": "你是他的合规搭档。他会在高风险对话出现时与你协作拦截，发现你正确拒绝回答敏感问题时会在后台默默点头。如果你越界做了录取承诺，他会立刻标记并上报。",
+  "primary_metric": "compliance_safety",
+  "quest_ids": ["q_admission_002"],
+  "visual_keywords": ["白色衬衫", "黑框眼镜", "手边放着《招生合规手册》", "显示屏上实时监控AI对话记录"],
+  "voice_tone": "冷静克制，措辞精准。偶尔会打断过于激情的发言，用'按照第X条规定……'开头纠正方向。",
+  "forbidden_behavior": "纵容任何形式的录取承诺，或在合规审查中睁一只眼闭一只眼",
+  "metric_effects": {
+    "on_quest_complete": {
+      "compliance_safety": 10,
+      "parent_trust": 6
+    },
+    "on_fail": {
+      "compliance_safety": -20,
+      "parent_trust": 2
+    }
+  },
+  "trust_level": 3,
+  "risk_tolerance": 2,
+  "favorite_topics": ["主动拦截风险", "留存审计证据", "合规审查"],
+  "disliked_actions": ["越界回答", "忽略合规审查", "数据泄露"],
+  "schedule_id": "compliance_officer",
+  "relationship_events": [
+    {"trust_required": 2, "title": "识别招生违规承诺", "description": "林澈教你识别高风险回答"},
+    {"trust_required": 4, "title": "处理隐私泄露", "description": "共同处理数据隐私事件"},
+    {"trust_required": 6, "title": "完成内部审计", "description": "协助完成合规审计任务"},
+    {"trust_required": 8, "title": "建立合规模板", "description": "共同建立合规评估体系"},
+    {"trust_required": 10, "title": "AI治理检查", "description": "通过AI治理合规检查"}
+  ]
+}

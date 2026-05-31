@@ -1,0 +1,12 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "smoke-p1b",
+      "verdict": "accept",
+      "reason": "Smoke 回归——cache disabled 68/68 + cache enabled 68/68，零回归。"
+    }
+  ],
+  "next_cycle": [],
+  "plan_complete": true,
+  "message_to_user": "P1B API Resilience Layer 全部完成！缓存+超时+队列已上线，68/68 双状态验证通过。"
+}

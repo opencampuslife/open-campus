@@ -1,0 +1,320 @@
+version: 1
+plan:
+  name: 'N2D Runtime Polish & Debt Cleanup'
+  max_concurrency: 10
+  max_consecutive_failures: 3
+  max_cycles: 20
+  auto_reject_retries: 2
+tasks:
+  - id: td-border
+    title: 'TD-1：PNG border 透明率检测脚本 + principal/parent_representative 修复'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Write a Python script `tools/validate_npc_png_borders.py` that:
+      1. Scans all 88 NPC PNGs in assets/npcs/<npc_id>/baseline/ (8 NPCs × 11 files each)
+      2. For each PNG, reads the outermost border ring pixels (top row, bottom row, left col, right col)
+      3. Reports the count and ratio of opaque vs transparent border pixels per file and per NPC
+      4. Fails if any border pixel is fully opaque (alpha=255) — that means the asset has a solid background
+
+      Run the script and capture output. Determine for principal and parent_representative:
+      - Is the opaque border intentional (e.g., they have a solid-color background as part of the design)?
+      - Or is it a defect that needs regeneration?
+
+      If defect: use the existing matrix_generate_image pipeline to regenerate just portrait_neutral.png for
+      those two NPCs, making sure the output has transparent background (RGBA PNG with alpha=0 on border).
+
+      Deliverables:
+      - tools/validate_npc_png_borders.py (validated, runnable)
+      - reports/n2d-td-border-cleanup.md (findings, actions taken, before/after border stats)
+
+      IMPORTANT: Do NOT use PIL/Pillow. Use standard Python libraries (struct, zlib, etc.)
+      as per existing tools/ smoke scripts.
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently: Run python3 tools/validate_npc_png_borders.py and confirm:
+      1. Script produces correct output for all 88 PNGs
+      2. Border alpha stats match the N2C report (principal/parent_representative 0% transparent)
+      3. If regenerated PNGs exist: read them with struct check — correct dimensions, RGBA mode, border alpha is not 100% opaque
+      4. Report file covers all findings
+      Do NOT re-read the producer's deliverable.md. Re-run the script yourself.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: td-headless
+    title: 'TD-2：Godot headless 环境安装或 blocker 记录'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Evaluate Godot headless availability and either install it or document the blocker.
+
+      Steps:
+      1. Check if Godot is installed: `which godot` or `which godot4` or check common install paths.
+      2. If not found: try installing via brew (`brew install godot`) or download from godotengine.org.
+         If Godot requires a GUI install and cannot be installed headless on this macOS, document that.
+      3. Try running `godot --headless --version` or `godot4 --headless --version`.
+      4. If Godot runs: try running the existing test scene:
+         `godot --headless --path /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot`
+      5. If Godot cannot be installed (GUI-only, no brew formula, etc.): write a clear blocker doc.
+
+      Deliverable:
+      - reports/n2d-td-headless.md containing:
+        * Installation status (installed / not installed)
+        * If installed: Godot version, headless smoke result
+        * If not installed: exact blocker description, what would be needed
+        * Recommendation for CI or local setup
+    assigned_to: godot-developer
+    verified_by: verifier
+    verify_prompt: >
+      Independent check: run the commands from the report yourself and confirm:
+      1. Godot is or isn't installed (match producer's finding)
+      2. If installed: run `godot --headless --version` and confirm version matches report
+      3. If not: confirm the blocker description is accurate (check brew, download page, etc.)
+      4. Report is honest about the outcome, not optimistic
+    timeout_ms: 1800000
+    max_retries: 1
+
+  - id: td-triggerquest
+    title: 'TD-3：清理空字符串 trigger_quest'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Clean up empty string trigger_quest fields in dialogue JSON files.
+
+      Steps:
+      1. Search all 8 dialogue files in data/dialogues/ for entries with `"trigger_quest": ""`.
+      2. For each match, read 3 lines of context (the surrounding dialogue entry) to understand the entry.
+      3. Replace the empty string `""` with `null` (JSON null) — do NOT remove the field entirely.
+         Use the Edit tool to make surgical changes, or use Python json manipulation.
+      4. After changes: validate that each dialogue file is still valid JSON.
+      5. Run the existing smoke test: `python3 tools/smoke_npc_dialogues.py` and confirm all checks pass.
+      6. Check dialogue_manager.gd for how it reads trigger_quest — does it handle null gracefully?
+
+      Key insight from context: dialogue_manager.gd reads trigger_quest via `line_data.get("trigger_quest", "")`
+      meaning null will be treated as empty string by default. No runtime crash expected, but the cleanup
+      makes the data schema consistent (no empty string vs null ambiguity).
+
+      Deliverable:
+      - Modified dialogue files (only the trigger_quest changes, nothing else)
+      - reports/n2d-td-triggerquest.md with:
+        * List of all changed entries
+        * Confirmation that smoke_npc_dialogues.py passes
+        * Assessment of dialogue_manager.gd null handling
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. Search data/dialogues/ for remaining `"trigger_quest": ""` entries — should be zero
+      2. Confirm all dialogue JSON files are valid: python3 -c "import json; json.load(open('data/dialogues/admissions_director_dialogues.json'))" for each file
+      3. Run python3 tools/smoke_npc_dialogues.py and confirm all checks pass
+      4. Read dialogue_manager.gd's handling of trigger_quest — confirm null is safe
+      5. Do NOT re-read producer's deliverable.md for pass/fail judgment
+      Do NOT re-read the producer's deliverable.md. Re-run commands yourself.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: display-polish
+    title: 'N2D-2：运行时显示 Polish'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Verify and polish runtime display for all 8 NPCs.
+
+      Steps:
+      1. Read npc_factory.gd and npc_sprite_loader.gd to understand asset path resolution.
+      2. Verify all 8 NPCs have correct asset paths:
+         - For each npc_id, confirm baseline/sprite_idle.png exists
+         - For each npc_id, confirm animation_spec.json exists and parseable
+         - For each npc_id, confirm portrait files exist (neutral, happy, worried, strict)
+      3. Check npc_spawn_config.json for:
+         - All 8 NPCs present
+         - Spawn positions don't overlap (check x/z coordinates)
+         - No spawn points inside collision bounds
+      4. Check the default pose: confirm each NPC loads idle animation by default
+      5. Add fallback: if a portrait or sprite file is missing, the system should not crash.
+         Read npc_sprite_loader.gd and npc_factory.gd to see current fallback behavior.
+         If missing: add a comment documenting the expected fallback path.
+      6. Read data/npc_spawn_config.json for the spawn positions.
+
+      Read these files for context:
+      - scripts/npc_factory.gd
+      - scripts/npc_sprite_loader.gd
+      - scripts/npc_registry.gd
+      - scripts/dialogue_manager.gd
+      - scenes/CampusMap.tscn
+      - data/npc_spawn_config.json
+      - data/npc_assets_manifest.json
+      - data/npcs/*.json (profile files for quest_ids)
+
+      Deliverable:
+      - reports/n2d-runtime-display-polish.md containing:
+        * 8/8 NPC asset path verification results
+        * Spawn config review (positions, no overlaps)
+        * Default pose confirmation
+        * Fallback assessment (crash-safe or not)
+        * Any config changes needed (write them as code changes)
+      - Any modified config files (if fixes needed)
+    assigned_to: godot-developer
+    depends_on: [td-border, td-triggerquest]
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. assets/npcs/<npc_id>/baseline/sprite_idle.png — confirm all 8 exist and are valid PNGs
+      2. data/npc_spawn_config.json has all 8 NPCs with valid positions
+      3. Run an offline Python check: for each NPC, construct expected paths and confirm they exist
+      4. Read npc_factory.gd fallback logic — does a missing sprite crash?
+      5. Do NOT re-read producer's deliverable.md. Re-check source files.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: interaction-smoke
+    title: 'N2D-3：交互 Smoke 测试脚本'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Write a Python offline smoke test that validates the NPC interaction chain:
+      Player near NPC → interact → DialogueManager opens dialogue → choice selected → QuestManager updates → MetricManager applies effects.
+
+      Since Godot headless may not be available, write a Python script that:
+      1. Reads dialogue JSON for admissions_director, compliance_officer, it_operator
+      2. Simulates the interaction flow by parsing dialogue data:
+         - Load NPC's dialogue file
+         - For each dialogue entry with trigger_quest that matches the NPC's quest_ids
+         - Simulate choice selection (pick first valid choice)
+         - Validate: choice has complete_quest or metric_effects
+         - Validate: metric_effects keys are valid (school_efficiency, parent_trust, compliance_safety, system_stability)
+         - Validate: metic effects are within range [-30, +30]
+      3. Also check the quest_manager.gd logic for how quest state transitions work
+         (read the script and document the expected flow in comments)
+      4. For the compliance_officer: specifically validate the "promise_admission" / "correct" branch
+         (high-risk dialogue branch from AGENTS.md)
+
+      Write the script as tools/smoke_npc_runtime_interaction.py
+      Run it and capture output.
+
+      Additionally, read the existing test infrastructure in smoke_g2.py and test_harness.gd for reference.
+
+      Deliverables:
+      - tools/smoke_npc_runtime_interaction.py (well-documented, runnable)
+      - reports/n2d-runtime-interaction-smoke.md (results, edge cases found)
+    assigned_to: qa-demo-lead
+    depends_on: [display-polish]
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. Run python3 tools/smoke_npc_runtime_interaction.py and confirm it produces output
+      2. Randomly pick 2-3 assertions from the script and manually verify them against source data
+      3. Check that compliance_officer high-risk branch is included
+      4. Confirm metric_effects values are within [-30, +30] range
+      5. Confirm quest_id references resolve to actual quest IDs in data/quests.json
+      6. Do NOT re-read producer's deliverable.md. Re-run the script and spot-check source data.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: demo-scene
+    title: 'N2D-4：Demo 场景验证'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Validate that 3 representative NPCs can form a presentable demo scene.
+
+      Select 3 NPCs:
+      1. admissions_director — 招生任务入口 (covers q_admission_001, q_admission_002)
+      2. compliance_officer — 高风险话术/合规分支 (covers compliance branch)
+      3. it_operator — 系统稳定/API 故障 (covers q_dashboard_001, q_canary_release_001)
+
+      For each NPC:
+      1. Read their dialogue JSON and confirm at least 2 dialogue entries exist
+      2. Read their quest JSON and confirm quest chains are connected
+      3. Read their spawn config and note the position in the scene
+      4. Read their persona (data/personas/<npc_id>.md) to understand character
+
+      Write a validation report that confirms:
+      - Each NPC has a complete interaction chain (dialogue → choice → quest → metric)
+      - The 3 NPCs together cover all 4 core metrics (school_efficiency, parent_trust, compliance_safety, system_stability)
+      - At least one quest chain spans 2+ steps (multi-step demo)
+      - The demo can be presented: spawn NPCs, talk to each, make choices, see metric changes
+
+      Deliverable:
+      - reports/n2d-demo-scene-pass.md with:
+        * 3 NPC verification results
+        * Coverage matrix (NPC → metrics → quests)
+        * Demo flow description step by step
+        * Any gaps found (missing dialogue branches, incomplete quest chains)
+    assigned_to: qa-demo-lead
+    depends_on: [interaction-smoke]
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. Pick one NPC (e.g. admissions_director) and manually trace: dialogue → choice → quest_id → quests.json
+         Confirm the full chain exists
+      2. Check that all 4 core metrics are indeed covered across the 3 NPCs
+      3. Check that at least one multi-step quest chain exists
+      4. Do NOT re-read producer's deliverable.md. Trace chains from source data yourself.
+    timeout_ms: 1800000
+    max_retries: 2
+
+  - id: final-report
+    title: 'N2D 最终验收报告'
+    prompt: >
+      Project root: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      Task: Write the consolidated N2D final report.
+
+      Read all these reports:
+      - reports/n2d-td-border-cleanup.md
+      - reports/n2d-td-headless.md
+      - reports/n2d-td-triggerquest.md
+      - reports/n2d-runtime-display-polish.md
+      - reports/n2d-runtime-interaction-smoke.md
+      - reports/n2d-demo-scene-pass.md
+
+      Also read these baselines for context:
+      - reports/n2c-godot-runtime-integration.md (for comparison)
+
+      Write reports/n2d-runtime-polish-final.md with:
+
+      ## N2D Runtime Polish & Debt Cleanup — 最终验收报告
+
+      ### 验收总表
+      | # | 任务 | 结果 | 证据 |
+      |---|------|------|------|
+      | 1 | TD-1: Border 透明率检测 | ? | 引用 td-border 报告 |
+      | 2 | TD-2: Godot headless 环境 | ? | 引用 td-headless 报告 |
+      | 3 | TD-3: 空 trigger_quest 清理 | ? | 引用 td-triggerquest 报告 |
+      | 4 | N2D-2: 运行时显示 Polish | ? | 引用 display-polish 报告 |
+      | 5 | N2D-3: 交互 Smoke | ? | 引用 interaction-smoke 报告 |
+      | 6 | N2D-4: Demo 场景验证 | ? | 引用 demo-scene 报告 |
+
+      ### 验收标准逐项确认
+      - [ ] TD-1 border alpha 检测通过，或修复
+      - [ ] TD-2 Godot headless 命令可运行，或明确 blocker
+      - [ ] TD-3 空 trigger_quest 清理完成
+      - [ ] 8 NPC 显示验证通过
+      - [ ] 3 NPC 交互链路验证通过
+      - [ ] 现有 smoke 不回退
+      - [ ] 无已验收的 N2B/N2C 资产被覆盖（border 修复除外）
+
+      ### 修复项
+      列出所有实际修改的文件和变更内容。
+
+      ### 残余技术债
+      列出 N2D 未能解决的问题，标注 owner/blocker。
+
+      ### 验收结论
+      PASS / FAIL with notes
+
+      Deliverable:
+      - reports/n2d-runtime-polish-final.md
+    assigned_to: general
+    depends_on: [td-border, td-headless, td-triggerquest, display-polish, interaction-smoke, demo-scene]
+    verified_by: verifier
+    verify_prompt: >
+      Verify independently:
+      1. Read EACH of the 6 sub-reports to confirm the final report accurately summarizes them
+      2. Check that the final report's checklist matches actual results
+      3. Verify no accepted N2B/N2C assets were overwritten (check git diff if applicable)
+      4. Do NOT re-read producer's deliverable.md. Read the sub-reports and source data yourself.
+    timeout_ms: 1800000
+    max_retries: 1

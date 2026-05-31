@@ -28,6 +28,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--strict", action="store_true", help="fail if live evidence is missing")
     parser.add_argument("--git-commit", default=None, help="git commit SHA (auto-detected if omitted)")
+    parser.add_argument("--staging-report", default=None, help="path to reports/staging/percentage-canary-1pct-latest.json")
     return parser.parse_args(argv)
 
 
@@ -84,7 +85,10 @@ def build_manifest(args: argparse.Namespace, bundle_dir: Path) -> dict[str, Any]
     report_dir = root / "reports" / "shadow"
     shadow_path = Path(args.shadow_report) if args.shadow_report else report_dir / "latest.json"
     mirror_path = Path(args.mirror_report) if args.mirror_report else report_dir / "mirror-latest.json"
-    staging_path = Path(args.staging_report) if args.staging_report else root / "reports" / "staging" / "header-canary-latest.json"
+    if args.staging_report:
+        staging_path = Path(args.staging_report)
+    else:
+        staging_path = root / "reports" / "staging" / "header-canary-latest.json"
     commit = args.git_commit or detect_git_commit(root)
 
     shadow = safe_load_json(shadow_path)
@@ -130,15 +134,6 @@ def build_manifest(args: argparse.Namespace, bundle_dir: Path) -> dict[str, Any]
 
     # Validate staging header-canary report if available
     staging = safe_load_json(staging_path)
-    if staging is not None:
-        summary["staging_header_canary"] = staging.get("status", "unknown")
-        if staging.get("status") == "completed":
-            summary["staging_evidence_ok"] = True
-        elif staging.get("status") == "skipped":
-            summary["staging_evidence_ok"] = None  # Unknown without staging env
-    else:
-        summary["staging_header_canary"] = None
-        summary["staging_evidence_ok"] = False
 
     # Summary fields
     summary: dict[str, Any] = {
@@ -153,6 +148,17 @@ def build_manifest(args: argparse.Namespace, bundle_dir: Path) -> dict[str, Any]
         "latency_warn_count": (shadow or {}).get("latency", {}).get("chat_warn_count"),
         "strict_ready": False,
     }
+
+    # Staging evidence (after summary is defined)
+    if staging is not None:
+        summary["staging_header_canary"] = staging.get("status", "unknown")
+        if staging.get("status") in ("completed", "passed"):
+            summary["staging_evidence_ok"] = True
+        elif staging.get("status") == "skipped" or staging.get("status") == "skipped_live_check":
+            summary["staging_evidence_ok"] = None  # Unknown without staging env
+    else:
+        summary["staging_header_canary"] = None
+        summary["staging_evidence_ok"] = False
 
     if args.strict:
         strict_conditions = [
@@ -189,14 +195,14 @@ def build_manifest(args: argparse.Namespace, bundle_dir: Path) -> dict[str, Any]
             "observability_contract_ok": obs_ok,
             "shadow_evidence_ok": shadow is not None,
             "mirror_evidence_ok": mirror is not None,
-            "staging_evidence_ok": staging is not None and staging.get("status") == "completed",
+            "staging_evidence_ok": staging is not None and staging.get("status") in ("completed", "passed"),
         },
     }
     return manifest
 
 
 def write_bundle_files(
-    args: argparse.Namespace, bundle_dir: Path, manifest: dict[str, Any]
+    args: argparse.Namespace, bundle_dir: Path, manifest: dict[str, Any], staging_path: Path
 ) -> list[str]:
     """Copy or generate each bundle artifact. Returns warnings."""
     warnings: list[str] = []
@@ -345,9 +351,14 @@ def main() -> int:
     print(f"building evidence bundle: {bundle_dir}")
 
     manifest = build_manifest(args, bundle_dir)
+    staging_path = manifest.get("inputs", {}).get("staging_report", "")
+    if staging_path:
+        staging_path = Path(staging_path)
+    else:
+        staging_path = Path("reports/staging/header-canary-latest.json")
 
     try:
-        warnings = write_bundle_files(args, bundle_dir, manifest)
+        warnings = write_bundle_files(args, bundle_dir, manifest, staging_path)
     except ValueError as exc:
         print(f"BUNDLE FAIL: {exc}", file=sys.stderr)
         return 1

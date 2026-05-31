@@ -1,0 +1,12 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "test-resilience",
+      "verdict": "accept",
+      "reason": "6 项弹性测试全过（cache hit/TTL/disabled/timeout fallback/queue overflow/high-risk no-cache），12/12 checks PASS。"
+    }
+  ],
+  "next_cycle": [],
+  "plan_complete": false,
+  "message_to_user": "弹性层测试通过。放行 Smoke 回归。"
+}

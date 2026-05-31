@@ -1,0 +1,49 @@
+{
+  "npc_id": "principal",
+  "npc_name": "唐毓",
+  "dialogues": [
+    {
+      "id": "principal_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_dashboard_001",
+      "speaker": "唐毓",
+      "text": "请坐。运营驾驶舱是我推动数字化校园的核心窗口——学校效率、家长信任、合规安全、系统稳定性，这四个数字不只是报表，更是我面对家长的底气。你先熟悉一下仪表盘，学会从数据里读趋势。",
+      "choices": [
+        {
+          "text": "进入运营驾驶舱，仔细分析四个核心指标",
+          "action": "review_dashboard",
+          "metric_effects": {"school_efficiency": 10, "system_stability": 10},
+          "next_line": -1,
+          "complete_quest": "q_dashboard_001"
+        },
+        {
+          "text": "口头答应，实际上并没有认真查看",
+          "action": "skip_review",
+          "metric_effects": {"school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "principal_high_risk_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "唐毓",
+      "text": "等一下——我刚看了一眼驾驶舱数据。最近合规安全的指标有些波动，家长投诉量也在上升。如果是我自己做决定，我会在数据充分之前按兵不动——但也有人建议我'先推AI覆盖，边跑边调整'。你觉得呢？",
+      "choices": [
+        {
+          "text": "建议数据驱动决策，指标稳定前不盲目扩张",
+          "action": "data_driven",
+          "metric_effects": {"compliance_safety": 15, "school_efficiency": 10},
+          "next_line": -1
+        },
+        {
+          "text": "支持'边跑边调'，先扩大AI覆盖范围（武断决策）",
+          "action": "rash_expand",
+          "metric_effects": {"compliance_safety": -20, "school_efficiency": -15},
+          "next_line": -1
+        }
+      ]
+    }
+  ]
+}

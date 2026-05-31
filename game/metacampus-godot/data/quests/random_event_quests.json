@@ -1,0 +1,380 @@
+{
+  "quests": [
+    {
+      "id": "event_parent_rumor",
+      "title": "家长群误传招生谣言",
+      "description": "家长群中误传学校招生政策发生变化，需要紧急澄清。",
+      "type": "random_event",
+      "category": "reputation",
+      "priority": 3,
+      "requirements": {"day_min": 2},
+      "choices": [
+        {
+          "id": "clarify",
+          "text": "发布官方澄清通知",
+          "risk": "low",
+          "effects": {
+            "metrics": {"parent_trust": 5, "compliance_safety": 3},
+            "resources": {"ap": -3, "compute": -5}
+          }
+        },
+        {
+          "id": "meeting",
+          "text": "让招生办主任召开说明会",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"parent_trust": 10, "school_efficiency": -3},
+            "resources": {"ap": -6}
+          }
+        },
+        {
+          "id": "ignore",
+          "text": "忽略，等待自然平息",
+          "risk": "high",
+          "effects": {
+            "metrics": {"parent_trust": -15}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_ai_hallucination",
+      "title": "AI 自动回复出现幻觉",
+      "description": "系统自动回复给出了错误的学生考核标准，家长表示质疑。",
+      "type": "random_event",
+      "category": "system",
+      "priority": 4,
+      "requirements": {"day_min": 3},
+      "choices": [
+        {
+          "id": "retract",
+          "text": "立即撤回并更正回复",
+          "risk": "low",
+          "effects": {
+            "metrics": {"parent_trust": 3, "compliance_safety": 5},
+            "resources": {"ap": -3, "compute": -8}
+          }
+        },
+        {
+          "id": "manual_review",
+          "text": "人工复核所有待发消息",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 12, "school_efficiency": -5},
+            "resources": {"ap": -8, "compute": -10}
+          }
+        },
+        {
+          "id": "disable_auto",
+          "text": "关闭自动回复功能",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"system_stability": 8, "compliance_safety": 5, "school_efficiency": -15}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_system_lag",
+      "title": "系统延迟升高",
+      "description": "AI 系统响应时间突然增加，影响教师正常使用。",
+      "type": "random_event",
+      "category": "system",
+      "priority": 3,
+      "requirements": {"day_min": 4},
+      "choices": [
+        {
+          "id": "restart_service",
+          "text": "重启 AI 推理服务",
+          "risk": "low",
+          "effects": {
+            "metrics": {"system_stability": 10, "school_efficiency": -3},
+            "resources": {"compute": -15}
+          }
+        },
+        {
+          "id": "scale_up",
+          "text": "临时扩容计算资源",
+          "risk": "low",
+          "effects": {
+            "metrics": {"system_stability": 15},
+            "resources": {"budget": -2000, "compute": -20}
+          }
+        },
+        {
+          "id": "ignore_lag",
+          "text": "暂不处理，观察情况",
+          "risk": "high",
+          "effects": {
+            "metrics": {"system_stability": -15, "school_efficiency": -12}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_policy_expired",
+      "title": "知识库政策过期",
+      "description": "AI 引用的招生政策版本已过时，可能误导家长。",
+      "type": "random_event",
+      "category": "quality",
+      "priority": 4,
+      "requirements": {"day_min": 4},
+      "choices": [
+        {
+          "id": "update_kb",
+          "text": "立即更新知识库至最新政策",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 10, "parent_trust": 5},
+            "resources": {"compute": -10}
+          }
+        },
+        {
+          "id": "flag_outdated",
+          "text": "标记过期条目并通知负责人",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 5},
+            "skills_xp": {"compliance": 10},
+            "resources": {"ap": -3}
+          }
+        },
+        {
+          "id": "ignore_outdated",
+          "text": "暂不处理，等下次更新",
+          "risk": "high",
+          "effects": {
+            "metrics": {"compliance_safety": -18, "parent_trust": -10}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_backlog",
+      "title": "工单积压",
+      "description": "各科室提交的维修和事务工单大量积压未处理。",
+      "type": "random_event",
+      "category": "logistics",
+      "priority": 2,
+      "requirements": {"day_min": 5},
+      "choices": [
+        {
+          "id": "auto_sort_assign",
+          "text": "使用 AI 自动分类并分配工单",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 12},
+            "resources": {"compute": -8, "budget": -500},
+            "skills_xp": {"operations": 15}
+          }
+        },
+        {
+          "id": "overtime_clear",
+          "text": "安排加班手动清理积压",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"school_efficiency": 8, "parent_trust": 3},
+            "resources": {"ap": -10, "budget": -1000}
+          }
+        },
+        {
+          "id": "deprioritize",
+          "text": "降低非紧急工单优先级",
+          "risk": "high",
+          "effects": {
+            "metrics": {"school_efficiency": -5, "parent_trust": -8}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_compliance_audit",
+      "title": "合规审计预警",
+      "description": "上级部门通知将要进行合规审计，需要准备材料。",
+      "type": "random_event",
+      "category": "compliance",
+      "priority": 5,
+      "requirements": {"day_min": 6},
+      "choices": [
+        {
+          "id": "full_prepare",
+          "text": "全面准备审计材料，整理所有合规记录",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 20, "school_efficiency": -5},
+            "resources": {"ap": -8, "compute": -15, "budget": -2000},
+            "skills_xp": {"compliance": 40}
+          }
+        },
+        {
+          "id": "minimal_prepare",
+          "text": "准备最低要求的合规文档",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 5, "school_efficiency": 3},
+            "resources": {"ap": -3}
+          }
+        },
+        {
+          "id": "delay_prepare",
+          "text": "推迟准备，先处理日常事务",
+          "risk": "high",
+          "effects": {
+            "metrics": {"compliance_safety": -15}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_parent_complaint_spike",
+      "title": "家长投诉激增",
+      "description": "多名家长同时反映 AI 回答不一致，投诉量激增。",
+      "type": "random_event",
+      "category": "reputation",
+      "priority": 4,
+      "requirements": {"day_min": 5},
+      "choices": [
+        {
+          "id": "dedicated_response",
+          "text": "成立专项小组逐一回应每起投诉",
+          "risk": "low",
+          "effects": {
+            "metrics": {"parent_trust": 15, "school_efficiency": -8},
+            "resources": {"ap": -10, "budget": -3000}
+          }
+        },
+        {
+          "id": "unified_statement",
+          "text": "发布统一声明并优化 AI 回答",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"parent_trust": 8, "system_stability": 5},
+            "resources": {"compute": -10}
+          }
+        },
+        {
+          "id": "downplay",
+          "text": "低调处理，不公开回应",
+          "risk": "high",
+          "effects": {
+            "metrics": {"parent_trust": -20}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_it_security",
+      "title": "系统安全扫描发现漏洞",
+      "description": "例行安全扫描发现 AI 系统的 API 接口存在潜在漏洞。",
+      "type": "random_event",
+      "category": "system",
+      "priority": 5,
+      "requirements": {"day_min": 6},
+      "choices": [
+        {
+          "id": "emergency_patch",
+          "text": "立即修复漏洞并更新安全策略",
+          "risk": "low",
+          "effects": {
+            "metrics": {"system_stability": 15, "compliance_safety": 10},
+            "resources": {"compute": -20, "budget": -5000},
+            "skills_xp": {"data_intelligence": 30}
+          }
+        },
+        {
+          "id": "plan_patch",
+          "text": "制定修复计划，择机更新",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 5},
+            "resources": {"ap": -5}
+          }
+        },
+        {
+          "id": "ignore_risk",
+          "text": "风险较低，暂不处理",
+          "risk": "high",
+          "effects": {
+            "metrics": {"system_stability": -15, "compliance_safety": -10}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_kb_contradiction",
+      "title": "知识库条目冲突",
+      "description": "知识库中两条政策条目内容相互矛盾，导致 AI 给出不一致回答。",
+      "type": "random_event",
+      "category": "quality",
+      "priority": 3,
+      "requirements": {"day_min": 4},
+      "choices": [
+        {
+          "id": "resolve_conflict",
+          "text": "核查原文并修正冲突条目",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 8, "parent_trust": 5},
+            "skills_xp": {"compliance": 20},
+            "resources": {"compute": -5, "ap": -3}
+          }
+        },
+        {
+          "id": "flag_review",
+          "text": "标记冲突条目，等待上级审核",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 3}
+          }
+        },
+        {
+          "id": "ignore_conflict",
+          "text": "忽略矛盾条目，维持当前版本",
+          "risk": "high",
+          "effects": {
+            "metrics": {"compliance_safety": -15, "parent_trust": -10}
+          }
+        }
+      ]
+    },
+    {
+      "id": "event_npc_schedule_disruption",
+      "title": "NPC 日程冲突",
+      "description": "招生办主任与合规专员同时预约了 AI 系统进行数据分析。",
+      "type": "random_event",
+      "category": "logistics",
+      "priority": 2,
+      "requirements": {"day_min": 5},
+      "choices": [
+        {
+          "id": "auto_reschedule",
+          "text": "用 AI 自动协调并重新排期",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 8},
+            "skills_xp": {"operations": 15},
+            "resources": {"compute": -5}
+          }
+        },
+        {
+          "id": "manual_coordinate",
+          "text": "逐一与双方沟通协调",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"parent_trust": 3},
+            "skills_xp": {"communication": 15},
+            "resources": {"ap": -5}
+          }
+        },
+        {
+          "id": "ignore_conflict",
+          "text": "不予理会，各自按原计划执行",
+          "risk": "high",
+          "effects": {
+            "metrics": {"school_efficiency": -10, "parent_trust": -5}
+          }
+        }
+      ]
+    }
+  ]
+}

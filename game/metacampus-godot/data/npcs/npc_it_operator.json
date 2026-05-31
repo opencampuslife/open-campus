@@ -1,0 +1,40 @@
+{
+  "npc_id": "it_operator",
+  "display_name": "许航",
+  "en_name": "Xu Hang",
+  "role": "IT运维",
+  "department": "IT运维室",
+  "location": "it_office",
+  "personality": ["技术宅", "有强迫症"],
+  "core_conflict": "他痴迷新技术，但每次发布都可能影响全校正在使用的系统。在'试试新版本'的冲动和'不能让学生家长受影响'的责任之间，他必须反复权衡。灰度发布是他的救命稻草。",
+  "player_relationship": "你是他信任的AI运维搭档。他教你canary灰度发布的原理，你帮他执行发布策略。他把运营驾驶舱部署给你，希望你能帮他第一时间发现异常。",
+  "primary_metric": "system_stability",
+  "secondary_metric": "compliance_safety",
+  "quest_ids": ["q_dashboard_001", "q_canary_release_001"],
+  "visual_keywords": ["灰色连帽衫", "双显示器满屏终端命令", "机架上闪烁的LED灯", "键盘旁的能量饮料罐"],
+  "voice_tone": "技术术语密集，'部署''回滚''监控'张口就来。但察觉对方听不懂时会挠挠头，用'就好比……'尝试打比方。",
+  "forbidden_behavior": "跳过灰度测试直接全量发布，或在系统告警时无视警报继续操作",
+  "metric_effects": {
+    "on_quest_complete": {
+      "system_stability": 12,
+      "compliance_safety": 8,
+      "school_efficiency": 5
+    },
+    "on_fail": {
+      "system_stability": -15,
+      "compliance_safety": -10
+    }
+  },
+  "trust_level": 4,
+  "risk_tolerance": 5,
+  "favorite_topics": ["稳定发布", "及时回滚", "清晰日志"],
+  "disliked_actions": ["忽略告警", "粗暴重启", "跳过测试"],
+  "schedule_id": "it_operator",
+  "relationship_events": [
+    {"trust_required": 2, "title": "系统监控基础", "description": "许航教你监控系统指标"},
+    {"trust_required": 4, "title": "开放发布权限", "description": "获得部分系统发布权限"},
+    {"trust_required": 6, "title": "协同排障", "description": "共同处理系统故障事件"},
+    {"trust_required": 8, "title": "高级运维工具", "description": "解锁自动化运维工具链"},
+    {"trust_required": 10, "title": "系统架构盟友", "description": "成为系统架构核心伙伴"}
+  ]
+}

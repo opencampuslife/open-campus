@@ -1,0 +1,17 @@
+version: 1
+plan:
+  name: 'NPC Track Phase N0/N1'
+  max_concurrency: 6
+  max_consecutive_failures: 2
+  max_cycles: 12
+  auto_reject_retries: 1
+  message_to_user: 'NPC Track 已启动：内容线 + 工程线 + 视觉线并行'
+  tasks:
+    - id: npc-style-bible
+      title: '产出 NPC 风格圣经'
+      prompt: |
+        创建 docs/npc-style-bible.md，包含世界观定位、视觉风格规范、表情规则、命名规则、资产目录结构、JSON数据规范、Persona安全规则、禁止事项。项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+      assigned_to: narrative-designer
+      verified_by: verifier
+      verify_prompt: '验证 docs/npc-style-bible.md 存在且包含所有必填部分（世界观、视觉规范、表情规则、命名规则、资产结构、JSON规范、安全规则、禁止事项）'
+      timeout_ms: 1800000

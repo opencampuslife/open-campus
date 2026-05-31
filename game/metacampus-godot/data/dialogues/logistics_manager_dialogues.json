@@ -1,0 +1,50 @@
+{
+  "npc_id": "logistics_manager",
+  "npc_name": "赵启山",
+  "dialogues": [
+    {
+      "id": "logistics_manager_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_meal_count_001",
+      "speaker": "赵启山",
+      "text": "来得好！你赶紧帮我看看今天食堂的订餐数据——订了多少份、退了多少、有没有忌口的、有没有加餐的，全得统计清楚。学生吃不上饭可不是闹着玩的！把这些数据整理成一张汇总表，别让我对半天。",
+      "choices": [
+        {
+          "text": "收集订餐数据，生成后勤汇总表",
+          "action": "ocr_meal",
+          "metric_effects": {"school_efficiency": 15, "compliance_safety": 10},
+          "next_line": -1,
+          "complete_quest": "q_meal_count_001"
+        },
+        {
+          "text": "手动统计（慢且容易出错）",
+          "action": "manual_meal",
+          "metric_effects": {"school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "logistics_manager_repair_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": "q_repair_order_001",
+      "speaker": "赵启山",
+      "text": "订餐统计完先放一边——宿舍楼那边又报上来了，水龙头漏水、空调不制冷、门锁也坏了。你帮我把这些工单用AI系统自动派单，设个48小时自动提醒，别让这些报修拖成烂账。记住，超过七天没处理的工单，学生家长那边是要投诉的！",
+      "choices": [
+        {
+          "text": "使用AI系统自动派单，设置48小时提醒",
+          "action": "ai_dispatch",
+          "metric_effects": {"school_efficiency": 12, "parent_trust": 10},
+          "next_line": -1,
+          "complete_quest": "q_repair_order_001"
+        },
+        {
+          "text": "先放一放，下周再说（工单积压风险）",
+          "action": "delay_repair",
+          "metric_effects": {"parent_trust": -15, "school_efficiency": -10},
+          "next_line": -1
+        }
+      ]
+    }
+  ]
+}

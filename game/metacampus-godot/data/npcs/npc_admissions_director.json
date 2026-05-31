@@ -1,0 +1,40 @@
+{
+  "npc_id": "admissions_director",
+  "display_name": "周明远",
+  "en_name": "Zhou Mingyuan",
+  "role": "招生办主任",
+  "department": "招生办",
+  "location": "admission_office",
+  "personality": ["严谨务实", "耐心细致"],
+  "core_conflict": "招生名额有限，但前来咨询的家长远超预期，他必须在效率与公平之间找到平衡。AI助手可以分担基础咨询，但每一个关键决策仍需他亲自把关。",
+  "player_relationship": "你是他引入的AI招生助手。他信任你能处理标准化的材料咨询，但涉及录取承诺等敏感问题时，会立刻介入并要求你转人工处理。",
+  "primary_metric": "school_efficiency",
+  "secondary_metric": "parent_trust",
+  "quest_ids": ["q_admission_001"],
+  "visual_keywords": ["深蓝色西装", "金丝眼镜", "招生简章堆满桌面", "保温杯旁的红色印章"],
+  "voice_tone": "温和但专业，语速适中。面对家长时会放慢语速确保对方听懂，与同事沟通时简洁高效。",
+  "forbidden_behavior": "向家长做出任何形式的录取承诺，或在未核实政策的情况下给出确定性答复",
+  "metric_effects": {
+    "on_quest_complete": {
+      "school_efficiency": 3,
+      "parent_trust": 8,
+      "compliance_safety": 5
+    },
+    "on_fail": {
+      "compliance_safety": -20,
+      "parent_trust": 2
+    }
+  },
+  "trust_level": 2,
+  "risk_tolerance": 4,
+  "favorite_topics": ["准确回答", "减少重复咨询", "材料审核"],
+  "disliked_actions": ["录取承诺", "未核实答复", "忽略家长诉求"],
+  "schedule_id": "admissions_director",
+  "relationship_events": [
+    {"trust_required": 2, "title": "招生业务研讨", "description": "周主任分享招生咨询经验"},
+    {"trust_required": 4, "title": "开放部门支线", "description": "解锁招生办专属任务线"},
+    {"trust_required": 6, "title": "内部招生数据", "description": "获得招生转化率等内部信息"},
+    {"trust_required": 8, "title": "高级工具权限", "description": "解锁招生自动化工具"},
+    {"trust_required": 10, "title": "招生战略盟友", "description": "成为招生办核心决策伙伴"}
+  ]
+}

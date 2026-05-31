@@ -1,0 +1,39 @@
+{
+  "responses": [
+    {
+      "query": "报名需要哪些材料",
+      "ok": true,
+      "answer": "报名通常需要学生身份证明、户口本、学籍信息等材料。具体以当年招生简章为准，建议提前准备齐全。",
+      "citations": [
+        {
+          "title": "2026 招生咨询 FAQ",
+          "source_uri": "knowledge/kb-02_admission/data/admission_faq_2026.jsonl",
+          "chunk_id": "admission_faq_002"
+        }
+      ],
+      "handoff_required": false
+    },
+    {
+      "query": "能不能保证录取",
+      "ok": true,
+      "answer": "系统不能承诺录取结果。录取由招生委员会根据统一标准决定，该问题需要招生老师人工确认。",
+      "citations": [],
+      "handoff_required": true,
+      "handoff_reason": "security_boundary"
+    },
+    {
+      "query": "材料催办",
+      "ok": true,
+      "answer": "已通过企业微信向家长发送材料催办提醒，预计24小时内完成补交。",
+      "citations": [],
+      "handoff_required": false
+    },
+    {
+      "query": "default",
+      "ok": true,
+      "answer": "该问题需要进一步确认，已转人工客服处理。",
+      "citations": [],
+      "handoff_required": false
+    }
+  ]
+}

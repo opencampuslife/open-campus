@@ -1,0 +1,69 @@
+{
+  "phase": "P3",
+  "timestamp": "2026-05-28T17:00:00+08:00",
+  "status": "accepted",
+  "optimization": "collision/proximity gating",
+  "root_cause": "Redundant NPC-side Area2D collision shapes: NPCFactory and NPCController both created equivalent CircleShape2D sensors per NPC (2 shapes/NPC → 300 NPC = 600 shapes processed every frame)",
+  "scope": "distance-gated CollisionShape2D disable + shape deduplication",
+  "config_file": "data/proximity_config.json",
+  "rollback": {
+    "config_flag": "proximity_config.json → enabled: false",
+    "bypass_const": "NPCController.OPTIMIZATION_BYPASS = true",
+    "git_revert": "full revert to P2"
+  },
+  "modified_files": [
+    "scripts/npc_controller.gd",
+    "scripts/npc_factory.gd",
+    "data/proximity_config.json"
+  ],
+  "unchanged_paths": [
+    "Player InteractArea — authoritative interaction detector",
+    "Quest/dialogue/behavior systems — not touched"
+  ],
+  "validation": {
+    "smoke_pass": true,
+    "smoke_g2_passed": 35,
+    "smoke_g3_passed": 18,
+    "smoke_g4_passed": 15,
+    "smoke_total": 68,
+    "interaction_nearby_works": true,
+    "interaction_far_npc_returns_expected": true,
+    "rollback_flag_verified": true,
+    "rollback_physics_p95_us": 1231
+  },
+  "before": {
+    "300_behavior": {
+      "fps_avg": 144.87,
+      "phys_p95_us": 2290,
+      "proc_p95_us": 15031,
+      "spike_freq": 0.0667,
+      "memory_kb": 300368
+    }
+  },
+  "after": {
+    "300_behavior": {
+      "fps_avg": 144.93,
+      "phys_p95_us": 1569,
+      "proc_p95_us": 1915,
+      "spike_freq": 0.0,
+      "memory_kb": 300119
+    }
+  },
+  "improvement": {
+    "300_behavior_phys_p95_pct": -31.5,
+    "300_behavior_proc_p95_pct": -87.3,
+    "300_behavior_spike_eliminated": true,
+    "fps_stable": true,
+    "target_30pct_met": true
+  },
+  "implementation_details": {
+    "activation_radius_px": 200,
+    "check_interval_frames": 15,
+    "initial_check_in_ready": true,
+    "staggered_updates": true,
+    "collision_shape_disabled_for_far_npcs": true,
+    "duplicate_shapes_removed": 300
+  },
+  "p2_ref": "reports/npc-pressure-profile.md",
+  "p3_report": "reports/p3-npc-collision-optimization.md"
+}

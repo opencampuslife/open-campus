@@ -1,0 +1,21 @@
+{
+  "last_cycle": [
+    {"task_id": "n2b3-fixup-b-assets", "verdict": "reject", "reason": "报告称生成了 20 张 PNG，但实际磁盘检查：4 NPC baseline 目录只有 walk_*.png（各4张），portrait 和 sprite_idle 全缺。数据不实，重跑。"}
+  ],
+  "next_cycle": [
+    {
+      "task_id": "n2b3-fixup-b-assets",
+      "title": "补 4 NPC portrait + sprite（重新验证）",
+      "prompt": "项目根目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot\n\n重要：不要只看之前的报告，必须自己用 Python pathlib 确认磁盘上文件存在后再报告完成。\n\n当前磁盘实际状态（需验证）：\n- compliance_officer/baseline/：只有 4 个 walk_*.png，缺 portrait_neutral/happy/worried/strict.png + sprite_idle.png\n- homeroom_teacher/baseline/：同上\n- it_operator/baseline/：同上\n- logistics_manager/baseline/：同上\n\n必须补的文件（用 Python Path().exists() 逐个检查）：\n\ncompliance_officer:\n  assets/npcs/compliance_officer/baseline/portrait_neutral.png\n  assets/npcs/compliance_officer/baseline/portrait_happy.png\n  assets/npcs/compliance_officer/baseline/portrait_worried.png\n  assets/npcs/compliance_officer/baseline/portrait_strict.png\n  assets/npcs/compliance_officer/baseline/sprite_idle.png\n\nhomeroom_teacher:\n  assets/npcs/homeroom_teacher/baseline/portrait_neutral.png\n  assets/npcs/homeroom_teacher/baseline/portrait_happy.png\n  assets/npcs/homeroom_teacher/baseline/portrait_worried.png\n  assets/npcs/homeroom_teacher/baseline/portrait_strict.png\n  assets/npcs/homeroom_teacher/baseline/sprite_idle.png\n\nit_operator:\n  assets/npcs/it_operator/baseline/portrait_neutral.png\n  assets/npcs/it_operator/baseline/portrait_happy.png\n  assets/npcs/it_operator/baseline/portrait_worried.png\n  assets/npcs/it_operator/baseline/portrait_strict.png\n  assets/npcs/it_operator/baseline/sprite_idle.png\n\nlogistics_manager:\n  assets/npcs/logistics_manager/baseline/portrait_neutral.png\n  assets/npcs/logistics_manager/baseline/portrait_happy.png\n  assets/npcs/logistics_manager/baseline/portrait_worried.png\n  assets/npcs/logistics_manager/baseline/portrait_strict.png\n  assets/npcs/logistics_manager/baseline/sprite_idle.png\n\n步骤：\n1. 扫描现有文件（Python）\n2. 确定缺哪些\n3. 用 matrix_generate_image 生成（portrait 256×256 RGBA，sprite_idle 64×64 RGBA）\n4. sips 转换 PNG\n5. Python struct 验证 PNG 格式\n6. 只有文件真正写入磁盘后才能报告完成\n\n人物设定：\n- compliance_officer：严肃职场女性，蓝色/灰色调\n- homeroom_teacher：温和教师，暖色调\n- it_operator：年轻技术男，蓝绿/灰色调\n- logistics_manager：干练中年管理，藏蓝/灰色调",
+      "assigned_to": "pixel-artist",
+      "verified_by": "verifier",
+      "verify_prompt": "独立验证：用 Python pathlib 逐一检查 20 个文件是否存在且为有效 PNG（256×256 或 64×64，color_type=6）。列出通过/失败清单。",
+      "timeout_ms": 1800000,
+      "max_retries": 1,
+      "depends_on": [],
+      "gates": []
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "Fixup-B 数据有问题，重跑。"
+}

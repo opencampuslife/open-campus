@@ -1,0 +1,8 @@
+{
+  "last_cycle": [
+    {"task_id": "n2c-manifest", "verdict": "accept", "reason": "PASS — manifest 8/8 NPC 路径正确，PNG+JPEG 双格式验证通过，root cause（verify_prompt 过于严格）已修复。"}
+  ],
+  "next_cycle": [],
+  "plan_complete": false,
+  "message_to_user": "Manifest 终于过了，下游任务（loader/spawn/smoke/visual-qa/dialogue-quest）正在排队跑。"
+}

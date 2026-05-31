@@ -1,0 +1,155 @@
+version: 1
+plan:
+  name: 'N2B-2: Art Direction Alignment'
+  max_concurrency: 3
+  max_consecutive_failures: 2
+  max_cycles: 8
+
+tasks:
+  - id: n2b2-style-delta
+    title: '风格修正 checklist + revised prompts'
+    prompt: |
+      任务：分析 N2B-1 当前资产的风格偏差，产出精确的 style delta checklist 和修订后 prompt。
+
+      输入文件：
+      - docs/npc-style-bible.md（第 11 章视觉深化规范 — 精确色板和视觉方向）
+      - reports/npc-visual-baseline-review.md（当前 N2A 资产评审）
+      - reports/n2b1-animation-integration.md（暗黑复古风已知问题记录）
+      - assets/npcs/admissions_director/baseline/（当前 portrait/sprite/walk sheet）
+      - assets/npcs/student_representative/baseline/（当前 portrait/sprite/walk sheet）
+
+      产出 1：风格修正硬门槛表格
+      ```
+      | 项目 | 当前问题 | 目标规范 | npc-style-bible 引用 |
+      ```
+      必须覆盖：
+      - 色调（暗黑复古 → 明亮温暖）
+      - 对比度（偏高 → 中等）
+      - 服装色（泛化 → 精确色值）
+      - 场景联想（复古 RPG → 现代校园）
+      - 角色气质（戏剧化 → 专业可亲）
+      - 线条（过重 → 清晰不厚重）
+
+      产出 2：修订后 AI 生图 prompt（每个 NPC × portrait / idle sprite / walk sheet）
+      对 admissions_director 和 student_representative 各产出一组 prompt，包含：
+      - 正向 prompt（融入 npc-style-bible §11 色板 + warm campus 方向）
+      - Negative prompt（明确禁止：Stardew、复古像素、暗黑色调、法式乡村）
+      - 具体色彩数值（来自 npc-style-bible §11.6）
+
+      产出 3：docs/npc-palette-guide-v1.md
+      完整的可推广色板规范，包含：
+      - 主色板（5色 + 用途）
+      - 辅助色板（≥8色 + 用途）
+      - 肤色统一：#F4C7A1
+      - 每个 NPC 类型的推荐色板
+      - 正向关键词（warm campus, modern pixel art, cozy style）
+      - 禁止关键词（retro pixel, 8-bit, dark tone, fantasy, Stardew）
+
+      验收：palette guide 可直接被 pixel-artist 用于生成 8 NPC 全部资产。
+
+      写 deliverable.md 报告所有产出文件路径。
+
+    assigned_to: narrative-designer
+    verified_by: verifier
+    verify_prompt: |
+      独立验证：
+      1. 读取 npc-palette-guide-v1.md，验证包含完整主色板（≥5色）+ 辅助色板（≥8色）+ 肤色 #F4C7A1。
+      2. 验证色板与 npc-style-bible.md §11.6 色值一致（允许 ≤3 字误差）。
+      3. 验证禁止关键词列表包含：Stardew、retro pixel、8-bit、dark tone、fantasy。
+      4. 验证 revised prompts 包含正向 prompt + negative prompt + 色彩数值。
+      5. 验证 revised prompts 的禁止项包含 Stardew Valley。
+      报告 PASS/FAIL + 具体不符项。
+    timeout_ms: 900000
+
+  - id: n2b2-asset-generation
+    title: '生成 revised 资产（portrait v2 + idle v2 + walk sheets v2）'
+    prompt: |
+      任务：为 admissions_director 和 student_representative 生成风格对齐后的 revised 资产。
+
+      前置条件：必须先读取 docs/npc-palette-guide-v1.md 和 revised prompts（由 n2b2-style-delta 任务产出）。
+
+      技术规格（来自 N2B-1，不改变）：
+      - walk sheet：256×64 RGBA PNG，每帧 64×64，4帧，透明背景
+      - idle sprite：64×64 RGBA PNG，透明背景
+      - portrait：256×256 PNG RGBA，透明背景
+      - 后处理：sips crop + sips PNG + add_transparency.py（pipeline 脚本在 plan workspace）
+      - 帧尺寸：64×64（头顶到脚底 64px）
+
+      角色规格（来自 npc-style-bible §11）：
+      - admissions_director（周明远）：深蓝西装 #2D4A6B + 白衬衫 #F5E6D3 + 深色领带，招生办主任形象，金丝眼镜，左胸校徽
+      - student_representative（沈一诺）：白色校服衬衫 #F5E6D3 + 深蓝西装外套 #2D4A6B，学生代表形象，左胸学生会徽章
+
+      禁止：Stardew Valley 风格、8-bit 复古、暗黑色调、法式乡村、奇幻、农场元素
+
+      产出文件（每个 NPC）：
+      - {npc_id}/baseline/portrait_neutral_v2.png（256×256 RGBA）
+      - {npc_id}/baseline/sprite_idle_v2.png（64×64 RGBA）
+      - {npc_id}/baseline/{npc_id}_walk_down_v2.png（256×64 RGBA）
+      - {npc_id}/baseline/{npc_id}_walk_up_v2.png（256×64 RGBA）
+      - {npc_id}/baseline/{npc_id}_walk_left_v2.png（256×64 RGBA）
+      - {npc_id}/baseline/{npc_id}_walk_right_v2.png（256×64 RGBA）
+
+      验证：
+      1. portrait_v2 / sprite_idle_v2：256×256 或 64×64 RGBA PNG
+      2. walk sheet：256×64 RGBA PNG（用 Python struct+zlib 读 PNG header 验证 color_type=6）
+      3. sprite idle 与 portrait 角色身份一致（发型、服装主色相同）
+
+      工作目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+      后处理脚本：/Users/kevinzzz/.mavis/plans/plan_71d97796/workspace/add_transparency.py
+      matrix_generate_image 使用标准 API（data/jobs/ 写 JPEG，sips 转 PNG）。
+
+      写 deliverable.md 报告所有生成文件路径和验证结果。
+
+    assigned_to: pixel-artist
+    verified_by: verifier
+    verify_prompt: |
+      独立验证（用 Python struct+zlib 读取 PNG 原始数据，不要用 PIL）：
+      1. 确认 8 张 walk sheet（2 NPC × 4 方向 v2）均为 256×64 RGBA PNG：解析 IHDR，width=256, height=64, color_type=6。
+      2. 确认 2 张 portrait_v2 为 256×256 RGBA PNG。
+      3. 确认 2 张 sprite_idle_v2 为 64×64 RGBA PNG。
+      4. 读取 docs/npc-palette-guide-v1.md 的色板，抽查 v2 asset 的主色是否接近目标色（允许误差 10% RGB）。
+      5. 报告每项 PASS/FAIL 和具体数值。
+    timeout_ms: 1500000
+
+  - id: n2b2-final-report
+    title: 'N2B-2 最终报告'
+    prompt: |
+      任务：汇总 N2B-2 全部产出，验证美术风格对齐效果，产出最终报告。
+
+      前置条件：n2b2-style-delta 和 n2b2-asset-generation 均完成。
+
+      产出：reports/n2b2-art-direction-alignment.md
+
+      必须包含：
+      1. 执行摘要（风格对齐目标是否达成）
+      2. 风格修正清单（从 n2b2-style-delta）
+      3. v2 资产清单（2 NPC × 6 文件 = 12 个 PNG，均附尺寸/格式验证）
+      4. 风格对比：N2A/N2B-1 vs N2B-2 的关键差异（色调、对比度、服装色、线条）
+      5. 验收门槛检查表（PASS only if 所有项通过）：
+         - [ ] revised assets 保留 N2B-1 技术规格（256×64 RGBA，64×64 帧，透明背景）
+         - [ ] 视觉风格匹配 npc-style-bible 温暖校园方向
+         - [ ] portrait 与 sprite 身份一致
+         - [ ] 无 Stardew-like 或 retro-fantasy 漂移
+         - [ ] npc-palette-guide-v1.md 完整且可推广到 8 NPC
+      6. 已知限制
+      7. 扩展路径（N2B-3：8 NPC 全量资产）
+
+      验证标准：
+      - smoke 测试（make smoke-test 或等效）仍为 537/537，或任何 delta 有明确说明
+      - 无新增技术 regression
+
+      工作目录：/Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+
+      写 deliverable.md + reports/n2b2-art-direction-alignment.md。
+
+    assigned_to: general
+    depends_on: [n2b2-style-delta, n2b2-asset-generation]
+    verified_by: verifier
+    verify_prompt: |
+      独立验证：
+      1. 读取 reports/n2b2-art-direction-alignment.md，验证包含：执行摘要、风格修正清单、v2 资产清单（12个文件）、风格对比、验收门槛检查表、已知限制、扩展路径。
+      2. 验证所有 12 个 PNG 文件存在（ls 命令验证）。
+      3. 验证 docs/npc-palette-guide-v1.md 存在。
+      4. 验证报告中的验收检查表所有项为 PASS。
+      报告每项 PASS/FAIL。
+    timeout_ms: 300000

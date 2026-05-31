@@ -1,0 +1,263 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+
+public partial class NpcScheduleVisualizer : Node
+{
+    private sealed class ScheduleEntry
+    {
+        public string Time { get; set; } = "";
+        public string Location { get; set; } = "";
+        public string Action { get; set; } = "";
+    }
+
+    private sealed class NpcSchedule
+    {
+        public string NpcId { get; set; } = "";
+        public List<ScheduleEntry> Schedule { get; set; } = new();
+    }
+
+    private sealed class SchedulesData
+    {
+        public List<NpcSchedule> Schedules { get; set; } = new();
+    }
+
+    private readonly Dictionary<string, List<(TimeOnly time, string location, string action)>> _npcSchedules = new();
+    private readonly Dictionary<string, Node2D> _npcNodes = new();
+    private readonly Dictionary<string, Vector2> _locationPositions = new();
+
+    private TimeManager _timeManager = null!;
+
+    public override void _Ready()
+    {
+        BuildLocationPositionMap();
+        LoadSchedules();
+        FindNpcNodes();
+        SetupInitialPositions();
+
+        _timeManager = GetNode<TimeManager>("/root/TimeManager");
+        _timeManager.TimeChanged += OnTimeChanged;
+    }
+
+    private void BuildLocationPositionMap()
+    {
+        var path = "res://data/locations.json";
+        if (!FileAccess.FileExists(path))
+        {
+            GD.PushWarning($"Locations file not found: {path}, using empty position map");
+            return;
+        }
+
+        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        var json = file.GetAsText();
+
+        try
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true
+            };
+
+            var locations = JsonSerializer.Deserialize<List<LocationData>>(json, options);
+            if (locations == null)
+                return;
+
+            foreach (var loc in locations)
+            {
+                if (loc.MapPosition != null)
+                    _locationPositions[loc.LocationId] = new Vector2(loc.MapPosition.X, loc.MapPosition.Y);
+            }
+
+            GD.Print($"Loaded {_locationPositions.Count} location positions from locations.json");
+        }
+        catch (Exception ex)
+        {
+            GD.PushError($"Failed to parse locations.json: {ex.Message}");
+        }
+    }
+
+    private sealed class LocationData
+    {
+        public string LocationId { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public MapPositionData? MapPosition { get; set; }
+    }
+
+    private sealed class MapPositionData
+    {
+        public float X { get; set; }
+        public float Y { get; set; }
+    }
+
+    private void LoadSchedules()
+    {
+        var path = "res://data/schedules.json";
+        if (!FileAccess.FileExists(path))
+        {
+            GD.PushWarning($"Schedule file not found: {path}");
+            return;
+        }
+
+        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        var json = file.GetAsText();
+
+        try
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true
+            };
+
+            var data = JsonSerializer.Deserialize<SchedulesData>(json, options);
+            if (data?.Schedules == null)
+                return;
+
+            foreach (var npcSchedule in data.Schedules)
+            {
+                var entries = new List<(TimeOnly, string, string)>();
+                foreach (var entry in npcSchedule.Schedule)
+                {
+                    if (TimeOnly.TryParse(entry.Time, out var time))
+                    {
+                        entries.Add((time, entry.Location, entry.Action));
+                    }
+                }
+
+                // Sort by time
+                entries.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+                _npcSchedules[npcSchedule.NpcId] = entries;
+            }
+
+            GD.Print($"Loaded schedules for {_npcSchedules.Count} NPCs");
+        }
+        catch (Exception ex)
+        {
+            GD.PushError($"Failed to parse schedules.json: {ex.Message}");
+        }
+    }
+
+    private void FindNpcNodes()
+    {
+        var npcContainer = GetNode<Node2D>("/root/Main/NPCContainer");
+        if (npcContainer == null)
+        {
+            GD.PushWarning("NPCContainer not found in Main scene");
+            return;
+        }
+
+        foreach (var child in npcContainer.GetChildren())
+        {
+            if (child is Node2D node2D)
+            {
+                // Try to get NpcId from the NpcController script
+                var controller = node2D.GetNodeOrNull<NpcController>(".");
+                if (controller != null)
+                {
+                    _npcNodes[controller.NpcId] = node2D;
+                }
+            }
+        }
+    }
+
+    private void SetupInitialPositions()
+    {
+        foreach (var kvp in _npcNodes)
+        {
+            var npcId = kvp.Key;
+            var node = kvp.Value;
+
+            if (!_npcSchedules.TryGetValue(npcId, out var schedule))
+                continue;
+
+            if (schedule.Count == 0)
+                continue;
+
+            // Start at first location
+            var firstLocation = schedule[0].Item2;
+            if (_locationPositions.TryGetValue(firstLocation, out var pos))
+            {
+                node.GlobalPosition = pos;
+            }
+        }
+    }
+
+    private void OnTimeChanged(int hour, int minute)
+    {
+        var currentTime = new TimeOnly(hour, minute);
+
+        foreach (var kvp in _npcSchedules)
+        {
+            var npcId = kvp.Key;
+            var schedule = kvp.Value;
+
+            if (!_npcNodes.TryGetValue(npcId, out var npcNode))
+                continue;
+
+            // Find the current schedule entry (the last entry with time <= currentTime)
+            var currentEntry = default((TimeOnly, string, string));
+            var found = false;
+
+            for (int i = schedule.Count - 1; i >= 0; i--)
+            {
+                if (schedule[i].Item1 <= currentTime)
+                {
+                    currentEntry = schedule[i];
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found && schedule.Count > 0)
+            {
+                currentEntry = schedule[0];
+            }
+
+            if (found || schedule.Count > 0)
+            {
+                var location = currentEntry.Item2;
+                if (_locationPositions.TryGetValue(location, out var targetPos))
+                {
+                    var controller = npcNode as NpcController ?? npcNode.GetNodeOrNull<NpcController>(".");
+                    if (controller != null)
+                    {
+                        controller.MoveTo(targetPos);
+                    }
+                    else
+                    {
+                        npcNode.GlobalPosition = targetPos;
+                    }
+                }
+            }
+        }
+    }
+
+    public Vector2? GetNpcPosition(string npcId)
+    {
+        if (_npcNodes.TryGetValue(npcId, out var node))
+            return node.GlobalPosition;
+        return null;
+    }
+
+    public string? GetNpcCurrentLocation(string npcId, int hour, int minute)
+    {
+        if (!_npcSchedules.TryGetValue(npcId, out var schedule))
+            return null;
+
+        var currentTime = new TimeOnly(hour, minute);
+
+        for (int i = schedule.Count - 1; i >= 0; i--)
+        {
+            if (schedule[i].Item1 <= currentTime)
+                return schedule[i].Item2;
+        }
+
+        return schedule.Count > 0 ? schedule[0].Item2 : null;
+    }
+}

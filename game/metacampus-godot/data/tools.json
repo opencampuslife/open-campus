@@ -1,0 +1,58 @@
+{
+  "tools": [
+    {
+      "tool_id": "knowledge_base",
+      "name": "招生知识库",
+      "description": "查询招生政策、学校信息、常见问答",
+      "icon": "📚",
+      "unlocked": true,
+      "effects": {
+        "school_efficiency": 5,
+        "parent_trust": 8
+      }
+    },
+    {
+      "tool_id": "auto_reminder",
+      "name": "企业微信自动提醒",
+      "description": "自动发送催办、通知提醒消息",
+      "icon": "🔔",
+      "unlocked": true,
+      "effects": {
+        "school_efficiency": 8
+      }
+    },
+    {
+      "tool_id": "ocr",
+      "name": "OCR识别",
+      "description": "识别截图、文档中的文字信息",
+      "icon": "📷",
+      "unlocked": true,
+      "effects": {
+        "school_efficiency": 6,
+        "compliance_safety": 5
+      }
+    },
+    {
+      "tool_id": "rpa",
+      "name": "RPA自动化",
+      "description": "自动执行重复性数据录入和表单处理",
+      "icon": "🤖",
+      "unlocked": false,
+      "effects": {
+        "school_efficiency": 10,
+        "compliance_safety": 6
+      }
+    },
+    {
+      "tool_id": "canary_release",
+      "name": "Canary灰度发布",
+      "description": "分阶段小流量验证新功能",
+      "icon": "🚀",
+      "unlocked": true,
+      "effects": {
+        "system_stability": 12,
+        "compliance_safety": 8
+      }
+    }
+  ]
+}

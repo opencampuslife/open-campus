@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://player_scene"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_player"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player")
+
+[node name="BodyRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(28, 28)
+offset_left = -14
+offset_top = -14
+offset_right = 14
+offset_bottom = 14
+color = Color(0.14, 0.39, 0.92, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_player")
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 0)
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 960
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0

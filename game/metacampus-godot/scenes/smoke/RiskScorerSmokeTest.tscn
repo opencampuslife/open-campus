@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/gdscript/smoke/risk_scorer_smoke_test.gd" id="1"]
+
+[node name="RiskScorerSmokeTest" type="Node2D"]
+script = ExtResource("1")

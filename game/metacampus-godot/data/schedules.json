@@ -1,0 +1,92 @@
+{
+  "schedules": [
+    {
+      "npc_id": "principal",
+      "schedule": [
+        {"time": "08:30", "location": "principal_office", "action": "work"},
+        {"time": "10:00", "location": "meeting_room", "action": "meeting"},
+        {"time": "13:30", "location": "admission_office", "action": "inspection"},
+        {"time": "16:00", "location": "ai_hub", "action": "review_dashboard"},
+        {"time": "18:00", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "admissions_director",
+      "schedule": [
+        {"time": "08:00", "location": "admission_office", "action": "work"},
+        {"time": "10:30", "location": "admission_office", "action": "consultation"},
+        {"time": "12:00", "location": "canteen", "action": "lunch"},
+        {"time": "13:30", "location": "admission_office", "action": "work"},
+        {"time": "15:00", "location": "principal_office", "action": "report"},
+        {"time": "17:30", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "homeroom_teacher",
+      "schedule": [
+        {"time": "07:30", "location": "academic_affairs", "action": "prepare"},
+        {"time": "09:00", "location": "teaching_building", "action": "class"},
+        {"time": "12:00", "location": "canteen", "action": "lunch"},
+        {"time": "14:00", "location": "academic_affairs", "action": "process_leave"},
+        {"time": "16:30", "location": "teaching_building", "action": "feedback"},
+        {"time": "18:00", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "it_operator",
+      "schedule": [
+        {"time": "09:00", "location": "it_office", "action": "work"},
+        {"time": "11:00", "location": "ai_hub", "action": "maintenance"},
+        {"time": "12:30", "location": "canteen", "action": "lunch"},
+        {"time": "14:00", "location": "server_room", "action": "check"},
+        {"time": "17:00", "location": "it_office", "action": "tickets"},
+        {"time": "18:30", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "logistics_manager",
+      "schedule": [
+        {"time": "08:00", "location": "logistics_area", "action": "inventory"},
+        {"time": "10:00", "location": "canteen", "action": "inspection"},
+        {"time": "12:00", "location": "canteen", "action": "lunch"},
+        {"time": "13:30", "location": "logistics_area", "action": "work"},
+        {"time": "15:30", "location": "dormitory", "action": "repair_check"},
+        {"time": "17:30", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "compliance_officer",
+      "schedule": [
+        {"time": "09:00", "location": "compliance_office", "action": "review"},
+        {"time": "11:00", "location": "ai_hub", "action": "monitor"},
+        {"time": "12:30", "location": "canteen", "action": "lunch"},
+        {"time": "14:00", "location": "compliance_office", "action": "audit"},
+        {"time": "16:00", "location": "principal_office", "action": "report"},
+        {"time": "18:00", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "parent_representative",
+      "schedule": [
+        {"time": "09:00", "location": "parent_reception", "action": "wait"},
+        {"time": "10:30", "location": "admission_office", "action": "consult"},
+        {"time": "12:00", "location": "canteen", "action": "lunch"},
+        {"time": "14:00", "location": "parent_reception", "action": "feedback"},
+        {"time": "16:30", "location": "parent_reception", "action": "wait"},
+        {"time": "18:30", "location": "school_gate", "action": "leave"}
+      ]
+    },
+    {
+      "npc_id": "student_representative",
+      "schedule": [
+        {"time": "08:00", "location": "teaching_building", "action": "class"},
+        {"time": "10:00", "location": "teaching_building", "action": "class"},
+        {"time": "12:00", "location": "canteen", "action": "lunch"},
+        {"time": "14:00", "location": "teaching_building", "action": "activity"},
+        {"time": "16:00", "location": "dormitory", "action": "rest"},
+        {"time": "18:00", "location": "teaching_building", "action": "study"},
+        {"time": "20:00", "location": "dormitory", "action": "return"}
+      ]
+    }
+  ]
+}

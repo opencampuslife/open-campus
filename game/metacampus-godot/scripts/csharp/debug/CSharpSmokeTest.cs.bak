@@ -1,0 +1,9 @@
+using Godot;
+
+public partial class CSharpSmokeTest : Node
+{
+    public override void _Ready()
+    {
+        GD.Print("=== CSharpSmokeTest loaded successfully ===");
+    }
+}

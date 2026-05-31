@@ -1,0 +1,138 @@
+{
+  "version": 2,
+  "npc_id": "student_representative",
+  "display_name": "沈一诺",
+  "role": "学生代表",
+  "generated_at": "2026-05-28T18:57:00+08:00",
+  "generator": "general (n2b3-batch-a-existing, matrix_generate_image + sips + Python RGBA pipeline)",
+  "style_bible_version": "v1.1",
+  "palette_guide_version": "v1.0",
+  "prompt_refs": {
+    "portrait_happy": "outputs/n2b2-style-delta/revised-prompts-student-representative.md A2",
+    "portrait_strict": "outputs/n2b2-style-delta/revised-prompts-student-representative.md A4",
+    "portrait_worried": "outputs/n2b2-style-delta/revised-prompts-student-representative.md A3"
+  },
+  "images": [
+    {
+      "filename": "portrait_neutral.png",
+      "type": "portrait",
+      "expression": "neutral",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from portrait_neutral_v2.png (N2B-2 baseline)"
+    },
+    {
+      "filename": "portrait_happy.png",
+      "type": "portrait",
+      "expression": "happy",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "general (n2b3-batch-a-existing)",
+      "generated_at": "2026-05-28T18:56:00+08:00",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779965700539-aba5ed0b.png",
+      "pipeline": "matrix_generate_image → sips PNG → sips resize 256x256 → Python pure-zlib RGBA (threshold=240)"
+    },
+    {
+      "filename": "portrait_strict.png",
+      "type": "portrait",
+      "expression": "strict",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "general (n2b3-batch-a-existing)",
+      "generated_at": "2026-05-28T18:56:00+08:00",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779965722282-579e1e23.png",
+      "pipeline": "matrix_generate_image → sips PNG → sips resize 256x256 → Python pure-zlib RGBA (threshold=240)"
+    },
+    {
+      "filename": "sprite_idle.png",
+      "type": "sprite",
+      "expression": "idle",
+      "canvas": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from sprite_idle_v2.png (N2B-2 baseline)"
+    },
+    {
+      "filename": "student_representative_walk_down.png",
+      "type": "walk_sheet",
+      "direction": "down",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from student_representative_walk_down_v2.png"
+    },
+    {
+      "filename": "student_representative_walk_up.png",
+      "type": "walk_sheet",
+      "direction": "up",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from student_representative_walk_up_v2.png"
+    },
+    {
+      "filename": "student_representative_walk_left.png",
+      "type": "walk_sheet",
+      "direction": "left",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from student_representative_walk_left_v2.png"
+    },
+    {
+      "filename": "student_representative_walk_right.png",
+      "type": "walk_sheet",
+      "direction": "right",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from student_representative_walk_right_v2.png"
+    }
+  ],
+  "constraints_verified": {
+    "stardew_forbidden": true,
+    "transparent_background": true,
+    "skin_tone": "#F4C7A1",
+    "style": "modern pixel art, NOT 8-bit retro, no noise or grain",
+    "character_colors": {
+      "uniform_shirt": "#F5E6D3",
+      "uniform_jacket": "#2D4A6B",
+      "pants": "#6B7280",
+      "badge": "#D4A843",
+      "backpack": "#2D4A6B",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E"
+    }
+  },
+  "deleted_legacy_files": [
+    "portrait_neutral_v2.png (renamed → portrait_neutral.png)",
+    "sprite_idle_v2.png (renamed → sprite_idle.png)",
+    "student_representative_walk_*_v2.png (renamed → walk_*.png)",
+    "expression_worried.png (deleted as v1 duplicate)",
+    "tmp/student_representative_walk_*.jpg (deleted as temp files)"
+  ],
+  "pending": {
+    "portrait_worried": {
+      "status": "blocked",
+      "reason": "matrix_generate_image quota insufficient (code 402); regeneration required",
+      "prompt_ref": "outputs/n2b2-style-delta/revised-prompts-student-representative.md A3"
+    }
+  }
+}

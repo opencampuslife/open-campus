@@ -1,0 +1,144 @@
+{
+  "version": 2,
+  "npc_id": "admissions_director",
+  "display_name": "周明远",
+  "role": "招生办主任",
+  "generated_at": "2026-05-28T18:57:00+08:00",
+  "generator": "general (n2b3-batch-a-existing, matrix_generate_image + sips + Python RGBA pipeline)",
+  "style_bible_version": "v1.1",
+  "palette_guide_version": "v1.0",
+  "prompt_refs": {
+    "portrait_happy": "outputs/n2b2-style-delta/revised-prompts-admissions-director.md A2",
+    "portrait_worried": "outputs/n2b2-style-delta/revised-prompts-admissions-director.md A3",
+    "portrait_strict": "outputs/n2b2-style-delta/revised-prompts-admissions-director.md A4"
+  },
+  "images": [
+    {
+      "filename": "portrait_neutral.png",
+      "type": "portrait",
+      "expression": "neutral",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from portrait_neutral_v2.png (N2B-2 baseline)"
+    },
+    {
+      "filename": "portrait_happy.png",
+      "type": "portrait",
+      "expression": "happy",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "general (n2b3-batch-a-existing)",
+      "generated_at": "2026-05-28T18:56:00+08:00",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779965680850-a7d4a458.png",
+      "pipeline": "matrix_generate_image → sips PNG → sips resize 256x256 → Python pure-zlib RGBA (threshold=240)"
+    },
+    {
+      "filename": "portrait_worried.png",
+      "type": "portrait",
+      "expression": "worried",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "general (n2b3-batch-a-existing)",
+      "generated_at": "2026-05-28T18:56:00+08:00",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779965698300-fdec6504.png",
+      "pipeline": "matrix_generate_image → sips PNG → sips resize 256x256 → Python pure-zlib RGBA (threshold=240)"
+    },
+    {
+      "filename": "portrait_strict.png",
+      "type": "portrait",
+      "expression": "strict",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "general (n2b3-batch-a-existing)",
+      "generated_at": "2026-05-28T18:56:00+08:00",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779965699597-71bd994d.png",
+      "pipeline": "matrix_generate_image → sips PNG → sips resize 256x256 → Python pure-zlib RGBA (threshold=240)"
+    },
+    {
+      "filename": "sprite_idle.png",
+      "type": "sprite",
+      "expression": "idle",
+      "canvas": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from sprite_idle_v2.png (N2B-2 baseline)"
+    },
+    {
+      "filename": "admissions_director_walk_down.png",
+      "type": "walk_sheet",
+      "direction": "down",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from admissions_director_walk_down_v2.png"
+    },
+    {
+      "filename": "admissions_director_walk_up.png",
+      "type": "walk_sheet",
+      "direction": "up",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from admissions_director_walk_up_v2.png"
+    },
+    {
+      "filename": "admissions_director_walk_left.png",
+      "type": "walk_sheet",
+      "direction": "left",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from admissions_director_walk_left_v2.png"
+    },
+    {
+      "filename": "admissions_director_walk_right.png",
+      "type": "walk_sheet",
+      "direction": "right",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "v2_rename",
+      "source_note": "Renamed from admissions_director_walk_right_v2.png"
+    }
+  ],
+  "constraints_verified": {
+    "stardew_forbidden": true,
+    "transparent_background": true,
+    "skin_tone": "#F4C7A1",
+    "style": "modern pixel art, NOT 8-bit retro",
+    "character_colors": {
+      "suit": "#2D4A6B",
+      "shirt": "#F5E6D3",
+      "tie": "#2D4A6B",
+      "emblem": "#D4A843",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E"
+    }
+  },
+  "deleted_legacy_files": [
+    "portrait_neutral_v2.png (renamed → portrait_neutral.png)",
+    "sprite_idle_v2.png (renamed → sprite_idle.png)",
+    "admissions_director_walk_*_v2.png (renamed → walk_*.png)",
+    "expression_strict.png (deleted as v1 duplicate)",
+    ".tmp_portrait_neutral.png (deleted as temp file)",
+    ".tmp_portrait_neutral.png.resized (deleted as temp file)",
+    "tmp/admissions_director_walk_*.jpg (deleted as temp files)"
+  ]
+}

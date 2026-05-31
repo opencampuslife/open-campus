@@ -1,0 +1,191 @@
+{
+  "quests": [
+    {
+      "id": "npc_principal_1",
+      "title": "熟悉校园系统",
+      "description": "校长希望你尽快熟悉校园 AI 系统的各项功能模块。",
+      "type": "npc",
+      "npc_id": "principal",
+      "location_id": "principal_office",
+      "priority": 3,
+      "requirements": {"day_min": 1, "trust_min": {"principal": 0}},
+      "objectives": [
+        {"id": "open_hud", "type": "open_dashboard", "target": "ai_hub", "required": 1},
+        {"id": "report_back", "type": "talk_to_npc", "target": "principal", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 5},
+        "skills_xp": {"communication": 20},
+        "npc_trust": {"principal": 2}
+      }
+    },
+    {
+      "id": "npc_principal_2",
+      "title": "首次数据汇报",
+      "description": "校长要求你汇报近期运营数据，展示 AI 系统成效。",
+      "type": "npc",
+      "npc_id": "principal",
+      "location_id": "principal_office",
+      "priority": 3,
+      "requirements": {"day_min": 3, "trust_min": {"principal": 2}},
+      "objectives": [
+        {"id": "open_dashboard", "type": "open_dashboard", "target": "ai_hub", "required": 1},
+        {"id": "explain_metrics", "type": "talk_to_npc", "target": "principal", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 8},
+        "skills_xp": {"communication": 30},
+        "npc_trust": {"principal": 1}
+      }
+    },
+    {
+      "id": "npc_admissions_1",
+      "title": "招生数据核对",
+      "description": "招生办主任要求核对昨日咨询数据与报名转化率。",
+      "type": "npc",
+      "npc_id": "admissions_director",
+      "location_id": "admission_office",
+      "priority": 2,
+      "requirements": {"day_min": 2, "trust_min": {"admissions_director": 0}},
+      "objectives": [
+        {"id": "check_data", "type": "collect_data", "target": "admissions_director", "required": 1},
+        {"id": "report_admissions", "type": "talk_to_npc", "target": "admissions_director", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 5, "parent_trust": 5},
+        "skills_xp": {"admissions": 25},
+        "npc_trust": {"admissions_director": 2}
+      }
+    },
+    {
+      "id": "npc_homeroom_1",
+      "title": "排课冲突检查",
+      "description": "班主任发现课表可能存在冲突，需要 AI 辅助检查。",
+      "type": "npc",
+      "npc_id": "homeroom_teacher",
+      "location_id": "academic_affairs",
+      "priority": 2,
+      "requirements": {"day_min": 2, "trust_min": {"homeroom_teacher": 0}},
+      "objectives": [
+        {"id": "scan_schedule", "type": "use_ai_tool", "target": "auto_approve", "required": 1},
+        {"id": "confirm_fix", "type": "talk_to_npc", "target": "homeroom_teacher", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 8},
+        "skills_xp": {"academic_affairs": 25},
+        "npc_trust": {"homeroom_teacher": 2}
+      }
+    },
+    {
+      "id": "npc_it_1",
+      "title": "系统健康检查",
+      "description": "IT 运维需要你协助做一次服务器健康检查。",
+      "type": "npc",
+      "npc_id": "it_operator",
+      "location_id": "it_office",
+      "priority": 2,
+      "requirements": {"day_min": 3, "trust_min": {"it_operator": 0}},
+      "objectives": [
+        {"id": "run_diagnostic", "type": "use_ai_tool", "target": "system_logs", "required": 1},
+        {"id": "report_status", "type": "talk_to_npc", "target": "it_operator", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"system_stability": 10},
+        "skills_xp": {"data_intelligence": 20, "operations": 15},
+        "npc_trust": {"it_operator": 2}
+      }
+    },
+    {
+      "id": "npc_logistics_1",
+      "title": "物资库存盘点",
+      "description": "后勤主管需要你协助盘点本月物资库存。",
+      "type": "npc",
+      "npc_id": "logistics_manager",
+      "location_id": "logistics_area",
+      "priority": 1,
+      "requirements": {"day_min": 2, "trust_min": {"logistics_manager": 0}},
+      "objectives": [
+        {"id": "inventory_check", "type": "collect_data", "target": "logistics_manager", "required": 1},
+        {"id": "submit_inventory", "type": "talk_to_npc", "target": "logistics_manager", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 5},
+        "skills_xp": {"operations": 20},
+        "npc_trust": {"logistics_manager": 2}
+      }
+    },
+    {
+      "id": "npc_compliance_1",
+      "title": "对话合规抽查",
+      "description": "合规专员需要你随机抽查部分对话记录的合规性。",
+      "type": "npc",
+      "npc_id": "compliance_officer",
+      "location_id": "compliance_office",
+      "priority": 3,
+      "requirements": {"day_min": 1, "trust_min": {"compliance_officer": 0}},
+      "objectives": [
+        {"id": "audit_logs", "type": "review_ai_answer", "target": "compliance_officer", "required": 3}
+      ],
+      "rewards": {
+        "metrics": {"compliance_safety": 8},
+        "skills_xp": {"compliance": 25},
+        "npc_trust": {"compliance_officer": 2}
+      }
+    },
+    {
+      "id": "npc_compliance_2",
+      "title": "识别招生违规承诺",
+      "description": "林澈教你识别高风险回答中的违规承诺。",
+      "type": "npc",
+      "npc_id": "compliance_officer",
+      "location_id": "compliance_office",
+      "priority": 3,
+      "requirements": {"day_min": 3, "trust_min": {"compliance_officer": 2}},
+      "objectives": [
+        {"id": "talk_compliance", "type": "talk_to_npc", "target": "compliance_officer", "required": 1},
+        {"id": "intercept_test", "type": "intercept_violation", "target": "test_dialogue", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"compliance_safety": 12},
+        "skills_xp": {"compliance": 35},
+        "npc_trust": {"compliance_officer": 1}
+      }
+    },
+    {
+      "id": "npc_parent_1",
+      "title": "家长反馈收集",
+      "description": "家长代表收集了其他家长对 AI 系统的使用反馈。",
+      "type": "npc",
+      "npc_id": "parent_representative",
+      "location_id": "parent_reception",
+      "priority": 2,
+      "requirements": {"day_min": 2, "trust_min": {"parent_representative": 0}},
+      "objectives": [
+        {"id": "listen_feedback", "type": "talk_to_npc", "target": "parent_representative", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"parent_trust": 8},
+        "skills_xp": {"communication": 20},
+        "npc_trust": {"parent_representative": 2}
+      }
+    },
+    {
+      "id": "npc_student_1",
+      "title": "学生需求调研",
+      "description": "学生代表想了解 AI 系统对学生日常的帮助与不足。",
+      "type": "npc",
+      "npc_id": "student_representative",
+      "location_id": "classroom",
+      "priority": 1,
+      "requirements": {"day_min": 3, "trust_min": {"student_representative": 0}},
+      "objectives": [
+        {"id": "student_survey", "type": "talk_to_npc", "target": "student_representative", "required": 1}
+      ],
+      "rewards": {
+        "metrics": {"school_efficiency": 5},
+        "skills_xp": {"communication": 15, "data_intelligence": 10},
+        "npc_trust": {"student_representative": 2}
+      }
+    }
+  ]
+}

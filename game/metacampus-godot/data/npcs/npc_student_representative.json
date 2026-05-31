@@ -1,0 +1,35 @@
+{
+  "npc_id": "student_representative",
+  "display_name": "沈一诺",
+  "en_name": "Shen Yinuo",
+  "role": "学生代表",
+  "department": "教学楼",
+  "location": "teaching_building",
+  "personality": ["阳光开朗", "有责任感"],
+  "core_conflict": "她是学生会副主席，同学们什么意见都找她反映——请假太麻烦、食堂菜少、报修太慢。她既要帮同学解决问题，又要理解学校的流程限制，常常在'朋友'和'代表'两种身份之间切换。",
+  "player_relationship": "她把你当作学校的'新科技'，既好奇又审慎。她帮你收集请假数据，也希望你能帮她说服学校把流程变得更人性化。她是你获得学生侧反馈的重要渠道。",
+  "primary_metric": "parent_trust",
+  "secondary_metric": "school_efficiency",
+  "quest_ids": ["q_leave_request_001"],
+  "visual_keywords": ["整洁校服", "白色运动鞋", "书包上别着学生会徽章", "随身携带的意见收集本"],
+  "voice_tone": "少年感十足，直言不讳但不失礼貌。和同学说话时随意活泼，和老师校长交谈时立刻挺直腰板、认真措辞。",
+  "forbidden_behavior": "鼓动学生集体违反校规以表达不满，或在未了解全貌的情况下向同学们传播片面信息",
+  "metric_effects": {
+    "on_quest_complete": {
+      "parent_trust": 3,
+      "school_efficiency": 2
+    }
+  },
+  "trust_level": 3,
+  "risk_tolerance": 6,
+  "favorite_topics": ["尊重学生", "减少管理机械化", "学生活动支持"],
+  "disliked_actions": ["忽视学生感受", "机械化管理", "信息不透明"],
+  "schedule_id": "student_representative",
+  "relationship_events": [
+    {"trust_required": 2, "title": "学生意见收集", "description": "沈一诺分享学生管理建议"},
+    {"trust_required": 4, "title": "流程人性化", "description": "共同推动流程优化"},
+    {"trust_required": 6, "title": "学生活动支持", "description": "开放学生活动管理权限"},
+    {"trust_required": 8, "title": "学生权益联盟", "description": "成为学生权益的重要伙伴"},
+    {"trust_required": 10, "title": "学生自治伙伴", "description": "成为学生自治核心盟友"}
+  ]
+}

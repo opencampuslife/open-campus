@@ -1,0 +1,173 @@
+version: 1
+plan:
+  name: 'P1B API Resilience Layer——缓存 + 超时/取消 + 轻量队列'
+  max_concurrency: 10
+  max_consecutive_failures: 2
+  max_cycles: 10
+tasks:
+  # ── Task 1: Config Schema ──
+  - id: update-config
+    title: '更新 api_config.json——添加缓存/队列/超时配置项'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/data/api_config.json 中添加以下配置项：
+
+      ```json
+      {
+        ...现有字段...
+        "cache": {
+          "enabled": true,
+          "max_entries": 100,
+          "ttl_ms": 300000
+        },
+        "queue": {
+          "max_concurrent_live": 2,
+          "overflow_policy": "fallback_immediate"
+        },
+        "timeout": {
+          "mock_ms": 100,
+          "live_ms": 10000,
+          "off_ms": 50
+        }
+      }
+      ```
+
+      约束：
+      - 保留所有现有字段（mode, base_url, timeout_ms, fallback_to_mock, endpoints, high_risk_keywords）
+      - 保留 timeout_ms 作为全局默认超时（新字段 per-mode 覆盖它）
+      - 不修改格式，纯 JSON
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: |
+      1. python3 -c "import json; json.load(open('data/api_config.json'))" 验证 JSON 合法
+      2. 确认所有现有字段未删除
+      3. 确认 cache.enabled, queue.max_concurrent_live, timeout.live_ms 存在
+    timeout_ms: 300000
+
+  # ── Task 2: 实现缓存 + 超时/取消 + 轻量队列 ──
+  - id: implement-resilience
+    title: '在 api_client.gd 中实现响应缓存 + 超时/取消 + 请求队列'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/scripts/api_client.gd 中实现 API Resilience Layer。
+
+      当前文件 389 行，已有：BENCH_MODE、mock/live/off 三种模式、high_risk guard、fallback 逻辑。
+
+      ### 1. 响应缓存 (Response Cache)
+
+      - 从 config["cache"] 读取设置
+      - 缓存键 = normalized query（trim + lowercase）
+      - 存储字段：response Dictionary, timestamp, npc_id context（可选）
+      - TTL = config.cache.ttl_ms (默认 300000 = 5min)
+      - max_entries = config.cache.max_entries (默认 100)
+      - 当 cache 满时，驱逐最旧的条目
+      - 只缓存成功（ok=true）且非 blocked/high-risk 的响应
+      - 添加 cache_hit/cache_miss 到 _bench_results（BENCH_MODE 守卫）
+      - 支持通过 config.cache.enabled=false 关闭缓存，关闭后行为回退到当前基线
+
+      ### 2. 超时/取消 (Timeout/Cancel)
+
+      - 从 config["timeout"] 读取 per-mode 超时（live_ms/mock_ms/off_ms）
+      - live 默认超时 10000ms（替代当前全局 20000ms）
+      - 在 _ask_knowledge_live() 中使用 SceneTreeTimer 或 create_timer() 实现超时
+      - 超时触发时：
+        - 调用 http_request.cancel() 取消待处理的 HTTP 请求
+        - 输出 fallback 响应（status=timeout_fallback）
+        - 触发 api_fallback_triggered 信号
+        - 回调正确执行
+      - 如果请求在超时前完成，取消 timer
+
+      ### 3. 轻量请求队列 (Request Queue)
+
+      - 从 config["queue"] 读取设置
+      - max_concurrent_live (默认 2)：允许的最大并发 live 请求数
+      - overflow_policy：fallback_immediate（默认）/ reject_new / reject_oldest
+      - 队列使用 Array[Dictionary] 存储待处理请求：{query, callback}
+      - 请求进入队列 → 如果当前并发 < max_concurrent_live，直接执行
+      - 如果并发已达上限：
+        - fallback_immediate：立即返回 fallback mock 响应
+        - reject_new：输出错误响应
+        - reject_oldest：取消最早的待处理请求，放入新的
+      - 请求完成 → 检查队列中是否有等待的请求并执行
+
+      ### 4. Observability 计数器 (BENCH_MODE 守卫)
+
+      添加以下计数器（仅在 BENCH_MODE=true 时累加）：
+      - cache_hit, cache_miss, timeout_count, fallback_count, queue_depth_max, live_request_count
+
+      ### 约束：
+      - 所有新增行为必须通过 Config 中的 enabled 开关可关闭
+      - cache.enabled=false 时，缓存完全绕过
+      - queue.max_concurrent_live=0 时，队列禁用
+      - BENCH_MODE=false 时，计数器不产生开销
+      - 每个请求最多一次回调
+      - 不引入磁盘持久化
+      - 不修改 mock/off 模式的行为
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+    assigned_to: general
+    depends_on: [update-config]
+    verified_by: verifier
+    verify_prompt: |
+      1. python3 -c "import ast; ast.parse(open('scripts/api_client.gd').read())" 验证 GDScript 语法（忽略类型错误）
+      2. 检查 cache.enabled=false 时缓存代码是否跳过
+      3. 检查 queue.max_concurrent_live=0 时队列是否禁用
+      4. 检查每个出口是否恰有一次 callback.call()
+      5. 检查超时场景是否会调用 http_request.cancel()
+      6. 检查 smoke_g2.py/smoke 不受影响（静态分析：方法签名未变、信号未改）
+    timeout_ms: 1800000
+
+  # ── Task 3: 缓存/队列/超时验证测试 ──
+  - id: test-resilience
+    title: '编写并运行缓存/超时/队列验证测试'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 编写测试验证 P1B 实现。
+
+      创建 tools/test_resilience.py（参照 smoke_g*.py 风格），通过 TestHarness HTTP 端点验证：
+
+      1. cache hit 避免 provider 调用：连续两次相同 query → 第二次延迟 < 5ms
+      2. cache TTL 过期：等待 TTL 后相同 query → 延迟 ≈ live 模式基线（走 provider）
+      3. cache 关闭：config cache.enabled=false → 相同 query 每次都走 live
+      4. 超时触发 fallback：设置 timeout.live_ms=1 → 请求立即超时 → 返回 fallback 响应
+      5. 队列限制：max_concurrent_live=1 → 两个并发请求 → 第二个走队列或 fallback
+      6. high-risk 不缓存："保证录取" → 响应 handoff_required=true → 不产生 cache 条目
+
+      运行方式：启动 Godot → TestHarness 就绪 → 修改 api_config → 发送请求 → 验证行为。
+      运行完后清理 api_config 到初始状态。
+
+      不修改 api_client.gd 本身（只读测试）。
+      如果运行时验证因环境限制不可行，输出测试方案设计和静态分析结论。
+    assigned_to: general
+    depends_on: [implement-resilience]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 tools/test_resilience.py 存在且语法正确
+      2. 检查验证覆盖了 6 个测试场景
+      3. 如果有运行时结果，检查 PASS/FAIL
+      4. 检查 smoke g2 未损坏
+    timeout_ms: 600000
+
+  # ── Task 4: Smoke 回归 ──
+  - id: smoke-p1b
+    title: 'Smoke g2/g3/g4 回归——确认 P1B 无破坏'
+    prompt: |
+      P1B 变更后运行全量回归：
+
+      1. 在 api_config.json 中设置 cache.enabled=false
+      2. 运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py
+      3. 确认 68/68 通过
+      4. 在 api_config.json 中设置 cache.enabled=true + max_concurrent_live=2
+      5. 再次运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py
+      6. 确认 68/68 通过
+      7. 重置 api_config 到默认
+      8. 输出报告 reports/smoke-p1b-regression.md
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+    assigned_to: general
+    depends_on: [test-resilience]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 cache disabled 下 g2/g3/g4 是否 68/68
+      2. 检查 cache enabled 下 g2/g3/g4 是否 68/68
+      3. 检查 reports/smoke-p1b-regression.md 存在
+    timeout_ms: 600000

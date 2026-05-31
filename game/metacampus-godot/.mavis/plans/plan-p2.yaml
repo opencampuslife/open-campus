@@ -1,0 +1,175 @@
+version: 1
+plan:
+  name: 'P2 NPC 行为压力剖析——确认 300+ NPC 下真实热点'
+  max_concurrency: 10
+  max_consecutive_failures: 2
+  max_cycles: 10
+tasks:
+  # ── Task 1: 探索 NPC 行为代码结构 ──
+  - id: explore-npc
+    title: '探索 NPC 行为代码——理解 behavior tick/proximity/animation/signal 实现'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 探索 NPC 相关代码：
+
+      读取分析以下文件：
+      - scripts/ 下所有 npc*.gd 文件
+      - scripts/player*.gd
+      - scripts/quest_manager.gd
+      - scripts/dialogue_manager.gd
+      - scripts/metric_manager.gd
+      - scripts/test_harness.gd（理解如何驱动场景）
+      - tools/perf_capture.gd（理解现有采集模式）
+      - tools/perf_baseline.py（理解编排器模式）
+      - scenes/Main.tscn 和相关场景文件
+
+      产出 reports/npc-code-map.md，包含：
+      1. NPC 节点结构：scene tree 层次、关联的脚本、信号连接
+      2. 行为 tick 逻辑：_process/_physics_process 频率、行为状态机
+      3. Proximity 检查：Area2D 配置、碰撞层、交互距离、更新频率
+      4. 动画系统：AnimationPlayer 配置、sprite 切换逻辑
+      5. Signal/Event 连接：NPC → QuestManager/MetricManager/UI
+      6. 物理设置：碰撞形状、layers/masks
+      7. 现有的 perf_capture.gd 采集指标（理解复用方式）
+      8. 所有场景/脚本中的性能关键路径
+
+      不修改任何代码。
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 reports/npc-code-map.md 存在非空
+      2. 检查覆盖了 NPC 节点结构、behavior tick、proximity、animation、signal、physics
+      3. 不要重复找 perf_capture.gd 模式（已存在）
+    timeout_ms: 600000
+
+  # ── Task 2: 创建 NPC 压力采集脚本 ──
+  - id: capture-script
+    title: '创建 tools/npc_pressure_capture.gd——支持多场景 NPC 梯度压力采集'
+    prompt: |
+      基于 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 现有 tools/perf_capture.gd 模式，
+      创建 tools/npc_pressure_capture.gd，扩展采集能力：
+
+      继承 perf_capture.gd 的 extends SceneTree + headless 模式，新增：
+
+      1. NPC 梯度控制：
+         --npc=N 控制 NPC 总数（10/50/100/300/500/1000）
+         --scenario=idle/animated/behavior/proximity/dialogue/all 控制场景模式
+         --dense 启用密集摆放（测试碰撞/物理）
+         --api-enabled 启用 api_client（测试信号/事件负载）
+
+      2. Scenario 模式：
+         - idle: NPC 静态不动，无行为 tick
+         - animated: NPC 有 idle animation
+         - behavior: NPC 执行 behavior tick（巡逻/随机移动）
+         - proximity: NPC 启用 Area2D 交互检测
+         - dialogue: NPC 载入对话数据
+         - all: 所有功能全开（最重负载）
+
+      3. 额外采集指标（在现有 FPS/帧耗时基础上增加）：
+         - signal_emit_count（跟踪 Performance.get_monitor 或手动计数器）
+         - node_count（已有）
+         - physics_time（已有）
+         - memory_bytes（已有）
+         - 脚本方法级热点（如果 Godot profiler 可导出）
+
+      4. 输出 CSV 格式扩展列：
+         scenario,npc_count,frames,signal_emit_count,...
+
+      5. 每轮采样 ≥30s
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+    assigned_to: general
+    depends_on: [explore-npc]
+    verified_by: verifier
+    verify_prompt: |
+      1. 检查 extends SceneTree（可在 --headless 模式加载）
+      2. 检查 --npc= 和 --scenario= 参数正确解析
+      3. 检查 CSV 输出格式
+      4. 检查 smoke g2 不受影响（静态分析）
+    timeout_ms: 600000
+
+  # ── Task 3: 创建编排器 ──
+  - id: orchestrator-p2
+    title: '创建 tools/npc_pressure_bench.py——多场景多梯度编排采集 + 报告生成'
+    prompt: |
+      基于 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 现有 tools/perf_baseline.py 风格，
+      创建 tools/npc_pressure_bench.py：
+
+      测试矩阵：
+      NPC 梯度: [10, 50, 100, 300, 500, 1000]
+      场景: [idle, animated, behavior, proximity, dialogue, all, dense_all]
+      每个组合采集 ≥30s
+
+      报告生成：
+      1. Markdown 报告 reports/npc-pressure-profile.md
+      2. 结构化 JSON reports/npc-pressure-profile.json
+      3. 验收表需要包含：
+         | NPC | Scenario | FPS avg | FPS min | Frame P95 | Physics P95 | Memory | Main bottleneck |
+
+      4. 分析每个瓶颈假设（见用户指令）：
+         - behavior tick vs process_time
+         - proximity vs O(n) scaling
+         - signal/UI vs frame spike
+         - collision vs physics_time
+         - animation vs idle
+         - memory/node_count vs NPC count
+
+      不修改生产代码。不调用 LLM live API。
+    assigned_to: general
+    depends_on: [capture-script]
+    verified_by: verifier
+    verify_prompt: |
+      1. python3 -c "import ast; ast.parse(open('tools/npc_pressure_bench.py').read())"
+      2. 验收表包含所有 NPC 梯度和场景
+      3. 输出路径 reports/ 下
+    timeout_ms: 600000
+
+  # ── Task 4: 运行采集 ──
+  - id: run-p2
+    title: '执行 NPC 压力采集——多梯度多场景全量跑'
+    prompt: |
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 执行 NPC 压力采集。
+
+      1. 终止所有 Godot 进程
+      2. 运行: python3 tools/npc_pressure_bench.py
+      3. 采集矩阵：
+         NPC 梯度: 10, 50, 100, 300, 500（1000 optional 如果稳定）
+         场景: idle, animated, behavior, proximity, all
+      4. 确认输出：
+         - reports/npc-pressure-profile.md
+         - reports/npc-pressure-profile.json
+      5. 清理后台进程
+      6. 注意：headless 模式可能无法触发所有 animation，如遇到用 --display 模式
+
+      如果某个 NPC 梯度不稳定（崩溃/内存不足），跳过该梯度并记录。
+      不调用 LLM live API。
+    assigned_to: general
+    depends_on: [orchestrator-p2]
+    verified_by: verifier
+    verify_prompt: |
+      1. reports/npc-pressure-profile.md 存在非空
+      2. reports/npc-pressure-profile.json 存在非空
+      3. 至少 3 个 NPC 梯度 + 3 个场景有数据
+      4. 报告中含 bottleneck 分析
+    timeout_ms: 1800000
+
+  # ── Task 5: Smoke 回归 ──
+  - id: smoke-p2
+    title: 'Smoke g2/g3/g4——确认 P2 仪器化未引发回归'
+    prompt: |
+      P2 变更后运行全量回归。
+
+      1. 终止所有 Godot 进程
+      2. 启动 Godot（带 display）
+      3. 等待 TestHarness 就绪 (port 16007)
+      4. 依次运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py
+      5. 确认 68/68 通过
+      6. 输出报告 reports/smoke-p2-regression.md
+
+      项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot
+    assigned_to: general
+    depends_on: [run-p2]
+    verified_by: verifier
+    verify_prompt: |
+      1. g2/g3/g4 全部 returncode=0
+      2. reports/smoke-p2-regression.md 存在
+    timeout_ms: 600000

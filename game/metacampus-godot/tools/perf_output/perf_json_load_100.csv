@@ -1,0 +1,16 @@
+file,stage,time_us
+dialogues,cold,45
+dialogues,parse,119
+dialogues,hot,27
+quests,cold,31
+quests,parse,136
+quests,hot,27
+npcs,cold,26
+npcs,parse,42
+npcs,hot,21
+locations,cold,23
+locations,parse,39
+locations,hot,20
+api_config,cold,23
+api_config,parse,26
+api_config,hot,19

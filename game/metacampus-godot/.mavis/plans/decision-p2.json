@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "orchestrator",
+      "verdict": "accept",
+      "reason": "tools/api_latency_bench.py 验证通过。多 mode 编排、Bridge lifecycle、报告生成模式正确。"
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "run-capture",
+      "title": "执行 API 延迟采集——对所有 mode 跑测量并生成报告",
+      "prompt": "在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot 执行 API 延迟采集。\n\n前置条件：\n- tools/api_latency_bench.py 已就绪（编排器刚创建的）\n- tools/api_latency_capture.gd 已就绪\n- scripts/api_client.gd 的 BENCH_MODE 由 env var PERF_BENCH=1 控制（不是 const）\n- tools/llm_bridge.py 已添加 X-Bench 计时（由 X-Bench: 1 header 控制）\n\n执行步骤：\n1. 终止所有 Godot / Python 残留进程\n2. 启动 LLM Bridge: PERF_BENCH=1 python3 tools/llm_bridge.py &\n3. 启动 Godot（带 display，因为 TestHarness 需要 HTTP endpoint）\n4. 等 TestHarness 就绪（port 16007）和 Bridge 就绪（port 8788）\n5. 运行: PERF_BENCH=1 python3 tools/api_latency_bench.py\n   （PERF_BENCH=1 使 api_client.gd 的 BENCH_MODE 激活）\n6. 确认输出存在：\n   - reports/api-latency-breakdown.md\n   - reports/api-latency-breakdown.json\n   - tools/perf_output/perf_api_raw.json\n7. 如果 live 模式不可用（DRY_RUN 模式或无 API key），跳过 live，在 mock/off/fallback 收够各 ≥30 样本\n8. fallback 模式：将 api_client 设为 live 模式，但让 bridge 端口不可达 → 验证 fallback 行为\n9. 清理后台进程\n\n安全：不打印/提交 API key。",
+      "assigned_to": "general",
+      "verified_by": "verifier",
+      "verify_prompt": "1. reports/api-latency-breakdown.md 存在且非空\n2. reports/api-latency-breakdown.json 存在且非空\n3. 报告含验收表：每个 mode 有 samples/avg/median/P95/P99/error rate/main bottleneck\n4. 报告推荐下一步（request queue / cache / timeout / bridge / no-op）\n5. mock/off 各 ≥30 样本（live 可跳过）",
+      "timeout_ms": 1800000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "编排器通过。现启动 P1 数据采集——对 mock/off/live/fallback 各 mode 跑延迟拆解。预计 15-20 分钟出报告。"
+}

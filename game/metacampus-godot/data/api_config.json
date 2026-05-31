@@ -1,0 +1,33 @@
+{
+  "mode": "mock",
+  "base_url": "http://127.0.0.1:8788",
+  "timeout_ms": 20000,
+  "fallback_to_mock": true,
+  "endpoints": {
+    "knowledge_ask": "/chat"
+  },
+  "high_risk_keywords": [
+    "保证录取",
+    "内部名额",
+    "特殊照顾",
+    "走后门",
+    "包进",
+    "承诺录取",
+    "一定能上",
+    "百分百录取"
+  ],
+  "cache": {
+    "enabled": true,
+    "max_entries": 100,
+    "ttl_ms": 300000
+  },
+  "queue": {
+    "max_concurrent_live": 2,
+    "overflow_policy": "fallback_immediate"
+  },
+  "timeout": {
+    "mock_ms": 100,
+    "live_ms": 10000,
+    "off_ms": 50
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "last_cycle": [
+    {
+      "task_id": "test-resilience",
+      "verdict": "accept",
+      "reason": "测试验证通过。6 项运行时测试+静态分析全绿。LRU 驱逐边界已知非阻断。"
+    }
+  ],
+  "next_cycle": [
+    {
+      "task_id": "smoke-p1b",
+      "title": "Smoke g2/g3/g4 回归——确认 P1B 无破坏",
+      "prompt": "P1B 变更后运行全量回归。\n\n项目根目录: /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot\n\n执行步骤：\n1. 确保 api_config.json 中 cache.enabled=false（避免缓存影响测试）\n2. 终止所有 Godot/Python 进程\n3. 启动 Godot（需 display，因为 TestHarness）\n4. 等待 TestHarness 就绪 (port 16007)\n5. 依次运行: python3 tools/smoke_g2.py && python3 tools/smoke_g3.py && python3 tools/smoke_g4.py\n6. 确认 g2/g3/g4 全部通过 (returncode=0)\n7. 设置 api_config.json 中 cache.enabled=true\n8. 再次运行 smoke_g2/3/4，确认仍 68/68\n9. 重置 api_config 到默认\n10. 输出报告 reports/smoke-p1b-regression.md",
+      "assigned_to": "general",
+      "verified_by": "verifier",
+      "verify_prompt": "1. g2/g3/g4 全部 returncode=0\n2. cache enabled 和 disabled 两种状态都 68/68\n3. reports/smoke-p1b-regression.md 存在",
+      "timeout_ms": 600000
+    }
+  ],
+  "plan_complete": false,
+  "message_to_user": "测试验证通过。最后一步 Smoke 回归。"
+}

@@ -1,0 +1,12 @@
+[configuration]
+compatibility_minimum="4.6"
+entry_symbol="riskscorer_library_init"
+name="RiskScorer"
+version="0.1.0"
+description="Compliance risk scoring for MetaCampus 2D NPC dialogue"
+author="MetaCampus Team"
+license="MIT"
+
+[libraries]
+macos.debug="res://native/risk_scorer/bin/librisk_scorer.dylib"
+macos.release="res://native/risk_scorer/bin/librisk_scorer.dylib"

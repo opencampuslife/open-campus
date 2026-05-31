@@ -1,0 +1,133 @@
+{
+  "version": "1.0",
+  "npc_id": "principal",
+  "display_name": "唐毓",
+  "role": "校长",
+  "generated_at": "2026-05-29T01:55:00+08:00",
+  "generator": "pixel-artist (n2b3-batch-b-new, matrix_generate_image + sips + Python pure-zlib RGBA pipeline)",
+  "style_bible_version": "v1.1",
+  "palette_guide_version": "v1.0",
+
+  "images": [
+    {
+      "filename": "portrait_neutral.png",
+      "type": "portrait",
+      "expression": "neutral",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990389141-2a54051a.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_happy.png",
+      "type": "portrait",
+      "expression": "happy",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990391438-0140751e.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_worried.png",
+      "type": "portrait",
+      "expression": "worried",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990394579-23383ffd.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "portrait_strict.png",
+      "type": "portrait",
+      "expression": "strict",
+      "canvas": "256x256",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990391938-9caffe09.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "sprite_idle.png",
+      "type": "sprite",
+      "expression": "idle",
+      "canvas": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_url": "/Users/kevinzzz/Documents/database/matrix-media-1779990417599-e951a2cb.png",
+      "pipeline": "matrix_generate_image → sips PNG → Python pure-zlib RGBA resize+transparency"
+    },
+    {
+      "filename": "principal_walk_down.png",
+      "type": "walk_sheet",
+      "direction": "down",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "generator": "pixel-artist",
+      "model_output_urls": [
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990417900-705f41aa.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990419393-4640b80d.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990417686-718df028.png",
+        "/Users/kevinzzz/Documents/database/matrix-media-1779990417498-2431aec2.png"
+      ],
+      "pipeline": "matrix_generate_image × 4 frames → sips PNG → Python pure-zlib RGBA resize → concat_horizontal"
+    },
+    {
+      "filename": "principal_walk_up.png",
+      "type": "walk_sheet",
+      "direction": "up",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "mirror_down"
+    },
+    {
+      "filename": "principal_walk_left.png",
+      "type": "walk_sheet",
+      "direction": "left",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "mirror_down"
+    },
+    {
+      "filename": "principal_walk_right.png",
+      "type": "walk_sheet",
+      "direction": "right",
+      "canvas": "256x64",
+      "frames": 4,
+      "frame_size": "64x64",
+      "format": "PNG",
+      "color_type": "RGBA",
+      "source": "copy_down"
+    }
+  ],
+
+  "constraints_verified": {
+    "stardew_forbidden": true,
+    "transparent_background": true,
+    "skin_tone": "#F4C7A1",
+    "style": "modern pixel art, NOT 8-bit retro",
+    "character_colors": {
+      "suit": "#374151",
+      "shirt": "#F5E6D3",
+      "badge": "#D4A843",
+      "skin": "#F4C7A1",
+      "outline": "#1A1A2E"
+    }
+  }
+}

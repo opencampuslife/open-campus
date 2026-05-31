@@ -1,0 +1,446 @@
+{
+  "quests": [
+    {
+      "id": "daily_admission_001",
+      "title": "招生咨询",
+      "description": "家长询问报名材料，使用知识库回答并引用来源。",
+      "type": "daily",
+      "category": "admissions",
+      "npc_id": "parent_representative",
+      "location_id": "admission_office",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 18, "minute": 0},
+      "requirements": {
+        "day_min": 1,
+        "skills_min": {"admissions": 1},
+        "metrics_min": {"compliance_safety": 30},
+        "unlocked_locations": ["admission_office"]
+      },
+      "objectives": [
+        {"id": "talk_parent", "type": "talk_to_npc", "target": "parent_representative", "required": 1},
+        {"id": "use_rag", "type": "use_ai_tool", "target": "knowledge_base", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "safe_answer",
+          "text": "根据招生政策回答，并引用材料清单来源。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 3, "parent_trust": 8, "compliance_safety": 5},
+            "skills_xp": {"admissions": 20, "communication": 10},
+            "resources": {"compute": -5},
+            "npc_trust": {"parent_representative": 1}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "vague_answer",
+          "text": "简单回答，不引用来源。",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"parent_trust": -2, "compliance_safety": -3},
+            "skills_xp": {"communication": 5}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"resources": {"budget": 300}, "skills_xp": {"admissions": 10}}
+    },
+    {
+      "id": "daily_admission_002",
+      "title": "报名材料催办",
+      "description": "部分家长未提交完整报名材料，需要发送催办通知。",
+      "type": "daily",
+      "category": "admissions",
+      "npc_id": "admissions_director",
+      "location_id": "admission_office",
+      "priority": 1,
+      "deadline": {"type": "same_day", "hour": 17, "minute": 0},
+      "requirements": {"day_min": 1, "unlocked_locations": ["admission_office"]},
+      "objectives": [
+        {"id": "generate_notice", "type": "use_ai_tool", "target": "auto_approve", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "polite_reminder",
+          "text": "发送温和催办通知，附材料清单。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 5, "parent_trust": 3},
+            "skills_xp": {"admissions": 15, "communication": 10},
+            "resources": {"compute": -3}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "direct_warning",
+          "text": "发送严肃警告，限定截止日期。",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"school_efficiency": 8, "parent_trust": -5},
+            "skills_xp": {"admissions": 10}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"admissions": 10}}
+    },
+    {
+      "id": "daily_leave_003",
+      "title": "请假申请汇总",
+      "description": "汇总今日请假申请并提交班主任审批。",
+      "type": "daily",
+      "category": "academic_affairs",
+      "npc_id": "homeroom_teacher",
+      "location_id": "academic_affairs",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 16, "minute": 0},
+      "requirements": {"day_min": 1},
+      "objectives": [
+        {"id": "collect_leave", "type": "collect_data", "target": "homeroom_teacher", "required": 1},
+        {"id": "report_leave", "type": "talk_to_npc", "target": "homeroom_teacher", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "auto_summary",
+          "text": "使用 AI 自动生成请假汇总表。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 8},
+            "skills_xp": {"academic_affairs": 20, "data_intelligence": 10},
+            "resources": {"compute": -6}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "manual_check",
+          "text": "逐条人工核对请假申请。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 5},
+            "skills_xp": {"academic_affairs": 10},
+            "resources": {"ap": -5}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"academic_affairs": 10}}
+    },
+    {
+      "id": "daily_meal_004",
+      "title": "食堂订餐统计",
+      "description": "统计今日订餐数量并生成汇总表提交后勤主管。",
+      "type": "daily",
+      "category": "logistics",
+      "npc_id": "logistics_manager",
+      "location_id": "canteen",
+      "priority": 1,
+      "deadline": {"type": "same_day", "hour": 10, "minute": 0},
+      "requirements": {"day_min": 1},
+      "objectives": [
+        {"id": "collect_meal", "type": "collect_data", "target": "canteen", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "generate_report",
+          "text": "生成订餐汇总报告。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 5},
+            "skills_xp": {"data_intelligence": 15, "operations": 5},
+            "resources": {"compute": -5, "budget": -50}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"data_intelligence": 10}}
+    },
+    {
+      "id": "daily_repair_005",
+      "title": "宿舍报修派单",
+      "description": "处理今日宿舍报修申请，分配维修任务。",
+      "type": "daily",
+      "category": "logistics",
+      "npc_id": "logistics_manager",
+      "location_id": "dormitory",
+      "priority": 1,
+      "deadline": {"type": "same_day", "hour": 17, "minute": 0},
+      "requirements": {"day_min": 2},
+      "objectives": [
+        {"id": "dispatch_repair", "type": "use_ai_tool", "target": "auto_approve", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "auto_dispatch",
+          "text": "使用 AI 自动分类并派单。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 6, "system_stability": 2},
+            "skills_xp": {"operations": 15, "data_intelligence": 5},
+            "resources": {"compute": -4}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "priority_sort",
+          "text": "按紧急程度手工排序后派单。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 3, "parent_trust": 3},
+            "skills_xp": {"operations": 10},
+            "resources": {"ap": -3}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"operations": 10}}
+    },
+    {
+      "id": "daily_complaint_006",
+      "title": "家长投诉初筛",
+      "description": "对收到的家长投诉进行分类和优先级标注。",
+      "type": "daily",
+      "category": "communication",
+      "npc_id": "parent_representative",
+      "location_id": "parent_reception",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 18, "minute": 0},
+      "requirements": {"day_min": 3},
+      "objectives": [
+        {"id": "screen_complaint", "type": "collect_data", "target": "parent_representative", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "ai_screening",
+          "text": "使用 AI 分类投诉并标记紧急程度。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 8, "parent_trust": 5},
+            "skills_xp": {"communication": 20, "data_intelligence": 10},
+            "resources": {"compute": -8}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "manual_screening",
+          "text": "逐条人工阅读并分类。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"parent_trust": 5},
+            "skills_xp": {"communication": 15},
+            "resources": {"ap": -6}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"communication": 10}}
+    },
+    {
+      "id": "daily_kbcheck_007",
+      "title": "知识库引用检查",
+      "description": "抽查 AI 回答中的知识库引用是否准确、来源是否最新。",
+      "type": "daily",
+      "category": "quality",
+      "npc_id": "compliance_officer",
+      "location_id": "compliance_office",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 19, "minute": 0},
+      "requirements": {"day_min": 2, "unlocked_locations": ["compliance_office"]},
+      "objectives": [
+        {"id": "check_citations", "type": "review_ai_answer", "target": "knowledge_base", "required": 3}
+      ],
+      "choices": [
+        {
+          "id": "diligent_check",
+          "text": "逐一核实引用来源和时效性。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 10, "system_stability": 3},
+            "skills_xp": {"compliance": 20, "data_intelligence": 15},
+            "resources": {"ap": -4}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "spot_check",
+          "text": "随机抽查 20%。",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 3},
+            "skills_xp": {"compliance": 5}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"compliance": 15}}
+    },
+    {
+      "id": "daily_review_008",
+      "title": "AI 回答复核",
+      "description": "复核今日 AI 对家长的高频回答，确保无风险表述。",
+      "type": "daily",
+      "category": "quality",
+      "npc_id": "compliance_officer",
+      "location_id": "compliance_office",
+      "priority": 3,
+      "deadline": {"type": "same_day", "hour": 20, "minute": 0},
+      "requirements": {"day_min": 3, "unlocked_locations": ["compliance_office"]},
+      "objectives": [
+        {"id": "review_responses", "type": "review_ai_answer", "target": "compliance_officer", "required": 3}
+      ],
+      "choices": [
+        {
+          "id": "full_review",
+          "text": "全面复核所有 AI 回答记录。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"compliance_safety": 12, "parent_trust": 5},
+            "skills_xp": {"compliance": 25, "communication": 10},
+            "resources": {"compute": -10, "ap": -3}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "sample_review",
+          "text": "抽样复核高风险类别回答。",
+          "risk": "medium",
+          "effects": {
+            "metrics": {"compliance_safety": 5},
+            "skills_xp": {"compliance": 10}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"compliance": 20}}
+    },
+    {
+      "id": "daily_feedback_009",
+      "title": "学生反馈摘要",
+      "description": "汇总学生代表收集的校园反馈，生成摘要报告。",
+      "type": "daily",
+      "category": "communication",
+      "npc_id": "student_representative",
+      "location_id": "classroom",
+      "priority": 1,
+      "deadline": {"type": "same_day", "hour": 17, "minute": 0},
+      "requirements": {"day_min": 2},
+      "objectives": [
+        {"id": "collect_feedback", "type": "talk_to_npc", "target": "student_representative", "required": 1},
+        {"id": "summarize", "type": "use_ai_tool", "target": "system_logs", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "detailed_summary",
+          "text": "生成详细分类摘要并附建议。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 6, "parent_trust": 3},
+            "skills_xp": {"data_intelligence": 20, "communication": 10},
+            "resources": {"compute": -6}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"communication": 10}}
+    },
+    {
+      "id": "daily_teacher_010",
+      "title": "教师事务汇总",
+      "description": "收集各科教师的教学反馈和设备需求。",
+      "type": "daily",
+      "category": "academic_affairs",
+      "npc_id": "homeroom_teacher",
+      "location_id": "academic_affairs",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 18, "minute": 0},
+      "requirements": {"day_min": 3},
+      "objectives": [
+        {"id": "collect_needs", "type": "collect_data", "target": "homeroom_teacher", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "ai_survey",
+          "text": "用 AI 问卷收集并自动汇总。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 8},
+            "skills_xp": {"academic_affairs": 20, "data_intelligence": 10},
+            "resources": {"compute": -5}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"academic_affairs": 10}}
+    },
+    {
+      "id": "daily_log_011",
+      "title": "系统日志巡检",
+      "description": "检查今日系统运行日志，标记异常行为。",
+      "type": "daily",
+      "category": "system",
+      "npc_id": "it_operator",
+      "location_id": "it_office",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 21, "minute": 0},
+      "requirements": {"day_min": 3, "unlocked_locations": ["it_office"]},
+      "objectives": [
+        {"id": "inspect_logs", "type": "use_ai_tool", "target": "system_logs", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "auto_scan",
+          "text": "使用 AI 自动扫描异常模式。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"system_stability": 8},
+            "skills_xp": {"data_intelligence": 20, "operations": 10},
+            "resources": {"compute": -8}
+          },
+          "complete_quest": true
+        },
+        {
+          "id": "manual_inspect",
+          "text": "逐条人工检查日志。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"system_stability": 5, "compliance_safety": 3},
+            "skills_xp": {"operations": 15},
+            "resources": {"ap": -8}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"data_intelligence": 15}}
+    },
+    {
+      "id": "daily_open_012",
+      "title": "开放日咨询准备",
+      "description": "为校园开放日准备常见问题清单和回答模板。",
+      "type": "daily",
+      "category": "admissions",
+      "npc_id": "admissions_director",
+      "location_id": "admission_office",
+      "priority": 2,
+      "deadline": {"type": "same_day", "hour": 20, "minute": 0},
+      "requirements": {"day_min": 4, "skills_min": {"admissions": 2}},
+      "objectives": [
+        {"id": "prepare_faq", "type": "use_ai_tool", "target": "knowledge_base", "required": 1},
+        {"id": "review_template", "type": "talk_to_npc", "target": "admissions_director", "required": 1}
+      ],
+      "choices": [
+        {
+          "id": "comprehensive_prep",
+          "text": "准备完整 FAQ 并更新知识库。",
+          "risk": "low",
+          "effects": {
+            "metrics": {"school_efficiency": 10, "parent_trust": 8},
+            "skills_xp": {"admissions": 25, "communication": 15},
+            "resources": {"compute": -10}
+          },
+          "complete_quest": true
+        }
+      ],
+      "rewards": {"skills_xp": {"admissions": 15}}
+    }
+  ]
+}

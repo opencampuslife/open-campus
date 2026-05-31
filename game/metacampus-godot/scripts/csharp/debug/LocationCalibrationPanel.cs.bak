@@ -1,0 +1,68 @@
+using Godot;
+using System;
+
+public partial class LocationCalibrationPanel : CanvasLayer
+{
+    private Label _coordsLabel = null!;
+    private Label _savedLabel = null!;
+    private bool _enabled = false;
+
+    public override void _Ready()
+    {
+        Visible = false;
+
+        _coordsLabel = GetNode<Label>("Panel/VBox/CoordsLabel");
+        _savedLabel = GetNode<Label>("Panel/VBox/SavedLabel");
+
+        var closeBtn = GetNode<Button>("Panel/VBox/CloseBtn");
+        closeBtn.Pressed += () => Toggle();
+
+        var snapBtn = GetNode<Button>("Panel/VBox/SnapBtn");
+        snapBtn.Pressed += OnSnapPosition;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+        {
+            if (keyEvent.Keycode == Key.F11)
+                Toggle();
+        }
+
+        if (_enabled && @event is InputEventMouseMotion mouseMotion)
+        {
+            UpdateCoords(mouseMotion.Position);
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (!_enabled)
+            return;
+
+        var viewport = GetViewport();
+        var mousePos = viewport.GetMousePosition();
+        _coordsLabel.Text = $"屏幕: {mousePos.X:F0}, {mousePos.Y:F0}  |  点击 Snap 记录坐标";
+    }
+
+    private void Toggle()
+    {
+        _enabled = !_enabled;
+        Visible = _enabled;
+    }
+
+    private void OnSnapPosition()
+    {
+        var viewport = GetViewport();
+        var mousePos = viewport.GetMousePosition();
+        var text = $"\"map_position\": {{\"x\": {mousePos.X:F0}, \"y\": {mousePos.Y:F0}}}";
+        _savedLabel.Text = $"已记录: {text}";
+        DisplayServer.ClipboardSet(text);
+        GD.Print($"[Calibration] {text}");
+    }
+
+    private void UpdateCoords(Vector2 pos)
+    {
+        // handled in _Process
+    }
+}

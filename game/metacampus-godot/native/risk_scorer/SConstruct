@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+# Load godot-cpp build environment
+env = SConscript('../../godot-cpp/SConstruct')
+
+# Add our source paths
+env.Append(CPPPATH=['src'])
+
+# Source files
+sources = [
+    'src/gdnative.cpp',
+    'src/register_types.cpp',
+    'src/risk_scorer.cpp',
+]
+
+# Build shared library
+library = env.SharedLibrary(
+    'bin/risk_scorer',
+    sources,
+)
+
+Default(library)

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "processing_pipeline": "sips -z 256 256 (resize to square) -> sips PNG -> add_transparency.py (threshold=240, RGBA)",
+  "files": [
+    {
+      "npc_id": "it_operator",
+      "expression": "neutral",
+      "filename": "portrait_neutral.png",
+      "path": "assets/npcs/it_operator/portrait_neutral.png",
+      "size_bytes": null,
+      "verified": "256x256 RGBA PNG"
+    },
+    {
+      "npc_id": "it_operator",
+      "expression": "happy",
+      "filename": "portrait_happy.png",
+      "path": "assets/npcs/it_operator/portrait_happy.png",
+      "size_bytes": null,
+      "verified": "256x256 RGBA PNG"
+    },
+    {
+      "npc_id": "it_operator",
+      "expression": "worried",
+      "filename": "portrait_worried.png",
+      "path": "assets/npcs/it_operator/portrait_worried.png",
+      "size_bytes": null,
+      "verified": "256x256 RGBA PNG"
+    },
+    {
+      "npc_id": "it_operator",
+      "expression": "strict",
+      "filename": "portrait_strict.png",
+      "path": "assets/npcs/it_operator/portrait_strict.png",
+      "size_bytes": null,
+      "verified": "256x256 RGBA PNG"
+    },
+    {
+      "npc_id": "it_operator",
+      "direction": "idle",
+      "filename": "sprite_idle.png",
+      "path": "assets/npcs/it_operator/sprite_idle.png",
+      "size_bytes": null,
+      "verified": "64x64 RGBA PNG"
+    },
+    {
+      "npc_id": "it_operator",
+      "direction": "down",
+      "filename": "walk_down.png",
+      "path": "assets/npcs/it_operator/walk_down.png",
+      "size_bytes": null,
+      "verified": "pending"
+    },
+    {
+      "npc_id": "it_operator",
+      "direction": "up",
+      "filename": "walk_up.png",
+      "path": "assets/npcs/it_operator/walk_up.png",
+      "size_bytes": null,
+      "verified": "pending"
+    },
+    {
+      "npc_id": "it_operator",
+      "direction": "left",
+      "filename": "walk_left.png",
+      "path": "assets/npcs/it_operator/walk_left.png",
+      "size_bytes": null,
+      "verified": "pending"
+    },
+    {
+      "npc_id": "it_operator",
+      "direction": "right",
+      "filename": "walk_right.png",
+      "path": "assets/npcs/it_operator/walk_right.png",
+      "size_bytes": null,
+      "verified": "pending"
+    }
+  ]
+}

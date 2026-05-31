@@ -1,0 +1,2 @@
+{"type": "bench", "ts": "2026-05-28T07:35:10.158Z", "session_id": "test_bench1", "turn": 1, "ok": true, "_timing": {"bridge_receive_ms": 1779953707964, "bridge_process_ms": 0, "provider_latency_ms": 2187, "bridge_response_ms": 0}}
+{"type": "bench", "ts": "2026-05-28T07:35:38.272Z", "session_id": "test_bench2", "turn": 1, "ok": true, "_timing": {"bridge_receive_ms": 1779953735811, "bridge_process_ms": 0, "provider_latency_ms": 2460, "bridge_response_ms": 0}}

@@ -1,0 +1,49 @@
+{
+  "npc_id": "homeroom_teacher",
+  "npc_name": "陈芷",
+  "dialogues": [
+    {
+      "id": "homeroom_teacher_intro_001",
+      "trigger": "quest_start",
+      "trigger_quest": "q_leave_request_001",
+      "speaker": "陈芷",
+      "text": "哎，你来得正好。我手里攒了好几个学生的请假申请，有的是病假、有的是事假——每一份我都想仔细看，但今天下午还有班会，实在来不及了。你帮我用AI汇总一下请假情况，生成处理建议，我再逐一确认，好吗？",
+      "choices": [
+        {
+          "text": "使用AI工具汇总请假数据，生成处理建议",
+          "action": "ai_leave_summary",
+          "metric_effects": {"school_efficiency": 12, "compliance_safety": 10},
+          "next_line": -1,
+          "complete_quest": "q_leave_request_001"
+        },
+        {
+          "text": "让她自己手动处理（耗时低效）",
+          "action": "manual_leave",
+          "metric_effects": {"school_efficiency": -12},
+          "next_line": -1
+        }
+      ]
+    },
+    {
+      "id": "homeroom_teacher_followup_001",
+      "trigger": "quest_trigger",
+      "trigger_quest": null,
+      "speaker": "陈芷",
+      "text": "AI汇总的数据我看过了，整理得很清楚。不过有个学生这周已经请了三次病了，我觉得需要关注一下。你说我们是直接批准还是先联系一下家长核实情况？",
+      "choices": [
+        {
+          "text": "建议先联系家长核实情况再处理",
+          "action": "verify_first",
+          "metric_effects": {"parent_trust": 12, "compliance_safety": 10},
+          "next_line": -1
+        },
+        {
+          "text": "直接批量审批通过（可能存在风险）",
+          "action": "batch_approve",
+          "metric_effects": {"school_efficiency": 10, "compliance_safety": -15},
+          "next_line": -1
+        }
+      ]
+    }
+  ]
+}
