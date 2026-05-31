@@ -25,7 +25,7 @@ TMP_CONFIG="${TMP_DIR}/staging-${PERCENT}pct-canary.yaml"
 REPORT_JSON="${REPORT_DIR}/percentage-canary-${PERCENT}pct-latest.json"
 
 echo "========================================="
-echo "PR-6E/PR-6F/PR-6G: Staging ${PERCENT}% Percentage Canary Evidence"
+echo "PR-6E-PR-6I: Staging ${PERCENT}% Percentage Canary Evidence"
 echo "========================================="
 
 # Validate percent
@@ -34,9 +34,9 @@ if [[ "$PERCENT" != "1" && "$PERCENT" != "5" && "$PERCENT" != "25" && "$PERCENT"
     exit 1
 fi
 
-# PR-6E/PR-6F/PR-6G: 1%, 5%, and 25% are all allowed (PR-6G runs at 25%)
-if [[ "$PERCENT" != "1" && "$PERCENT" != "5" && "$PERCENT" != "25" ]]; then
-    echo "ERROR: PR-6E=1%, PR-6F=5%, PR-6G=25%. Use CANARY_PERCENT=1, 5, or 25."
+# PR-6E through PR-6I: 1%, 5%, 25%, 50%, 100% all allowed
+if [[ "$PERCENT" != "1" && "$PERCENT" != "5" && "$PERCENT" != "25" && "$PERCENT" != "50" && "$PERCENT" != "100" ]]; then
+    echo "ERROR: Use CANARY_PERCENT=1, 5, 25, 50, or 100."
     exit 1
 fi
 
