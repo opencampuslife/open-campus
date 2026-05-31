@@ -161,12 +161,6 @@ if [[ "$HEALTH_STATUS" == "passed" && "$CHAT_STATUS" == "passed" ]]; then
     echo "    INFO: config_applied derived from live evidence (health_ok + chat_parity both passed)"
 fi
 
-# Derive config_applied from live evidence: if health + chat passed, config was actually running
-CONFIG_APPLIED="true"
-if [[ "$HEALTH_STATUS" == "passed" && "$CHAT_STATUS" == "passed" ]]; then
-    echo "    INFO: config_applied derived from live evidence (health_ok + chat_parity both passed)"
-fi
-
 # 5.3 1% percentage config applied check
 echo "  [5.3] Verifying 1% config applied (current_weight=1, route weights=1)"
 echo "    INFO: config_applied was set to true from live evidence (Step 5.2)"
